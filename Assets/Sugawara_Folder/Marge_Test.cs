@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sugawara_Script : MonoBehaviour
+public class Marge_Test : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
