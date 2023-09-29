@@ -22,6 +22,7 @@ public class PlayerIF : PawnIF
     static protected float GROUND_VEL_MULTI = 0.81f;    //地上減速（摩擦）
     static protected float AIR_VEL_MULTI = 0.998f;      //空中減速（空気抵抗）
     static protected float GLAVITY = 0.68f * MultiplyNum;
+    static protected float ACTION_VEL_MULTI = 0.8f;     //アクション中の減速率
 
 
     public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.AIR;
@@ -134,7 +135,7 @@ public class PlayerIF : PawnIF
     {
         if (JumpKeyDown == true && isGround) // キー入力判定
         {
-            NextPlayerState = PLAYER_STATE.AIR;
+            //NextPlayerState = PLAYER_STATE.AIR;
             SelfVel.y = 20.0f * MultiplyNum;
         }
     }
@@ -331,7 +332,6 @@ public class AfterImage : MonoBehaviour
     }
     public void ImageUpdate(Rigidbody rb , Vector3 vel)
     {
-        Debug.Log(vel.magnitude);
         //停止時
         if(vel.magnitude <= 0.012f)
         {
