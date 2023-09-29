@@ -8,7 +8,9 @@ public class PlayerGymClothes : PlayerIF
     {
         PlayerAnim.instans.Anim.SetTrigger("Idle");
         CopyPlayer(oldPlayer);
+        //減速
         SelfVel.x *= ACTION_VEL_MULTI;
+        //プレハブ生成
         GameObject GymClothesSmall = (GameObject)Resources.Load("GymClothesSmall");
         GymClothesSmall = Instantiate(GymClothesSmall, rb.transform.position, Quaternion.Euler(-90, rb.transform.eulerAngles.y + 90, 0));
         //GymClothesSmall.transform.parent = rb.transform;

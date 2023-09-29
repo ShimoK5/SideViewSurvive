@@ -8,7 +8,9 @@ public class PlayerRecorder : PlayerIF
     {
         PlayerAnim.instans.Anim.SetTrigger("Idle");
         CopyPlayer(oldPlayer);
+        //減速
         SelfVel.x *= ACTION_VEL_MULTI;
+        //プレハブ生成
         GameObject SoundWaves = (GameObject)Resources.Load("SoundWaves");
         SoundWaves = Instantiate(SoundWaves, rb.transform.position, Quaternion.Euler(90,0,0));
     }
