@@ -81,9 +81,19 @@ public class RhythmManager : MonoBehaviour
 
     void ChangeStateDefault()
     {
+        //Player.instance.SetOuterState(PLAYER_STATE.NONE);
+
         if (Player.instance.GetisGround())
         {
-            Player.instance.SetOuterState(PLAYER_STATE.RUN);
+            if (Mathf.Abs(Player.instance.GetM_Player().SelfVel.x/* + OtherVel.x*/) < Player.instance.GetM_Player().GetStandSpeed() )
+            {
+                Player.instance.SetOuterState(PLAYER_STATE.STAND);
+            }
+            else
+            {
+                Player.instance.SetOuterState(PLAYER_STATE.RUN);
+            }
+            
         }
         else
         {

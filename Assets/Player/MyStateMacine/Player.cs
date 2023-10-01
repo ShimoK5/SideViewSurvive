@@ -95,6 +95,10 @@ public class Player : MonoBehaviour
             case PLAYER_STATE.ERASER:
                 m_Player = new PlayerEraser(m_Player);
                 break;
+
+            case PLAYER_STATE.NONE:
+                //m_Player = new PlayerNone(m_Player);
+                break;
         }
     }
 
@@ -154,8 +158,8 @@ public class Player : MonoBehaviour
     //外部から直値座標変更(移動床)
     public void AddPosition(Vector3 AddVolume)
     {
-        if(m_Player.isGround)
-        transform.position += AddVolume;
+        if (m_Player.isGround)
+            transform.position += AddVolume;
     }
 
     public bool GetisGround()

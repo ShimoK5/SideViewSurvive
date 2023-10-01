@@ -34,7 +34,7 @@ public class EnemyIF : PawnIF
     public Vector2 OtherVel;        //外部速度
     public Vector2 AllVel;          //合算速度
     //protected bool JumpKeyDown = false; //ジャンプキーを押しているかどうか            
-    static AfterImage AfterImageInstanse = new AfterImage();
+    AfterImage AfterImageInstanse = new AfterImage();
 
 
     //コピー関数

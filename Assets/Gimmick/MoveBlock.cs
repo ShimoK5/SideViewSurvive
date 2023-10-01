@@ -52,26 +52,26 @@ public class MoveBlock : MonoBehaviour
 
     void FixedUpdate()
     {
-        //ブロックサイズ代入
-        Vector3 ThisSize = transform.GetComponent<MeshRenderer>().bounds.size;
+        ////ブロックサイズ代入
+        //Vector3 ThisSize = transform.GetComponent<MeshRenderer>().bounds.size;
 
-        //ブロックの半分の厚みで、ブロック上面からレイをスタートする
-        //ボックスキャストセンター
-        Vector3 CenterPos = new Vector3(transform.position.x, transform.position.y + ThisSize.y * 0.25f, transform.position.z);
-        //ボックスキャストスケール
-        Vector3 HalfExetents = new Vector3(ThisSize.x * 0.5f, ThisSize.y * 0.25f, ThisSize.z * 0.5f);
-        //プレイヤー探索
+        ////ブロックの半分の厚みで、ブロック上面からレイをスタートする
+        ////ボックスキャストセンター
+        //Vector3 CenterPos = new Vector3(transform.position.x, transform.position.y + ThisSize.y * 0.25f, transform.position.z);
+        ////ボックスキャストスケール
+        //Vector3 HalfExetents = new Vector3(ThisSize.x * 0.5f, ThisSize.y * 0.25f, ThisSize.z * 0.5f);
+        ////プレイヤー探索
         
-        foreach (RaycastHit hit in
-        Physics.BoxCastAll(CenterPos, HalfExetents,
-        transform.up, Quaternion.identity, PlayerHitThickness))
-        {
-            if(hit.collider.gameObject.GetComponent<Player>())
-            {
-                //ブロックの移動に合わせて移動
-                hit.collider.gameObject.GetComponent<Player>().AddPosition((MoveDirection * FlameMove));
-            }
-        }
+        //foreach (RaycastHit hit in
+        //Physics.BoxCastAll(CenterPos, HalfExetents,
+        //transform.up, Quaternion.identity, PlayerHitThickness))
+        //{
+        //    if(hit.collider.gameObject.GetComponent<Player>())
+        //    {
+        //        //ブロックの移動に合わせて移動
+        //        hit.collider.gameObject.GetComponent<Player>().AddPosition((MoveDirection * FlameMove));
+        //    }
+        //}
 
 
         //座標移動

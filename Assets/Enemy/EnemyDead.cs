@@ -28,7 +28,14 @@ public class EnemyDead : EnemyIF
         if(FCnt > 10)
         {
             Debug.Log("消えた");
+
+            GameObject myPrefab;//プレハブをGameObject型で取得
+            myPrefab = (GameObject)Resources.Load("SpringEffect");//プレハブをGameObject型で取得
+            GameObject Obj = Instantiate(myPrefab, tf.position, Quaternion.identity);
+
             Destroy(tf.gameObject);
+
+
         }
 
         ////過去情報保存

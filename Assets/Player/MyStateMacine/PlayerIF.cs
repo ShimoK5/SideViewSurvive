@@ -89,6 +89,8 @@ public class PlayerIF : PawnIF
     {
         //残像処理
         AfterImage();
+        //移動床追従
+        //FollowMoveBlock();
     }
 
     //速度反映関数
@@ -145,9 +147,25 @@ public class PlayerIF : PawnIF
         Debug.Log("オーバーライドしていない関数が呼ばれた");
     }
 
+    //床に合わせた座標移動
+    protected void FollowMoveBlock()
+    {
+        if(StandBlock)
+        {
+            tf.position += (StandBlock.transform.position - StandBlock.OldPos);
+            Debug.Log("Stand");
+        }
+        else
+        {
+            Debug.Log("Fly");
+
+        }
+    }
+
     public override void HitUnder(Block block)
     {
         Debug.Log("床");
+        StandBlock = block;
         isGround = true;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
         tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
@@ -181,6 +199,7 @@ public class PlayerIF : PawnIF
     public override void NonHitUnder() 
     {
         isGround = false;
+        StandBlock = null;
     }
 
 #if false
@@ -314,6 +333,11 @@ public class PlayerIF : PawnIF
     {
 
         AfterImageInstanse.ImageUpdate(tf, AllVel);
+    }
+
+    public float GetStandSpeed()
+    {
+        return STAND_SPEED;
     }
 
 }
