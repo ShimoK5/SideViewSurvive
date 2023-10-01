@@ -48,7 +48,7 @@ public class EnemyIF : PawnIF
         SelfVel = oldEnemy.SelfVel;
         OtherVel = oldEnemy.OtherVel;
         //JumpKeyDown = oldEnemy.JumpKeyDown;
-        rb = oldEnemy.rb;
+        tf = oldEnemy.tf;
         Size = oldEnemy.Size;
     }
 
@@ -67,11 +67,11 @@ public class EnemyIF : PawnIF
     //    });
     //}
 
-    public void CustumStart(Rigidbody rigidbody)
+    public void CustumStart(Transform transform)
     {
-        rb = rigidbody;
-        rb.transform.localEulerAngles = new Vector3(0, 90, 0);
-        Size = rb.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
+        tf = transform;
+        tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+        Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
         //EnemyAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
     public virtual void CustumUpdate()//仮想関数
@@ -94,24 +94,24 @@ public class EnemyIF : PawnIF
     protected void MoveEnemy()
     {
         AllVel = SelfVel + OtherVel;
-        rb.transform.position += new Vector3(AllVel.x, AllVel.y, 0);
+        tf.transform.position += new Vector3(AllVel.x, AllVel.y, 0);
     }
 
     //横移動   
     protected void MoveX(float maxSpeed, float addSpeed)
     {
         //移動処理
-        if (rb.position.x < Player.instance.transform.position.x) // キー入力判定
+        if (tf.position.x < Player.instance.transform.position.x) // キー入力判定
         {
-            rb.transform.localEulerAngles = new Vector3(0, -90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
             if (SelfVel.x <= maxSpeed)
             {
                 SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
             }
         }
-        if (rb.position.x > Player.instance.transform.position.x) // キー入力判定
+        if (tf.position.x > Player.instance.transform.position.x) // キー入力判定
         {
-            rb.transform.localEulerAngles = new Vector3(0, 90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
             if (SelfVel.x >= -maxSpeed)
             {
                 SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
@@ -147,7 +147,7 @@ public class EnemyIF : PawnIF
         isGround = true;
         StandBlock = block;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
-        rb.transform.position = new Vector3(rb.transform.position.x, YPos, rb.transform.position.z);
+        tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
         OtherVel.y = 0.0f;
     }
@@ -155,7 +155,7 @@ public class EnemyIF : PawnIF
     {
         Debug.Log("上");
         float YPos = block.transform.position.y - (block.Size.y + Size.y) / 2;
-        rb.transform.position = new Vector3(rb.transform.position.x, YPos, rb.transform.position.z);
+        tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
         OtherVel.y = 0.0f;
     }
@@ -163,7 +163,7 @@ public class EnemyIF : PawnIF
     {
         Debug.Log("右");
         float XPos = block.transform.position.x - (block.Size.x + Size.x) / 2;
-        rb.transform.position = new Vector3(XPos, rb.transform.position.y, rb.transform.position.z);
+        tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
         OtherVel.x = 0.0f;
     }
@@ -171,7 +171,7 @@ public class EnemyIF : PawnIF
     {
         Debug.Log("左");
         float XPos = block.transform.position.x + (block.Size.x + Size.x) / 2;
-        rb.transform.position = new Vector3(XPos, rb.transform.position.y, rb.transform.position.z);
+        tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
         OtherVel.x = 0.0f;
     }
@@ -303,14 +303,14 @@ public class EnemyIF : PawnIF
     //過去情報h保存
     protected void KeepOld()
     {
-        OldPos = rb.transform.position;
+        OldPos = tf.transform.position;
     }
 
     //残像エフェクト
     public void AfterImage()
     {
 
-        AfterImageInstanse.ImageUpdate(rb, AllVel);
+        AfterImageInstanse.ImageUpdate(tf, AllVel);
     }
 
 }

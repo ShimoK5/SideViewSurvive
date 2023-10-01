@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8386946992251073828}
   - component: {fileID: 8153740516045655966}
   - component: {fileID: 3590837354017499943}
+  - component: {fileID: 6198747853299291718}
   m_Layer: 0
   m_Name: GymClothesSmall
   m_TagString: Untagged
@@ -642,3 +643,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6324099a4585010428da96f6f02f0143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &6198747853299291718
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4129644753042470333}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

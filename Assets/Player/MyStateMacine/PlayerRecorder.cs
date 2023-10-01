@@ -12,7 +12,7 @@ public class PlayerRecorder : PlayerIF
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
         GameObject SoundWaves = (GameObject)Resources.Load("SoundWaves");
-        SoundWaves = Instantiate(SoundWaves, rb.transform.position, Quaternion.Euler(90,0,0));
+        SoundWaves = Instantiate(SoundWaves, tf.transform.position, Quaternion.Euler(90,0,0));
     }
 
     public override void CustumUpdate()

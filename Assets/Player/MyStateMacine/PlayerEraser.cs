@@ -12,8 +12,8 @@ public class PlayerEraser : PlayerIF
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
         GameObject Eraser = (GameObject)Resources.Load("Eraser");
-        Eraser = Instantiate(Eraser, rb.transform.position, Quaternion.Euler(0, 0, 0));
-        Eraser.GetComponent<Eraser>().Velocity = 0.5f * -rb.transform.forward;
+        Eraser = Instantiate(Eraser, tf.transform.position, Quaternion.Euler(0, 0, 0));
+        Eraser.GetComponent<Eraser>().Velocity = 0.5f * -tf.transform.forward;
     }
 
     public override void CustumUpdate()

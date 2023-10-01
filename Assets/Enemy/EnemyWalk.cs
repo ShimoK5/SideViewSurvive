@@ -57,7 +57,7 @@ public class EnemyWalk : EnemyIF
         isGround = true;
         StandBlock = block;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
-        rb.transform.position = new Vector3(rb.transform.position.x, YPos, rb.transform.position.z);
+        tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
         OtherVel.y = 0.0f;
     }

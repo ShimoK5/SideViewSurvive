@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
         OuterNextState = ENEMY_STATE.NONE;
 
         m_Enemy = new EnemyIF();
-        m_Enemy.CustumStart(GetComponent<Rigidbody>());
+        m_Enemy.CustumStart(GetComponent<Transform>());
 
         switch (InitEnmyType)
         {

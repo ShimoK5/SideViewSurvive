@@ -48,7 +48,7 @@ public class PlayerIF : PawnIF
         SelfVel = oldPlayer.SelfVel;
         OtherVel = oldPlayer.OtherVel;
         JumpKeyDown = oldPlayer.JumpKeyDown;
-        rb = oldPlayer.rb;
+        tf = oldPlayer.tf;
         Size = oldPlayer.Size;
     }
 
@@ -69,9 +69,9 @@ public class PlayerIF : PawnIF
 
     public void CustumStart()
     {
-        rb = Player.instance.GetComponent<Rigidbody>();
-        rb.transform.localEulerAngles = new Vector3(0, -90, 0);
-        Size = rb.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
+        tf = Player.instance.GetComponent<Transform>();
+        tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+        Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
         JumpKeyDown = false;
         //PlayerAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
@@ -95,7 +95,7 @@ public class PlayerIF : PawnIF
     protected void MovePlayer()
     {
         AllVel = SelfVel + OtherVel;
-        rb.transform.position += new Vector3(AllVel.x, AllVel.y ,0);
+        tf.transform.position += new Vector3(AllVel.x, AllVel.y ,0);
     }
 
     //横移動   
@@ -104,7 +104,7 @@ public class PlayerIF : PawnIF
         //移動処理
         if (Input.GetKey("d")) // キー入力判定
         {
-            rb.transform.localEulerAngles = new Vector3(0, -90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
             if (SelfVel.x <= maxSpeed)
             {
                 SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
@@ -112,7 +112,7 @@ public class PlayerIF : PawnIF
         }
         if (Input.GetKey("a")) // キー入力判定
         {
-            rb.transform.localEulerAngles = new Vector3(0, 90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
             if (SelfVel.x >= -maxSpeed)
             {
                 SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
@@ -150,7 +150,7 @@ public class PlayerIF : PawnIF
         Debug.Log("床");
         isGround = true;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
-        rb.transform.position = new Vector3(rb.transform.position.x, YPos, rb.transform.position.z);
+        tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
         OtherVel.y = 0.0f;
     }
@@ -158,7 +158,7 @@ public class PlayerIF : PawnIF
     {
         Debug.Log("上");
         float YPos = block.transform.position.y - (block.Size.y + Size.y) / 2;
-        rb.transform.position = new Vector3(rb.transform.position.x, YPos, rb.transform.position.z);
+        tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
         OtherVel.y = 0.0f;
     }
@@ -166,7 +166,7 @@ public class PlayerIF : PawnIF
     {
         Debug.Log("右");
         float XPos = block.transform.position.x - (block.Size.x + Size.x) / 2;
-        rb.transform.position = new Vector3(XPos, rb.transform.position.y, rb.transform.position.z);
+        tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
         OtherVel.x = 0.0f;
     }
@@ -174,7 +174,7 @@ public class PlayerIF : PawnIF
     {
         Debug.Log("左");
         float XPos = block.transform.position.x + (block.Size.x + Size.x) / 2;
-        rb.transform.position = new Vector3(XPos, rb.transform.position.y, rb.transform.position.z);
+        tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
         OtherVel.x = 0.0f;
     }
@@ -306,14 +306,14 @@ public class PlayerIF : PawnIF
     //過去情報h保存
     protected void KeepOld()
     {
-        OldPos = rb.transform.position;
+        OldPos = tf.transform.position;
     }
 
     //残像エフェクト
     public void AfterImage()
     {
 
-        AfterImageInstanse.ImageUpdate(rb, AllVel);
+        AfterImageInstanse.ImageUpdate(tf, AllVel);
     }
 
 }
@@ -330,7 +330,7 @@ public class AfterImage : MonoBehaviour
         m_Time = 0;
         RemitTime = 1000;
     }
-    public void ImageUpdate(Rigidbody rb , Vector3 vel)
+    public void ImageUpdate(Transform tf , Vector3 vel)
     {
         //停止時
         if(vel.magnitude <= 0.012f)
@@ -349,7 +349,7 @@ public class AfterImage : MonoBehaviour
             {
                 m_Time = 0;
                 // プレハブを元に、インスタンスを生成、
-                GameObject Obj = Instantiate(myPrefab,rb.position + new Vector3(0,0,0.6f), Quaternion.identity);
+                GameObject Obj = Instantiate(myPrefab,tf.position + new Vector3(0,0,0.6f), Quaternion.identity);
             }
         }
         

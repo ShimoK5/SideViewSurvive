@@ -28,7 +28,7 @@ public class EnemyDead : EnemyIF
         if(FCnt > 10)
         {
             Debug.Log("消えた");
-            Destroy(rb.gameObject);
+            Destroy(tf.gameObject);
         }
 
         ////過去情報保存

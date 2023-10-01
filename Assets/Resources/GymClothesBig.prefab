@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4993535328785655742}
   - component: {fileID: 5033167245057505846}
   - component: {fileID: 40268578983193468}
+  - component: {fileID: 2489511706922317525}
   m_Layer: 0
   m_Name: GymClothesBig
   m_TagString: Untagged
@@ -936,7 +937,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1606
+  m_VersionIndex: 1609
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1057,3 +1058,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6324099a4585010428da96f6f02f0143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &2489511706922317525
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605593632025667367}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
