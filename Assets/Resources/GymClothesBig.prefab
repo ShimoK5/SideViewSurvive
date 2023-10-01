@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6064550010409917176}
   - component: {fileID: 4993535328785655742}
   - component: {fileID: 5033167245057505846}
+  - component: {fileID: 40268578983193468}
   m_Layer: 0
   m_Name: GymClothesBig
   m_TagString: Untagged
@@ -1025,10 +1026,10 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605593632025667367}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!114 &5033167245057505846
@@ -1044,3 +1045,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LifeCnt: 7
+--- !u!114 &40268578983193468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605593632025667367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6324099a4585010428da96f6f02f0143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

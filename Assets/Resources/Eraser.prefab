@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8649789994199710470}
   - component: {fileID: 8649789994199710471}
   - component: {fileID: 4283910652379216060}
+  - component: {fileID: 9072080431534837274}
   m_Layer: 0
   m_Name: Eraser
   m_TagString: Untagged
@@ -89,7 +90,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649789994199710488}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -108,3 +109,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LifeCnt: 60
   Velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &9072080431534837274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649789994199710488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6324099a4585010428da96f6f02f0143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

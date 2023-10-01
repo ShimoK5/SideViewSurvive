@@ -35,7 +35,16 @@ void Start()
 
     void FixedUpdate()
     {
-        MoveObjHitBlock(Player.instance.GetM_Player());
+		MoveObjHitBlock(Player.instance.GetM_Player());
+
+		Enemy[] Enemys = GameObject.FindObjectsOfType<Enemy>();
+		for(int i = 0; i < Enemys.Length; i++)
+        {
+			MoveObjHitBlock(Enemys[i].GetM_Enemy());
+		}
+		
+
+		
     }
 
 

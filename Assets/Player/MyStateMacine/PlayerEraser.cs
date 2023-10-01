@@ -14,7 +14,6 @@ public class PlayerEraser : PlayerIF
         GameObject Eraser = (GameObject)Resources.Load("Eraser");
         Eraser = Instantiate(Eraser, rb.transform.position, Quaternion.Euler(0, 0, 0));
         Eraser.GetComponent<Eraser>().Velocity = 0.5f * -rb.transform.forward;
-        Debug.Log(Eraser);
     }
 
     public override void CustumUpdate()
