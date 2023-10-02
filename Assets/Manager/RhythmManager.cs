@@ -11,7 +11,7 @@ public class RhythmManager : MonoBehaviour
 
         None            //なし
     }
-
+    public static RhythmManager Instance;
     static int BeatNum = 8; //拍数
     [Header("アクション配列")]
     [SerializeField] RhythmAction[] ActionArray = new RhythmAction[BeatNum];
@@ -22,6 +22,7 @@ public class RhythmManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         //ActionArray = new RhythmAction[BeatNum];
     }
 
