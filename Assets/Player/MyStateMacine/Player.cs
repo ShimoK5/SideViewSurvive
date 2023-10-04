@@ -8,6 +8,9 @@ public enum PLAYER_STATE
     STAND,
     AIR,
     RUN,
+    GYM_CLOTHES,    //体操着
+    RECORDER,       //リコーダー
+    ERASER,         //消しゴム
 }
 
 public class Player : MonoBehaviour
@@ -59,22 +62,43 @@ public class Player : MonoBehaviour
 
         if(m_Player.PlayerState != m_Player.NextPlayerState)
         {
-            switch (m_Player.NextPlayerState)
-            {
-                case PLAYER_STATE.STAND:
-                    m_Player = new PlayerStand(m_Player);
-                    break;
-
-                case PLAYER_STATE.RUN:
-                    m_Player = new PlayerRun(m_Player);
-                    break;
-
-                case PLAYER_STATE.AIR:
-                    m_Player = new PlayerAir(m_Player);
-                    break;
-            }
+            ChengeState(m_Player.NextPlayerState);
 
             m_Player.PlayerState = m_Player.NextPlayerState;
+        }
+    }
+
+    void ChengeState(PLAYER_STATE playerState)
+    {
+        switch (playerState)
+        {
+            case PLAYER_STATE.STAND:
+                m_Player = new PlayerStand(m_Player);
+                break;
+
+            case PLAYER_STATE.RUN:
+                m_Player = new PlayerRun(m_Player);
+                break;
+
+            case PLAYER_STATE.AIR:
+                m_Player = new PlayerAir(m_Player);
+                break;
+
+            case PLAYER_STATE.GYM_CLOTHES:
+                m_Player = new PlayerGymClothes(m_Player);
+                break;
+
+            case PLAYER_STATE.RECORDER:
+                m_Player = new PlayerRecorder(m_Player);
+                break;
+
+            case PLAYER_STATE.ERASER:
+                m_Player = new PlayerEraser(m_Player);
+                break;
+
+            case PLAYER_STATE.NONE:
+                //m_Player = new PlayerNone(m_Player);
+                break;
         }
     }
 
@@ -134,8 +158,8 @@ public class Player : MonoBehaviour
     //外部から直値座標変更(移動床)
     public void AddPosition(Vector3 AddVolume)
     {
-        if(m_Player.isGround)
-        transform.position += AddVolume;
+        if (m_Player.isGround)
+            transform.position += AddVolume;
     }
 
     public bool GetisGround()

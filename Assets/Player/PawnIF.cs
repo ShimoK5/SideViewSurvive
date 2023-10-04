@@ -5,7 +5,7 @@ using UnityEngine;
 public class PawnIF : MonoBehaviour
 {
     protected Block StandBlock;
-    public Rigidbody rb;
+    public Transform tf;
     public Vector3 OldPos;
     public Vector3 Size;      //大きさ（ワールド）
     public virtual void HitUnder(Block block) { }

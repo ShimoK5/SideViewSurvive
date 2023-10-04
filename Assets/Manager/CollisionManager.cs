@@ -35,7 +35,16 @@ void Start()
 
     void FixedUpdate()
     {
-        MoveObjHitBlock(Player.instance.GetM_Player());
+		MoveObjHitBlock(Player.instance.GetM_Player());
+
+		Enemy[] Enemys = GameObject.FindObjectsOfType<Enemy>();
+		for(int i = 0; i < Enemys.Length; i++)
+        {
+			MoveObjHitBlock(Enemys[i].GetM_Enemy());
+		}
+		
+
+		
     }
 
 
@@ -58,7 +67,7 @@ void Start()
 			if (Blocks[i])//i番目がnullではない (=使っているなら)
 			{
 				//プレイヤーのあたりかたで分岐
-				switch (CollisionBB(pawn.rb.transform.position, pawn.OldPos, Blocks[i].transform.position, Blocks[i].OldPos, pawn.Size, Blocks[i].Size, false).ObjDirection1)
+				switch (CollisionBB(pawn.tf.transform.position, pawn.OldPos, Blocks[i].transform.position, Blocks[i].OldPos, pawn.Size, Blocks[i].Size, false).ObjDirection1)
 				{
 					case HIT_DIRECTION.HIT_UNDER:
 						if (Blocks[i].GetComponent<TopOnlyBlock2>() && Input.GetKey("s"))
@@ -170,7 +179,7 @@ void Start()
 				if (Blocks[i])//i番目がnullではない (=使っているなら)
 				{
 					//プレイヤーのあたりかたで分岐
-					switch (CollisionBB(pawn.rb.transform.position, pawn.OldPos, Blocks[i].transform.position, Blocks[i].OldPos, pawn.Size , Blocks[i].Size, true).ObjDirection1)
+					switch (CollisionBB(pawn.tf.transform.position, pawn.OldPos, Blocks[i].transform.position, Blocks[i].OldPos, pawn.Size , Blocks[i].Size, true).ObjDirection1)
 					{
 						case HIT_DIRECTION.HIT_UNDER:
 							if (Blocks[i].GetComponent<TopOnlyBlock2>() && Input.GetKey("s"))
