@@ -118,6 +118,28 @@ public class EnemyIF : PawnIF
             }
         }
     }
+
+    protected void MoveY(float maxSpeed, float addSpeed)
+    {
+        //移動処理
+        if (tf.position.y < Player.instance.transform.position.y) // キー入力判定
+        {
+            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+            if (SelfVel.y <= maxSpeed)
+            {
+                SelfVel.y = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
+            }
+        }
+        if (tf.position.y > Player.instance.transform.position.y) // キー入力判定
+        {
+            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+            if (SelfVel.y >= -maxSpeed)
+            {
+                SelfVel.y = Mathf.Max(-maxSpeed, SelfVel.y - addSpeed);
+            }
+        }
+    }
+
     //横速度減速
     protected void SlowDown(float selfVelMulti, float otherVelMulti)
     {

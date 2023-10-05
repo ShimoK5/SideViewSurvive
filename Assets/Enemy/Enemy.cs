@@ -6,6 +6,8 @@ public enum ENEMY_STATE
     NONE,
     WALK,
     FLY,
+    ZIGZAG,
+    TRACKING,
     DEAD
 }
 
@@ -41,6 +43,14 @@ public class Enemy : MonoBehaviour
 
             case ENEMY_STATE.FLY:
                 m_Enemy = new EnemyFly(m_Enemy);
+                break;
+            
+            case ENEMY_STATE.ZIGZAG:
+                m_Enemy = new EnemyZigzag(m_Enemy);
+                break;
+            
+            case ENEMY_STATE.TRACKING:
+                m_Enemy = new EnemyTracking(m_Enemy);
                 break;
 
             default:
@@ -93,6 +103,14 @@ public class Enemy : MonoBehaviour
 
             case ENEMY_STATE.FLY:
                 m_Enemy = new EnemyFly(m_Enemy);
+                break;
+
+            case ENEMY_STATE.ZIGZAG:
+                m_Enemy = new EnemyZigzag(m_Enemy);
+                break;
+            
+            case ENEMY_STATE.TRACKING:
+                m_Enemy = new EnemyTracking(m_Enemy);
                 break;
 
             case ENEMY_STATE.DEAD:
