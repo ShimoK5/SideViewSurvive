@@ -6,7 +6,8 @@ Shader "Custom/TileShader" {
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", Range(0,1)) = 0.0
-		_TileScale("TileScale", Range(0.1, 10)) = 1
+		_TileScale("TileScale", Range(0.1, 10)) = 1	
+		_BunkatsuSuu("BunkatsuSuu",int) = 1
 	}
 		SubShader{
 			Tags { "RenderType" = "Opaque" }
@@ -31,6 +32,9 @@ Shader "Custom/TileShader" {
 			half _Metallic;
 			fixed4 _Color;
 			half _TileScale;
+			int  _BunkatsuSuu;
+			//プロトタイプ宣言
+			float fmodcg(float x, float y);
 
 			// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
 			// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -48,9 +52,12 @@ Shader "Custom/TileShader" {
 
 				float3 scaledWorldPos = IN.worldPos / _TileScale;
 
-				fixed4 cx = tex2D(_MainTex, float2(scaledWorldPos.z, scaledWorldPos.y)) * factorX;
-				fixed4 cy = tex2D(_MainTex, float2(scaledWorldPos.x, scaledWorldPos.z)) * factorY;
-				fixed4 cz = tex2D(_MainTex, float2(scaledWorldPos.x, scaledWorldPos.y)) * factorZ;
+				//分割数に応じた小数を作成
+				float TempNum = 1.0f / _BunkatsuSuu;
+
+				fixed4 cx = tex2D(_MainTex, float2(fmodcg(scaledWorldPos.z, 1) * TempNum + TempNum, fmodcg(scaledWorldPos.y, 1) * TempNum)) * factorX;
+				fixed4 cy = tex2D(_MainTex, float2(fmodcg(scaledWorldPos.x, 1) * TempNum + TempNum, fmodcg(scaledWorldPos.z, 1) * TempNum + TempNum)) * factorY;
+				fixed4 cz = tex2D(_MainTex, float2(fmodcg(scaledWorldPos.x, 1) * TempNum, fmodcg(scaledWorldPos.y, 1) * TempNum)) * factorZ;
 
 				fixed4 c = (cx + cy + cz);
 
@@ -59,7 +66,66 @@ Shader "Custom/TileShader" {
 				o.Metallic = _Metallic;
 				o.Smoothness = _Glossiness;
 				o.Alpha = c.a;
+
+
+
+				//if (abs(IN.worldNormal.x) >= 0.1)
+				//{
+				//	fixed4 cx = tex2D(_MainTex, float2(scaledWorldPos.z * 2, scaledWorldPos.y)) * factorX;
+				//	fixed4 cy = tex2D(_MainTex, float2(scaledWorldPos.x, scaledWorldPos.z)) * factorY;
+				//	fixed4 cz = tex2D(_MainTex, float2(scaledWorldPos.x, scaledWorldPos.y)) * factorZ;
+
+				//	fixed4 c = (cx + cy + cz);
+
+				//	o.Albedo = c.rgb;
+				//	// Metallic and smoothness come from slider variables
+				//	o.Metallic = _Metallic;
+				//	o.Smoothness = _Glossiness;
+				//	o.Alpha = c.a;
+				//}
+				//else if (abs(IN.worldNormal.y) >= 0.1)
+				//{
+				//	fixed4 cx = tex2D(_MainTex, float2(scaledWorldPos.z * 2, scaledWorldPos.y)) * factorX;
+				//	fixed4 cy = tex2D(_MainTex, float2(scaledWorldPos.x, scaledWorldPos.z)) * factorY;
+				//	fixed4 cz = tex2D(_MainTex, float2(scaledWorldPos.x, scaledWorldPos.y)) * factorZ;
+
+				//	fixed4 c = (cx + cy + cz);
+
+				//	o.Albedo = c.rgb;
+				//	// Metallic and smoothness come from slider variables
+				//	o.Metallic = _Metallic;
+				//	o.Smoothness = _Glossiness;
+				//	o.Alpha = c.a;
+				//}
+				//else if (abs(IN.worldNormal.z) >= 0.1)
+				//{
+				//	fixed4 cx = tex2D(_MainTex, float2(scaledWorldPos.z * 2, scaledWorldPos.y)) * factorX;
+				//	fixed4 cy = tex2D(_MainTex, float2(scaledWorldPos.x, scaledWorldPos.z)) * factorY;
+				//	fixed4 cz = tex2D(_MainTex, float2(scaledWorldPos.x, scaledWorldPos.y)) * factorZ;
+
+				//	fixed4 c = (cx + cy + cz);
+
+				//	o.Albedo = c.rgb;
+				//	// Metallic and smoothness come from slider variables
+				//	o.Metallic = _Metallic;
+				//	o.Smoothness = _Glossiness;
+				//	o.Alpha = c.a;
+				//}
+				//else
+				//{
+				//	//斜め
+				//}
+
+				
 			}
+
+			// Equivalent to fmod() in CG.
+			float fmodcg(float x, float y)
+			{
+				const float c = frac(abs(x / y)) * abs(y);
+				return x < 0 ? -c : c;
+			}
+
 			ENDCG
 		}
 			FallBack "Diffuse"
