@@ -29,7 +29,33 @@ public class Sacrifice: PawnIF
     // Update is called once per frame
     void Update()
     {
-        
+#if false
+        // Sacrifice クラス型の配列に、シーン上すべてのSacrificeをぶち込む
+        Sacrifice[] SacrificeArray = GameObject.FindObjectsOfType<Sacrifice>();
+
+        //身代わり一個もない（プレイヤーしかいない）
+        if(SacrificeArray.Length == 0)//    ←「配列名.Length」で要素数取得できるよん
+        {
+            //プレイヤーに追従するように書いて～
+        }
+        //身代わり一個以上ある
+        else
+        {
+            // 距離保存変数用意するよね多分
+            // float TempDistance;
+
+            // 一番近い奴の要素数保存用の変数も用意しそう
+            // int NeerIndex;
+
+            // for回す
+            for (int i = 0; i < SacrificeArray.Length; i++)
+            {
+                //一番近いやつ見つけそう
+            }
+
+            //一番近い奴に追従するように書く？
+        }
+#endif
     }
 
     void FixedUpdate()
@@ -79,7 +105,17 @@ public class Sacrifice: PawnIF
         StandBlock = block;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
         tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
-        Vel.y = 0;
+        
+        if (Vel.y > -0.1f)
+        {
+            Vel.y = 0;
+        }
+        else
+        {
+            Vel.y *= -0.5f;
+        }
+       
+
     }
     public override void HitTop(Block block)
     {
@@ -93,14 +129,14 @@ public class Sacrifice: PawnIF
         Debug.Log("右");
         float XPos = block.transform.position.x - (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
-        Vel.x = 0.0f;
+        Vel.x *= -0.5f;
     }
     public override void HitLeft(Block block)
     {
         Debug.Log("左");
         float XPos = block.transform.position.x + (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
-        Vel.x = 0.0f;
+        Vel.x *= -0.5f;
     }
     public override void NonHitUnder()
     {
@@ -112,4 +148,7 @@ public class Sacrifice: PawnIF
     {
          transform.position += AddVolume;
     }
+
+
+    
 }
