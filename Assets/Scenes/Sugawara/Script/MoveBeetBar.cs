@@ -7,8 +7,8 @@ public class MoveBeetBar : MonoBehaviour
     [SerializeField] public RhythmManager Manager = null;                   //リズムマネージャー変数の取得用
     [SerializeField] public int Tempo = 0;                                  //テンポ変数の確認用
     [SerializeField] RectTransform BarTransForm = null;                     //UIの位置を変更する際に必要なUI用のトランスフォーム変数
-    private float Init_BarPosition_x = -113.5f;                             //初期位置の移動位置
-    private Vector3 BarPosition = new Vector3(-113.5f, -195.0f, 0.0f);      //移動するバーの位置情報
+    private float Init_BarPosition_x = 0.0f;                             //初期位置の移動位置
+    private Vector3 BarPosition = new Vector3(0.0f, 0.0f, 0.0f);      //移動するバーの位置情報
     private float Move_BarSpeed = 0.0f;                                     //移動スピードの変数
     private bool FirstCount = true;
 
@@ -16,6 +16,8 @@ public class MoveBeetBar : MonoBehaviour
     void Start()
     {
         BarTransForm = this.GetComponent<RectTransform>();                  //このスクリプトについているRectTransformを取得
+        Init_BarPosition_x = BarTransForm.localPosition.x;
+        BarPosition = new Vector3(BarTransForm.localPosition.x, BarTransForm.localPosition.y,0.0f);
     }
 
     // Update is called once per frame
