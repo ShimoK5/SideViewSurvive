@@ -70,7 +70,7 @@ public class PlayerIF : PawnIF
     public void CustumStart()
     {
         tf = Player.instance.GetComponent<Transform>();
-        tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+        tf.transform.localEulerAngles = new Vector3(0, 90, 0);
         Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
         JumpKeyDown = false;
         //PlayerAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
@@ -106,7 +106,7 @@ public class PlayerIF : PawnIF
         //移動処理
         if (Input.GetKey("d")) // キー入力判定
         {
-            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
             if (SelfVel.x <= maxSpeed)
             {
                 SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
@@ -114,7 +114,7 @@ public class PlayerIF : PawnIF
         }
         if (Input.GetKey("a")) // キー入力判定
         {
-            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
             if (SelfVel.x >= -maxSpeed)
             {
                 SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
