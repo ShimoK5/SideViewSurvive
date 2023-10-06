@@ -12,7 +12,7 @@ public class PlayerGymClothes : PlayerIF
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
         GameObject GymClothesSmall = (GameObject)Resources.Load("GymClothesSmall");
-        GymClothesSmall = Instantiate(GymClothesSmall, tf.transform.position, Quaternion.Euler(-90, tf.transform.eulerAngles.y + 90, 0));
+        GymClothesSmall = Instantiate(GymClothesSmall, tf.transform.position, Quaternion.Euler(-90, tf.transform.eulerAngles.y - 90, 0));
         //GymClothesSmall.transform.parent = rb.transform;
     }
 

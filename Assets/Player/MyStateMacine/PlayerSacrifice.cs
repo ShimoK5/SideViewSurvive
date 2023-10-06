@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEraser : PlayerIF
+public class PlayerSacrifice : PlayerIF
 {
-    public PlayerEraser(PlayerIF oldPlayer)
+    public PlayerSacrifice(PlayerIF oldPlayer)
     {
         PlayerAnim.instans.Anim.SetTrigger("Idle");
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
-        GameObject Eraser = (GameObject)Resources.Load("Eraser");
-        Eraser = Instantiate(Eraser, tf.transform.position, tf.transform.rotation);
-        Eraser.GetComponent<Eraser>().Velocity = 0.5f * tf.transform.forward;
+        GameObject Sacrifice = (GameObject)Resources.Load("Sacrifice");
+        Sacrifice = Instantiate(Sacrifice, tf.transform.position,Quaternion.Euler(tf.transform.localEulerAngles));
+        Debug.Log(Quaternion.Euler(tf.transform.localEulerAngles));
+        Sacrifice.GetComponent<Sacrifice>().SetVel(new Vector2(tf.forward.x * 0.2f, 0.2f));
     }
 
     public override void CustumUpdate()

@@ -11,6 +11,7 @@ public enum PLAYER_STATE
     GYM_CLOTHES,    //体操着
     RECORDER,       //リコーダー
     ERASER,         //消しゴム
+    SACRIFICE,      //身代わり
 }
 
 public class Player : MonoBehaviour
@@ -94,6 +95,10 @@ public class Player : MonoBehaviour
 
             case PLAYER_STATE.ERASER:
                 m_Player = new PlayerEraser(m_Player);
+                break;
+
+            case PLAYER_STATE.SACRIFICE:
+                m_Player = new PlayerSacrifice(m_Player);
                 break;
 
             case PLAYER_STATE.NONE:

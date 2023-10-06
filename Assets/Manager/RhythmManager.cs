@@ -8,7 +8,7 @@ public class RhythmManager : MonoBehaviour
         GymClothes,     //体操着
         Recorder,       //リコーダー
         Eraser,         //消しゴム
-
+        Sacrifice,      //身代わり
         None            //なし
     }
     public static RhythmManager Instance;
@@ -55,6 +55,10 @@ public class RhythmManager : MonoBehaviour
 
                 case RhythmAction.Eraser:
                     Player.instance.SetOuterState(PLAYER_STATE.ERASER);
+                    break;
+                
+                case RhythmAction.Sacrifice:
+                    Player.instance.SetOuterState(PLAYER_STATE.SACRIFICE);
                     break;
 
 
