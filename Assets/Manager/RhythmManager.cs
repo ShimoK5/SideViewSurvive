@@ -16,8 +16,8 @@ public class RhythmManager : MonoBehaviour
     [Header("アクション配列")]
     [SerializeField] RhythmAction[] ActionArray = new RhythmAction[BeatNum];
     [Header("リズム間隔（フレーム数）")]
-    [SerializeField] int BeatTempo;
-    int FCnt = 0;//フレームカウント
+    [SerializeField] public int BeatTempo;
+    public int FCnt = 0;//フレームカウント
 
     // Start is called before the first frame update
     void Start()
