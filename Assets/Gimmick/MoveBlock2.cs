@@ -99,6 +99,16 @@ public class MoveBlock2 : Block
                     hit.collider.gameObject.GetComponent<Enemy>().AddPosition((MoveDirection * NowMove));
                 }
             }
+
+            if (hit.collider.gameObject.GetComponent<Sacrifice>())
+            {
+                //地上なら
+                //if (hit.collider.gameObject.GetComponent<Sacrifice>().GetisGround())
+                {
+                    //ブロックの移動に合わせて移動
+                    hit.collider.gameObject.GetComponent<Sacrifice>().AddPosition((MoveDirection * NowMove));
+                }
+            }
         }
 #endif
         //座標移動

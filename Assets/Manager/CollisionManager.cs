@@ -35,17 +35,24 @@ void Start()
 
     void FixedUpdate()
     {
+		//プレイヤー
 		MoveObjHitBlock(Player.instance.GetM_Player());
 
+		//エネミー
 		Enemy[] Enemys = GameObject.FindObjectsOfType<Enemy>();
 		for(int i = 0; i < Enemys.Length; i++)
         {
 			MoveObjHitBlock(Enemys[i].GetM_Enemy());
 		}
-		
 
-		
-    }
+		//身代わり
+		Sacrifice[] sacrifices = GameObject.FindObjectsOfType<Sacrifice>();
+		for (int i = 0; i < sacrifices.Length; i++)
+		{
+			MoveObjHitBlock(sacrifices[i]);
+		}
+
+	}
 
 
 	void MoveObjHitBlock(PawnIF pawn)

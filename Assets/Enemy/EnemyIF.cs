@@ -71,7 +71,7 @@ public class EnemyIF : PawnIF
     {
         tf = transform;
         tf.transform.localEulerAngles = new Vector3(0, 90, 0);
-        Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
+        Size = tf.transform.GetComponent<MeshRenderer>().bounds.size;
         //EnemyAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
     public virtual void CustumUpdate()//仮想関数

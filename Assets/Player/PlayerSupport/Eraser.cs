@@ -5,7 +5,7 @@ using UnityEngine;
 public class Eraser : MonoBehaviour
 {
 
-    [Header("滞在時間")]
+    [Header("滞在時間（フレーム）")]
     [SerializeField] int LifeCnt;
 
     int FCnt;//フレームカウント
@@ -19,6 +19,11 @@ public class Eraser : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    void FixedUpdate()
     {
         transform.position += Velocity;
 
