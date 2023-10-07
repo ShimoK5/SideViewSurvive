@@ -176,4 +176,26 @@ public class Player : MonoBehaviour
     {
         return m_Player;
     }
+
+    public void HitEnemy(Vector2 EtoP_Vel)
+    {
+#if false
+        //プレイヤーVel編集
+        SetOuterVel(EtoP_Vel.x * Player.instance.GetM_Player().KNOCK_BACK_POWER
+            , EtoP_Vel.y * Player.instance.GetM_Player().KNOCK_BACK_POWER, true, true, true, true);
+#else
+        //プレイヤーVel編集
+        if(EtoP_Vel.x >= 0)
+        {
+            SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 2
+            , GetM_Player().KNOCK_BACK_POWER * 0.3f, true, true, true, true);
+        }
+        else
+        {
+            SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 2
+            , GetM_Player().KNOCK_BACK_POWER * 0.3f, true, true, true, true);
+        }
+        
+#endif
+    }
 }

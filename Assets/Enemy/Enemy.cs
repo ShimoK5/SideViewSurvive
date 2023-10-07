@@ -192,4 +192,25 @@ public class Enemy : MonoBehaviour
     {
         return m_Enemy;
     }
+
+    public void SetEnemyDeadVector(Vector2 Vel)
+    {
+        m_Enemy.DeadVector = Vel.normalized;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        //プレイヤーとの衝突
+        if (other.GetComponent<Player>())
+        {
+            //Playerからエネミーへのベクトル
+            Vector3 PtoE_Vel = (transform.position - other.transform.position).normalized;
+            //プレイヤーVel編集
+            other.GetComponent<Player>().HitEnemy(-PtoE_Vel);
+            //EnemyDead化　＆　DeadVector編集
+            SetOuterState(ENEMY_STATE.DEAD);
+            SetEnemyDeadVector(PtoE_Vel.normalized);
+
+        }
+    }
 }

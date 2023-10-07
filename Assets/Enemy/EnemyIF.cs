@@ -35,7 +35,7 @@ public class EnemyIF : PawnIF
     public Vector2 AllVel;          //合算速度
     //protected bool JumpKeyDown = false; //ジャンプキーを押しているかどうか            
     AfterImage AfterImageInstanse = new AfterImage();
-
+    public Vector2 DeadVector;      //Dead時のベクトル
 
     //コピー関数
     //全ての変数をコピーする
@@ -50,6 +50,7 @@ public class EnemyIF : PawnIF
         //JumpKeyDown = oldEnemy.JumpKeyDown;
         tf = oldEnemy.tf;
         Size = oldEnemy.Size;
+        DeadVector = oldEnemy.DeadVector;
     }
 
     //EnemyIF(EnemyIF oldEnemy)
