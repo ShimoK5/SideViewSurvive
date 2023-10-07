@@ -23,12 +23,9 @@ public class EnemyDead : EnemyIF
     public override void CustumFixed()
     {
         FCnt++;
-        Debug.Log("カウント加算");
 
         if(FCnt > 10)
         {
-            Debug.Log("消えた");
-
             GameObject myPrefab;//プレハブをGameObject型で取得
             myPrefab = (GameObject)Resources.Load("SpringEffect");//プレハブをGameObject型で取得
             GameObject Obj = Instantiate(myPrefab, tf.position, Quaternion.identity);

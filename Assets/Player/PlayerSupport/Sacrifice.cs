@@ -100,7 +100,6 @@ public class Sacrifice: PawnIF
 
     public override void HitUnder(Block block)
     {
-        Debug.Log("床");
         isGround = true;
         StandBlock = block;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
@@ -119,21 +118,18 @@ public class Sacrifice: PawnIF
     }
     public override void HitTop(Block block)
     {
-        Debug.Log("上");
         float YPos = block.transform.position.y - (block.Size.y + Size.y) / 2;
         tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         Vel.y = 0.0f;
     }
     public override void HitRight(Block block)
     {
-        Debug.Log("右");
         float XPos = block.transform.position.x - (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         Vel.x *= -0.5f;
     }
     public override void HitLeft(Block block)
     {
-        Debug.Log("左");
         float XPos = block.transform.position.x + (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         Vel.x *= -0.5f;

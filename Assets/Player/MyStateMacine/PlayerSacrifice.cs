@@ -13,7 +13,6 @@ public class PlayerSacrifice : PlayerIF
         //プレハブ生成
         GameObject Sacrifice = (GameObject)Resources.Load("Sacrifice");
         Sacrifice = Instantiate(Sacrifice, tf.transform.position,Quaternion.Euler(tf.transform.localEulerAngles));
-        Debug.Log(Quaternion.Euler(tf.transform.localEulerAngles));
         Sacrifice.GetComponent<Sacrifice>().SetVel(new Vector2(tf.forward.x * 0.2f, 0.2f));
     }
 
