@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public enum PLAYER_STATE
 {
     NONE,
@@ -16,12 +16,13 @@ public enum PLAYER_STATE
 
 public class Player : MonoBehaviour
 {
-    static public Player instance;
-    PlayerIF m_Player;
+    static public Player instance;  //静的な実態
+    PlayerIF m_Player;              //ステートマシーンの実態
 
-    public PLAYER_STATE Temp;
+    public PLAYER_STATE Temp;       //ReadOnly
 
     PLAYER_STATE OuterNextState;//外部から編集されたNextState
+    public int HitPoint;        //HP
 
     void Awake()
     {
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
         m_Player.CustumStart();
 
         m_Player = new PlayerAir(m_Player);
+        HitPoint = 3;
     }
 
     // Update is called once per frame
@@ -44,6 +46,12 @@ public class Player : MonoBehaviour
     {
         Temp = m_Player.PlayerState;
         m_Player.CustumUpdate();
+
+        //シーンリロード処理
+        if(HitPoint <= 0)
+        {
+            StartCoroutine("SceneChange");
+        }
     }
 
     void FixedUpdate()
@@ -161,10 +169,10 @@ public class Player : MonoBehaviour
     }
 
     //外部から直値座標変更(移動床)
-    public void AddPosition(Vector3 AddVolume)
+    public void AddPosition(Vector3 addVolume)
     {
         if (m_Player.isGround)
-            transform.position += AddVolume;
+            transform.position += addVolume;
     }
 
     public bool GetisGround()
@@ -195,7 +203,17 @@ public class Player : MonoBehaviour
             SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 2.5f
             , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
         }
-        
+
 #endif
+        HitPoint = Mathf.Max(0, HitPoint - 1);
+    }
+
+    IEnumerator SceneChange()
+    {
+        //0.5秒停止
+        yield return new WaitForSeconds(0.5f);
+
+        //シーンリロード
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
