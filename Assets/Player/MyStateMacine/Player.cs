@@ -187,13 +187,13 @@ public class Player : MonoBehaviour
         //プレイヤーVel編集
         if(EtoP_Vel.x >= 0)
         {
-            SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 2
-            , GetM_Player().KNOCK_BACK_POWER * 0.3f, true, true, true, true);
+            SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 2.5f
+            , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
         }
         else
         {
-            SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 2
-            , GetM_Player().KNOCK_BACK_POWER * 0.3f, true, true, true, true);
+            SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 2.5f
+            , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
         }
         
 #endif
