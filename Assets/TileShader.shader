@@ -55,9 +55,39 @@ Shader "Custom/TileShader" {
 				//分割数に応じた小数を作成
 				float TempNum = 1.0f / _BunkatsuSuu;
 
-				fixed4 cx = tex2D(_MainTex, float2(fmodcg(scaledWorldPos.z, 1) * TempNum + TempNum, fmodcg(scaledWorldPos.y, 1) * TempNum)) * factorX;
-				fixed4 cy = tex2D(_MainTex, float2(fmodcg(scaledWorldPos.x, 1) * TempNum + TempNum, fmodcg(scaledWorldPos.z, 1) * TempNum + TempNum)) * factorY;
-				fixed4 cz = tex2D(_MainTex, float2(fmodcg(scaledWorldPos.x, 1) * TempNum, fmodcg(scaledWorldPos.y, 1) * TempNum)) * factorZ;
+				//ScaleWorldPos を剰余算で０から１にまとめたもの
+				float3 ZeroToOne;
+				ZeroToOne.x = fmodcg(abs(scaledWorldPos.x), 1);
+				ZeroToOne.y = fmodcg(abs(scaledWorldPos.y), 1);
+				ZeroToOne.z = fmodcg(abs(scaledWorldPos.z), 1);
+
+
+				//倍率計算（端っこ被り回避）
+				float Multi = 0.98f;
+				//少し左にずらす分
+				float Zurashi = (1 - Multi) * 0.5f;
+
+				//計算
+				fixed4 cx = tex2D(
+					_MainTex, float2(
+					(ZeroToOne.z * TempNum) * Multi + Zurashi * TempNum,
+					(ZeroToOne.y) * Multi + Zurashi * TempNum
+					) 
+				) * factorX;
+				
+				fixed4 cy = tex2D(
+					_MainTex, float2(
+						(ZeroToOne.x * TempNum ) * Multi + Zurashi * TempNum + TempNum * 1,//最後の+TempNum * 1でタイルn枚目調整
+						(ZeroToOne.z) * Multi + Zurashi * TempNum
+						)
+				) * factorY;
+				
+				fixed4 cz = tex2D(
+					_MainTex, float2(
+						(ZeroToOne.x * TempNum) * Multi + Zurashi * TempNum,
+						(ZeroToOne.y) * Multi + Zurashi * TempNum
+						)
+				) * factorZ;
 
 				fixed4 c = (cx + cy + cz);
 

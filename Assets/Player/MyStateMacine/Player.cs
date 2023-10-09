@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public enum PLAYER_STATE
 {
     NONE,
@@ -11,16 +11,18 @@ public enum PLAYER_STATE
     GYM_CLOTHES,    //体操着
     RECORDER,       //リコーダー
     ERASER,         //消しゴム
+    SACRIFICE,      //身代わり
 }
 
 public class Player : MonoBehaviour
 {
-    static public Player instance;
-    PlayerIF m_Player;
+    static public Player instance;  //静的な実態
+    PlayerIF m_Player;              //ステートマシーンの実態
 
-    public PLAYER_STATE Temp;
+    public PLAYER_STATE Temp;       //ReadOnly
 
     PLAYER_STATE OuterNextState;//外部から編集されたNextState
+    public int HitPoint;        //HP
 
     void Awake()
     {
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour
         m_Player.CustumStart();
 
         m_Player = new PlayerAir(m_Player);
+        HitPoint = 3;
     }
 
     // Update is called once per frame
@@ -43,6 +46,12 @@ public class Player : MonoBehaviour
     {
         Temp = m_Player.PlayerState;
         m_Player.CustumUpdate();
+
+        //シーンリロード処理
+        if(HitPoint <= 0)
+        {
+            StartCoroutine("SceneChange");
+        }
     }
 
     void FixedUpdate()
@@ -94,6 +103,10 @@ public class Player : MonoBehaviour
 
             case PLAYER_STATE.ERASER:
                 m_Player = new PlayerEraser(m_Player);
+                break;
+
+            case PLAYER_STATE.SACRIFICE:
+                m_Player = new PlayerSacrifice(m_Player);
                 break;
 
             case PLAYER_STATE.NONE:
@@ -156,10 +169,10 @@ public class Player : MonoBehaviour
     }
 
     //外部から直値座標変更(移動床)
-    public void AddPosition(Vector3 AddVolume)
+    public void AddPosition(Vector3 addVolume)
     {
         if (m_Player.isGround)
-            transform.position += AddVolume;
+            transform.position += addVolume;
     }
 
     public bool GetisGround()
@@ -170,5 +183,37 @@ public class Player : MonoBehaviour
     public PlayerIF GetM_Player()
     {
         return m_Player;
+    }
+
+    public void HitEnemy(Vector2 EtoP_Vel)
+    {
+#if false
+        //プレイヤーVel編集
+        SetOuterVel(EtoP_Vel.x * Player.instance.GetM_Player().KNOCK_BACK_POWER
+            , EtoP_Vel.y * Player.instance.GetM_Player().KNOCK_BACK_POWER, true, true, true, true);
+#else
+        //プレイヤーVel編集
+        if(EtoP_Vel.x >= 0)
+        {
+            SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 2.5f
+            , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
+        }
+        else
+        {
+            SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 2.5f
+            , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
+        }
+
+#endif
+        HitPoint = Mathf.Max(0, HitPoint - 1);
+    }
+
+    IEnumerator SceneChange()
+    {
+        //0.5秒停止
+        yield return new WaitForSeconds(0.5f);
+
+        //シーンリロード
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

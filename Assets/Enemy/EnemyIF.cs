@@ -35,7 +35,7 @@ public class EnemyIF : PawnIF
     public Vector2 AllVel;          //合算速度
     //protected bool JumpKeyDown = false; //ジャンプキーを押しているかどうか            
     AfterImage AfterImageInstanse = new AfterImage();
-
+    public Vector2 DeadVector;      //Dead時のベクトル
 
     //コピー関数
     //全ての変数をコピーする
@@ -50,6 +50,7 @@ public class EnemyIF : PawnIF
         //JumpKeyDown = oldEnemy.JumpKeyDown;
         tf = oldEnemy.tf;
         Size = oldEnemy.Size;
+        DeadVector = oldEnemy.DeadVector;
     }
 
     //EnemyIF(EnemyIF oldEnemy)
@@ -71,7 +72,7 @@ public class EnemyIF : PawnIF
     {
         tf = transform;
         tf.transform.localEulerAngles = new Vector3(0, 90, 0);
-        Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
+        Size = tf.transform.GetComponent<MeshRenderer>().bounds.size;
         //EnemyAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
     public virtual void CustumUpdate()//仮想関数
@@ -165,7 +166,6 @@ public class EnemyIF : PawnIF
 
     public override void HitUnder(Block block)
     {
-        Debug.Log("床");
         isGround = true;
         StandBlock = block;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
@@ -175,7 +175,6 @@ public class EnemyIF : PawnIF
     }
     public override void HitTop(Block block)
     {
-        Debug.Log("上");
         float YPos = block.transform.position.y - (block.Size.y + Size.y) / 2;
         tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
@@ -183,7 +182,6 @@ public class EnemyIF : PawnIF
     }
     public override void HitRight(Block block)
     {
-        Debug.Log("右");
         float XPos = block.transform.position.x - (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
@@ -191,7 +189,6 @@ public class EnemyIF : PawnIF
     }
     public override void HitLeft(Block block)
     {
-        Debug.Log("左");
         float XPos = block.transform.position.x + (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;

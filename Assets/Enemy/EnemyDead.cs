@@ -13,6 +13,13 @@ public class EnemyDead : EnemyIF
         //EnemyAnim.instans.Anim.SetTrigger("Run");
         CopyEnemy(oldEnemy);
         FCnt = 0;
+
+        //仮
+        tf.GetComponent<Renderer>().material.color = Color.grey;
+
+        //速度反映
+        OtherVel = Vector2.zero;
+        SelfVel = DeadVector * 0.2f;
     }
 
     public override void CustumUpdate()
@@ -23,12 +30,9 @@ public class EnemyDead : EnemyIF
     public override void CustumFixed()
     {
         FCnt++;
-        Debug.Log("カウント加算");
 
-        if(FCnt > 10)
+        if(FCnt > 6)
         {
-            Debug.Log("消えた");
-
             GameObject myPrefab;//プレハブをGameObject型で取得
             myPrefab = (GameObject)Resources.Load("SpringEffect");//プレハブをGameObject型で取得
             GameObject Obj = Instantiate(myPrefab, tf.position, Quaternion.identity);
@@ -37,9 +41,8 @@ public class EnemyDead : EnemyIF
 
 
         }
-
         ////過去情報保存
-        //KeepOld();
+        KeepOld();
         ////勢い減少 
         //SlowDown(GROUND_VEL_MULTI, GROUND_VEL_MULTI);
         ////自由落下
@@ -51,7 +54,10 @@ public class EnemyDead : EnemyIF
         ////状態遷移
         //ChangeNextState();
         ////速度反映
-        //MoveEnemy();
+
+        SelfVel *= 0.95f;
+
+        MoveEnemy();
         ////フラグリセット
         ////JumpKeyDown = false;
         ////共通更新

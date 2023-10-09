@@ -4,46 +4,54 @@ using UnityEngine;
 
 public class MoveBeetBar : MonoBehaviour
 {
-    [SerializeField] public RhythmManager Manager = null;
-    [SerializeField] public int Tempo = 0;
-    float Init_BarPosition_x = -113.5f;
-    Vector3 BarPosition = new Vector3(-113.5f, -195.0f, 0.0f);
-    [SerializeField] RectTransform BarTransForm = null;
-    float Move_BarSpeed = 0.0f;
-    [SerializeField] public GameObject rhythm = null;
+    [SerializeField] public RhythmManager Manager = null;                   //リズムマネージャー変数の取得用
+    [SerializeField] public int Tempo = 0;                                  //テンポ変数の確認用
+    [SerializeField] RectTransform BarTransForm = null;                     //UIの位置を変更する際に必要なUI用のトランスフォーム変数
+    private float Init_BarPosition_x = -113.5f;                             //初期位置の移動位置
+    private Vector3 BarPosition = new Vector3(-113.5f, -195.0f, 0.0f);      //移動するバーの位置情報
+    private float Move_BarSpeed = 0.0f;                                     //移動スピードの変数
+    private bool FirstCount = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        BarTransForm = GetComponent<RectTransform>();
-        rhythm = GameObject.Find("RhythmManager");
+        BarTransForm = this.GetComponent<RectTransform>();                  //このスクリプトについているRectTransformを取得
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //rhythm = GameObject.Find("RhythmManager");
-        if(Manager == null)
+        if (Manager == null)
         {
-           rhythm = GameObject.Find("RhythmManager");
-            Debug.Log("< color =#ff0000ff>rhythm</color>");
+            GameObject rhythm = GameObject.Find("RhythmManager");
             Manager = rhythm.GetComponent<RhythmManager>();
-            
-           
+            FirstCount = true;
+            Move_BarSpeed = 100 * (BarTransForm.localScale.x) / Manager.BeatTempo;
         }
 
-        //GameObject rhythm = GameObject.Find("RhythmManager");
-        //Debug.Log(rhythm);
-        //Manager = rhythm.GetComponent<RhythmManager>();
-        //Debug.Log(Manager);
-
-        
-
         Tempo = Manager.FCnt;
-        Move_BarSpeed = 100 * (BarTransForm.localScale.x) / Manager.BeatTempo;
 
-        BarPosition.x = Init_BarPosition_x + Move_BarSpeed * Manager.FCnt;
-        BarTransForm.localPosition = BarPosition;
+        if (FirstCount == true && Tempo <= Manager.BeatTempo)           //初回時で１回目のサイクルフレーム未満の場合
+        {
+            BarPosition.x = Init_BarPosition_x + Move_BarSpeed * (Tempo - Manager.BeatTempo);
+            BarTransForm.localPosition = BarPosition;
+        }
+        else if (FirstCount == true && Tempo >= Manager.BeatTempo)      //初回時で2～7サイクルフレームの時
+        {
+            FirstCount = false;
+            BarPosition.x = Init_BarPosition_x + Move_BarSpeed * (Tempo - Manager.BeatTempo);
+            BarTransForm.localPosition = BarPosition;
+        }
+        else if(FirstCount == false && Tempo <= Manager.BeatTempo)      //初回以外で8サイクル時の時
+        {
+            BarPosition.x = Init_BarPosition_x + Move_BarSpeed * (Tempo + Manager.BeatTempo * 7.0f);
+            BarTransForm.localPosition = BarPosition;
+        }
+        else                                                            //その他のサイクル時
+        {
+            BarPosition.x = Init_BarPosition_x + Move_BarSpeed * (Tempo - Manager.BeatTempo);
+            BarTransForm.localPosition = BarPosition;
+        }
 
     }
 }

@@ -23,7 +23,7 @@ public class PlayerIF : PawnIF
     static protected float AIR_VEL_MULTI = 0.998f;      //空中減速（空気抵抗）
     static protected float GLAVITY = 0.68f * MultiplyNum;
     static protected float ACTION_VEL_MULTI = 0.8f;     //アクション中の減速率
-
+    public float KNOCK_BACK_POWER = 20 * MultiplyNum;
 
     public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.AIR;
     public PLAYER_STATE NextPlayerState { get; set; } = PLAYER_STATE.AIR;
@@ -70,7 +70,7 @@ public class PlayerIF : PawnIF
     public void CustumStart()
     {
         tf = Player.instance.GetComponent<Transform>();
-        tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+        tf.transform.localEulerAngles = new Vector3(0, 90, 0);
         Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
         JumpKeyDown = false;
         //PlayerAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
@@ -106,7 +106,7 @@ public class PlayerIF : PawnIF
         //移動処理
         if (Input.GetKey("d")) // キー入力判定
         {
-            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
             if (SelfVel.x <= maxSpeed)
             {
                 SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
@@ -114,7 +114,7 @@ public class PlayerIF : PawnIF
         }
         if (Input.GetKey("a")) // キー入力判定
         {
-            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
             if (SelfVel.x >= -maxSpeed)
             {
                 SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
@@ -164,7 +164,6 @@ public class PlayerIF : PawnIF
 
     public override void HitUnder(Block block)
     {
-        Debug.Log("床");
         StandBlock = block;
         isGround = true;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
@@ -174,7 +173,6 @@ public class PlayerIF : PawnIF
     }
     public override void HitTop(Block block) 
     {
-        Debug.Log("上");
         float YPos = block.transform.position.y - (block.Size.y + Size.y) / 2;
         tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
@@ -182,7 +180,6 @@ public class PlayerIF : PawnIF
     }
     public override void HitRight(Block block) 
     {
-        Debug.Log("右");
         float XPos = block.transform.position.x - (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
@@ -190,7 +187,6 @@ public class PlayerIF : PawnIF
     }
     public override void HitLeft(Block block) 
     {
-        Debug.Log("左");
         float XPos = block.transform.position.x + (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
