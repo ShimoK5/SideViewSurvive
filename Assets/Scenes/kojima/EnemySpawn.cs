@@ -23,10 +23,10 @@ public class EnemySpawn : MonoBehaviour
     {
         FlameCount++;
 
-        if (FlameCount > 30)
+        if (FlameCount > 90)
             FlameCount = 0;
 
-        if (FlameCount == 30)
+        if (FlameCount == 90)
         {
             GameObject Enemy = (GameObject)Resources.Load("EnemyZigzag");
             
