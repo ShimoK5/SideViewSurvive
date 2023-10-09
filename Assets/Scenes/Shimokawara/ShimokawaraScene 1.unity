@@ -3772,6 +3772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LockY: 0
+  ZurashiX: 0
   cameraPosY: 2
 --- !u!114 &963194230
 MonoBehaviour:
@@ -6024,7 +6025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfd37335c1f3c34bbed954bedf0a62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionArray: 0400000004000000040000000400000004000000040000000400000004000000
+  ActionArray: 0400000000000000040000000000000004000000040000000400000004000000
   BeatTempo: 30
   FCnt: 0
 --- !u!4 &1641433481

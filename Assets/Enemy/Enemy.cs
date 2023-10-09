@@ -27,6 +27,11 @@ public class Enemy : MonoBehaviour
         //instance = this;
     }
 
+    void OnEnable()
+    {
+        Start();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
