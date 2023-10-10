@@ -23,12 +23,12 @@ public class EnemySpawn : MonoBehaviour
     {
         FlameCount++;
 
-        if (FlameCount > 90)
+        if (FlameCount > 30)
             FlameCount = 0;
 
-        if (FlameCount == 90)
+        if (FlameCount == 30)
         {
-            GameObject Enemy = (GameObject)Resources.Load("EnemyZigzag");
+            GameObject Enemy = (GameObject)Resources.Load("EnemyTracking");
             
             Vector3 Size = transform.GetComponent<MeshRenderer>().bounds.size;
             float RandomPosX = Random.Range(-Size.x / 2, Size.x / 2);

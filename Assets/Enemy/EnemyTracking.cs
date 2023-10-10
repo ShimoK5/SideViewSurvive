@@ -7,6 +7,10 @@ using System.Reflection;
 public class EnemyTracking : EnemyIF
 {
     private Vector3 PlayerPos;
+    private int FlameCount = 60;
+    private float SaveVelX;
+    private float SaveVelY;
+
     public EnemyTracking(EnemyIF oldEnemy)
     {
         //EnemyAnim.instans.Anim.SetTrigger("Run");
@@ -30,13 +34,26 @@ public class EnemyTracking : EnemyIF
         // Sacrifice クラス型の配列に、シーン上すべてのSacrificeをぶち込む
         Sacrifice[] SacrificeArray = GameObject.FindObjectsOfType<Sacrifice>();
 
+        FlameCount++;
+
+        
+
         //移動
         if (SacrificeArray.Length == 0)//    ←「配列名.Length」で要素数取得
         {
-            PlayerPos = Player.instance.transform.position;
-            float radius = Mathf.Atan2(PlayerPos.y - tf.transform.position.y, PlayerPos.x - tf.transform.position.x);
-            SelfVel.x = Mathf.Cos(radius) * MAX_RUN_SPEED;
-            SelfVel.y = Mathf.Sin(radius) * MAX_RUN_SPEED;
+            if (FlameCount > 60)
+            {
+                PlayerPos = Player.instance.transform.position;
+                float radius = Mathf.Atan2(PlayerPos.y - tf.transform.position.y, PlayerPos.x - tf.transform.position.x);
+                SaveVelX = Mathf.Cos(radius) * MAX_RUN_SPEED;
+                SaveVelY = Mathf.Sin(radius) * MAX_RUN_SPEED;
+                FlameCount = 0;
+            }
+            else
+            {
+                SelfVel.x = SaveVelX;
+                SelfVel.y = SaveVelY;
+            }
         }
         else
         {
@@ -58,7 +75,7 @@ public class EnemyTracking : EnemyIF
                     NeerIndex = i;
                 }
             }
-            //一番近い奴に追従するように書く？
+            //一番近い奴に追従するように書く
             //PlayerPos = Player.instance.transform.position;
             float radius = Mathf.Atan2(SacrificeArray[NeerIndex].transform.position.y - tf.transform.position.y,
                                         SacrificeArray[NeerIndex].transform.position.x - tf.transform.position.x);
