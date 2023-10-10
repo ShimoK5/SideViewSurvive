@@ -14,7 +14,7 @@ public class RhythmManager : MonoBehaviour
     public static RhythmManager Instance;
     static int BeatNum = 8; //拍数
     [Header("アクション配列")]
-    [SerializeField] RhythmAction[] ActionArray = new RhythmAction[BeatNum];
+    [SerializeField] public RhythmAction[] ActionArray = new RhythmAction[BeatNum];
     [Header("リズム間隔（フレーム数）")]
     [SerializeField] public int BeatTempo;
     public int FCnt = 0;//フレームカウント
