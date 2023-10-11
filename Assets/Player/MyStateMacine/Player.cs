@@ -23,6 +23,11 @@ public class Player : MonoBehaviour
 
     PLAYER_STATE OuterNextState;//外部から編集されたNextState
     public int HitPoint;        //HP
+    [Header("ダメージのクールタイム")]
+    [SerializeField] int DAMAGE_COOL_TIME;  //ダメージクールタイム（無敵時間）
+    bool Invincible = false;            //無敵かどうか
+    int DamageFlameCount = 0;           //ダメージ時加算カウント
+    GameObject AnimObj;
 
     void Awake()
     {
@@ -39,6 +44,7 @@ public class Player : MonoBehaviour
 
         m_Player = new PlayerAir(m_Player);
         HitPoint = 3;
+        AnimObj = GameObject.Find("Anim");
     }
 
     // Update is called once per frame
@@ -56,6 +62,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        DamageCheck();
         CheckState();
         m_Player.CustumFixed();
     }
@@ -187,25 +194,59 @@ public class Player : MonoBehaviour
 
     public void HitEnemy(Vector2 EtoP_Vel)
     {
+        if (!Invincible)
+        {
 #if false
         //プレイヤーVel編集
         SetOuterVel(EtoP_Vel.x * Player.instance.GetM_Player().KNOCK_BACK_POWER
             , EtoP_Vel.y * Player.instance.GetM_Player().KNOCK_BACK_POWER, true, true, true, true);
 #else
-        //プレイヤーVel編集
-        if(EtoP_Vel.x >= 0)
+            //無敵じゃなければ
+
+            //無敵になる
+            Invincible = true;
+            //プレイヤーVel編集
+            if (EtoP_Vel.x >= 0)
+            {
+                SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 2.5f
+                , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
+            }
+            else
+            {
+                SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 2.5f
+                , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
+            }
+        
+
+#endif
+            HitPoint = Mathf.Max(0, HitPoint - 1);
+        }
+
+    }
+
+    void DamageCheck()
+    {
+        if (Invincible)
         {
-            SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 2.5f
-            , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
+            //フレームカウント加算
+            DamageFlameCount++;
+
+            if (DamageFlameCount > DAMAGE_COOL_TIME)
+            {
+                DamageFlameCount = 0;
+                Invincible = false;
+            }
+
+        }
+
+        if (Invincible)
+        {
+            AnimObj.GetComponent<Renderer>().material.color = new Color(1, 0.3f, 0.3f, 1);
         }
         else
         {
-            SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 2.5f
-            , GetM_Player().KNOCK_BACK_POWER * 0.5f, true, true, true, true);
+            AnimObj.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 1);
         }
-
-#endif
-        HitPoint = Mathf.Max(0, HitPoint - 1);
     }
 
     IEnumerator SceneChange()
