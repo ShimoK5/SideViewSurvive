@@ -21,9 +21,9 @@ public class PlayerIF : PawnIF
     static protected float ADD_AIR_SPEED = 1.25f * MultiplyNum;       //空中最大速度
     static protected float GROUND_VEL_MULTI = 0.81f;    //地上減速（摩擦）
     static protected float AIR_VEL_MULTI = 0.998f;      //空中減速（空気抵抗）
-    static protected float GLAVITY = 0.68f * MultiplyNum;
+    static protected float GLAVITY = 0.68f * MultiplyNum;       //重力
     static protected float ACTION_VEL_MULTI = 0.8f;     //アクション中の減速率
-    public float KNOCK_BACK_POWER = 20 * MultiplyNum;
+    public float KNOCK_BACK_POWER = 20 * MultiplyNum;   //ノックバックの強さ
 
     public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.AIR;
     public PLAYER_STATE NextPlayerState { get; set; } = PLAYER_STATE.AIR;
