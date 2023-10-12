@@ -66,6 +66,7 @@ public class MoveBlock2 : Block
         float NowMove = Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, NormalizeTime, 1, 0, MoveRenge) -
             Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, OldNormalizeTime, 1, 0, MoveRenge);
 
+#if true
         //ブロックサイズ代入
         Vector3 ThisSize = transform.GetComponent<MeshRenderer>().bounds.size;
 
@@ -88,8 +89,28 @@ public class MoveBlock2 : Block
                     hit.collider.gameObject.GetComponent<Player>().AddPosition((MoveDirection * NowMove));
                 }
             }
-        }
 
+            if (hit.collider.gameObject.GetComponent<Enemy>())
+            {
+                //地上なら
+                if (hit.collider.gameObject.GetComponent<Enemy>().GetisGround())
+                {
+                    //ブロックの移動に合わせて移動
+                    hit.collider.gameObject.GetComponent<Enemy>().AddPosition((MoveDirection * NowMove));
+                }
+            }
+
+            if (hit.collider.gameObject.GetComponent<Sacrifice>())
+            {
+                //地上なら
+                //if (hit.collider.gameObject.GetComponent<Sacrifice>().GetisGround())
+                {
+                    //ブロックの移動に合わせて移動
+                    hit.collider.gameObject.GetComponent<Sacrifice>().AddPosition((MoveDirection * NowMove));
+                }
+            }
+        }
+#endif
         //座標移動
         transform.position += (MoveDirection * NowMove);
 

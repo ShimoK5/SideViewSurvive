@@ -7,6 +7,10 @@ public class CameraPos : MonoBehaviour
 
     [Header("Y固定")]
     [SerializeField] bool LockY;
+
+    [Header("Xずらし")]
+    [SerializeField] float ZurashiX;
+
     public static CameraPos instance;
     private GameObject targetObj;//targetオブジェクトデータ
     public float cameraPosY = 5.3f;//Y座標の加算値
@@ -35,13 +39,13 @@ public class CameraPos : MonoBehaviour
     {
         if(LockY)
         {
-            transform.position = new Vector3(targetObj.transform.position.x,
+            transform.position = new Vector3(targetObj.transform.position.x + ZurashiX,
             transform.position.y,
             transform.position.z);
         }
         else
         {
-            transform.position = new Vector3(targetObj.transform.position.x,
+            transform.position = new Vector3(targetObj.transform.position.x + ZurashiX,
             targetObj.transform.position.y + cameraPosY,
             transform.position.z);
         }

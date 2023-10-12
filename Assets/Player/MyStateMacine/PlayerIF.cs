@@ -21,8 +21,9 @@ public class PlayerIF : PawnIF
     static protected float ADD_AIR_SPEED = 1.25f * MultiplyNum;       //空中最大速度
     static protected float GROUND_VEL_MULTI = 0.81f;    //地上減速（摩擦）
     static protected float AIR_VEL_MULTI = 0.998f;      //空中減速（空気抵抗）
-    static protected float GLAVITY = 0.68f * MultiplyNum;
-
+    static protected float GLAVITY = 0.68f * MultiplyNum;       //重力
+    static protected float ACTION_VEL_MULTI = 0.8f;     //アクション中の減速率
+    public float KNOCK_BACK_POWER = 20 * MultiplyNum;   //ノックバックの強さ
 
     public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.AIR;
     public PLAYER_STATE NextPlayerState { get; set; } = PLAYER_STATE.AIR;
@@ -47,7 +48,7 @@ public class PlayerIF : PawnIF
         SelfVel = oldPlayer.SelfVel;
         OtherVel = oldPlayer.OtherVel;
         JumpKeyDown = oldPlayer.JumpKeyDown;
-        rb = oldPlayer.rb;
+        tf = oldPlayer.tf;
         Size = oldPlayer.Size;
     }
 
@@ -68,9 +69,9 @@ public class PlayerIF : PawnIF
 
     public void CustumStart()
     {
-        rb = Player.instance.GetComponent<Rigidbody>();
-        rb.transform.localEulerAngles = new Vector3(0, -90, 0);
-        Size = rb.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
+        tf = Player.instance.GetComponent<Transform>();
+        tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+        Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
         JumpKeyDown = false;
         //PlayerAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
@@ -88,13 +89,15 @@ public class PlayerIF : PawnIF
     {
         //残像処理
         AfterImage();
+        //移動床追従
+        //FollowMoveBlock();
     }
 
     //速度反映関数
     protected void MovePlayer()
     {
         AllVel = SelfVel + OtherVel;
-        rb.transform.position += new Vector3(AllVel.x, AllVel.y ,0);
+        tf.transform.position += new Vector3(AllVel.x, AllVel.y ,0);
     }
 
     //横移動   
@@ -103,7 +106,7 @@ public class PlayerIF : PawnIF
         //移動処理
         if (Input.GetKey("d")) // キー入力判定
         {
-            rb.transform.localEulerAngles = new Vector3(0, -90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
             if (SelfVel.x <= maxSpeed)
             {
                 SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
@@ -111,7 +114,7 @@ public class PlayerIF : PawnIF
         }
         if (Input.GetKey("a")) // キー入力判定
         {
-            rb.transform.localEulerAngles = new Vector3(0, 90, 0);
+            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
             if (SelfVel.x >= -maxSpeed)
             {
                 SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
@@ -134,7 +137,7 @@ public class PlayerIF : PawnIF
     {
         if (JumpKeyDown == true && isGround) // キー入力判定
         {
-            NextPlayerState = PLAYER_STATE.AIR;
+            //NextPlayerState = PLAYER_STATE.AIR;
             SelfVel.y = 20.0f * MultiplyNum;
         }
     }
@@ -144,42 +147,55 @@ public class PlayerIF : PawnIF
         Debug.Log("オーバーライドしていない関数が呼ばれた");
     }
 
+    //床に合わせた座標移動
+    protected void FollowMoveBlock()
+    {
+        if(StandBlock)
+        {
+            tf.position += (StandBlock.transform.position - StandBlock.OldPos);
+            Debug.Log("Stand");
+        }
+        else
+        {
+            Debug.Log("Fly");
+
+        }
+    }
+
     public override void HitUnder(Block block)
     {
-        Debug.Log("床");
+        StandBlock = block;
         isGround = true;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
-        rb.transform.position = new Vector3(rb.transform.position.x, YPos, rb.transform.position.z);
+        tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
         OtherVel.y = 0.0f;
     }
     public override void HitTop(Block block) 
     {
-        Debug.Log("上");
         float YPos = block.transform.position.y - (block.Size.y + Size.y) / 2;
-        rb.transform.position = new Vector3(rb.transform.position.x, YPos, rb.transform.position.z);
+        tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;
         OtherVel.y = 0.0f;
     }
     public override void HitRight(Block block) 
     {
-        Debug.Log("右");
         float XPos = block.transform.position.x - (block.Size.x + Size.x) / 2;
-        rb.transform.position = new Vector3(XPos, rb.transform.position.y, rb.transform.position.z);
+        tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
         OtherVel.x = 0.0f;
     }
     public override void HitLeft(Block block) 
     {
-        Debug.Log("左");
         float XPos = block.transform.position.x + (block.Size.x + Size.x) / 2;
-        rb.transform.position = new Vector3(XPos, rb.transform.position.y, rb.transform.position.z);
+        tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
         SelfVel.x = 0.0f;
         OtherVel.x = 0.0f;
     }
     public override void NonHitUnder() 
     {
         isGround = false;
+        StandBlock = null;
     }
 
 #if false
@@ -305,14 +321,19 @@ public class PlayerIF : PawnIF
     //過去情報h保存
     protected void KeepOld()
     {
-        OldPos = rb.transform.position;
+        OldPos = tf.transform.position;
     }
 
     //残像エフェクト
     public void AfterImage()
     {
 
-        AfterImageInstanse.ImageUpdate(rb, AllVel);
+        AfterImageInstanse.ImageUpdate(tf, AllVel);
+    }
+
+    public float GetStandSpeed()
+    {
+        return STAND_SPEED;
     }
 
 }
@@ -329,9 +350,8 @@ public class AfterImage : MonoBehaviour
         m_Time = 0;
         RemitTime = 1000;
     }
-    public void ImageUpdate(Rigidbody rb , Vector3 vel)
+    public void ImageUpdate(Transform tf , Vector3 vel)
     {
-        Debug.Log(vel.magnitude);
         //停止時
         if(vel.magnitude <= 0.012f)
         {
@@ -349,7 +369,7 @@ public class AfterImage : MonoBehaviour
             {
                 m_Time = 0;
                 // プレハブを元に、インスタンスを生成、
-                GameObject Obj = Instantiate(myPrefab,rb.position + new Vector3(0,0,0.6f), Quaternion.identity);
+                GameObject Obj = Instantiate(myPrefab,tf.position + new Vector3(0,0,0.6f), Quaternion.identity);
             }
         }
         
