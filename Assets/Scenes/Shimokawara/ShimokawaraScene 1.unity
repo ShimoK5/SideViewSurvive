@@ -5900,8 +5900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfd37335c1f3c34bbed954bedf0a62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionArray: 0400000003000000040000000400000004000000000000000400000001000000
-  BeatTempo: 30
+  ActionArray: 0300000002000000030000000200000000000000000000000100000002000000
+  BeatTempo: 15
   FCnt: 0
 --- !u!4 &1641433481
 Transform:
