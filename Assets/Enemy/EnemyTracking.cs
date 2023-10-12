@@ -10,6 +10,7 @@ public class EnemyTracking : EnemyIF
     private int FlameCount = 60;
     private float SaveVelX;
     private float SaveVelY;
+    private float Radius;
 
     public EnemyTracking(EnemyIF oldEnemy)
     {
@@ -41,12 +42,20 @@ public class EnemyTracking : EnemyIF
         //移動
         if (SacrificeArray.Length == 0)//    ←「配列名.Length」で要素数取得
         {
-            if (FlameCount > 60)
+            if (FlameCount == 60)
             {
                 PlayerPos = Player.instance.transform.position;
-                float radius = Mathf.Atan2(PlayerPos.y - tf.transform.position.y, PlayerPos.x - tf.transform.position.x);
-                SaveVelX = Mathf.Cos(radius) * MAX_RUN_SPEED;
-                SaveVelY = Mathf.Sin(radius) * MAX_RUN_SPEED;
+                Radius = Mathf.Atan2(PlayerPos.y - tf.transform.position.y, PlayerPos.x - tf.transform.position.x);
+                SaveVelX = Mathf.Cos(Radius) * MAX_RUN_SPEED;
+                SaveVelY = Mathf.Sin(Radius) * MAX_RUN_SPEED;
+               // FlameCount = 0;
+            }
+            else if(FlameCount > 100)
+            {
+                float RandomAddRot = Random.Range(-120.0f, 120.0f);
+                Radius += RandomAddRot * Mathf.PI / 180.0f;
+                SaveVelX = Mathf.Cos(Radius) * MAX_RUN_SPEED;
+                SaveVelY = Mathf.Sin(Radius) * MAX_RUN_SPEED;
                 FlameCount = 0;
             }
             else
