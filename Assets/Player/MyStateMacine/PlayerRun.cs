@@ -8,7 +8,7 @@ public class PlayerRun : PlayerIF
 {
     public PlayerRun(PlayerIF oldPlayer)
     {
-        PlayerAnim.instans.Anim.SetTrigger("Run");
+        Player.instance.GetAnim().Anim.state.SetAnimation(0, "run", true);
         CopyPlayer(oldPlayer);
     }
 

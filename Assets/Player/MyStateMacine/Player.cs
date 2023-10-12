@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Spine;
+using Spine.Unity;
 public enum PLAYER_STATE
 {
     NONE,
@@ -27,7 +29,8 @@ public class Player : MonoBehaviour
     [SerializeField] int InvisibleCoolTime;  //ダメージクールタイム（無敵時間）
     bool Invincible = false;            //無敵かどうか
     int InvincibleFlameCount = 0;           //ダメージ時加算カウント
-    GameObject AnimObj;
+
+    PlayerAnimSpine PlayerAnim;
 
     void Awake()
     {
@@ -37,14 +40,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerAnim = GameObject.Find("PlayerAnim").GetComponent<PlayerAnimSpine>();
+
         OuterNextState = PLAYER_STATE.NONE;
 
         m_Player = new PlayerIF();
         m_Player.CustumStart();
 
-        m_Player = new PlayerAir(m_Player);
-        HitPoint = 3;
-        AnimObj = GameObject.Find("Anim");
+        m_Player = new PlayerStand(m_Player);
+        HitPoint = 200;
     }
 
     // Update is called once per frame
@@ -192,6 +196,11 @@ public class Player : MonoBehaviour
         return m_Player;
     }
 
+    public PlayerAnimSpine GetAnim()
+    {
+        return PlayerAnim;
+    }
+
     public void HitEnemy(Vector2 EtoP_Vel)
     {
         if (!Invincible)
@@ -241,11 +250,13 @@ public class Player : MonoBehaviour
 
         if (Invincible)
         {
-            AnimObj.GetComponent<Renderer>().material.color = new Color(1, 0.3f, 0.3f, 1);
+            //プレイヤーが赤くなる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 0.6f, 0.6f));
         }
         else
         {
-            AnimObj.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 1);
+            //プレイヤーが赤くなる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f));
         }
     }
 

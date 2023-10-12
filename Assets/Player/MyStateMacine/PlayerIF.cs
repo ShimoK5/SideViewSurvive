@@ -25,11 +25,11 @@ public class PlayerIF : PawnIF
     static protected float ACTION_VEL_MULTI = 0.8f;     //アクション中の減速率
     public float KNOCK_BACK_POWER = 20 * MultiplyNum;   //ノックバックの強さ
 
-    public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.AIR;
-    public PLAYER_STATE NextPlayerState { get; set; } = PLAYER_STATE.AIR;
+    public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.STAND;
+    public PLAYER_STATE NextPlayerState { get; set; } = PLAYER_STATE.STAND;
 
    
-    public bool isGround = false;   //地面に触れているかのフラグ
+    public bool isGround = true;   //地面に触れているかのフラグ
     public Vector2 SelfVel;         //自己速度
     public Vector2 OtherVel;        //外部速度
     public Vector2 AllVel;          //合算速度

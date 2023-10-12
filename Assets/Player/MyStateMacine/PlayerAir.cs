@@ -9,7 +9,7 @@ public class PlayerAir : PlayerIF
 
     public PlayerAir(PlayerIF oldPlayer)
     {
-        PlayerAnim.instans.Anim.SetTrigger("Jump");
+        Player.instance.GetAnim().Anim.state.SetAnimation(0, "jump", true);
         CopyPlayer(oldPlayer);
     }
     ~PlayerAir()
