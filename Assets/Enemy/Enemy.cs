@@ -8,6 +8,7 @@ public enum ENEMY_STATE
     FLY,
     ZIGZAG,
     TRACKING,
+    CIRCLE,
     DEAD
 }
 
@@ -19,6 +20,8 @@ public class Enemy : MonoBehaviour
 
     [Header("エネミーのタイプ")]
     [SerializeField] ENEMY_STATE InitEnmyType;
+    //[Header("円運動用の半径")]
+    //public float Radius = 0.0f;
 
     ENEMY_STATE OuterNextState;//外部から編集されたNextState
 
@@ -56,6 +59,10 @@ public class Enemy : MonoBehaviour
             
             case ENEMY_STATE.TRACKING:
                 m_Enemy = new EnemyTracking(m_Enemy);
+                break;
+            
+            case ENEMY_STATE.CIRCLE:
+                m_Enemy = new EnemyCircularMotion(m_Enemy);
                 break;
 
             default:
@@ -116,6 +123,10 @@ public class Enemy : MonoBehaviour
             
             case ENEMY_STATE.TRACKING:
                 m_Enemy = new EnemyTracking(m_Enemy);
+                break;
+
+            case ENEMY_STATE.CIRCLE:
+                m_Enemy = new EnemyCircularMotion(m_Enemy);
                 break;
 
             case ENEMY_STATE.DEAD:
