@@ -10,10 +10,13 @@ public enum PLAYER_STATE
     STAND,
     AIR,
     RUN,
+
     GYM_CLOTHES,    //体操着
     RECORDER,       //リコーダー
     ERASER,         //消しゴム
     SACRIFICE,      //身代わり
+
+    DAMAGE,         //被弾
 }
 
 public class Player : MonoBehaviour
@@ -120,6 +123,10 @@ public class Player : MonoBehaviour
                 m_Player = new PlayerSacrifice(m_Player);
                 break;
 
+            case PLAYER_STATE.DAMAGE:
+                m_Player = new PlayerDamage(m_Player);
+                break;
+
             case PLAYER_STATE.NONE:
                 //m_Player = new PlayerNone(m_Player);
                 break;
@@ -214,23 +221,33 @@ public class Player : MonoBehaviour
 
             //無敵になる
             InvisibleOn(120);
-            //プレイヤーVel編集
+            //プレイヤーVel編集 & 向き変更
             if (EtoP_Vel.x >= 0)
             {
                 SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 1.5f
                 , GetM_Player().KNOCK_BACK_POWER * 0.2f, true, true, true, true);
+                
+                transform.localEulerAngles = new Vector3(0, -90, 0);
             }
             else
             {
                 SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 1.5f
                 , GetM_Player().KNOCK_BACK_POWER * 0.2f, true, true, true, true);
+               
+                transform.localEulerAngles = new Vector3(0, 90, 0);
             }
-        
 
+            //プレイヤーステート変更
+            PlayerStateIsDamage();
 #endif
             HitPoint = Mathf.Max(0, HitPoint - 1);
         }
 
+    }
+
+    void PlayerStateIsDamage()
+    {
+        m_Player.NextPlayerState = PLAYER_STATE.DAMAGE;
     }
 
     void DamageCheck()

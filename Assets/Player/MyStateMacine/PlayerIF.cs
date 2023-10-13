@@ -106,7 +106,7 @@ public class PlayerIF : PawnIF
         //移動処理
         if (Input.GetKey("d")) // キー入力判定
         {
-            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+            
             if (SelfVel.x <= maxSpeed)
             {
                 SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
@@ -114,13 +114,29 @@ public class PlayerIF : PawnIF
         }
         if (Input.GetKey("a")) // キー入力判定
         {
-            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+            
             if (SelfVel.x >= -maxSpeed)
             {
                 SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
             }
         }
     }
+
+    //向き変更
+    protected void ChangeDirection()
+    {
+        if(SelfVel.x > 0)
+        {
+            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+        }
+        else if (SelfVel.x < 0)
+        {
+            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+        }
+
+    }
+
+
     //横速度減速
     protected void SlowDown(float selfVelMulti, float otherVelMulti)
     {

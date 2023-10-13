@@ -38,6 +38,8 @@ public class PlayerRecorder : PlayerIF
             Fall();
             //横移動
             MoveX(MAX_RUN_SPEED * ACTION_VEL_MULTI, ADD_RUN_SPEED * ACTION_VEL_MULTI);
+            //向き変更
+            ChangeDirection();
             //ジャンプ処理
             Jump();
             //状態遷移
@@ -59,6 +61,8 @@ public class PlayerRecorder : PlayerIF
             Fall();
             //横移動
             MoveX(MAX_AIR_SPEED * ACTION_VEL_MULTI, ADD_AIR_SPEED * ACTION_VEL_MULTI);
+            //向き変更
+            ChangeDirection();
             //状態遷移
             //ChangeNextState();
             //速度反映
