@@ -6,7 +6,7 @@ public class PlayerSacrifice : PlayerIF
 {
     public PlayerSacrifice(PlayerIF oldPlayer)
     {
-        PlayerAnim.instans.Anim.SetTrigger("Idle");
+        Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;

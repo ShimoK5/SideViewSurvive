@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Spine;
+using Spine.Unity;
 public enum PLAYER_STATE
 {
     NONE,
@@ -23,11 +25,12 @@ public class Player : MonoBehaviour
 
     PLAYER_STATE OuterNextState;//外部から編集されたNextState
     public int HitPoint;        //HP
-    [Header("ダメージのクールタイム")]
-    [SerializeField] int DAMAGE_COOL_TIME;  //ダメージクールタイム（無敵時間）
+    //[Header("ダメージのクールタイム")]
+    [SerializeField] int InvisibleCoolTime;  //ダメージクールタイム（無敵時間）
     bool Invincible = false;            //無敵かどうか
-    int DamageFlameCount = 0;           //ダメージ時加算カウント
-    GameObject AnimObj;
+    int InvincibleFlameCount = 0;           //ダメージ時加算カウント
+
+    PlayerAnimSpine PlayerAnim;
 
     void Awake()
     {
@@ -37,14 +40,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerAnim = GameObject.Find("PlayerAnim").GetComponent<PlayerAnimSpine>();
+
         OuterNextState = PLAYER_STATE.NONE;
 
         m_Player = new PlayerIF();
         m_Player.CustumStart();
 
-        m_Player = new PlayerAir(m_Player);
-        HitPoint = 3;
-        AnimObj = GameObject.Find("Anim");
+        m_Player = new PlayerStand(m_Player);
+        HitPoint = 200;
     }
 
     // Update is called once per frame
@@ -192,6 +196,11 @@ public class Player : MonoBehaviour
         return m_Player;
     }
 
+    public PlayerAnimSpine GetAnim()
+    {
+        return PlayerAnim;
+    }
+
     public void HitEnemy(Vector2 EtoP_Vel)
     {
         if (!Invincible)
@@ -204,16 +213,16 @@ public class Player : MonoBehaviour
             //無敵じゃなければ
 
             //無敵になる
-            Invincible = true;
+            InvisibleOn(120);
             //プレイヤーVel編集
             if (EtoP_Vel.x >= 0)
             {
-                SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 3.5f
+                SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 1.5f
                 , GetM_Player().KNOCK_BACK_POWER * 0.2f, true, true, true, true);
             }
             else
             {
-                SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 3.5f
+                SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 1.5f
                 , GetM_Player().KNOCK_BACK_POWER * 0.2f, true, true, true, true);
             }
         
@@ -229,11 +238,11 @@ public class Player : MonoBehaviour
         if (Invincible)
         {
             //フレームカウント加算
-            DamageFlameCount++;
+            InvincibleFlameCount++;
 
-            if (DamageFlameCount > DAMAGE_COOL_TIME)
+            if (InvincibleFlameCount > InvisibleCoolTime)
             {
-                DamageFlameCount = 0;
+                InvincibleFlameCount = 0;
                 Invincible = false;
             }
 
@@ -241,12 +250,20 @@ public class Player : MonoBehaviour
 
         if (Invincible)
         {
-            AnimObj.GetComponent<Renderer>().material.color = new Color(1, 0.3f, 0.3f, 1);
+            //プレイヤーが赤くなる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 0.6f, 0.6f));
         }
         else
         {
-            AnimObj.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 1);
+            //プレイヤーが赤くなる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f));
         }
+    }
+
+    void InvisibleOn(int damageCoolTime)
+    {
+        Invincible = true;
+        InvisibleCoolTime = damageCoolTime;
     }
 
     IEnumerator SceneChange()
