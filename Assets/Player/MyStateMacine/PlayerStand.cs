@@ -30,6 +30,8 @@ public class PlayerStand : PlayerIF
         Fall();
         //横移動
         MoveX(MAX_RUN_SPEED,ADD_RUN_SPEED);
+        //向き変更
+        ChangeDirection();
         //ジャンプ処理
         Jump();
         //状態遷移
