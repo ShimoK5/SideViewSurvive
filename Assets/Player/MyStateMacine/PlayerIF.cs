@@ -12,7 +12,7 @@ public class PlayerIF : PawnIF
 {
     //定数
     static public KeyCode jumpKey = KeyCode.Space; //ジャンプキー
-    static float MultiplyNum = 1.0f / 60;
+    static protected float MultiplyNum = 1.0f / 60;
     static protected float STAND_SPEED = 0.4f * MultiplyNum;      //これ以下のスピードならRunからStand
     static protected float MAX_RUN_SPEED = 8 * MultiplyNum;       //地上最大速度
     static protected float ADD_RUN_SPEED = 2.5f * MultiplyNum;    //地上加速度
@@ -35,6 +35,8 @@ public class PlayerIF : PawnIF
     public Vector2 AllVel;          //合算速度
     protected bool JumpKeyDown = false; //ジャンプキーを押しているかどうか            
     static AfterImage AfterImageInstanse = new AfterImage();
+
+    public bool ActionInvisible;
 
 
     //コピー関数
@@ -73,6 +75,7 @@ public class PlayerIF : PawnIF
         tf.transform.localEulerAngles = new Vector3(0, 90, 0);
         Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
         JumpKeyDown = false;
+        ActionInvisible = false;
         //PlayerAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
     public virtual void CustumUpdate()//仮想関数

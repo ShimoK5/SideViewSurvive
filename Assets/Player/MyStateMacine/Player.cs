@@ -11,10 +11,15 @@ public enum PLAYER_STATE
     AIR,
     RUN,
 
-    GYM_CLOTHES,    //体操着
+    TSUNAGI,
+
+    UMBRELLA,    //体操着
     RECORDER,       //リコーダー
     ERASER,         //消しゴム
     SACRIFICE,      //身代わり
+    AIR_CANNON,     //空気砲
+    BAG,            //ランドセル
+    RULER,          //定規
 
     DAMAGE,         //被弾
 }
@@ -30,7 +35,7 @@ public class Player : MonoBehaviour
     public int HitPoint;        //HP
     //[Header("ダメージのクールタイム")]
     [SerializeField] int InvisibleCoolTime;  //ダメージクールタイム（無敵時間）
-    bool Invincible = false;            //無敵かどうか
+    bool DamageInvincible = false;            //無敵かどうか
     int InvincibleFlameCount = 0;           //ダメージ時加算カウント
 
     PlayerAnimSpine PlayerAnim;
@@ -107,8 +112,12 @@ public class Player : MonoBehaviour
                 m_Player = new PlayerAir(m_Player);
                 break;
 
-            case PLAYER_STATE.GYM_CLOTHES:
-                m_Player = new PlayerGymClothes(m_Player);
+            case PLAYER_STATE.TSUNAGI:
+                m_Player = new PlayerTsunagi(m_Player);
+                break;
+
+            case PLAYER_STATE.UMBRELLA:
+                m_Player = new PlayerUmbrella(m_Player);
                 break;
 
             case PLAYER_STATE.RECORDER:
@@ -123,12 +132,24 @@ public class Player : MonoBehaviour
                 m_Player = new PlayerSacrifice(m_Player);
                 break;
 
+            case PLAYER_STATE.AIR_CANNON:
+                m_Player = new PlayerAirCannon(m_Player);
+                break; 
+            
+            case PLAYER_STATE.BAG:
+                m_Player = new PlayerBag(m_Player);
+                break;
+            
+            case PLAYER_STATE.RULER:
+                m_Player = new PlayerRuler(m_Player);
+                break;
+
             case PLAYER_STATE.DAMAGE:
                 m_Player = new PlayerDamage(m_Player);
                 break;
 
             case PLAYER_STATE.NONE:
-                //m_Player = new PlayerNone(m_Player);
+                m_Player = new PlayerTsunagi(m_Player);
                 break;
         }
     }
@@ -210,7 +231,13 @@ public class Player : MonoBehaviour
 
     public void HitEnemy(Vector2 EtoP_Vel)
     {
-        if (!Invincible)
+        //無敵ならしない処理
+        if (DamageInvincible)
+            return;
+        if (m_Player.ActionInvisible)
+            return;
+
+
         {
 #if false
         //プレイヤーVel編集
@@ -252,7 +279,7 @@ public class Player : MonoBehaviour
 
     void DamageCheck()
     {
-        if (Invincible)
+        if (DamageInvincible)
         {
             //フレームカウント加算
             InvincibleFlameCount++;
@@ -260,26 +287,31 @@ public class Player : MonoBehaviour
             if (InvincibleFlameCount > InvisibleCoolTime)
             {
                 InvincibleFlameCount = 0;
-                Invincible = false;
+                DamageInvincible = false;
             }
 
         }
 
-        if (Invincible)
+        if (DamageInvincible)
         {
             //プレイヤーが赤くなる処理
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 0.6f, 0.6f));
         }
+        else if (m_Player.ActionInvisible)
+        {
+            //プレイヤーが黄色くなる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 0.6f));
+        }
         else
         {
-            //プレイヤーが赤くなる処理
+            //プレイヤーが通常色になる処理
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f));
         }
     }
 
     void InvisibleOn(int damageCoolTime)
     {
-        Invincible = true;
+        DamageInvincible = true;
         InvisibleCoolTime = damageCoolTime;
     }
 
