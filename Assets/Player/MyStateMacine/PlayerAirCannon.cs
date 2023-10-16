@@ -54,7 +54,7 @@ public class PlayerAirCannon : PlayerIF
             //向き変更
             ChangeDirection();
             //ジャンプ処理
-            Jump();
+            //Jump();
             //状態遷移
             ChangeNextState();
             //速度反映
