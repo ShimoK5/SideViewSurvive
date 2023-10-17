@@ -20,6 +20,7 @@ public enum PLAYER_STATE
     AIR_CANNON,     //空気砲
     BAG,            //ランドセル
     RULER,          //定規
+    WHISTLE,        //笛
 
     DAMAGE,         //被弾
 }
@@ -142,6 +143,10 @@ public class Player : MonoBehaviour
             
             case PLAYER_STATE.RULER:
                 m_Player = new PlayerRuler(m_Player);
+                break;
+            
+            case PLAYER_STATE.WHISTLE:
+                m_Player = new PlayerWhistle(m_Player);
                 break;
 
             case PLAYER_STATE.DAMAGE:

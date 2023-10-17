@@ -7,9 +7,13 @@ using System.Reflection;
 public class PlayerAir : PlayerIF
 {
 
+    int FCnt = 0;
+
     public PlayerAir(PlayerIF oldPlayer)
     {
-        Player.instance.GetAnim().Anim.state.SetAnimation(0, "jump", true);
+        if(Player.instance.GetAnim().Anim.AnimationName != "jump")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "jump", true);
+
         CopyPlayer(oldPlayer);
     }
     ~PlayerAir()

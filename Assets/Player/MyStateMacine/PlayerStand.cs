@@ -8,7 +8,8 @@ public class PlayerStand : PlayerIF
 {
     public PlayerStand(PlayerIF oldPlayer)
     {
-        Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
+        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
     }
 

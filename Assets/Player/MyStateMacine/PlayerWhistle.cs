@@ -2,32 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAirCannon : PlayerIF
+public class PlayerWhistle : PlayerIF
 {
-    public PlayerAirCannon(PlayerIF oldPlayer)
+    public PlayerWhistle(PlayerIF oldPlayer)
     {
         if (Player.instance.GetAnim().Anim.AnimationName != "idle")
             Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
-        //ジャンプ処理
-        SelfVel.y = 30.0f * MultiplyNum;
-        OtherVel.y = 0;
-
-        //無敵
-        ActionInvisible = true;
-
         //プレハブ生成
-        //GameObject GymClothesSmall = (GameObject)Resources.Load("Umbrella");
-        //GymClothesSmall = Instantiate(GymClothesSmall, tf.transform.position, Quaternion.Euler(-90, tf.transform.eulerAngles.y - 90, 0));
-        //GymClothesSmall.GetComponent<Umbrella>().InitSetPosition();
+        GameObject SoundWaves = (GameObject)Resources.Load("Whistle");
+        SoundWaves = Instantiate(SoundWaves, tf.transform.position, Quaternion.Euler(90, 0, 0));
     }
-    ~PlayerAirCannon()
-    {
-        ActionInvisible = false;
-    }
-
 
     public override void CustumUpdate()
     {
@@ -55,9 +42,9 @@ public class PlayerAirCannon : PlayerIF
             //向き変更
             ChangeDirection();
             //ジャンプ処理
-            //Jump();
+            Jump();
             //状態遷移
-            ChangeNextState();
+            //ChangeNextState();
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -73,12 +60,12 @@ public class PlayerAirCannon : PlayerIF
             SlowDown(AIR_VEL_MULTI, GROUND_VEL_MULTI);
             //自由落下
             Fall();
-            //横移動       上昇中の横移動を減らす
-            MoveX(MAX_AIR_SPEED * ACTION_VEL_MULTI * 0.03f, ADD_AIR_SPEED * ACTION_VEL_MULTI * 0.03f);
+            //横移動
+            MoveX(MAX_AIR_SPEED * ACTION_VEL_MULTI, ADD_AIR_SPEED * ACTION_VEL_MULTI);
             //向き変更
             ChangeDirection();
             //状態遷移
-            ChangeNextState();
+            //ChangeNextState();
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -89,12 +76,15 @@ public class PlayerAirCannon : PlayerIF
     }
 
     //状態遷移
-    protected override void ChangeNextState()
-    {
-        if(SelfVel.y < 0)
-        {
-            NextPlayerState = PLAYER_STATE.AIR;
-        }
-
-    }
+    //protected override void ChangeNextState()
+    //{
+    //    if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED && NextPlayerState == PLAYER_STATE.STAND)
+    //    {
+    //        NextPlayerState = PLAYER_STATE.RUN;
+    //    }
+    //    if (!isGround)
+    //    {
+    //        NextPlayerState = PLAYER_STATE.AIR;
+    //    }
+    //}
 }

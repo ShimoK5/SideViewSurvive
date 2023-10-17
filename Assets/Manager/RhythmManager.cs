@@ -13,6 +13,7 @@ public class RhythmManager : MonoBehaviour
         AirCannon,      //空気砲
         Bag,            //ランドセル
         Ruler,          //定規
+        Whistle,
         None            //なし
     }
     public static RhythmManager Instance;
@@ -75,6 +76,10 @@ public class RhythmManager : MonoBehaviour
                 
                 case RhythmAction.Ruler:
                     Player.instance.SetOuterState(PLAYER_STATE.RULER);
+                    break;
+                
+                case RhythmAction.Whistle:
+                    Player.instance.SetOuterState(PLAYER_STATE.WHISTLE);
                     break;
 
                 case RhythmAction.None:

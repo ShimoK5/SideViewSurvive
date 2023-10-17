@@ -3078,7 +3078,7 @@ PrefabInstance:
     - target: {fileID: 3532542396871453691, guid: 5f0708d5fbbc9ae4f951404088d67315,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f0708d5fbbc9ae4f951404088d67315, type: 3}
@@ -5893,7 +5893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfd37335c1f3c34bbed954bedf0a62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionArray: 0700000007000000070000000700000007000000070000000700000007000000
+  ActionArray: 0700000008000000080000000700000008000000080000000800000008000000
   BeatTempo: 30
   FCnt: 0
 --- !u!4 &1641433481

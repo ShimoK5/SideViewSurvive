@@ -9,7 +9,8 @@ public class PlayerBag : PlayerIF
 
     public PlayerBag(PlayerIF oldPlayer)
     {
-        Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
+        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
         //横移動消し
         SelfVel.x = 0;
