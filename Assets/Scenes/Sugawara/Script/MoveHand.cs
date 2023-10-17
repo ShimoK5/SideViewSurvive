@@ -12,14 +12,22 @@ public class MoveHand : MonoBehaviour
     [SerializeField] private bool Catch_Icon_Judge = false;                                 //アイコンを掴めるかどうかの確認
     [SerializeField] private GameObject Catch_Icon = null;                                  //アイコン保管用（多分消せる）
     [SerializeField] private Vector3 Catch_IconPosition = Vector3.zero;                     //移動する際に使用する位置座標（後で変数にして削除予定）
+    public static MoveHand instance;
+    [SerializeField] public GameObject[] NoteBox = new GameObject[8];
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         HandPosition = new Vector3(50.0f, -82.0f, 0.0f);
         Icon_Transform = this.GetComponent<RectTransform>();
         Icon_Transform.TransformPoint(HandPosition);
         Catch_Icon_Judge = false;
+        
     }
 
     void OnTriggerEnter2D(Collider2D collision)
