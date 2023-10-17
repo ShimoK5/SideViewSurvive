@@ -22,10 +22,10 @@ public class Umbrella : MonoBehaviour
 
     void FixedUpdate()
     {
-        FCnt++;
+        
 
         //アングル分割
-        float Angle = (90.0f / LifeCnt) * FCnt;
+        float Angle = (90.0f / LifeCnt) * (LifeCnt - FCnt);
         //右向き
         if(Player.instance.transform.rotation.y > 0)
         {
@@ -53,6 +53,7 @@ public class Umbrella : MonoBehaviour
             Destroy(gameObject);
         }
 
+        FCnt++;
     }
 
     public void InitSetPosition()

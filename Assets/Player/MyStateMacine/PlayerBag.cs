@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerBag : PlayerIF
 {
     int AfterGapFlame = 7;
-    int FlameCount = 0;
+    int GroundFlameCount = 0;
+    int AirFlameCnt = 0;
+
+    bool PrefabOnce = true;
 
     public PlayerBag(PlayerIF oldPlayer)
     {
@@ -22,9 +25,11 @@ public class PlayerBag : PlayerIF
         //無敵
         ActionInvisible = true;
 
-        FlameCount = 0;
+        GroundFlameCount = 0;
 
-        //プレハブ生成
+        
+
+
         //GameObject GymClothesSmall = (GameObject)Resources.Load("Umbrella");
         //GymClothesSmall = Instantiate(GymClothesSmall, tf.transform.position, Quaternion.Euler(-90, tf.transform.eulerAngles.y - 90, 0));
         //GymClothesSmall.GetComponent<Umbrella>().InitSetPosition();
@@ -50,7 +55,13 @@ public class PlayerBag : PlayerIF
     {
         if (isGround)
         {
-            FlameCount++;
+            if(PrefabOnce)
+            {
+                CreatePrefab();
+                PrefabOnce = false;
+            }
+
+            GroundFlameCount++;
 
             //過去情報保存
             KeepOld();
@@ -75,6 +86,8 @@ public class PlayerBag : PlayerIF
         }
         else
         {
+            AirFlameCnt++;
+
             //過去情報保存
             KeepOld();
             //勢い減少
@@ -99,10 +112,37 @@ public class PlayerBag : PlayerIF
     //状態遷移
     protected override void ChangeNextState()
     {
-        if (FlameCount >= AfterGapFlame)
+        if (GroundFlameCount >= AfterGapFlame)
         {
             NextPlayerState = PLAYER_STATE.STAND;
         }
 
+    }
+
+    void CreatePrefab()
+    {
+        //プレハブ生成
+        GameObject BagShockWave = (GameObject)Resources.Load("BagShockWave");
+        BagShockWave = Instantiate(BagShockWave, tf.transform.position, tf.transform.rotation);
+        //値渡し
+        BagShockWave.GetComponent<BagShockWave>().SetParam((float)AirFlameCnt / RhythmManager.Instance.BeatTempo);
+        //vel渡し
+        BagShockWave.GetComponent<BagShockWave>().Velocity = new Vector3(0.4f, 0, 0);
+        //高さ調整
+        BagShockWave.transform.position = new Vector3(BagShockWave.transform.position.x,
+            BagShockWave.transform.position.y + (BagShockWave.GetComponent<BagShockWave>().GetSize() - 2) * 0.5f,
+            BagShockWave.transform.position.z);
+
+        //プレハブ生成
+        GameObject BagShockWave2 = (GameObject)Resources.Load("BagShockWave");
+        BagShockWave2 = Instantiate(BagShockWave2, tf.transform.position, tf.transform.rotation);
+        //値渡し
+        BagShockWave2.GetComponent<BagShockWave>().SetParam((float)AirFlameCnt / RhythmManager.Instance.BeatTempo);
+        //vel渡し
+        BagShockWave2.GetComponent<BagShockWave>().Velocity = new Vector3(-0.4f, 0, 0);
+        //高さ調整
+        BagShockWave2.transform.position = new Vector3(BagShockWave2.transform.position.x,
+            BagShockWave2.transform.position.y + (BagShockWave2.GetComponent<BagShockWave>().GetSize() - 2) * 0.5f,
+            BagShockWave2.transform.position.z);
     }
 }

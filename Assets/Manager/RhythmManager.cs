@@ -13,7 +13,7 @@ public class RhythmManager : MonoBehaviour
         AirCannon,      //空気砲
         Bag,            //ランドセル
         Ruler,          //定規
-        Whistle,
+        Whistle,        //笛
         None            //なし
     }
     public static RhythmManager Instance;

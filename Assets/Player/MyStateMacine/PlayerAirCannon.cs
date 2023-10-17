@@ -19,6 +19,10 @@ public class PlayerAirCannon : PlayerIF
         ActionInvisible = true;
 
         //プレハブ生成
+        GameObject AirCannonAir = (GameObject)Resources.Load("AirCannonAir");
+        AirCannonAir = Instantiate(AirCannonAir, tf.transform.position, tf.transform.rotation);
+        AirCannonAir.GetComponent<AirCannonAir>().Velocity = new Vector3(0, -0.5f, 0);
+
         //GameObject GymClothesSmall = (GameObject)Resources.Load("Umbrella");
         //GymClothesSmall = Instantiate(GymClothesSmall, tf.transform.position, Quaternion.Euler(-90, tf.transform.eulerAngles.y - 90, 0));
         //GymClothesSmall.GetComponent<Umbrella>().InitSetPosition();
