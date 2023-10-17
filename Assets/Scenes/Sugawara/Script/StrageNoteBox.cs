@@ -59,9 +59,7 @@ public class StrageNoteBox : MonoBehaviour
 
                         default:
                             break;
-                    }
-                   
-                    Debug.Log(i);
+                    }                 
                 }
 
             }
