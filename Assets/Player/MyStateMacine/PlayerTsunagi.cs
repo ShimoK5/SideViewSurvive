@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRecorder : PlayerIF
+public class PlayerTsunagi : PlayerIF
 {
-    public PlayerRecorder(PlayerIF oldPlayer)
+    public PlayerTsunagi(PlayerIF oldPlayer)
     {
-        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
+        //PlayerAnim.instans.Anim.SetTrigger("Idle");
         CopyPlayer(oldPlayer);
         //減速
-        SelfVel.x *= ACTION_VEL_MULTI;
-        //プレハブ生成
-        GameObject SoundWaves = (GameObject)Resources.Load("SoundWaves");
-        SoundWaves = Instantiate(SoundWaves, tf.transform.position, Quaternion.Euler(90,0,0));
+        //SelfVel.x *= ACTION_VEL_MULTI;
     }
 
     public override void CustumUpdate()
@@ -38,13 +34,13 @@ public class PlayerRecorder : PlayerIF
             //自由落下
             Fall();
             //横移動
-            MoveX(MAX_RUN_SPEED * ACTION_VEL_MULTI, ADD_RUN_SPEED * ACTION_VEL_MULTI);
+            MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);
             //向き変更
             ChangeDirection();
             //ジャンプ処理
             Jump();
             //状態遷移
-            //ChangeNextState();
+            ChangeNextState();
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -61,11 +57,11 @@ public class PlayerRecorder : PlayerIF
             //自由落下
             Fall();
             //横移動
-            MoveX(MAX_AIR_SPEED * ACTION_VEL_MULTI, ADD_AIR_SPEED * ACTION_VEL_MULTI);
+            MoveX(MAX_AIR_SPEED , ADD_AIR_SPEED );
             //向き変更
             ChangeDirection();
             //状態遷移
-            //ChangeNextState();
+            ChangeNextState();
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -76,15 +72,24 @@ public class PlayerRecorder : PlayerIF
     }
 
     //状態遷移
-    //protected override void ChangeNextState()
-    //{
-    //    if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED && NextPlayerState == PLAYER_STATE.STAND)
-    //    {
-    //        NextPlayerState = PLAYER_STATE.RUN;
-    //    }
-    //    if (!isGround)
-    //    {
-    //        NextPlayerState = PLAYER_STATE.AIR;
-    //    }
-    //}
+    protected override void ChangeNextState()
+    {
+        if (!isGround)
+        {
+            NextPlayerState = PLAYER_STATE.AIR;
+        }
+        else 
+        {
+            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED && NextPlayerState == PLAYER_STATE.STAND)
+            {
+                NextPlayerState = PLAYER_STATE.RUN;
+            }
+            else
+            {
+                NextPlayerState = PLAYER_STATE.STAND;
+            }
+                
+        }
+        
+    }
 }

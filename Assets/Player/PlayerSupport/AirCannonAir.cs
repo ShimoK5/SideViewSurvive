@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GymClothes : MonoBehaviour
+public class AirCannonAir : MonoBehaviour
 {
-    [Header("滞在時間")]
+
+    [Header("滞在時間（フレーム）")]
     [SerializeField] int LifeCnt;
 
     int FCnt;//フレームカウント
+    public Vector3 Velocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +25,13 @@ public class GymClothes : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position = Player.instance.transform.position;
+        transform.position += Velocity;
+
+
         FCnt++;
         if (FCnt >= LifeCnt)
         {
             Destroy(gameObject);
         }
-
     }
 }

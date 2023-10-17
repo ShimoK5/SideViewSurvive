@@ -146,8 +146,15 @@ public class EnemyIF : PawnIF
     //横速度減速
     protected void SlowDown(float selfVelMulti, float otherVelMulti)
     {
+        //地上
+        /*
         SelfVel.x *= selfVelMulti;
         OtherVel.x *= otherVelMulti;
+        */
+
+        //空中
+        SelfVel *= selfVelMulti;
+        OtherVel *= otherVelMulti;
     }
     //自由落下
     protected void Fall()
@@ -200,6 +207,12 @@ public class EnemyIF : PawnIF
     {
         isGround = false;
     }
+
+    public float GetMaxRunSpeed()
+    {
+        return MAX_RUN_SPEED;
+    }
+
 
 #if false
     //全方位とのあたり判定

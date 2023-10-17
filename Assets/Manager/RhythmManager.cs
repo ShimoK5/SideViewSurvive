@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class RhythmManager : MonoBehaviour
 {
-    public enum RhythmAction {
-        GymClothes,     //体操着
+    public enum RhythmAction
+    {
+        Umbrella,     //体操着
         Recorder,       //リコーダー
         Eraser,         //消しゴム
         Sacrifice,      //身代わり
+        AirCannon,      //空気砲
+        Bag,            //ランドセル
+        Ruler,          //定規
+        Whistle,        //笛
         None            //なし
     }
     public static RhythmManager Instance;
@@ -45,8 +50,8 @@ public class RhythmManager : MonoBehaviour
             int ActionIndex = FCnt / BeatTempo - 1;
             switch (ActionArray[ActionIndex])
             {
-                case RhythmAction.GymClothes:
-                    Player.instance.SetOuterState(PLAYER_STATE.GYM_CLOTHES);
+                case RhythmAction.Umbrella:
+                    Player.instance.SetOuterState(PLAYER_STATE.UMBRELLA);
                     break;
 
                 case RhythmAction.Recorder:
@@ -56,11 +61,26 @@ public class RhythmManager : MonoBehaviour
                 case RhythmAction.Eraser:
                     Player.instance.SetOuterState(PLAYER_STATE.ERASER);
                     break;
-                
+
                 case RhythmAction.Sacrifice:
                     Player.instance.SetOuterState(PLAYER_STATE.SACRIFICE);
                     break;
 
+                case RhythmAction.AirCannon:
+                    Player.instance.SetOuterState(PLAYER_STATE.AIR_CANNON);
+                    break;
+
+                case RhythmAction.Bag:
+                    Player.instance.SetOuterState(PLAYER_STATE.BAG);
+                    break;
+                
+                case RhythmAction.Ruler:
+                    Player.instance.SetOuterState(PLAYER_STATE.RULER);
+                    break;
+                
+                case RhythmAction.Whistle:
+                    Player.instance.SetOuterState(PLAYER_STATE.WHISTLE);
+                    break;
 
                 case RhythmAction.None:
                     ChangeStateDefault();
@@ -86,8 +106,9 @@ public class RhythmManager : MonoBehaviour
 
     void ChangeStateDefault()
     {
-        //Player.instance.SetOuterState(PLAYER_STATE.NONE);
+        Player.instance.SetOuterState(PLAYER_STATE.TSUNAGI);
 
+#if false
         if (Player.instance.GetisGround())
         {
             if (Mathf.Abs(Player.instance.GetM_Player().SelfVel.x/* + OtherVel.x*/) < Player.instance.GetM_Player().GetStandSpeed() )
@@ -104,6 +125,8 @@ public class RhythmManager : MonoBehaviour
         {
             Player.instance.SetOuterState(PLAYER_STATE.AIR);
         }
-    }
+    
+#endif
 
+    }
 }
