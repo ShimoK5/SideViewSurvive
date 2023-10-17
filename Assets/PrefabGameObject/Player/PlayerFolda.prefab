@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Temp: 0
-  HitPoint: 0
+  HitPoint: 3
   InvisibleCoolTime: 0
 --- !u!23 &6426386239536353818
 MeshRenderer:
