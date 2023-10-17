@@ -3010,6 +3010,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 963194228}
     m_Modifications:
+    - target: {fileID: 3532542394848585136, guid: 5f0708d5fbbc9ae4f951404088d67315,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3532542394848585137, guid: 5f0708d5fbbc9ae4f951404088d67315,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3069,6 +3074,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Habitable zone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532542396871453691, guid: 5f0708d5fbbc9ae4f951404088d67315,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f0708d5fbbc9ae4f951404088d67315, type: 3}
@@ -5883,7 +5893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfd37335c1f3c34bbed954bedf0a62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionArray: 0000000004000000060000000500000004000000060000000500000000000000
+  ActionArray: 0700000007000000070000000700000007000000070000000700000007000000
   BeatTempo: 30
   FCnt: 0
 --- !u!4 &1641433481
