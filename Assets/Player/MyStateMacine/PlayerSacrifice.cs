@@ -6,14 +6,15 @@ public class PlayerSacrifice : PlayerIF
 {
     public PlayerSacrifice(PlayerIF oldPlayer)
     {
-        Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
+        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
         GameObject Sacrifice = (GameObject)Resources.Load("Sacrifice");
         Sacrifice = Instantiate(Sacrifice, tf.transform.position,Quaternion.Euler(tf.transform.localEulerAngles));
-        Sacrifice.GetComponent<Sacrifice>().SetVel(new Vector2(tf.forward.x * 0.2f, 0.2f));
+        Sacrifice.GetComponent<Sacrifice>().SetVel(new Vector2(tf.forward.x * 0.07f, 0.4f));
     }
 
     public override void CustumUpdate()

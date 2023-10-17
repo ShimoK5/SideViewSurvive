@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerNone : PlayerIF
+public class PlayerWhistle : PlayerIF
 {
-    public PlayerNone(PlayerIF oldPlayer)
+    public PlayerWhistle(PlayerIF oldPlayer)
     {
-        //PlayerAnim.instans.Anim.SetTrigger("Idle");
+        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
+        //プレハブ生成
+        GameObject SoundWaves = (GameObject)Resources.Load("Whistle");
+        SoundWaves = Instantiate(SoundWaves, tf.transform.position, Quaternion.Euler(90, 0, 0));
     }
 
     public override void CustumUpdate()
@@ -34,13 +38,13 @@ public class PlayerNone : PlayerIF
             //自由落下
             Fall();
             //横移動
-            MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);
+            MoveX(MAX_RUN_SPEED * ACTION_VEL_MULTI, ADD_RUN_SPEED * ACTION_VEL_MULTI);
             //向き変更
             ChangeDirection();
             //ジャンプ処理
             Jump();
             //状態遷移
-            ChangeNextState();
+            //ChangeNextState();
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -57,11 +61,11 @@ public class PlayerNone : PlayerIF
             //自由落下
             Fall();
             //横移動
-            MoveX(MAX_AIR_SPEED , ADD_AIR_SPEED );
+            MoveX(MAX_AIR_SPEED * ACTION_VEL_MULTI, ADD_AIR_SPEED * ACTION_VEL_MULTI);
             //向き変更
             ChangeDirection();
             //状態遷移
-            ChangeNextState();
+            //ChangeNextState();
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -72,24 +76,15 @@ public class PlayerNone : PlayerIF
     }
 
     //状態遷移
-    protected override void ChangeNextState()
-    {
-        if (!isGround)
-        {
-            NextPlayerState = PLAYER_STATE.AIR;
-        }
-        else 
-        {
-            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED && NextPlayerState == PLAYER_STATE.STAND)
-            {
-                NextPlayerState = PLAYER_STATE.RUN;
-            }
-            else
-            {
-                NextPlayerState = PLAYER_STATE.STAND;
-            }
-                
-        }
-        
-    }
+    //protected override void ChangeNextState()
+    //{
+    //    if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED && NextPlayerState == PLAYER_STATE.STAND)
+    //    {
+    //        NextPlayerState = PLAYER_STATE.RUN;
+    //    }
+    //    if (!isGround)
+    //    {
+    //        NextPlayerState = PLAYER_STATE.AIR;
+    //    }
+    //}
 }

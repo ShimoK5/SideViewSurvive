@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGymClothes : PlayerIF
+public class PlayerUmbrella : PlayerIF
 {
-    public PlayerGymClothes(PlayerIF oldPlayer)
+    public PlayerUmbrella(PlayerIF oldPlayer)
     {
-        Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
+        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
-        GameObject GymClothesSmall = (GameObject)Resources.Load("GymClothesSmall");
+        GameObject GymClothesSmall = (GameObject)Resources.Load("Umbrella");
         GymClothesSmall = Instantiate(GymClothesSmall, tf.transform.position, Quaternion.Euler(-90, tf.transform.eulerAngles.y - 90, 0));
+        GymClothesSmall.GetComponent<Umbrella>().InitSetPosition();
         //GymClothesSmall.transform.parent = rb.transform;
     }
 

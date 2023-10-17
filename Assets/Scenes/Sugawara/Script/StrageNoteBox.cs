@@ -34,7 +34,7 @@ public class StrageNoteBox : MonoBehaviour
 
                     switch(Rhythm.ActionArray[i])
                     {
-                        case RhythmAction.GymClothes:
+                        case RhythmAction.Umbrella:
                             NoteBox.GetComponent<Image>().sprite = PresetSprite[0];
                             break;
 
