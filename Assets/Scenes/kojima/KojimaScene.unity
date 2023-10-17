@@ -7607,8 +7607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Temp: 0
-  HitPoint: 0
-  DAMAGE_COOL_TIME: 0
+  HitPoint: 3
+  InvisibleCoolTime: 5
 --- !u!1 &2059589445
 GameObject:
   m_ObjectHideFlags: 0
