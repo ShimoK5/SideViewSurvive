@@ -15,6 +15,7 @@ public enum ENEMY_STATE
 public class Enemy : MonoBehaviour
 {
     EnemyIF m_Enemy;
+    bool IsOnes = false;
 
     public ENEMY_STATE Temp;
     public bool Operation = false;
@@ -89,8 +90,11 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         CheckState();
-        if(stationary != !Operation)
+        if ((stationary != !Operation) || !IsOnes)
+        {
             m_Enemy.CustumFixed();
+            IsOnes = true;
+        }
     }
 
     void CheckState()
