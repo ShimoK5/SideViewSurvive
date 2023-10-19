@@ -12,7 +12,7 @@ public class PlayerIF : PawnIF
 {
     //定数
     static public KeyCode jumpKey = KeyCode.Space; //ジャンプキー
-    static float MultiplyNum = 1.0f / 60;
+    static protected float MultiplyNum = 1.0f / 60;
     static protected float STAND_SPEED = 0.4f * MultiplyNum;      //これ以下のスピードならRunからStand
     static protected float MAX_RUN_SPEED = 8 * MultiplyNum;       //地上最大速度
     static protected float ADD_RUN_SPEED = 2.5f * MultiplyNum;    //地上加速度
@@ -25,16 +25,18 @@ public class PlayerIF : PawnIF
     static protected float ACTION_VEL_MULTI = 0.8f;     //アクション中の減速率
     public float KNOCK_BACK_POWER = 20 * MultiplyNum;   //ノックバックの強さ
 
-    public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.AIR;
-    public PLAYER_STATE NextPlayerState { get; set; } = PLAYER_STATE.AIR;
+    public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.STAND;
+    public PLAYER_STATE NextPlayerState { get; set; } = PLAYER_STATE.STAND;
 
    
-    public bool isGround = false;   //地面に触れているかのフラグ
+    public bool isGround = true;   //地面に触れているかのフラグ
     public Vector2 SelfVel;         //自己速度
     public Vector2 OtherVel;        //外部速度
     public Vector2 AllVel;          //合算速度
     protected bool JumpKeyDown = false; //ジャンプキーを押しているかどうか            
     static AfterImage AfterImageInstanse = new AfterImage();
+
+    public bool ActionInvisible;
 
 
     //コピー関数
@@ -73,6 +75,7 @@ public class PlayerIF : PawnIF
         tf.transform.localEulerAngles = new Vector3(0, 90, 0);
         Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
         JumpKeyDown = false;
+        ActionInvisible = false;
         //PlayerAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
     public virtual void CustumUpdate()//仮想関数
@@ -106,7 +109,7 @@ public class PlayerIF : PawnIF
         //移動処理
         if (Input.GetKey("d")) // キー入力判定
         {
-            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+            
             if (SelfVel.x <= maxSpeed)
             {
                 SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
@@ -114,13 +117,29 @@ public class PlayerIF : PawnIF
         }
         if (Input.GetKey("a")) // キー入力判定
         {
-            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+            
             if (SelfVel.x >= -maxSpeed)
             {
                 SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
             }
         }
     }
+
+    //向き変更
+    protected void ChangeDirection()
+    {
+        if(SelfVel.x > 0)
+        {
+            tf.transform.localEulerAngles = new Vector3(0, 90, 0);
+        }
+        else if (SelfVel.x < 0)
+        {
+            tf.transform.localEulerAngles = new Vector3(0, -90, 0);
+        }
+
+    }
+
+
     //横速度減速
     protected void SlowDown(float selfVelMulti, float otherVelMulti)
     {

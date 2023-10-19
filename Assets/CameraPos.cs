@@ -8,15 +8,29 @@ public class CameraPos : MonoBehaviour
     [Header("Y固定")]
     [SerializeField] bool LockY;
 
-    [Header("Xずらし")]
-    [SerializeField] float ZurashiX;
+    //[Header("Xずらし")]
+    //[SerializeField] float ZurashiX;
 
     public static CameraPos instance;
     private GameObject targetObj;//targetオブジェクトデータ
     public float cameraPosY = 5.3f;//Y座標の加算値
 
+    float MinX;         //カメラの最低X座標
+    float MaxX;         //カメラの最高X座標
+
     void Start()
     {
+        Vector3 MinObj = GameObject.Find("StartObj").transform.position;
+        Vector3 MaxObj = GameObject.Find("GoalObj").transform.position;
+
+        float TanTheta = Mathf.Tan(51.225f * Mathf.Deg2Rad);
+        float DistanceZ = Mathf.Abs(transform.position.z - MinObj.z);//プレイヤーの壁をメイン
+        //float DistanceZ = Mathf.Abs(transform.position.z - (-1));//ますをメイン
+        float Zurashi = TanTheta * DistanceZ  -2.5f;
+
+        MinX = MinObj.x + Zurashi;
+        MaxX = MaxObj.x - Zurashi;
+
         instance = this;
         //targetオブジェクトを取得
 
@@ -39,15 +53,24 @@ public class CameraPos : MonoBehaviour
     {
         if(LockY)
         {
-            transform.position = new Vector3(targetObj.transform.position.x + ZurashiX,
+            transform.position = new Vector3(targetObj.transform.position.x /*+ ZurashiX*/,
             transform.position.y,
             transform.position.z);
         }
         else
         {
-            transform.position = new Vector3(targetObj.transform.position.x + ZurashiX,
+            transform.position = new Vector3(targetObj.transform.position.x /*+ ZurashiX*/,
             targetObj.transform.position.y + cameraPosY,
             transform.position.z);
+        }
+
+        if(transform.position.x <= MinX)
+        {
+            transform.position = new Vector3(MinX, transform.position.y, transform.position.z);
+        }
+        if(transform.position.x >= MaxX)
+        {
+            transform.position = new Vector3(MaxX, transform.position.y, transform.position.z);
         }
     }
 }

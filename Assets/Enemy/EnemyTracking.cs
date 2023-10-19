@@ -10,7 +10,7 @@ public class EnemyTracking : EnemyIF
     private int FlameCount = 60;
     private float SaveVelX;
     private float SaveVelY;
-    private float Radius;
+    private float Radian;
 
     public EnemyTracking(EnemyIF oldEnemy)
     {
@@ -45,17 +45,17 @@ public class EnemyTracking : EnemyIF
             if (FlameCount == 60)
             {
                 PlayerPos = Player.instance.transform.position;
-                Radius = Mathf.Atan2(PlayerPos.y - tf.transform.position.y, PlayerPos.x - tf.transform.position.x);
-                SaveVelX = Mathf.Cos(Radius) * MAX_RUN_SPEED;
-                SaveVelY = Mathf.Sin(Radius) * MAX_RUN_SPEED;
+                Radian = Mathf.Atan2(PlayerPos.y - tf.transform.position.y, PlayerPos.x - tf.transform.position.x);
+                SaveVelX = Mathf.Cos(Radian) * MAX_RUN_SPEED;
+                SaveVelY = Mathf.Sin(Radian) * MAX_RUN_SPEED;
                // FlameCount = 0;
             }
             else if(FlameCount > 100)
             {
                 float RandomAddRot = Random.Range(-120.0f, 120.0f);
-                Radius += RandomAddRot * Mathf.PI / 180.0f;
-                SaveVelX = Mathf.Cos(Radius) * MAX_RUN_SPEED;
-                SaveVelY = Mathf.Sin(Radius) * MAX_RUN_SPEED;
+                Radian += RandomAddRot * Mathf.PI / 180.0f;
+                SaveVelX = Mathf.Cos(Radian) * MAX_RUN_SPEED;
+                SaveVelY = Mathf.Sin(Radian) * MAX_RUN_SPEED;
                 FlameCount = 0;
             }
             else
@@ -86,10 +86,10 @@ public class EnemyTracking : EnemyIF
             }
             //一番近い奴に追従するように書く
             //PlayerPos = Player.instance.transform.position;
-            float radius = Mathf.Atan2(SacrificeArray[NeerIndex].transform.position.y - tf.transform.position.y,
+            Radian = Mathf.Atan2(SacrificeArray[NeerIndex].transform.position.y - tf.transform.position.y,
                                         SacrificeArray[NeerIndex].transform.position.x - tf.transform.position.x);
-            SelfVel.x = Mathf.Cos(radius) * MAX_RUN_SPEED;
-            SelfVel.y = Mathf.Sin(radius) * MAX_RUN_SPEED;
+            SelfVel.x = Mathf.Cos(Radian) * MAX_RUN_SPEED;
+            SelfVel.y = Mathf.Sin(Radian) * MAX_RUN_SPEED;
         }
 
         //MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);

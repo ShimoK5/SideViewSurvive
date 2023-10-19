@@ -6,14 +6,15 @@ public class PlayerSacrifice : PlayerIF
 {
     public PlayerSacrifice(PlayerIF oldPlayer)
     {
-        PlayerAnim.instans.Anim.SetTrigger("Idle");
+        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
         GameObject Sacrifice = (GameObject)Resources.Load("Sacrifice");
         Sacrifice = Instantiate(Sacrifice, tf.transform.position,Quaternion.Euler(tf.transform.localEulerAngles));
-        Sacrifice.GetComponent<Sacrifice>().SetVel(new Vector2(tf.forward.x * 0.2f, 0.2f));
+        Sacrifice.GetComponent<Sacrifice>().SetVel(new Vector2(tf.forward.x * 0.07f, 0.4f));
     }
 
     public override void CustumUpdate()
@@ -39,6 +40,8 @@ public class PlayerSacrifice : PlayerIF
             Fall();
             //横移動
             MoveX(MAX_RUN_SPEED * ACTION_VEL_MULTI, ADD_RUN_SPEED * ACTION_VEL_MULTI);
+            //向き変更
+            ChangeDirection();
             //ジャンプ処理
             Jump();
             //状態遷移
@@ -60,6 +63,8 @@ public class PlayerSacrifice : PlayerIF
             Fall();
             //横移動
             MoveX(MAX_AIR_SPEED * ACTION_VEL_MULTI, ADD_AIR_SPEED * ACTION_VEL_MULTI);
+            //向き変更
+            ChangeDirection();
             //状態遷移
             //ChangeNextState();
             //速度反映

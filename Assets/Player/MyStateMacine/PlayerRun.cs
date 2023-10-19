@@ -8,7 +8,8 @@ public class PlayerRun : PlayerIF
 {
     public PlayerRun(PlayerIF oldPlayer)
     {
-        PlayerAnim.instans.Anim.SetTrigger("Run");
+        if (Player.instance.GetAnim().Anim.AnimationName != "run")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "run", true);
         CopyPlayer(oldPlayer);
     }
 
@@ -30,6 +31,8 @@ public class PlayerRun : PlayerIF
         Fall();
         //横移動
         MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);
+        //向き変更
+        ChangeDirection();
         //ジャンプ処理
         Jump();
         //状態遷移

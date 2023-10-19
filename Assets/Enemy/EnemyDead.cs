@@ -15,7 +15,7 @@ public class EnemyDead : EnemyIF
         FCnt = 0;
 
         //仮
-        tf.GetComponent<Renderer>().material.color = Color.grey;
+        //tf.GetComponent<Renderer>().material.color = Color.grey;
 
         //速度反映
         OtherVel = Vector2.zero;
