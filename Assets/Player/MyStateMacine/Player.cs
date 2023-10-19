@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
         m_Player.CustumStart();
 
         m_Player = new PlayerStand(m_Player);
-        HitPoint = 200;
+        //HitPoint = 200;
     }
 
     // Update is called once per frame
