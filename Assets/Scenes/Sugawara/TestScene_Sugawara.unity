@@ -513,7 +513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 130}
+  m_AnchoredPosition: {x: 0, y: 133.89832}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &379893835
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9716981, g: 0.063270584, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -843,6 +843,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  FlameCount: 0
+  NoteNum: 0
+  NoteCollision: 0
+  NoteSprite:
+  - {fileID: 21300000, guid: b19d1e6327dc9484fb004d7a2b81ae4d, type: 3}
+  - {fileID: 21300000, guid: 0617ae2fc8c890e4881b7adbf63cf1e5, type: 3}
+  - {fileID: 21300000, guid: 9d160725cf0b7084695a20622412bcc4, type: 3}
+  - {fileID: 21300000, guid: 65005806fd22a3148a52556359747cce, type: 3}
+  - {fileID: 21300000, guid: 0854c429ac555ee429df8cf030a9b106, type: 3}
+  - {fileID: 21300000, guid: 95bb638011785324fa8634b20edf4c1e, type: 3}
+  - {fileID: 21300000, guid: d5515827b2ffc63438a1c2a9739ef369, type: 3}
+  - {fileID: 21300000, guid: 645bfa423db8edd4fac246615d48f329, type: 3}
+  - {fileID: 21300000, guid: c0c047364e66c324da759cfc6df2df58, type: 3}
+  - {fileID: 21300000, guid: c0c047364e66c324da759cfc6df2df58, type: 3}
+  - {fileID: 21300000, guid: c0c047364e66c324da759cfc6df2df58, type: 3}
+  - {fileID: 21300000, guid: c0c047364e66c324da759cfc6df2df58, type: 3}
 --- !u!114 &710285777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,7 +909,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -21.753338, y: 22.822815}
+  m_Offset: {x: -25.447704, y: 22.822815}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -904,7 +920,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 59.427025, y: 46.64563}
+  m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
 --- !u!50 &710285780
 Rigidbody2D:
@@ -1191,19 +1207,19 @@ MonoBehaviour:
   PrefavIcon: {fileID: 3105282100191320954, guid: 0cdf106585e34414da24e335e5ab12c7,
     type: 3}
   IconSprite:
-  - {fileID: 21300000, guid: ea712587ab9097e4cb3c5ccf9b5b7b3f, type: 3}
-  - {fileID: 21300000, guid: 7c87146117720a343b20d2057e29ec99, type: 3}
-  - {fileID: 21300000, guid: c618f7f5611861f4d9ef05377180f3dd, type: 3}
+  - {fileID: 21300000, guid: fca0c25e9800fb74090b3bacad51b473, type: 3}
   - {fileID: 21300000, guid: 58c1d23982901e647aabfb9094dde8d0, type: 3}
+  - {fileID: 21300000, guid: 7c87146117720a343b20d2057e29ec99, type: 3}
   - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
-  - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
-  - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
-  - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
-  - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
-  - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
-  - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
-  - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
-  - {fileID: 21300000, guid: 51c8cae28543d6e47ab460fa458a0155, type: 3}
+  - {fileID: 21300000, guid: 1e8a295d56ad94d47bb64e9e48d1c1e2, type: 3}
+  - {fileID: 21300000, guid: 6bbb527720628a54587e200a4093699c, type: 3}
+  - {fileID: 21300000, guid: b6d5f41267ec91b41a04cf3401d4b667, type: 3}
+  - {fileID: 21300000, guid: 4ff3d49bce0e54949a73e96cc4239f80, type: 3}
+  - {fileID: 21300000, guid: 071b2c7c50d09b548852b087afec3385, type: 3}
+  - {fileID: 21300000, guid: 071b2c7c50d09b548852b087afec3385, type: 3}
+  - {fileID: 21300000, guid: 071b2c7c50d09b548852b087afec3385, type: 3}
+  - {fileID: 21300000, guid: 071b2c7c50d09b548852b087afec3385, type: 3}
+  - {fileID: 21300000, guid: 071b2c7c50d09b548852b087afec3385, type: 3}
 --- !u!1 &902277385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,7 +1866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f3aaa6f43308a4d8934876c2097612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionArray: 0000000000000000000000000000000000000000000000000000000000000000
+  ActionArray: 0800000008000000080000000000000000000000000000000000000000000000
   BeatTempo: 30
   FCnt: 0
 --- !u!1 &1807916888
@@ -1903,7 +1919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

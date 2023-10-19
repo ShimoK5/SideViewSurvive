@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Copy_RhythmM : MonoBehaviour
 {
-    public enum RhythmAction {
-        GymClothes,     //体操着
+    public enum RhythmAction
+    {
+        Umbrella,     //体操着
         Recorder,       //リコーダー
         Eraser,         //消しゴム
         Sacrifice,      //身代わり
+        AirCannon,      //空気砲
+        Bag,            //ランドセル
+        Ruler,          //定規
+        Whistle,        //笛
         None            //なし
     }
     public static Copy_RhythmM Instance;
@@ -45,7 +50,7 @@ public class Copy_RhythmM : MonoBehaviour
             int ActionIndex = FCnt / BeatTempo - 1;
             switch (ActionArray[ActionIndex])
             {
-                case RhythmAction.GymClothes:
+                case RhythmAction.Umbrella:
                     //Player.instance.SetOuterState(PLAYER_STATE.GYM_CLOTHES);
                     break;
 

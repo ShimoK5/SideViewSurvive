@@ -21,6 +21,8 @@ public class CreateIcon : MonoBehaviour
                 + IconPosition * SpriteSize;
             CloneIconBox = Instantiate(PrefavIcon, PrefavePosition, Quaternion.identity);
             CloneIconBox.GetComponent<Image>().sprite = IconSprite[SpriteSize];
+            CloneIconBox.tag = "Icon";
+            CloneIconBox.name = "" +SpriteSize;
             CloneIconBox.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
             CloneIconBox.transform.SetSiblingIndex(HierarchyNumber);
         }
