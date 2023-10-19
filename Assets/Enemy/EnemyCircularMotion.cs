@@ -16,15 +16,14 @@ public class EnemyCircularMotion : EnemyIF
         //EnemyAnim.instans.Anim.SetTrigger("Run");
         
         CopyEnemy(oldEnemy);
+       
         CenterCoordinates = tf.transform.position;
-        TargetLocation.x = Radius * Mathf.Cos(FlameCount * Mathf.PI / 180.0f);
-        TargetLocation.y = Radius * Mathf.Sin(FlameCount * Mathf.PI / 180.0f);
-        tf.transform.position = new Vector3(CenterCoordinates.x + TargetLocation.x, CenterCoordinates.y + TargetLocation.y, tf.transform.position.z);
+        tf.transform.position = new Vector3(tf.transform.position.x, tf.transform.position.y, tf.transform.position.z);
     }
 
     void Start()
     {
-        
+       
     }
 
     public override void CustumUpdate()

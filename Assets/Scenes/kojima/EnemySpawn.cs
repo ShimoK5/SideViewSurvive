@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     public GameObject SkySpownZone;
-    private int FlameCount = 0; 
+    private int FlameCount = 0;
+    private const float ENEMY_SIZE = 0.99f;
+    private Vector3 SpownPos;
 
     // Start is called before the first frame update
     void Start()
@@ -29,17 +31,43 @@ public class EnemySpawn : MonoBehaviour
         if (FlameCount == 30)
         {
             GameObject Enemy = (GameObject)Resources.Load("EnemyTracking");
-            
-            Vector3 Size = transform.GetComponent<MeshRenderer>().bounds.size;
-            float RandomPosX = Random.Range(-Size.x / 2, Size.x / 2);
-            float RandomPosY = Random.Range(-Size.y / 2, Size.y / 2);
-            Vector3 SpownPos = transform.position + new Vector3(RandomPosX, RandomPosY, 0.0f);
+
+            SpawnPosGenerate();
 
             Enemy = Instantiate(Enemy, SpownPos, Quaternion.Euler(0, 0, 0));
             
         }
-       
-          
+    }
+
+    bool Collision(Vector3 pos)
+    {
+        Block[] Blocks = GameObject.FindObjectsOfType<Block>();
+        for (int i = 0; i < Blocks.Length; i++)
+        {
+            Vector3 b_Size = Blocks[i].transform.GetComponent<MeshRenderer>().bounds.size;
+            Vector3 b_Pos = Blocks[i].transform.position;
+
+            if (pos.y + ENEMY_SIZE > b_Pos.y - b_Size.y / 2 &&
+            pos.y - ENEMY_SIZE < b_Pos.y + b_Size.y / 2 &&
+            pos.x + ENEMY_SIZE / 2 > b_Pos.x - b_Size.x / 2 &&
+            pos.x - ENEMY_SIZE / 2 < b_Pos.x + b_Size.x / 2)
+                return true;
+         }
+
+        return false;
+    }
+
+    void SpawnPosGenerate()
+    {
+        Vector3 Size = transform.GetComponent<MeshRenderer>().bounds.size;
+        float RandomPosX = Random.Range(-Size.x / 2, Size.x / 2);
+        float RandomPosY = Random.Range(-Size.y / 2, Size.y / 2);
+        SpownPos = transform.position + new Vector3(RandomPosX, RandomPosY, 0.0f);
+
+        if(Collision(SpownPos))
+        {
+            SpawnPosGenerate();
+        }
     }
 
     //要件定義(現時点)
