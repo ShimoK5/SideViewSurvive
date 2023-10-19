@@ -320,11 +320,33 @@ MonoBehaviour:
   NoteBox: {fileID: 0}
   Rhythm: {fileID: 0}
   PresetSprite:
-  - {fileID: 21300000, guid: f46135553d862a848a29d3555315bc0e, type: 3}
+  - {fileID: 21300000, guid: b19d1e6327dc9484fb004d7a2b81ae4d, type: 3}
   - {fileID: 21300000, guid: 0617ae2fc8c890e4881b7adbf63cf1e5, type: 3}
   - {fileID: 21300000, guid: 9d160725cf0b7084695a20622412bcc4, type: 3}
   - {fileID: 21300000, guid: 65005806fd22a3148a52556359747cce, type: 3}
+  - {fileID: 21300000, guid: 0854c429ac555ee429df8cf030a9b106, type: 3}
+  - {fileID: 21300000, guid: 95bb638011785324fa8634b20edf4c1e, type: 3}
+  - {fileID: 21300000, guid: d5515827b2ffc63438a1c2a9739ef369, type: 3}
+  - {fileID: 21300000, guid: 645bfa423db8edd4fac246615d48f329, type: 3}
   - {fileID: 21300000, guid: c0c047364e66c324da759cfc6df2df58, type: 3}
+  - {fileID: 21300000, guid: 071b2c7c50d09b548852b087afec3385, type: 3}
+  ActionSE:
+  - {fileID: 8300000, guid: bc5cb7829f9289e4ab45f6ea62363382, type: 3}
+  - {fileID: 8300000, guid: 8edd9ca866a8bd24496b22cfea647746, type: 3}
+  - {fileID: 8300000, guid: b311269ceda837e4d81df41877345c51, type: 3}
+  - {fileID: 8300000, guid: 13fc277e456b4b647a6a4dfd237b7865, type: 3}
+  - {fileID: 8300000, guid: 42dfd8ad5c20af4408718c7ee382b7bd, type: 3}
+  - {fileID: 8300000, guid: f8f75691dd7840d4ca08a1a42d49f0a4, type: 3}
+  - {fileID: 8300000, guid: 52b878eeac4f182459391eb8a3e5f801, type: 3}
+  - {fileID: 8300000, guid: bdb5d3e2817637b4b8c6a7f920e27fb0, type: 3}
+  - {fileID: 8300000, guid: 00ea0ba3fdf31f64fbf30b31e04f4cd0, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!1 &3253575578739902627
 GameObject:
   m_ObjectHideFlags: 0
