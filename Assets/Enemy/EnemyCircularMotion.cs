@@ -9,6 +9,7 @@ public class EnemyCircularMotion : EnemyIF
     public float Radius = 5.0f;
     private int FlameCount = 0;
     private static Vector3 CenterCoordinates;//中心点
+    private Vector2 TargetLocation;
 
     public EnemyCircularMotion(EnemyIF oldEnemy)
     {
@@ -16,7 +17,9 @@ public class EnemyCircularMotion : EnemyIF
         
         CopyEnemy(oldEnemy);
         CenterCoordinates = tf.transform.position;
-        tf.transform.position = new Vector3 (tf.transform.position.x, tf.transform.position.y, tf.transform.position.z); 
+        TargetLocation.x = Radius * Mathf.Cos(FlameCount * Mathf.PI / 180.0f);
+        TargetLocation.y = Radius * Mathf.Sin(FlameCount * Mathf.PI / 180.0f);
+        tf.transform.position = new Vector3(CenterCoordinates.x + TargetLocation.x, CenterCoordinates.y + TargetLocation.y, tf.transform.position.z);
     }
 
     void Start()
@@ -39,8 +42,6 @@ public class EnemyCircularMotion : EnemyIF
         //Fall();
         //移動
         FlameCount++;
-
-        Vector2 TargetLocation;
 
         TargetLocation.x = Radius * Mathf.Cos(FlameCount * Mathf.PI / 180.0f);
         TargetLocation.y = Radius * Mathf.Sin(FlameCount * Mathf.PI / 180.0f);

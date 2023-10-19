@@ -17,6 +17,10 @@ public class Enemy : MonoBehaviour
     EnemyIF m_Enemy;
 
     public ENEMY_STATE Temp;
+    public bool Operation = false;
+
+    [Header("設置型")]
+    public bool stationary = false;
 
     [Header("エネミーのタイプ")]
     [SerializeField] ENEMY_STATE InitEnmyType;
@@ -85,7 +89,8 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         CheckState();
-        m_Enemy.CustumFixed();
+        if(stationary != !Operation)
+            m_Enemy.CustumFixed();
     }
 
     void CheckState()

@@ -25,4 +25,15 @@ public class EnemyDelete : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Enemy>())
+        {
+            if (other.GetComponent<Enemy>().stationary)
+            {
+                other.GetComponent<Enemy>().Operation = true;
+            }
+        }
+    }
 }
