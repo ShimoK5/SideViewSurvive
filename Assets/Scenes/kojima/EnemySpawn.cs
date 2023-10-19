@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     public GameObject SkySpownZone;
-    private int FlameCount = 0; 
+    private int FlameCount = 0;
+    private const float ENEMYSIZE = 0.99f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +39,13 @@ public class EnemySpawn : MonoBehaviour
             Enemy = Instantiate(Enemy, SpownPos, Quaternion.Euler(0, 0, 0));
             
         }
-       
-          
+    }
+
+    bool Collision()
+    {
+
+
+        return true;
     }
 
     //要件定義(現時点)
