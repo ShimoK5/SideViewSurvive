@@ -8,6 +8,8 @@ TagManager:
   - PlatForm
   - Platform_TopOnly
   - Platform_Default
+  - Note
+  - Icon
   layers:
   - Default
   - TransparentFX
