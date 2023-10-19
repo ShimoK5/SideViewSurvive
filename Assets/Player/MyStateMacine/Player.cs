@@ -63,6 +63,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PauseManager.instanse)
+        {
+            if (PauseManager.instanse.isPause)
+                return;
+        }
+
         Temp = m_Player.PlayerState;
         m_Player.CustumUpdate();
 
