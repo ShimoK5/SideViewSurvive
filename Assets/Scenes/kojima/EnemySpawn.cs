@@ -11,7 +11,10 @@ public class EnemySpawn : MonoBehaviour
     private GameObject Goal;
 
     [Header("ゴールとの非スポーン距離")]
-    [SerializeField] float SpawnOffDistance = 20.0f;
+    [SerializeField] float SpawnOffDistance = 20.0f; 
+    
+    [Header("エネミー最大存在数")]
+    [SerializeField] int MaxEnemy = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +34,9 @@ public class EnemySpawn : MonoBehaviour
 
         if (FlameCount > 30)
             FlameCount = 0;
+       
 
-        if (FlameCount == 30 && GoalDistanceChack())
+        if (FlameCount == 30 && GoalDistanceCheck() && OperatingEnemyCheck())
         {
             GameObject Enemy = (GameObject)Resources.Load("EnemyTracking");
 
@@ -73,12 +77,29 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
-    bool GoalDistanceChack()
+    bool GoalDistanceCheck()
     {
         if(Goal.transform.position.x - transform.position.x < SpawnOffDistance)
             return false;
         return true;
     }
+
+    bool OperatingEnemyCheck()
+    {
+        Enemy[] Enemys = GameObject.FindObjectsOfType<Enemy>();
+        int count = 0;   
+
+        for(int i = 0; i < Enemys.Length; i++)
+        {
+            if (Enemys[i].Operation == Enemys[i].stationary)
+                count++;
+        }
+
+        if (count < MaxEnemy)
+            return true;
+        return false;
+    }
+
 
     //要件定義(現時点)
     //スポーンゾーン内のランダムな場所にエネミーをスポーン
