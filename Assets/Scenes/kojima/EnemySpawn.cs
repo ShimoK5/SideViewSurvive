@@ -8,11 +8,15 @@ public class EnemySpawn : MonoBehaviour
     private int FlameCount = 0;
     private const float ENEMY_SIZE = 0.99f;
     private Vector3 SpownPos;
+    private GameObject Goal;
+
+    [Header("ゴールとの非スポーン距離")]
+    [SerializeField] float SpawnOffDistance = 20.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Goal = GameObject.Find("GoalObj");
     }
 
     // Update is called once per frame
@@ -28,14 +32,13 @@ public class EnemySpawn : MonoBehaviour
         if (FlameCount > 30)
             FlameCount = 0;
 
-        if (FlameCount == 30)
+        if (FlameCount == 30 && GoalDistanceChack())
         {
             GameObject Enemy = (GameObject)Resources.Load("EnemyTracking");
 
             SpawnPosGenerate();
 
             Enemy = Instantiate(Enemy, SpownPos, Quaternion.Euler(0, 0, 0));
-            
         }
     }
 
@@ -68,6 +71,13 @@ public class EnemySpawn : MonoBehaviour
         {
             SpawnPosGenerate();
         }
+    }
+
+    bool GoalDistanceChack()
+    {
+        if(Goal.transform.position.x - transform.position.x < SpawnOffDistance)
+            return false;
+        return true;
     }
 
     //要件定義(現時点)
