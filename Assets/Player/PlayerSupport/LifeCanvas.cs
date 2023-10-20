@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class LifeCanvas : MonoBehaviour
 {
     public GameObject[] LifeArray = new GameObject[3];
@@ -28,7 +28,7 @@ public class LifeCanvas : MonoBehaviour
             {
                 if (NowHitPoint <= i)
                 {
-                    LifeArray[i].GetComponent<Renderer>().material.color = Color.black;
+                    LifeArray[i].GetComponent<Image>().color = Color.black;
                 }
             }
         }
