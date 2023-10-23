@@ -24,9 +24,9 @@ public class PlayerRuler : PlayerIF
         }
             
         OtherVel.x = 0;
-        //下降
-        SelfVel.y = 0;
-        OtherVel.y = 0;
+        //YVel無向化
+        //SelfVel.y = 0;
+        //OtherVel.y = 0;
 
         //無敵
         ActionInvisible = true;
@@ -66,7 +66,7 @@ public class PlayerRuler : PlayerIF
             //勢い減少
             //SlowDown(GROUND_VEL_MULTI, GROUND_VEL_MULTI);
             //自由落下
-            //Fall();
+            Fall();
             //横移動
             //MoveX(MAX_RUN_SPEED * ACTION_VEL_MULTI, ADD_RUN_SPEED * ACTION_VEL_MULTI);
             //向き変更
@@ -89,7 +89,7 @@ public class PlayerRuler : PlayerIF
             //勢い減少
             //SlowDown(AIR_VEL_MULTI, GROUND_VEL_MULTI);
             //自由落下
-            //Fall();
+            Fall();
             //横移動       上昇中の横移動を減らす
             //MoveX(MAX_AIR_SPEED * ACTION_VEL_MULTI * 0.03f, ADD_AIR_SPEED * ACTION_VEL_MULTI * 0.03f);
             //向き変更

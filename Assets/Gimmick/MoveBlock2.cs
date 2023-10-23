@@ -54,6 +54,18 @@ public class MoveBlock2 : Block
 
     void FixedUpdate()
     {
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                FixedGame();
+                break;
+        }
+
+        
+    }
+
+    void FixedGame()
+    {
         //過去座標保存
         OldPos = transform.position;
         //過去保存
@@ -123,9 +135,9 @@ public class MoveBlock2 : Block
             OldNormalizeTime = 0;
         }
 
-        CameraPos.instance.Update();
-    }
+        CameraPos.instance.FixedUpdate();
 
+    }
     void VelDirection()
     {
         switch (Direction)

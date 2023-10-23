@@ -83,11 +83,32 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                UpdateGame();
+                break;
+        }
+        
+    }
+
+    void UpdateGame()
+    {
         Temp = m_Enemy.EnemyState;
         m_Enemy.CustumUpdate();
     }
 
     void FixedUpdate()
+    {
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                FixedGame();
+                break;
+        }
+    }
+
+    void FixedGame()
     {
         CheckState();
         if ((stationary != !Operation) || !IsOnes)

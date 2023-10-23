@@ -13,7 +13,11 @@ public class Block : MonoBehaviour
 
     void FixedUpdate()
     {
-        OldPos = transform.position;
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                OldPos = transform.position;
+                break;
+        }
     }
-
 }
