@@ -36,17 +36,23 @@ public class CameraPos : MonoBehaviour
 
         targetObj = GameObject.Find("Player");
         FollowObj();
+
+        StartMovieInit();
     }
 
-
-    public void Update()
+    public void FixedUpdate()
     {
-        FollowObj();
-    }
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.StartCameraMotion:
+                StartMovieUpdate();
+                break;
 
-    void FixedUpdate()
-    {
-        Update();
+            case GAME_STATE.Game:
+
+                FollowObj();
+                break;
+        }
     }
 
     public void FollowObj()
@@ -72,6 +78,26 @@ public class CameraPos : MonoBehaviour
         {
             transform.position = new Vector3(MaxX, transform.position.y, transform.position.z);
         }
+    }
+
+    void StartMovieUpdate()
+    {
+        float PosX = transform.position.x - 0.1f;
+
+        transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
+
+        if (PosX < MinX)
+        {
+            GameStateManager.instance.GameState = GAME_STATE.Game;
+            transform.position = new Vector3(MinX, transform.position.y, transform.position.z);
+        }
+    }
+
+    void StartMovieInit()
+    {
+        transform.position = new Vector3(MaxX /*+ ZurashiX*/,
+            targetObj.transform.position.y + cameraPosY,
+            transform.position.z);
     }
 }
 

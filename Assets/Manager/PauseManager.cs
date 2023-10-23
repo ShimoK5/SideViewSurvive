@@ -15,9 +15,9 @@ public class PauseManager : MonoBehaviour
     int SelectState = (int)PAUSE_STATE.SCREEN_SET;
 
     public static PauseManager instanse;
-    public GameObject PauseCanvas;
-    public GameObject[] ButtonArray = new  GameObject [(int)PAUSE_STATE.PAUSE_STATE_MAX];
-    public GameObject Flame;
+    public GameObject PauseCanvas;  //ポーズ背景
+    public GameObject[] ButtonArray = new  GameObject [(int)PAUSE_STATE.PAUSE_STATE_MAX];//ボタン
+    public GameObject Flame;    //枠
     bool OldIsPause;
     public bool isPause;
 
@@ -36,40 +36,60 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OldIsPause = isPause;
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                //Pause入力あれば
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    GameStateManager.instance.GameState = GAME_STATE.Pause;
+                }
+                break;
+            case GAME_STATE.Pause:
+                //Pause入力あれば
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    GameStateManager.instance.GameState = GAME_STATE.Game;
+                    SelectState = 0;
+                }
+                break;
+            default:
+                break;
+        }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+
+        switch (GameStateManager.instance.GameState)
         {
-            //フラグ反転
-            isPause = !isPause;
+            case GAME_STATE.Game:
+                Time.timeScale = 1f;
+                FixedGame();
+                break;
+            case GAME_STATE.Pause:
+                Time.timeScale = 0f;
+                FixedPause();
+                break;
+            default:
+                break;
         }
-        
-        
-        if(isPause)
+
+        void FixedGame()
         {
-            PauseCanvas.SetActive(true);
-            Time.timeScale = 0f;
-       
-            if(!OldIsPause)
-            {
-                SelectState = 0;
-            }
-        }
-        else
-        {
+            //ポーズ画面非表示
             PauseCanvas.SetActive(false);
-            Time.timeScale = 1f;
         }
 
-        //ポーズ中なら
-        if(isPause)
+        void FixedPause()
         {
+            //ポーズ画面表示
+            PauseCanvas.SetActive(true);
+
             //カーソル値変化
-            if(Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 SelectState++;
             }
-            else if(Input. GetKeyDown(KeyCode.UpArrow))
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 SelectState--;
             }
@@ -96,9 +116,7 @@ public class PauseManager : MonoBehaviour
                         break;
 
                 }
-
             }
         }
-
     }
 }

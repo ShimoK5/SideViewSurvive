@@ -147,7 +147,7 @@ public class PlayerIF : PawnIF
         OtherVel.x *= otherVelMulti;
     }
     //自由落下
-    protected void Fall()
+    protected virtual void Fall()
     {
         SelfVel.y -= GLAVITY;
     }
