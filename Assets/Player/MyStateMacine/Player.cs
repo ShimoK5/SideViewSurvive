@@ -63,23 +63,42 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PauseManager.instanse)
+        switch (GameStateManager.instance.GameState)
         {
-            if (PauseManager.instanse.isPause)
-                return;
+            case GAME_STATE.Game:
+                UpdateGame();
+                break;
+            default:
+                break;
         }
+    }
 
+    void UpdateGame()
+    {
         Temp = m_Player.PlayerState;
         m_Player.CustumUpdate();
 
         //シーンリロード処理
-        if(HitPoint <= 0)
+        if (HitPoint <= 0)
         {
             StartCoroutine("SceneChange");
         }
     }
 
+
     void FixedUpdate()
+    {
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                FixedGame();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void FixedGame()
     {
         DamageCheck();
         CheckState();

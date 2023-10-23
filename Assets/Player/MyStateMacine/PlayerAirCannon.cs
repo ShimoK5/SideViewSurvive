@@ -12,7 +12,7 @@ public class PlayerAirCannon : PlayerIF
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
         //ジャンプ処理
-        SelfVel.y = 30.0f * MultiplyNum;
+        SelfVel.y = 50.0f * MultiplyNum;
         OtherVel.y = 0;
 
         //無敵
@@ -100,5 +100,10 @@ public class PlayerAirCannon : PlayerIF
             NextPlayerState = PLAYER_STATE.AIR;
         }
 
+    }
+
+    protected override void Fall()
+    {
+        SelfVel.y -= GLAVITY * 3;
     }
 }

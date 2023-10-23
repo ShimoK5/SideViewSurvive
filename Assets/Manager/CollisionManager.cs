@@ -35,13 +35,23 @@ void Start()
 
     void FixedUpdate()
     {
+		switch (GameStateManager.instance.GameState)
+		{
+			case GAME_STATE.Game:
+				FixedGame();
+				break;
+		}
+	}
+
+	void FixedGame()
+    {
 		//プレイヤー
 		MoveObjHitBlock(Player.instance.GetM_Player());
 
 		//エネミー
 		Enemy[] Enemys = GameObject.FindObjectsOfType<Enemy>();
-		for(int i = 0; i < Enemys.Length; i++)
-        {
+		for (int i = 0; i < Enemys.Length; i++)
+		{
 			MoveObjHitBlock(Enemys[i].GetM_Enemy());
 		}
 
@@ -51,9 +61,7 @@ void Start()
 		{
 			MoveObjHitBlock(sacrifices[i]);
 		}
-
 	}
-
 
 	void MoveObjHitBlock(PawnIF pawn)
 	{

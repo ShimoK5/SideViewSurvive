@@ -12,7 +12,9 @@ public class EnabledFalse : MonoBehaviour
 
     void Awake()
     {
+#if !UNITY_EDITOR
         this.GetComponent<Renderer>(). enabled = false;
+#endif
     }
 
     // Update is called once per frame
