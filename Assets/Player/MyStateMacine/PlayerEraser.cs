@@ -6,14 +6,15 @@ public class PlayerEraser : PlayerIF
 {
     public PlayerEraser(PlayerIF oldPlayer)
     {
-        PlayerAnim.instans.Anim.SetTrigger("Idle");
+        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
         GameObject Eraser = (GameObject)Resources.Load("Eraser");
-        Eraser = Instantiate(Eraser, tf.transform.position, Quaternion.Euler(0, 0, 0));
-        Eraser.GetComponent<Eraser>().Velocity = 0.5f * -tf.transform.forward;
+        Eraser = Instantiate(Eraser, tf.transform.position, tf.transform.rotation);
+        Eraser.GetComponent<Eraser>().Velocity = 0.5f * tf.transform.forward;
     }
 
     public override void CustumUpdate()
@@ -39,6 +40,8 @@ public class PlayerEraser : PlayerIF
             Fall();
             //横移動
             MoveX(MAX_RUN_SPEED * ACTION_VEL_MULTI, ADD_RUN_SPEED * ACTION_VEL_MULTI);
+            //向き変更
+            ChangeDirection();
             //ジャンプ処理
             Jump();
             //状態遷移
@@ -60,6 +63,8 @@ public class PlayerEraser : PlayerIF
             Fall();
             //横移動
             MoveX(MAX_AIR_SPEED * ACTION_VEL_MULTI, ADD_AIR_SPEED * ACTION_VEL_MULTI);
+            //向き変更
+            ChangeDirection();
             //状態遷移
             //ChangeNextState();
             //速度反映

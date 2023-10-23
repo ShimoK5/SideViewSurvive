@@ -54,6 +54,18 @@ public class MoveBlock2 : Block
 
     void FixedUpdate()
     {
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                FixedGame();
+                break;
+        }
+
+        
+    }
+
+    void FixedGame()
+    {
         //過去座標保存
         OldPos = transform.position;
         //過去保存
@@ -99,6 +111,16 @@ public class MoveBlock2 : Block
                     hit.collider.gameObject.GetComponent<Enemy>().AddPosition((MoveDirection * NowMove));
                 }
             }
+
+            if (hit.collider.gameObject.GetComponent<Sacrifice>())
+            {
+                //地上なら
+                //if (hit.collider.gameObject.GetComponent<Sacrifice>().GetisGround())
+                {
+                    //ブロックの移動に合わせて移動
+                    hit.collider.gameObject.GetComponent<Sacrifice>().AddPosition((MoveDirection * NowMove));
+                }
+            }
         }
 #endif
         //座標移動
@@ -113,9 +135,9 @@ public class MoveBlock2 : Block
             OldNormalizeTime = 0;
         }
 
-        CameraPos.instance.Update();
-    }
+        CameraPos.instance.FixedUpdate();
 
+    }
     void VelDirection()
     {
         switch (Direction)

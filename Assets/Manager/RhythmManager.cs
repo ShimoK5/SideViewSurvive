@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class RhythmManager : MonoBehaviour
 {
-    public enum RhythmAction {
-        GymClothes,     //体操着
+    public enum RhythmAction
+    {
+        Umbrella,     //体操着
         Recorder,       //リコーダー
         Eraser,         //消しゴム
-
+        Sacrifice,      //身代わり
+        AirCannon,      //空気砲
+        Bag,            //ランドセル
+        Ruler,          //定規
+        Whistle,        //笛
         None            //なし
     }
     public static RhythmManager Instance;
     static int BeatNum = 8; //拍数
     [Header("アクション配列")]
-    [SerializeField] RhythmAction[] ActionArray = new RhythmAction[BeatNum];
+    [SerializeField] public RhythmAction[] ActionArray = new RhythmAction[BeatNum];
     [Header("リズム間隔（フレーム数）")]
-    [SerializeField] int BeatTempo;
-    int FCnt = 0;//フレームカウント
+    [SerializeField] public int BeatTempo;
+    public int FCnt = 0;//フレームカウント
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +34,47 @@ public class RhythmManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                FixedGame();
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    void ChangeStateDefault()
+    {
+        Player.instance.SetOuterState(PLAYER_STATE.TSUNAGI);
+
+#if false
+        if (Player.instance.GetisGround())
+        {
+            if (Mathf.Abs(Player.instance.GetM_Player().SelfVel.x/* + OtherVel.x*/) < Player.instance.GetM_Player().GetStandSpeed() )
+            {
+                Player.instance.SetOuterState(PLAYER_STATE.STAND);
+            }
+            else
+            {
+                Player.instance.SetOuterState(PLAYER_STATE.RUN);
+            }
+            
+        }
+        else
+        {
+            Player.instance.SetOuterState(PLAYER_STATE.AIR);
+        }
+    
+#endif
+
+    }
+
+
+    void FixedGame()
+    {
+
         //フレームカウント加算
         FCnt++;
 
@@ -45,8 +91,8 @@ public class RhythmManager : MonoBehaviour
             int ActionIndex = FCnt / BeatTempo - 1;
             switch (ActionArray[ActionIndex])
             {
-                case RhythmAction.GymClothes:
-                    Player.instance.SetOuterState(PLAYER_STATE.GYM_CLOTHES);
+                case RhythmAction.Umbrella:
+                    Player.instance.SetOuterState(PLAYER_STATE.UMBRELLA);
                     break;
 
                 case RhythmAction.Recorder:
@@ -57,6 +103,25 @@ public class RhythmManager : MonoBehaviour
                     Player.instance.SetOuterState(PLAYER_STATE.ERASER);
                     break;
 
+                case RhythmAction.Sacrifice:
+                    Player.instance.SetOuterState(PLAYER_STATE.SACRIFICE);
+                    break;
+
+                case RhythmAction.AirCannon:
+                    Player.instance.SetOuterState(PLAYER_STATE.AIR_CANNON);
+                    break;
+
+                case RhythmAction.Bag:
+                    Player.instance.SetOuterState(PLAYER_STATE.BAG);
+                    break;
+
+                case RhythmAction.Ruler:
+                    Player.instance.SetOuterState(PLAYER_STATE.RULER);
+                    break;
+
+                case RhythmAction.Whistle:
+                    Player.instance.SetOuterState(PLAYER_STATE.WHISTLE);
+                    break;
 
                 case RhythmAction.None:
                     ChangeStateDefault();
@@ -75,31 +140,5 @@ public class RhythmManager : MonoBehaviour
         {
             FCnt = 0;
         }
-
-
     }
-
-
-    void ChangeStateDefault()
-    {
-        //Player.instance.SetOuterState(PLAYER_STATE.NONE);
-
-        if (Player.instance.GetisGround())
-        {
-            if (Mathf.Abs(Player.instance.GetM_Player().SelfVel.x/* + OtherVel.x*/) < Player.instance.GetM_Player().GetStandSpeed() )
-            {
-                Player.instance.SetOuterState(PLAYER_STATE.STAND);
-            }
-            else
-            {
-                Player.instance.SetOuterState(PLAYER_STATE.RUN);
-            }
-            
-        }
-        else
-        {
-            Player.instance.SetOuterState(PLAYER_STATE.AIR);
-        }
-    }
-
 }

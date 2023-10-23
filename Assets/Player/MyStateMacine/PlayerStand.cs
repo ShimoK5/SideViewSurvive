@@ -8,7 +8,8 @@ public class PlayerStand : PlayerIF
 {
     public PlayerStand(PlayerIF oldPlayer)
     {
-        PlayerAnim.instans.Anim.SetTrigger("Idle");
+        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
         CopyPlayer(oldPlayer);
     }
 
@@ -30,6 +31,8 @@ public class PlayerStand : PlayerIF
         Fall();
         //横移動
         MoveX(MAX_RUN_SPEED,ADD_RUN_SPEED);
+        //向き変更
+        ChangeDirection();
         //ジャンプ処理
         Jump();
         //状態遷移

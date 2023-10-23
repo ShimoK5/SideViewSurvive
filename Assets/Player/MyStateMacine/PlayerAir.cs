@@ -7,9 +7,13 @@ using System.Reflection;
 public class PlayerAir : PlayerIF
 {
 
+    int FCnt = 0;
+
     public PlayerAir(PlayerIF oldPlayer)
     {
-        PlayerAnim.instans.Anim.SetTrigger("Jump");
+        if(Player.instance.GetAnim().Anim.AnimationName != "jump")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "jump", true);
+
         CopyPlayer(oldPlayer);
     }
     ~PlayerAir()
@@ -36,6 +40,8 @@ public class PlayerAir : PlayerIF
         Fall();
         //横移動
         MoveX(MAX_AIR_SPEED,ADD_AIR_SPEED);
+        //向き変更
+        ChangeDirection();
         //状態遷移
         ChangeNextState();
         //速度反映

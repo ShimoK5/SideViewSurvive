@@ -21,6 +21,10 @@ public class AttackAttachment : MonoBehaviour
         if(other.GetComponent<Enemy>())
         {
             other.GetComponent<Enemy>().SetOuterState(ENEMY_STATE.DEAD);
+            //ベクトル計算
+            Vector3 Obj_toE_Vec = other.transform.position - transform.position;
+
+            other.GetComponent<Enemy>().SetEnemyDeadVector(Obj_toE_Vec.normalized);
         }
     }
 }

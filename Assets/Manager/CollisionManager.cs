@@ -35,18 +35,33 @@ void Start()
 
     void FixedUpdate()
     {
+		switch (GameStateManager.instance.GameState)
+		{
+			case GAME_STATE.Game:
+				FixedGame();
+				break;
+		}
+	}
+
+	void FixedGame()
+    {
+		//プレイヤー
 		MoveObjHitBlock(Player.instance.GetM_Player());
 
+		//エネミー
 		Enemy[] Enemys = GameObject.FindObjectsOfType<Enemy>();
-		for(int i = 0; i < Enemys.Length; i++)
-        {
+		for (int i = 0; i < Enemys.Length; i++)
+		{
 			MoveObjHitBlock(Enemys[i].GetM_Enemy());
 		}
-		
 
-		
-    }
-
+		//身代わり
+		Sacrifice[] sacrifices = GameObject.FindObjectsOfType<Sacrifice>();
+		for (int i = 0; i < sacrifices.Length; i++)
+		{
+			MoveObjHitBlock(sacrifices[i]);
+		}
+	}
 
 	void MoveObjHitBlock(PawnIF pawn)
 	{
@@ -184,7 +199,6 @@ void Start()
 						case HIT_DIRECTION.HIT_UNDER:
 							if (Blocks[i].GetComponent<TopOnlyBlock2>() && Input.GetKey("s"))
 							{
-								Debug.Log("地形抜け");
 								break;
 							}
 
@@ -307,9 +321,10 @@ void Start()
         {
 			ReturnTwoDirection.ObjDirection1 = HIT_DIRECTION.NON_HIT;
 			ReturnTwoDirection.ObjDirection2 = HIT_DIRECTION.NON_HIT;
+			Debug.Log("埋もれ");
 		}
 		//元々上辺or下辺に衝突する位置にいた
-		else if (VertualOldMin1.x < Max2.x && VertualOldMax1.x > Min2.x)
+		/*else*/ if (VertualOldMin1.x < Max2.x && VertualOldMax1.x > Min2.x)
 		{
 			if (ObjVertualVel1.y >= 0.0f)//仮想的にoblj１が下向きに進んでいる
 			{

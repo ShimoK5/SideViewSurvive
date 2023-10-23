@@ -1,26 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using Spine;
+using Spine.Unity;
 public enum PLAYER_STATE
 {
     NONE,
     STAND,
     AIR,
     RUN,
-    GYM_CLOTHES,    //体操着
+
+    TSUNAGI,
+
+    UMBRELLA,    //体操着
     RECORDER,       //リコーダー
     ERASER,         //消しゴム
+    SACRIFICE,      //身代わり
+    AIR_CANNON,     //空気砲
+    BAG,            //ランドセル
+    RULER,          //定規
+    WHISTLE,        //笛
+
+    DAMAGE,         //被弾
 }
 
 public class Player : MonoBehaviour
 {
-    static public Player instance;
-    PlayerIF m_Player;
+    static public Player instance;  //静的な実態
+    PlayerIF m_Player;              //ステートマシーンの実態
 
-    public PLAYER_STATE Temp;
+    public PLAYER_STATE Temp;       //ReadOnly
 
     PLAYER_STATE OuterNextState;//外部から編集されたNextState
+    public int HitPoint;        //HP
+    //[Header("ダメージのクールタイム")]
+    [SerializeField] int InvisibleCoolTime;  //ダメージクールタイム（無敵時間）
+    bool DamageInvincible = false;            //無敵かどうか
+    int InvincibleFlameCount = 0;           //ダメージ時加算カウント
+
+    PlayerAnimSpine PlayerAnim;
 
     void Awake()
     {
@@ -30,23 +49,58 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerAnim = GameObject.Find("PlayerAnim").GetComponent<PlayerAnimSpine>();
+
         OuterNextState = PLAYER_STATE.NONE;
 
         m_Player = new PlayerIF();
         m_Player.CustumStart();
 
-        m_Player = new PlayerAir(m_Player);
+        m_Player = new PlayerStand(m_Player);
+        //HitPoint = 200;
     }
 
     // Update is called once per frame
     void Update()
     {
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                UpdateGame();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void UpdateGame()
+    {
         Temp = m_Player.PlayerState;
         m_Player.CustumUpdate();
+
+        //シーンリロード処理
+        if (HitPoint <= 0)
+        {
+            StartCoroutine("SceneChange");
+        }
     }
+
 
     void FixedUpdate()
     {
+        switch (GameStateManager.instance.GameState)
+        {
+            case GAME_STATE.Game:
+                FixedGame();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void FixedGame()
+    {
+        DamageCheck();
         CheckState();
         m_Player.CustumFixed();
     }
@@ -84,8 +138,12 @@ public class Player : MonoBehaviour
                 m_Player = new PlayerAir(m_Player);
                 break;
 
-            case PLAYER_STATE.GYM_CLOTHES:
-                m_Player = new PlayerGymClothes(m_Player);
+            case PLAYER_STATE.TSUNAGI:
+                m_Player = new PlayerTsunagi(m_Player);
+                break;
+
+            case PLAYER_STATE.UMBRELLA:
+                m_Player = new PlayerUmbrella(m_Player);
                 break;
 
             case PLAYER_STATE.RECORDER:
@@ -96,8 +154,32 @@ public class Player : MonoBehaviour
                 m_Player = new PlayerEraser(m_Player);
                 break;
 
+            case PLAYER_STATE.SACRIFICE:
+                m_Player = new PlayerSacrifice(m_Player);
+                break;
+
+            case PLAYER_STATE.AIR_CANNON:
+                m_Player = new PlayerAirCannon(m_Player);
+                break; 
+            
+            case PLAYER_STATE.BAG:
+                m_Player = new PlayerBag(m_Player);
+                break;
+            
+            case PLAYER_STATE.RULER:
+                m_Player = new PlayerRuler(m_Player);
+                break;
+            
+            case PLAYER_STATE.WHISTLE:
+                m_Player = new PlayerWhistle(m_Player);
+                break;
+
+            case PLAYER_STATE.DAMAGE:
+                m_Player = new PlayerDamage(m_Player);
+                break;
+
             case PLAYER_STATE.NONE:
-                //m_Player = new PlayerNone(m_Player);
+                m_Player = new PlayerTsunagi(m_Player);
                 break;
         }
     }
@@ -156,10 +238,10 @@ public class Player : MonoBehaviour
     }
 
     //外部から直値座標変更(移動床)
-    public void AddPosition(Vector3 AddVolume)
+    public void AddPosition(Vector3 addVolume)
     {
         if (m_Player.isGround)
-            transform.position += AddVolume;
+            transform.position += addVolume;
     }
 
     public bool GetisGround()
@@ -170,5 +252,105 @@ public class Player : MonoBehaviour
     public PlayerIF GetM_Player()
     {
         return m_Player;
+    }
+
+    public PlayerAnimSpine GetAnim()
+    {
+        return PlayerAnim;
+    }
+
+    public void HitEnemy(Vector2 EtoP_Vel)
+    {
+        //無敵ならしない処理
+        if (DamageInvincible)
+            return;
+        if (m_Player.ActionInvisible)
+            return;
+
+
+        {
+#if false
+        //プレイヤーVel編集
+        SetOuterVel(EtoP_Vel.x * Player.instance.GetM_Player().KNOCK_BACK_POWER
+            , EtoP_Vel.y * Player.instance.GetM_Player().KNOCK_BACK_POWER, true, true, true, true);
+#else
+            //無敵じゃなければ
+
+            //無敵になる
+            InvisibleOn(120);
+            //プレイヤーVel編集 & 向き変更
+            if (EtoP_Vel.x >= 0)
+            {
+                SetOuterVel(GetM_Player().KNOCK_BACK_POWER * 1.5f
+                , GetM_Player().KNOCK_BACK_POWER * 0.2f, true, true, true, true);
+                
+                transform.localEulerAngles = new Vector3(0, -90, 0);
+            }
+            else
+            {
+                SetOuterVel(-GetM_Player().KNOCK_BACK_POWER * 1.5f
+                , GetM_Player().KNOCK_BACK_POWER * 0.2f, true, true, true, true);
+               
+                transform.localEulerAngles = new Vector3(0, 90, 0);
+            }
+
+            //プレイヤーステート変更
+            PlayerStateIsDamage();
+#endif
+            HitPoint = Mathf.Max(0, HitPoint - 1);
+        }
+
+    }
+
+    void PlayerStateIsDamage()
+    {
+        m_Player.NextPlayerState = PLAYER_STATE.DAMAGE;
+    }
+
+    void DamageCheck()
+    {
+        if (DamageInvincible)
+        {
+            //フレームカウント加算
+            InvincibleFlameCount++;
+
+            if (InvincibleFlameCount > InvisibleCoolTime)
+            {
+                InvincibleFlameCount = 0;
+                DamageInvincible = false;
+            }
+
+        }
+
+        if (DamageInvincible)
+        {
+            //プレイヤーが赤くなる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 0.6f, 0.6f));
+        }
+        else if (m_Player.ActionInvisible)
+        {
+            //プレイヤーが黄色くなる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 0.6f));
+        }
+        else
+        {
+            //プレイヤーが通常色になる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f));
+        }
+    }
+
+    void InvisibleOn(int damageCoolTime)
+    {
+        DamageInvincible = true;
+        InvisibleCoolTime = damageCoolTime;
+    }
+
+    IEnumerator SceneChange()
+    {
+        //0.5秒停止
+        yield return new WaitForSeconds(0.5f);
+
+        //シーンリロード
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
