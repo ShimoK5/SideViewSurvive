@@ -18,6 +18,10 @@ public class CameraPos : MonoBehaviour
     float MinX;         //カメラの最低X座標
     float MaxX;         //カメラの最高X座標
 
+    [Header("アニメーションのフレーム数")]
+    [SerializeField] int StartMovieFlame;
+    int StartMovieFlameCount = 0;
+
     void Start()
     {
         Vector3 MinObj = GameObject.Find("StartObj").transform.position;
@@ -82,11 +86,18 @@ public class CameraPos : MonoBehaviour
 
     void StartMovieUpdate()
     {
-        float PosX = transform.position.x - 0.1f;
+        StartMovieFlameCount++;
+
+        if(Input.GetKey(KeyCode.Return))
+        {
+            StartMovieFlameCount += 3;
+        }
+
+        float PosX = Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, StartMovieFlameCount, StartMovieFlame, MaxX, MinX);
 
         transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
 
-        if (PosX < MinX)
+        if (StartMovieFlameCount >= StartMovieFlame)
         {
             GameStateManager.instance.GameState = GAME_STATE.Game;
             transform.position = new Vector3(MinX, transform.position.y, transform.position.z);
