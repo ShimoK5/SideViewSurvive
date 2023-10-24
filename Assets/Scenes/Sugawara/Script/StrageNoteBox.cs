@@ -78,90 +78,97 @@ public class StrageNoteBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int count = Rhythm.FCnt / Rhythm.BeatTempo;
-        if (Rhythm.FCnt % Rhythm.BeatTempo == 0 && count == 0)
+        switch (GameStateManager.instance.GameState)
         {
-            switch (Rhythm.ActionArray[7])
+            case GAME_STATE.Game:
+            int count = Rhythm.FCnt / Rhythm.BeatTempo;
+            if (Rhythm.FCnt % Rhythm.BeatTempo == 0 && count == 0)
             {
-                case RhythmAction.Umbrella:
-                    audioSource.PlayOneShot(ActionSE[0]);
-                    break;
+                switch (Rhythm.ActionArray[7])
+                {
+                    case RhythmAction.Umbrella:
+                        audioSource.PlayOneShot(ActionSE[0]);
+                        break;
 
-                case RhythmAction.Recorder:
-                    audioSource.PlayOneShot(ActionSE[1]);
-                    break;
+                    case RhythmAction.Recorder:
+                        audioSource.PlayOneShot(ActionSE[1]);
+                        break;
 
-                case RhythmAction.Eraser:
-                    audioSource.PlayOneShot(ActionSE[2]);
-                    break;
+                    case RhythmAction.Eraser:
+                        audioSource.PlayOneShot(ActionSE[2]);
+                        break;
 
-                case RhythmAction.Sacrifice:
-                    audioSource.PlayOneShot(ActionSE[3]);
-                    break;
+                    case RhythmAction.Sacrifice:
+                        audioSource.PlayOneShot(ActionSE[3]);
+                        break;
 
-                case RhythmAction.AirCannon:
-                    audioSource.PlayOneShot(ActionSE[4]);
-                    break;
+                    case RhythmAction.AirCannon:
+                        audioSource.PlayOneShot(ActionSE[4]);
+                        break;
 
-                case RhythmAction.Bag:
-                    audioSource.PlayOneShot(ActionSE[5]);
-                    break;
+                    case RhythmAction.Bag:
+                        audioSource.PlayOneShot(ActionSE[5]);
+                        break;
 
-                case RhythmAction.Ruler:
-                    audioSource.PlayOneShot(ActionSE[6]);
-                    break;
+                    case RhythmAction.Ruler:
+                        audioSource.PlayOneShot(ActionSE[6]);
+                        break;
 
-                case RhythmAction.Whistle:
-                    audioSource.PlayOneShot(ActionSE[7]);
-                    break;
+                    case RhythmAction.Whistle:
+                        audioSource.PlayOneShot(ActionSE[7]);
+                        break;
 
-                default:
-                    audioSource.PlayOneShot(ActionSE[8]);
-                    break;
+                    default:
+                        audioSource.PlayOneShot(ActionSE[8]);
+                        break;
+                }
             }
-        }
-        else if (Rhythm.FCnt % Rhythm.BeatTempo == 0 && count > 0)
-        {
-            switch (Rhythm.ActionArray[(count -1)])
+            else if (Rhythm.FCnt % Rhythm.BeatTempo == 0 && count > 0)
             {
-                case RhythmAction.Umbrella:
-                    audioSource.PlayOneShot(ActionSE[0]);
-                    break;
+                switch (Rhythm.ActionArray[(count - 1)])
+                {
+                    case RhythmAction.Umbrella:
+                        audioSource.PlayOneShot(ActionSE[0]);
+                        break;
 
-                case RhythmAction.Recorder:
-                    audioSource.PlayOneShot(ActionSE[1]);
-                    break;
+                    case RhythmAction.Recorder:
+                        audioSource.PlayOneShot(ActionSE[1]);
+                        break;
 
-                case RhythmAction.Eraser:
-                    audioSource.PlayOneShot(ActionSE[2]);
-                    break;
+                    case RhythmAction.Eraser:
+                        audioSource.PlayOneShot(ActionSE[2]);
+                        break;
 
-                case RhythmAction.Sacrifice:
-                    audioSource.PlayOneShot(ActionSE[3]);
-                    break;
+                    case RhythmAction.Sacrifice:
+                        audioSource.PlayOneShot(ActionSE[3]);
+                        break;
 
-                case RhythmAction.AirCannon:
-                    audioSource.PlayOneShot(ActionSE[4]);
-                    break;
+                    case RhythmAction.AirCannon:
+                        audioSource.PlayOneShot(ActionSE[4]);
+                        break;
 
-                case RhythmAction.Bag:
-                    audioSource.PlayOneShot(ActionSE[5]);
-                    break;
+                    case RhythmAction.Bag:
+                        audioSource.PlayOneShot(ActionSE[5]);
+                        break;
 
-                case RhythmAction.Ruler:
-                    audioSource.PlayOneShot(ActionSE[6]);
-                    break;
+                    case RhythmAction.Ruler:
+                        audioSource.PlayOneShot(ActionSE[6]);
+                        break;
 
-                case RhythmAction.Whistle:
-                    audioSource.PlayOneShot(ActionSE[7]);
-                    break;
+                    case RhythmAction.Whistle:
+                        audioSource.PlayOneShot(ActionSE[7]);
+                        break;
 
-                default:
-                    audioSource.PlayOneShot(ActionSE[8]);
-                    break;
+                    default:
+                        audioSource.PlayOneShot(ActionSE[8]);
+                        break;
+                }
             }
+
+                break;
+
+            default:
+                break;
         }
-
-
     }
 }
