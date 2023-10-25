@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum GAME_STATE { 
-StartFade,
-StartCameraMotion,
-StartPlayerMotion,
-Game,
-Pause,
-EndPlayerMotion,
-EndFade,
+StartFade,          //開始フェード
+StartCameraMotion,  //スタートカメラ移動
+StartPlayerMotion,  //プレイヤースタート演出  
+Game,               //ゲーム
+Pause,              //ポーズ
+DeadPlayer,         //プレイヤー死亡時演出
+EndPlayerMotion,    //プレイヤーゴール演出
+EndFade,            //終了フェード
 }
 
 

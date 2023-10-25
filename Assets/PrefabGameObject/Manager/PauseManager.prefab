@@ -414,13 +414,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eda00b2803953e4c9f1cbf21cbf066d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimWaitFlame: 20
   PauseCanvas: {fileID: 744650808210095157}
+  PauseBackGround: {fileID: 744650806614358747}
   ButtonArray:
   - {fileID: 744650807602707942}
   - {fileID: 744650807522573288}
   - {fileID: 744650806774804201}
   Flame: {fileID: 744650807068102971}
-  isPause: 0
 --- !u!1 &744650808210095157
 GameObject:
   m_ObjectHideFlags: 0
