@@ -244,6 +244,11 @@ public class Enemy : MonoBehaviour
         m_Enemy.DeadVector = Vel.normalized;
     }
 
+    public ENEMY_STATE GetEnemyState()
+    {
+        return InitEnmyType;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         //プレイヤーとの衝突

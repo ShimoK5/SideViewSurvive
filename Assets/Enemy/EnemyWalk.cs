@@ -6,6 +6,10 @@ using System.Reflection;
 
 public class EnemyWalk : EnemyIF
 {
+    private int FlameCount = 0;
+    private int JumpCount = 0;
+    private bool isJump = false;
+
     public EnemyWalk(EnemyIF oldEnemy)
     {
         //EnemyAnim.instans.Anim.SetTrigger("Run");
@@ -26,9 +30,33 @@ public class EnemyWalk : EnemyIF
         //自由落下
         Fall();
         //横移動
-        MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);
+        SelfVel.x = -MAX_RUN_SPEED;
         //ジャンプ処理
-        //Jump();
+
+        if(isGround && !isJump)
+            FlameCount++;
+
+        if (FlameCount > 180 && isGround)
+        {
+            isJump = true;
+            FlameCount = 0;
+        }
+
+        if(isJump)
+        {
+            JumpCount++;
+            Jump();
+
+            if(JumpCount > 15)
+            {
+                isJump = false;
+                JumpCount = 0;
+            }
+        }
+
+      
+        
+
         //状態遷移
         ChangeNextState();
         //速度反映

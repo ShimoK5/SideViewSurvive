@@ -9,6 +9,14 @@ public class EnemySpawn : MonoBehaviour
     private const float ENEMY_SIZE = 0.99f;
     private Vector3 SpownPos;
     private GameObject Goal;
+    private int EnemyCount = 0;
+    private int ZigZagCount = 0;
+    private int TrackingCount = 0;
+
+
+    [Header("エネミーの存在数の最低保証")]
+    [SerializeField] int TrackingFew = 3;
+    [SerializeField] int ZigZagFew = 3;
 
     [Header("ゴールとの非スポーン距離")]
     [SerializeField] float SpawnOffDistance = 20.0f; 
@@ -34,15 +42,46 @@ public class EnemySpawn : MonoBehaviour
 
         if (FlameCount > 30)
             FlameCount = 0;
-       
+
 
         if (FlameCount == 30 && GoalDistanceCheck() && OperatingEnemyCheck())
         {
-            GameObject Enemy = (GameObject)Resources.Load("EnemyTracking");
+            float TrackingSpawnRate = 0.5f;
+            //if ((TrackingCount < TrackingFew && ZigZagCount < ZigZagFew) || (TrackingCount == ZigZagCount))
+            //    TrackingSpawnRate = 0.5f;
+            //else if(TrackingCount < ZigZagCount)
+            //    TrackingSpawnRate = (TrackingCount - TrackingFew) / ZigZagCount;
+            ////else if(TrackingCount > ZigZagCount)
+            ////    TrackingSpawnRate = (ZigZagCount - ZigZagFew) / (TrackingCount);
 
+            //現存数のうち追尾が少ない→追尾の出現確率を上げる＝ジグザグの出現率を下げる
+            //現存数のうちジグザグが少ない（略
+            //現存数のうち追尾が極めて少ない→追尾を100%出現にする
+
+
+
+            int choice;
+
+            choice = (RandomBool(TrackingSpawnRate)) ? 0 : 1;
+            //choice = Random.Range(0, 1);
+            GameObject Enemy;
+
+            switch (choice)
+            {
+                case 0:
+                    Enemy = (GameObject)Resources.Load("EnemyTracking");
+                    break;
+                case 1:
+                    Enemy = (GameObject)Resources.Load("EnemyZigZag");
+                    break;
+                    
+                default:
+                    Enemy = null;
+                    break;
+            }
             SpawnPosGenerate();
 
-            Enemy = Instantiate(Enemy, SpownPos, Quaternion.Euler(0, 0, 0));
+            Instantiate(Enemy, SpownPos, Quaternion.Euler(0, 0, 0));
         }
     }
 
@@ -64,6 +103,7 @@ public class EnemySpawn : MonoBehaviour
         return false;
     }
 
+    //出現場所の設定
     void SpawnPosGenerate()
     {
         Vector3 Size = transform.GetComponent<MeshRenderer>().bounds.size;
@@ -77,6 +117,7 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
+    //ゴールとの距離確認
     bool GoalDistanceCheck()
     {
         if(Goal.transform.position.x - transform.position.x < SpawnOffDistance)
@@ -84,22 +125,40 @@ public class EnemySpawn : MonoBehaviour
         return true;
     }
 
+    //稼働済みエネミー数の確認(ついでにそれぞれのエネミー種の残存数確認)
     bool OperatingEnemyCheck()
     {
         Enemy[] Enemys = GameObject.FindObjectsOfType<Enemy>();
-        int count = 0;   
+        int count = 0;
 
         for(int i = 0; i < Enemys.Length; i++)
         {
             if (Enemys[i].Operation == Enemys[i].stationary)
+            {
                 count++;
+                if (Enemys[i].GetEnemyState() == ENEMY_STATE.ZIGZAG)
+                {
+                    ZigZagCount++;
+                }
+                else if (Enemys[i].GetEnemyState() == ENEMY_STATE.TRACKING)
+                {
+                    TrackingCount++;
+                }
+            }
         }
+
+        EnemyCount = count;
 
         if (count < MaxEnemy)
             return true;
         return false;
     }
 
+    //bool型乱数　引数：成功確率(0.0f～1.0f)
+    bool RandomBool(float successRate)
+    {
+        return Random.Range(0.0f, 1.0f) <= successRate;
+    }
 
     //要件定義(現時点)
     //スポーンゾーン内のランダムな場所にエネミーをスポーン
