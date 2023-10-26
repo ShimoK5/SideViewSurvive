@@ -24,10 +24,10 @@ public class PlayerAir : PlayerIF
     // Start is called before the first frame update
     public override void CustumUpdate()
     {
-        if (Input.GetKeyDown(jumpKey)) // キー入力判定
-        {
-            JumpKeyDown = true;
-        }
+        //if (Input.GetKeyDown(jumpKey)) // キー入力判定
+        //{
+        //    JumpKeyDown = true;
+        //}
     }
 
     public override void CustumFixed()
@@ -47,7 +47,7 @@ public class PlayerAir : PlayerIF
         //速度反映
         MovePlayer();
         //フラグリセット
-        JumpKeyDown = false;
+        //JumpKeyDown = false;
         //共通更新
         FixedCommon();
     }

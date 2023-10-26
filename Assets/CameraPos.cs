@@ -88,7 +88,7 @@ public class CameraPos : MonoBehaviour
     {
         StartMovieFlameCount++;
 
-        if(Input.GetKey(KeyCode.Return))
+        if(InputManager_FU.instanse.GetKey(Key.B))
         {
             StartMovieFlameCount += 3;
         }
