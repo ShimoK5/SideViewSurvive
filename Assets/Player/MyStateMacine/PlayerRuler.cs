@@ -46,13 +46,13 @@ public class PlayerRuler : PlayerIF
 
     public override void CustumUpdate()
     {
-        if (isGround)
-        {
-            if (Input.GetKeyDown(jumpKey)) // キー入力判定
-            {
-                JumpKeyDown = true;
-            }
-        }
+        //if (isGround)
+        //{
+        //    if (Input.GetKeyDown(jumpKey)) // キー入力判定
+        //    {
+        //        JumpKeyDown = true;
+        //    }
+        //}
     }
 
     public override void CustumFixed()
@@ -78,7 +78,7 @@ public class PlayerRuler : PlayerIF
             //速度反映
             MovePlayer();
             //フラグリセット
-            JumpKeyDown = false;
+            //JumpKeyDown = false;
             //共通更新
             FixedCommon();
         }
@@ -99,7 +99,7 @@ public class PlayerRuler : PlayerIF
             //速度反映
             MovePlayer();
             //フラグリセット
-            JumpKeyDown = false;
+            //JumpKeyDown = false;
             //共通更新
             FixedCommon();
         }

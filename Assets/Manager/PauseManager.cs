@@ -56,7 +56,7 @@ public class PauseManager : MonoBehaviour
         {
             case GAME_STATE.Game:
                 //Pause入力あれば
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (InputManager_U.instanse.GetKeyTrigger(Key.Start))
                 {
                     GameStateManager.instance.GameState = GAME_STATE.Pause;
                     PauseState = PAUSE_STATE.START;
@@ -65,7 +65,8 @@ public class PauseManager : MonoBehaviour
                 break;
             case GAME_STATE.Pause:
                 //Pause入力あれば
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (InputManager_U.instanse.GetKeyTrigger(Key.Start) ||
+                    InputManager_U.instanse.GetKeyTrigger(Key.A))
                 {
                     //GameStateManager.instance.GameState = GAME_STATE.Game;
                     PauseState = PAUSE_STATE.END;
@@ -92,30 +93,30 @@ public class PauseManager : MonoBehaviour
                 break;
         }
 
-        void FixedGame()
-        {
-            //ポーズ画面非表示
-            PauseCanvas.SetActive(false);
-        }
-
-        void FixedPause()
-        {
-            switch (PauseState)
-            {
-                case PAUSE_STATE.START:
-                    FixedPauseStart();
-                    break;
-                case PAUSE_STATE.PAUSE:
-                    FixedPausePause();
-                    break;
-                case PAUSE_STATE.END:
-                    FixedPauseEnd();
-                    break;
-
-            }
-        }
+        
+    }
+    void FixedGame()
+    {
+        //ポーズ画面非表示
+        PauseCanvas.SetActive(false);
     }
 
+    void FixedPause()
+    {
+        switch (PauseState)
+        {
+            case PAUSE_STATE.START:
+                FixedPauseStart();
+                break;
+            case PAUSE_STATE.PAUSE:
+                FixedPausePause();
+                break;
+            case PAUSE_STATE.END:
+                FixedPauseEnd();
+                break;
+
+        }
+    }
     void FixedPauseStart()
     {
         //カーソル値変化
@@ -140,7 +141,7 @@ public class PauseManager : MonoBehaviour
         MoveCursor();
 
         //処理を行う場合は処理
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (InputManager_U.instanse.GetKeyTrigger(Key.B))
         {
             switch (PauseChoose)
             {
@@ -178,11 +179,11 @@ public class PauseManager : MonoBehaviour
     void MoveCursor()
     {
         //カーソル値変化
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (InputManager_U.instanse.LongPushCoolInput(Key.Down))
         {
             PauseChoose++;
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (InputManager_U.instanse.LongPushCoolInput(Key.Up))
         {
             PauseChoose--;
         }
