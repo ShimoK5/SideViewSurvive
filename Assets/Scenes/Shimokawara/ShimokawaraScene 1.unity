@@ -5810,6 +5810,31 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2563259383867639605, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775360100698700712, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775360100698700712, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775360100698700712, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.9400001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024748109027427703, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3041548197106704859, guid: af4f5bcd325702f42957814bae9f3b29,
         type: 3}
       propertyPath: m_Name
@@ -5874,6 +5899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901174141110326850, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af4f5bcd325702f42957814bae9f3b29, type: 3}
@@ -5967,7 +5997,7 @@ PrefabInstance:
     - target: {fileID: 4008923266302692941, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9fe8fc461622fe48853b1bba11934a4, type: 3}
@@ -6032,6 +6062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744650808065368457, guid: 33a291d5c7a77b44cac5dd8c8b1fd719,
+        type: 3}
+      propertyPath: AnimWaitFlame
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 744650808065368463, guid: 33a291d5c7a77b44cac5dd8c8b1fd719,
         type: 3}
@@ -6303,7 +6338,7 @@ PrefabInstance:
     - target: {fileID: 7323444327955935837, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}
       propertyPath: GameState
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7323444327955935838, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}

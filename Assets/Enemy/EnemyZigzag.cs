@@ -29,12 +29,12 @@ public class EnemyZigzag : EnemyIF
         Fall();
         //移動
         FlameCount++;
-        if (FlameCount > 60)
+        if (FlameCount > 120)
             FlameCount = 0;
 
-        if(FlameCount < 30)
+        if(FlameCount < 60)
             SelfVel = new Vector2(-MAX_RUN_SPEED, MAX_RUN_SPEED);
-        else if(FlameCount > 30)
+        else if(FlameCount > 60)
             SelfVel = new Vector2(-MAX_RUN_SPEED, -MAX_RUN_SPEED);
 
         //MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);
