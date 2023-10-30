@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class AssetManager : MonoBehaviour
 {
-    public enum ActionNumber
+    public enum  ActionNumber               //アクション名
     {
-        Umbrella = 1,     //体操着
+        Umbrella,     //体操着
         Recorder,       //リコーダー
         Eraser,         //消しゴム
         Sacrifice,      //身代わり
@@ -18,26 +18,25 @@ public class AssetManager : MonoBehaviour
         None            //なし
     }
 
-    public enum AssetTypeNumber
+    public enum AssetTypeNumber             //アセット一覧
     {
         BGM,
         SE
     }
 
-    public static AssetManager Instance;
-    public Sprite[] SpriteAsset = default;
-    public AudioClip[] SEAsset = default;
-    public AudioClip[] BGMAsset = default;
-    private AudioSource audioSource = null;
-    private bool PlaySESound = false;
-    private bool PlayBGMSound = false;
+    public static AssetManager Instance;        //シングルトンするためのインスタンス
+    [SerializeField] private Sprite[] SpriteAsset = default;      //格納するスプライトの配列
+    [SerializeField] private AudioClip[] SEAsset = default;       //格納するSEの配列
+    [SerializeField] private AudioClip[] BGMAsset = default;      //格納するBGMの配列
+    [SerializeField] private float AudioVolume = 0.0f;
+    private AudioSource audioSource = null;     //音鳴らすための物
     
-    public class ReserveAsset
+    public class ReserveAsset               //音鳴らすために予約をするクラス
     {
         public AssetTypeNumber AssetType;
         public ActionNumber AssetNumber;
     }
-    [SerializeField] List<ReserveAsset>ReserveAssets = new List<ReserveAsset>();
+    [SerializeField] List<ReserveAsset>ReserveAssets = new List<ReserveAsset>();        //リスト化
 
 
     void Awake()
@@ -48,77 +47,156 @@ public class AssetManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = this.GetComponent<AudioSource>();
-        PlaySESound = false;
-        PlayBGMSound = false;
-        //AssetNumber = default;
+        audioSource = this.GetComponent<AudioSource>();         //自身の持っているオーディオソースを持ってくる
+        ReserveAssets.Clear();                                  //リストの中身を初期化
 
-        Addreserve(AssetTypeNumber.BGM, ActionNumber.AirCannon);
-        Addreserve(AssetTypeNumber.SE, ActionNumber.Bag);
-        Addreserve(AssetTypeNumber.SE, ActionNumber.Ruler);
-        Addreserve(AssetTypeNumber.BGM, ActionNumber.Sacrifice);
+        if(AudioVolume <=0.0f)
+        {
+            AudioVolume = 0.03f;
+        }
+        //中身問題ないかの確認用
+        //AddMusicReserve(AssetTypeNumber.BGM, ActionNumber.AirCannon);
+        //AddMusicReserve(AssetTypeNumber.SE, ActionNumber.Bag);
+        //AddMusicReserve(AssetTypeNumber.SE, ActionNumber.Ruler);
+        //AddMusicReserve(AssetTypeNumber.BGM, ActionNumber.Sacrifice);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (PlaySESound == true &&(Input.GetKey(KeyCode.A)))
+        if(ReserveAssets.Count > 0)
         {
-            PlaySESound = false;
+            int ReserveCount = ReserveAssets.Count;
 
-            Debug.Log(ReserveAssets[0].AssetType);
-            Debug.Log(ReserveAssets[0].AssetNumber);
-
-            ReserveAssets.Remove(ReserveAssets[0]);
-
-            Debug.Log(ReserveAssets[0].AssetType);
-            Debug.Log(ReserveAssets[0].AssetNumber);
-            
-            ReserveAssets.Remove(ReserveAssets[0]);
-
-            Debug.Log(ReserveAssets[0].AssetType);
-            Debug.Log(ReserveAssets[0].AssetNumber);
-
-            ReserveAssets.Remove(ReserveAssets[0]);
-            if (ReserveAssets.Count > 0)
+            for(int Count = 0; Count < ReserveCount; Count++)
             {
-                Debug.Log(ReserveAssets[0].AssetType);
-                Debug.Log(ReserveAssets[0].AssetNumber);
-            }else
-            {
-                Debug.Log("ReserveAssets[3]が存在しないよ");
+                PlayMusic(Count);
             }
-           
-        };
+            ReserveAssets.Clear();
+        }
+        
+    }   
 
-        //if((Input.GetKey(KeyCode.Q)))
-        //{
-        //    PlaySESound = true;
-        //}
-        //else
-        //{
-        //    PlaySESound = false;
-        //}
-    }
-
-    public void PlaySE(int Number)
+    void PlayMusic(int count)
     {
-        PlaySESound = true;
+        switch (ReserveAssets[count].AssetType)
+        {
+            case AssetTypeNumber.BGM:
+                switch (ReserveAssets[count].AssetNumber)
+                {
+                    case 0:
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+
+
+            case AssetTypeNumber.SE:
+                switch(ReserveAssets[count].AssetNumber)
+                {
+                    case ActionNumber.Umbrella:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[0]);
+                        break;
+
+                    case ActionNumber.Recorder:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[1]);
+                        break;
+
+                    case ActionNumber.Eraser:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[2]);
+                        break;
+
+                    case ActionNumber.Sacrifice:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[3]);
+                        break;
+
+                    case ActionNumber.AirCannon:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[4]);
+                        break;
+
+                    case ActionNumber.Bag:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[5]);
+                        break;
+
+                    case ActionNumber.Ruler:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[6]);
+                        break;
+
+                    case ActionNumber.Whistle:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[7]);
+                        break;
+
+                    case ActionNumber.None:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[8]);
+                        break;
+
+                    default:
+                        audioSource.volume = AudioVolume;
+                        audioSource.PlayOneShot(SEAsset[8]);
+                        break;
+
+                }
+                break;
+
+            default:
+                break;
+
+        }
     }
 
-    void Addreserve(AssetTypeNumber type, ActionNumber number)
+    public void AddMusicReserve(AssetTypeNumber type, ActionNumber number)
     {
         ReserveAsset Temporary = new ReserveAsset();
         Temporary.AssetType = type;
         Temporary.AssetNumber = number;
         ReserveAssets.Add(Temporary);
-
-        if(PlaySESound == false)
-        {
-            PlaySESound = true;
-        }
     }
 
+    public Sprite ReferenceSprite(ActionNumber Action)
+    {
+        switch (Action)
+        {
+            case ActionNumber.Umbrella:
+                return SpriteAsset[0];
+
+            case ActionNumber.Recorder:
+                return SpriteAsset[1];
+
+            case ActionNumber.Eraser:
+                return SpriteAsset[2];
+
+            case ActionNumber.Sacrifice:
+                return SpriteAsset[3];
+
+            case ActionNumber.AirCannon:
+                return SpriteAsset[4];
+
+            case ActionNumber.Bag:
+                return SpriteAsset[5];
+
+            case ActionNumber.Ruler:
+                return SpriteAsset[6];
+
+            case ActionNumber.Whistle:
+                return SpriteAsset[7];
+
+            case ActionNumber.None:
+                return SpriteAsset[8];
+
+            default:
+                return SpriteAsset[8];
+        }
+    }
 }
 
