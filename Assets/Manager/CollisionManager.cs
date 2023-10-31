@@ -37,7 +37,8 @@ void Start()
     {
 		switch (GameStateManager.instance.GameState)
 		{
-			case GAME_STATE.Game:
+			//case GAME_STATE.Game:
+			default:
 				FixedGame();
 				break;
 		}
