@@ -38,7 +38,7 @@ public class EnemyDead : EnemyIF
             GameObject Obj = Instantiate(myPrefab, tf.position, Quaternion.identity);
 
             Destroy(tf.gameObject);
-
+            EnemyKillCountManager.Instance.DestroyCountUp();
 
         }
         ////過去情報保存
