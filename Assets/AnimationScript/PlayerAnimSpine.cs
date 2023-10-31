@@ -27,7 +27,7 @@ public class PlayerAnimSpine : MonoBehaviour
 
         if (FCnt == 120)
         {
-            Anim.state.SetAnimation(0, "idle", true);
+            Anim.state.SetAnimation(0, "normal/idle", true);
         }
         if (FCnt == 190)
         {

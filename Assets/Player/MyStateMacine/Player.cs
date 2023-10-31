@@ -23,6 +23,8 @@ public enum PLAYER_STATE
     WHISTLE,        //笛
 
     DAMAGE,         //被弾
+
+    DEAD,
 }
 
 public class Player : MonoBehaviour
@@ -63,6 +65,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Temp = m_Player.PlayerState;
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
@@ -75,23 +78,34 @@ public class Player : MonoBehaviour
 
     void UpdateGame()
     {
-        Temp = m_Player.PlayerState;
+       
         m_Player.CustumUpdate();
-
-        //シーンリロード処理
-        if (HitPoint <= 0)
-        {
-            StartCoroutine("SceneChange");
-        }
     }
 
 
     void FixedUpdate()
     {
+        //シーンリロード処理
+        if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
+        {
+            GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
+            
+        }
+
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
                 FixedGame();
+                break;
+            case GAME_STATE.DeadPlayer:
+                SetOuterState(PLAYER_STATE.DEAD);
+                CheckState();
+                m_Player.CustumFixed();
+                break;
+
+            case GAME_STATE.StartPlayerMotion:
+            case GAME_STATE.EndPlayerMotion:
+                m_Player.CustumFixed();
                 break;
             default:
                 break;
@@ -176,6 +190,10 @@ public class Player : MonoBehaviour
 
             case PLAYER_STATE.DAMAGE:
                 m_Player = new PlayerDamage(m_Player);
+                break;
+
+            case PLAYER_STATE.DEAD:
+                m_Player = new PlayerDead(m_Player);
                 break;
 
             case PLAYER_STATE.NONE:
@@ -295,7 +313,7 @@ public class Player : MonoBehaviour
             }
 
             //プレイヤーステート変更
-            //PlayerStateIsDamage();
+            PlayerStateIsDamage();
 #endif
             HitPoint = Mathf.Max(0, HitPoint - 1);
         }

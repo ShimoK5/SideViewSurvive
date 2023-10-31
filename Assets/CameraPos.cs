@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraPos : MonoBehaviour
 {
@@ -18,9 +19,14 @@ public class CameraPos : MonoBehaviour
     float MinX;         //カメラの最低X座標
     float MaxX;         //カメラの最高X座標
 
-    [Header("アニメーションのフレーム数")]
+    [Header("スタートアニメーションのフレーム数")]
     [SerializeField] int StartMovieFlame;
     int StartMovieFlameCount = 0;
+
+    [Header("死亡アニメーションのフレーム数")]
+    [SerializeField] int DeadMovieFlame;
+    int DeadMovieFlameCnt = 0;
+    Vector3 DeadPlayerFirstCameraPos;
 
     void Start()
     {
@@ -55,7 +61,13 @@ public class CameraPos : MonoBehaviour
             case GAME_STATE.Game:
 
                 FollowObj();
+                DeadPlayerFirstCameraPos = transform.position;
                 break;
+
+            case GAME_STATE.DeadPlayer:
+                DeadPlayerUpdate();
+                break;
+
         }
     }
 
@@ -109,6 +121,26 @@ public class CameraPos : MonoBehaviour
         transform.position = new Vector3(MaxX /*+ ZurashiX*/,
             targetObj.transform.position.y + cameraPosY,
             transform.position.z);
+    }
+
+    void DeadPlayerUpdate()
+    {
+        DeadMovieFlameCnt++;
+
+        Vector3 GoPos = new Vector3(targetObj.transform.position.x,
+            targetObj.transform.position.y , - 3);
+
+        float NowWariai = Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, DeadMovieFlameCnt, DeadMovieFlame, 0.0f, 1.0f);
+
+        Vector3 NowPos = Vector3.Lerp(DeadPlayerFirstCameraPos, GoPos, NowWariai);
+
+        transform.position = NowPos;
+
+        if(DeadMovieFlameCnt >= DeadMovieFlame)
+        {
+            transform.position = GoPos;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
 
