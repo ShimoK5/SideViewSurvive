@@ -6,8 +6,8 @@ public class PlayerSacrifice : PlayerIF
 {
     public PlayerSacrifice(PlayerIF oldPlayer)
     {
-        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
+        if (Player.instance.GetAnim().Anim.AnimationName != "bear/throw")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/throw", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;

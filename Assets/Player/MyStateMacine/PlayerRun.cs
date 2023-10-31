@@ -8,8 +8,8 @@ public class PlayerRun : PlayerIF
 {
     public PlayerRun(PlayerIF oldPlayer)
     {
-        if (Player.instance.GetAnim().Anim.AnimationName != "run")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "run", true);
+        if (Player.instance.GetAnim().Anim.AnimationName != "normal/run")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/run", true);
         CopyPlayer(oldPlayer);
     }
 

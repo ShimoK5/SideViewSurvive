@@ -6,8 +6,8 @@ public class PlayerUmbrella : PlayerIF
 {
     public PlayerUmbrella(PlayerIF oldPlayer)
     {
-        if (Player.instance.GetAnim().Anim.AnimationName != "idle")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "idle", true);
+        if (Player.instance.GetAnim().Anim.AnimationName != "unbrella/unbrella_atteck")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "unbrella/unbrella_atteck", true);
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;

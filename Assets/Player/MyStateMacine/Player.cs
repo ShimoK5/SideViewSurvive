@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
             }
 
             //プレイヤーステート変更
-            PlayerStateIsDamage();
+            //PlayerStateIsDamage();
 #endif
             HitPoint = Mathf.Max(0, HitPoint - 1);
         }
@@ -304,6 +304,7 @@ public class Player : MonoBehaviour
 
     void PlayerStateIsDamage()
     {
+        //上書き可能なセルフステートを変更
         m_Player.NextPlayerState = PLAYER_STATE.DAMAGE;
     }
 
