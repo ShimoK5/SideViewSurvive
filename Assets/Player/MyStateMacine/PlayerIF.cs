@@ -33,7 +33,7 @@ public class PlayerIF : PawnIF
     public Vector2 SelfVel;         //自己速度
     public Vector2 OtherVel;        //外部速度
     public Vector2 AllVel;          //合算速度
-    protected bool JumpKeyDown = false; //ジャンプキーを押しているかどうか            
+    //protected bool JumpKeyDown = false; //ジャンプキーを押しているかどうか            
     static AfterImage AfterImageInstanse = new AfterImage();
 
     public bool ActionInvisible;
@@ -49,7 +49,7 @@ public class PlayerIF : PawnIF
         isGround = oldPlayer.isGround;
         SelfVel = oldPlayer.SelfVel;
         OtherVel = oldPlayer.OtherVel;
-        JumpKeyDown = oldPlayer.JumpKeyDown;
+        //JumpKeyDown = oldPlayer.JumpKeyDown;
         tf = oldPlayer.tf;
         Size = oldPlayer.Size;
     }
@@ -74,7 +74,7 @@ public class PlayerIF : PawnIF
         tf = Player.instance.GetComponent<Transform>();
         tf.transform.localEulerAngles = new Vector3(0, 90, 0);
         Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
-        JumpKeyDown = false;
+        //JumpKeyDown = false;
         ActionInvisible = false;
         //PlayerAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
@@ -107,7 +107,7 @@ public class PlayerIF : PawnIF
     protected void MoveX(float maxSpeed , float addSpeed)
     {
         //移動処理
-        if (Input.GetKey("d")) // キー入力判定
+        if (InputManager_FU.instanse.GetKey(Key.Right)) // キー入力判定
         {
             
             if (SelfVel.x <= maxSpeed)
@@ -115,7 +115,7 @@ public class PlayerIF : PawnIF
                 SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
             }
         }
-        if (Input.GetKey("a")) // キー入力判定
+        if (InputManager_FU.instanse.GetKey(Key.Left)) // キー入力判定
         {
             
             if (SelfVel.x >= -maxSpeed)
@@ -154,7 +154,7 @@ public class PlayerIF : PawnIF
     //ジャンプ
     protected void Jump()
     {
-        if (JumpKeyDown == true && isGround) // キー入力判定
+        if (InputManager_FU.instanse.GetKeyTrigger(Key.A) && isGround) // キー入力判定
         {
             //NextPlayerState = PLAYER_STATE.AIR;
             SelfVel.y = 20.0f * MultiplyNum;

@@ -96,7 +96,7 @@ public class ShowIcon : MonoBehaviour
 
         if(ActionNumber == 7)
         {
-            ActionNumber = 0;
+            ActionNumber = -1;
         }
 
         switch (RhythmManager.Instance.ActionArray[ActionNumber + 1])

@@ -15,10 +15,10 @@ public class PlayerStand : PlayerIF
 
     public override void CustumUpdate()
     {
-        if (Input.GetKeyDown(jumpKey)) // キー入力判定
-        {
-            JumpKeyDown = true;
-        }
+        //if (Input.GetKeyDown(jumpKey)) // キー入力判定
+        //{
+        //    JumpKeyDown = true;
+        //}
     }
 
     public override void CustumFixed()
@@ -40,7 +40,7 @@ public class PlayerStand : PlayerIF
         //速度反映
         MovePlayer();
         //フラグリセット
-        JumpKeyDown = false;
+        //JumpKeyDown = false;
         //共通更新
         FixedCommon();
     }
