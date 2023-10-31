@@ -239,9 +239,10 @@ public class Enemy : MonoBehaviour
         return m_Enemy;
     }
 
-    public void SetEnemyDeadVector(Vector2 Vel)
+    public void SetEnemyDeadData(Vector2 vel, bool deadCntFlag = true)
     {
-        m_Enemy.DeadVector = Vel.normalized;
+        m_Enemy.DeadVector = vel.normalized;
+        m_Enemy.DeadCntFlag = deadCntFlag;
     }
 
     public ENEMY_STATE GetEnemyState()
@@ -260,7 +261,7 @@ public class Enemy : MonoBehaviour
             other.GetComponent<Player>().HitEnemy(-PtoE_Vel);
             //EnemyDead化　＆　DeadVector編集
             SetOuterState(ENEMY_STATE.DEAD);
-            SetEnemyDeadVector(PtoE_Vel.normalized);
+            SetEnemyDeadData(PtoE_Vel.normalized,false);
 
         }
     }
