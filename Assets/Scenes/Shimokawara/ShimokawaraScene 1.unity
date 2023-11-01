@@ -6004,6 +6004,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9200012266430242413, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: initialSkinName
+      value: Emotion/normal2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af4f5bcd325702f42957814bae9f3b29, type: 3}
 --- !u!1001 &478669018415115491
@@ -6041,6 +6046,16 @@ PrefabInstance:
     - target: {fileID: 478669018269942166, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: DeadMovieFlame
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 478669018269942166, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: ZoomCamera
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478669018269942166, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: GoalMovieFlame
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 478669018269942167, guid: c9fe8fc461622fe48853b1bba11934a4,

@@ -24,7 +24,8 @@ public enum PLAYER_STATE
 
     DAMAGE,         //被弾
 
-    DEAD,
+    DEAD,           //死亡
+    GOAL,           //ゴール
 }
 
 public class Player : MonoBehaviour
@@ -40,7 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField] int InvisibleCoolTime;  //ダメージクールタイム（無敵時間）
     bool DamageInvincible = false;            //無敵かどうか
     int InvincibleFlameCount = 0;           //ダメージ時加算カウント
-
+    float GoalPosX = 0;                       //ゴールのX座標
     PlayerAnimSpine PlayerAnim;
 
     void Awake()
@@ -59,6 +60,8 @@ public class Player : MonoBehaviour
         m_Player.CustumStart();
 
         m_Player = new PlayerStand(m_Player);
+
+        GoalPosX = GameObject.Find("GoalObj").transform.position.x;
         //HitPoint = 200;
     }
 
@@ -85,8 +88,13 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        //シーンリロード処理
-        if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
+        //ゴール演出
+        if(transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
+        {
+            GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
+        }
+        //プレイヤー死亡演出
+        else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
             GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
             
@@ -97,14 +105,21 @@ public class Player : MonoBehaviour
             case GAME_STATE.Game:
                 FixedGame();
                 break;
+
             case GAME_STATE.DeadPlayer:
                 SetOuterState(PLAYER_STATE.DEAD);
                 CheckState();
                 m_Player.CustumFixed();
                 break;
 
-            case GAME_STATE.StartPlayerMotion:
             case GAME_STATE.EndPlayerMotion:
+                SetOuterState(PLAYER_STATE.GOAL);
+                CheckState();
+                m_Player.CustumFixed();
+                break;
+
+            case GAME_STATE.StartPlayerMotion:
+            
                 m_Player.CustumFixed();
                 break;
             default:
@@ -194,6 +209,10 @@ public class Player : MonoBehaviour
 
             case PLAYER_STATE.DEAD:
                 m_Player = new PlayerDead(m_Player);
+                break;
+
+            case PLAYER_STATE.GOAL:
+                m_Player = new PlayerGoal(m_Player);
                 break;
 
             case PLAYER_STATE.NONE:

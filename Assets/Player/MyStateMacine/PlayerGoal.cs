@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Spine.Unity;
 using Spine;
 
-public class PlayerDead : PlayerIF
+public class PlayerGoal : PlayerIF
 {
-    public PlayerDead(PlayerIF oldPlayer)
+    public PlayerGoal(PlayerIF oldPlayer)
     {
-        if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
+        if (isGround)
+        {
+            if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
+        }
+        else
+        {
+            if (Player.instance.GetAnim().Anim.AnimationName != "normal/jump")
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/jump", true);
+        }
+        
         CopyPlayer(oldPlayer);
         //横移動消し
         SelfVel.x = 0;
@@ -22,9 +32,9 @@ public class PlayerDead : PlayerIF
         //GymClothesSmall = Instantiate(GymClothesSmall, tf.transform.position, Quaternion.Euler(-90, tf.transform.eulerAngles.y - 90, 0));
         //GymClothesSmall.GetComponent<Umbrella>().InitSetPosition();
     }
-    ~PlayerDead()
+    ~PlayerGoal()
     {
-        
+
     }
 
 
@@ -41,15 +51,19 @@ public class PlayerDead : PlayerIF
 
     public override void CustumFixed()
     {
-        //ゴールアニメーション開始
-        if (Player.instance.GetAnim().Anim.AnimationName != "normal/walking")
-        {
-            TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/walking", true);
-            trackEntry.Complete += SceneChange;
-        }
-
         if (isGround)
         {
+            //カメラズーム開始
+            CameraPos.instance.ZoomCamera = true;
+
+            //ゴールアニメーション開始
+            if (Player.instance.GetAnim().Anim.AnimationName != "normal/walking")
+            {
+                TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/walking", true);
+                trackEntry.Complete += SceneChange;
+            }
+               
+
             //過去情報保存
             KeepOld();
             //勢い減少
@@ -97,10 +111,11 @@ public class PlayerDead : PlayerIF
     //状態遷移
     protected override void ChangeNextState()
     {
-        
+
 
     }
 
+    //　trackEntry.Completeに関数ポインターを渡す用
     public void SceneChange(TrackEntry trackEntry)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

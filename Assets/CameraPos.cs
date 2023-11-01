@@ -28,6 +28,13 @@ public class CameraPos : MonoBehaviour
     int DeadMovieFlameCnt = 0;
     Vector3 DeadPlayerFirstCameraPos;
 
+    [Header("ゴールアニメーションのカメラ近づきフレーム数")]
+    [SerializeField] int GoalMovieFlame;
+    int GoalMovieFlameCnt = 0;
+    Vector3 GoalPlayerFirstCameraPos;
+    public bool ZoomCamera = false;
+
+
     void Start()
     {
         Vector3 MinObj = GameObject.Find("StartObj").transform.position;
@@ -43,6 +50,8 @@ public class CameraPos : MonoBehaviour
 
         instance = this;
         //targetオブジェクトを取得
+
+        ZoomCamera = false;
 
         targetObj = GameObject.Find("Player");
         FollowObj();
@@ -61,11 +70,17 @@ public class CameraPos : MonoBehaviour
             case GAME_STATE.Game:
 
                 FollowObj();
+                //別ステートで使う座標保存
                 DeadPlayerFirstCameraPos = transform.position;
+                GoalPlayerFirstCameraPos = transform.position;
                 break;
 
             case GAME_STATE.DeadPlayer:
                 DeadPlayerUpdate();
+                break;
+
+            case GAME_STATE.EndPlayerMotion:
+                EndMovieUpdate();
                 break;
 
         }
@@ -139,7 +154,29 @@ public class CameraPos : MonoBehaviour
         if(DeadMovieFlameCnt >= DeadMovieFlame)
         {
             transform.position = GoPos;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    void EndMovieUpdate()
+    {
+        if(ZoomCamera)
+        {
+            GoalMovieFlameCnt++;
+
+            Vector3 GoPos = new Vector3(targetObj.transform.position.x,
+                targetObj.transform.position.y, -3);
+
+            float NowWariai = Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, GoalMovieFlameCnt, GoalMovieFlame, 0.0f, 1.0f);
+
+            Vector3 NowPos = Vector3.Lerp(GoalPlayerFirstCameraPos, GoPos, NowWariai);
+
+            transform.position = NowPos;
+
+            if (GoalMovieFlameCnt >= GoalMovieFlame)
+            {
+                transform.position = GoPos;
+            }
         }
     }
 }
