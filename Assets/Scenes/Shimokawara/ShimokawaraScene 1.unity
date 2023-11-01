@@ -6041,7 +6041,7 @@ PrefabInstance:
     - target: {fileID: 478669018269942166, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: DeadMovieFlame
-      value: 60
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 478669018269942167, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
