@@ -37,6 +37,8 @@ public class EnemyIF : PawnIF
     AfterImage AfterImageInstanse = new AfterImage();
     public Vector2 DeadVector;      //Dead時のベクトル
 
+    public bool DeadCntFlag = true;               //死亡時加算するかのフラグ（）
+
     //コピー関数
     //全ての変数をコピーする
     protected void CopyEnemy(EnemyIF oldEnemy)
@@ -51,6 +53,7 @@ public class EnemyIF : PawnIF
         tf = oldEnemy.tf;
         Size = oldEnemy.Size;
         DeadVector = oldEnemy.DeadVector;
+        DeadCntFlag = oldEnemy.DeadCntFlag;
     }
 
     //EnemyIF(EnemyIF oldEnemy)

@@ -11,8 +11,8 @@ public class PlayerAir : PlayerIF
 
     public PlayerAir(PlayerIF oldPlayer)
     {
-        if(Player.instance.GetAnim().Anim.AnimationName != "jump")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "jump", true);
+        if(Player.instance.GetAnim().Anim.AnimationName != "normal/jump")
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/jump", true);
 
         CopyPlayer(oldPlayer);
     }

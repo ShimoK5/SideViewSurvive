@@ -39,6 +39,9 @@ public class EnemyDead : EnemyIF
 
             Destroy(tf.gameObject);
 
+            //マネージャーに加算を送るフラグtrueなら
+            if(DeadCntFlag)
+                EnemyKillCountManager.Instance.DestroyCountUp();
 
         }
         ////過去情報保存

@@ -23,6 +23,9 @@ public enum PLAYER_STATE
     WHISTLE,        //笛
 
     DAMAGE,         //被弾
+
+    DEAD,           //死亡
+    GOAL,           //ゴール
 }
 
 public class Player : MonoBehaviour
@@ -38,7 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField] int InvisibleCoolTime;  //ダメージクールタイム（無敵時間）
     bool DamageInvincible = false;            //無敵かどうか
     int InvincibleFlameCount = 0;           //ダメージ時加算カウント
-
+    float GoalPosX = 0;                       //ゴールのX座標
     PlayerAnimSpine PlayerAnim;
 
     void Awake()
@@ -57,12 +60,15 @@ public class Player : MonoBehaviour
         m_Player.CustumStart();
 
         m_Player = new PlayerStand(m_Player);
+
+        GoalPosX = GameObject.Find("GoalObj").transform.position.x;
         //HitPoint = 200;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Temp = m_Player.PlayerState;
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
@@ -75,23 +81,46 @@ public class Player : MonoBehaviour
 
     void UpdateGame()
     {
-        Temp = m_Player.PlayerState;
+       
         m_Player.CustumUpdate();
-
-        //シーンリロード処理
-        if (HitPoint <= 0)
-        {
-            StartCoroutine("SceneChange");
-        }
     }
 
 
     void FixedUpdate()
     {
+        //ゴール演出
+        if(transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
+        {
+            GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
+        }
+        //プレイヤー死亡演出
+        else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
+        {
+            GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
+            
+        }
+
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
                 FixedGame();
+                break;
+
+            case GAME_STATE.DeadPlayer:
+                SetOuterState(PLAYER_STATE.DEAD);
+                CheckState();
+                m_Player.CustumFixed();
+                break;
+
+            case GAME_STATE.EndPlayerMotion:
+                SetOuterState(PLAYER_STATE.GOAL);
+                CheckState();
+                m_Player.CustumFixed();
+                break;
+
+            case GAME_STATE.StartPlayerMotion:
+            
+                m_Player.CustumFixed();
                 break;
             default:
                 break;
@@ -176,6 +205,14 @@ public class Player : MonoBehaviour
 
             case PLAYER_STATE.DAMAGE:
                 m_Player = new PlayerDamage(m_Player);
+                break;
+
+            case PLAYER_STATE.DEAD:
+                m_Player = new PlayerDead(m_Player);
+                break;
+
+            case PLAYER_STATE.GOAL:
+                m_Player = new PlayerGoal(m_Player);
                 break;
 
             case PLAYER_STATE.NONE:
@@ -298,12 +335,21 @@ public class Player : MonoBehaviour
             PlayerStateIsDamage();
 #endif
             HitPoint = Mathf.Max(0, HitPoint - 1);
+
+            //被ダメ演出呼び出し
+            if(HitPoint > 0)
+            {
+                GameObject Canvas = (GameObject)Resources.Load("DamageEffectCanvas");
+                Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+            }
+            
         }
 
     }
 
     void PlayerStateIsDamage()
     {
+        //上書き可能なセルフステートを変更
         m_Player.NextPlayerState = PLAYER_STATE.DAMAGE;
     }
 
