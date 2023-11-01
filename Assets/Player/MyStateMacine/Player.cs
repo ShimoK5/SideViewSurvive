@@ -335,6 +335,14 @@ public class Player : MonoBehaviour
             PlayerStateIsDamage();
 #endif
             HitPoint = Mathf.Max(0, HitPoint - 1);
+
+            //被ダメ演出呼び出し
+            if(HitPoint > 0)
+            {
+                GameObject Canvas = (GameObject)Resources.Load("DamageEffectCanvas");
+                Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+            }
+            
         }
 
     }
