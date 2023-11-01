@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AssetManager : MonoBehaviour
 {
-    public enum  ActionNumber               //アクション名
+    public enum  ActionName               //アクション名
     {
         Umbrella,     //体操着
         Recorder,       //リコーダー
@@ -34,7 +34,7 @@ public class AssetManager : MonoBehaviour
     public class ReserveAsset               //音鳴らすために予約をするクラス
     {
         public AssetTypeNumber AssetType;
-        public ActionNumber AssetNumber;
+        public ActionName AssetNumber;
     }
     [SerializeField] List<ReserveAsset>ReserveAssets = new List<ReserveAsset>();        //リスト化
 
@@ -55,10 +55,10 @@ public class AssetManager : MonoBehaviour
             AudioVolume = 0.03f;
         }
         //中身問題ないかの確認用
-        //AddMusicReserve(AssetTypeNumber.BGM, ActionNumber.AirCannon);
-        //AddMusicReserve(AssetTypeNumber.SE, ActionNumber.Bag);
-        //AddMusicReserve(AssetTypeNumber.SE, ActionNumber.Ruler);
-        //AddMusicReserve(AssetTypeNumber.BGM, ActionNumber.Sacrifice);
+        //AddMusicReserve(AssetTypeNumber.BGM, ActionName.AirCannon);
+        //AddMusicReserve(AssetTypeNumber.SE, ActionName.Bag);
+        //AddMusicReserve(AssetTypeNumber.SE, ActionName.Ruler);
+        //AddMusicReserve(AssetTypeNumber.BGM, ActionName.Sacrifice);
     }
 
     // Update is called once per frame
@@ -96,47 +96,47 @@ public class AssetManager : MonoBehaviour
             case AssetTypeNumber.SE:
                 switch(ReserveAssets[count].AssetNumber)
                 {
-                    case ActionNumber.Umbrella:
+                    case ActionName.Umbrella:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[0]);
                         break;
 
-                    case ActionNumber.Recorder:
+                    case ActionName.Recorder:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[1]);
                         break;
 
-                    case ActionNumber.Eraser:
+                    case ActionName.Eraser:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[2]);
                         break;
 
-                    case ActionNumber.Sacrifice:
+                    case ActionName.Sacrifice:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[3]);
                         break;
 
-                    case ActionNumber.AirCannon:
+                    case ActionName.AirCannon:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[4]);
                         break;
 
-                    case ActionNumber.Bag:
+                    case ActionName.Bag:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[5]);
                         break;
 
-                    case ActionNumber.Ruler:
+                    case ActionName.Ruler:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[6]);
                         break;
 
-                    case ActionNumber.Whistle:
+                    case ActionName.Whistle:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[7]);
                         break;
 
-                    case ActionNumber.None:
+                    case ActionName.None:
                         audioSource.volume = AudioVolume;
                         audioSource.PlayOneShot(SEAsset[8]);
                         break;
@@ -155,7 +155,7 @@ public class AssetManager : MonoBehaviour
         }
     }
 
-    public void AddMusicReserve(AssetTypeNumber type, ActionNumber number)
+    public void AddMusicReserve(AssetTypeNumber type, ActionName number)
     {
         ReserveAsset Temporary = new ReserveAsset();
         Temporary.AssetType = type;
@@ -163,40 +163,84 @@ public class AssetManager : MonoBehaviour
         ReserveAssets.Add(Temporary);
     }
 
-    public Sprite ReferenceSprite(ActionNumber Action)
+    public Sprite ReferenceSpriteBox(ActionName Action)
     {
         switch (Action)
         {
-            case ActionNumber.Umbrella:
+            case ActionName.Umbrella:
                 return SpriteAsset[0];
 
-            case ActionNumber.Recorder:
+            case ActionName.Recorder:
                 return SpriteAsset[1];
 
-            case ActionNumber.Eraser:
+            case ActionName.Eraser:
                 return SpriteAsset[2];
 
-            case ActionNumber.Sacrifice:
+            case ActionName.Sacrifice:
                 return SpriteAsset[3];
 
-            case ActionNumber.AirCannon:
+            case ActionName.AirCannon:
                 return SpriteAsset[4];
 
-            case ActionNumber.Bag:
+            case ActionName.Bag:
                 return SpriteAsset[5];
 
-            case ActionNumber.Ruler:
+            case ActionName.Ruler:
                 return SpriteAsset[6];
 
-            case ActionNumber.Whistle:
+            case ActionName.Whistle:
                 return SpriteAsset[7];
 
-            case ActionNumber.None:
+            case ActionName.None:
                 return SpriteAsset[8];
 
             default:
                 return SpriteAsset[8];
         }
+    }
+
+    public Sprite ReferenceIcon(ActionName Action)
+    {
+        if(SpriteAsset.Length > 9)
+        {
+            switch(Action)
+            {
+                case ActionName.Umbrella:
+                    return SpriteAsset[9];
+
+                case ActionName.Recorder:
+                    return SpriteAsset[10];
+
+                case ActionName.Eraser:
+                    return SpriteAsset[11];
+
+                case ActionName.Sacrifice:
+                    return SpriteAsset[12];
+
+                case ActionName.AirCannon:
+                    return SpriteAsset[13];
+
+                case ActionName.Bag:
+                    return SpriteAsset[14];
+
+                case ActionName.Ruler:
+                    return SpriteAsset[15];
+
+                case ActionName.Whistle:
+                    return SpriteAsset[16];
+
+                case ActionName.None:
+                    return SpriteAsset[8];
+
+                default:
+                    return SpriteAsset[8];
+            }
+        }
+        else
+        {
+            return SpriteAsset[8];
+        }
+        
     }
 }
 

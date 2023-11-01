@@ -10,16 +10,16 @@ public class MoveHand : MonoBehaviour
     [SerializeField] private Vector3 HandPosition = new Vector3(50.0f, -82.0f, 0.0f);       //ハンドの初期位置
     [SerializeField] private float MoveSpeed = 0.1f;                                        //移動スピード
     [SerializeField] private RectTransform Icon_Transform = null;                           //アイコンの位置、話したときに戻す用
-    [SerializeField] private bool DragJudge = false;
-    [SerializeField] private bool DragAndDrop = false;                                 //アイコンを掴めるかどうかの確認
-    [SerializeField] private GameObject Catch_Icon = null;                                  //アイコン保管用（多分消せる）
+    [SerializeField] private bool DragJudge = false;                                        //アイコンを掴めるかどうかの確認
+    [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか 
+    [SerializeField] public GameObject Catch_Icon = null;                                  //アイコン保管用（多分消せる）
     [SerializeField] private Vector3 Catch_IconPosition = Vector3.zero;                     //移動する際に使用する位置座標（後で変数にして削除予定）
-    public static MoveHand instance;
-    [SerializeField] public GameObject[] NoteBox = new GameObject[8];
-    [SerializeField] int FlameCount = 0;
+    public static MoveHand instance;                                                        //ノートボックスを格納するためのインスタンス化
+    [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
+    [SerializeField] int FlameCount = 0;                                                    //
     [SerializeField] int NoteNum = 0;
     [SerializeField] bool NoteCollision = false;
-    [SerializeField] public Sprite[] NoteSprite = new Sprite[15];
+    [SerializeField] private MovieChange Movie = null;
 
     // Start is called before the first frame update
     void Awake()
@@ -45,6 +45,7 @@ public class MoveHand : MonoBehaviour
         {
             DragJudge = true;
             Catch_Icon = collision.gameObject;
+            ChangeMovie(Catch_Icon.name);
             Catch_IconPosition = Catch_Icon.GetComponent<RectTransform>().localPosition;
             if (FlameCount % 5 == 0)
             {
@@ -207,6 +208,11 @@ public class MoveHand : MonoBehaviour
                 CloneIconBox.transform.SetSiblingIndex(3);
                 CloneIconBox.name = Catch_Icon.name;
             }
+            else if (Input.GetKeyDown("joystick button 0") && NoteCollision == true)
+            {
+                NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
+                Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.None;
+            }
         }
         else if (DragAndDrop == true)
         {
@@ -215,68 +221,53 @@ public class MoveHand : MonoBehaviour
                 switch (Catch_Icon.GetComponent<Image>().sprite.name)
                 {
                     case ("Umbrella"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[0];
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Umbrella);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.Umbrella;
                         break;
 
                     case ("Quaver"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[1];
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Recorder);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.Recorder;
                         break;
 
                     case ("Eraser"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[2];
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Eraser);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.Eraser;
                         break;
 
                     case ("Sacrifice"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[3];
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Sacrifice);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.Sacrifice;
                         break;
 
                     case ("AirCannon"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[4];
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.AirCannon);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.AirCannon;
                         break;
 
                     case ("Bag"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[5];
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Bag);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.Bag;
                         break;
 
                     case ("Ruler"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[6];
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Ruler);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.Ruler;
                         break;
 
                     case ("Whistle"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[7];
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Whistle);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.Whistle;
                         break;
 
-                    case ("8"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[8];
-                        Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.None;
-                        break;
-
-                    case ("9"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[9];
-                        Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.None;
-                        break;
-
-                    case ("10"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[10];
-                        Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.None;
-                        break;
-
-                    case ("11"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[11];
+                    case ("None"):
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
                         Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.None;
                         break;
 
                     default:
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[11];
-                        //Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.None;
+                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
+                        Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.None;
                         break;
 
                 }
@@ -288,8 +279,50 @@ public class MoveHand : MonoBehaviour
             }
             else if (Input.GetKeyDown("joystick button 0") && NoteCollision == true)
             {
-                NoteBox[NoteNum].GetComponent<Image>().sprite = NoteSprite[11];
+                NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
+                Copy_RhythmM.Instance.ActionArray[NoteNum] = Copy_RhythmM.RhythmAction.None;
             }
+        }
+    }
+
+    void ChangeMovie(string Name)
+    {
+        switch(Name)
+        {
+            case ("0"):
+                Movie.Change(RhythmManager.RhythmAction.Umbrella);
+                break;
+
+            case ("1"):
+                Movie.Change(RhythmManager.RhythmAction.Recorder);
+                break;
+
+            case ("2"):
+                Movie.Change(RhythmManager.RhythmAction.Eraser);
+                break;
+
+            case ("3"):
+                Movie.Change(RhythmManager.RhythmAction.Sacrifice);
+                break;
+
+            case ("4"):
+                Movie.Change(RhythmManager.RhythmAction.AirCannon);
+                break;
+
+            case ("5"):
+                Movie.Change(RhythmManager.RhythmAction.Bag);
+                break;
+
+            case ("6"):
+                Movie.Change(RhythmManager.RhythmAction.Ruler);
+                break;
+
+            case ("7"):
+                Movie.Change(RhythmManager.RhythmAction.Whistle);
+                break;
+
+            default:
+                break;
         }
     }
 }
