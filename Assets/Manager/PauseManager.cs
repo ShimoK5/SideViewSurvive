@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     enum PAUSE_CHOOSE
@@ -146,9 +146,11 @@ public class PauseManager : MonoBehaviour
             switch (PauseChoose)
             {
                 case (int)PAUSE_CHOOSE.SCREEN_SET:
+                    SceneManager.LoadScene("SetScene");
                     break;
 
                 case (int)PAUSE_CHOOSE.BACK_TITLE:
+                    SceneManager.LoadScene("Title");
                     break;
 
                 case (int)PAUSE_CHOOSE.CLOSE_PAUUSE:
