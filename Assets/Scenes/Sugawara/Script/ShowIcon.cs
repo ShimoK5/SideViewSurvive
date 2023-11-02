@@ -7,15 +7,15 @@ public class ShowIcon : MonoBehaviour
 {
     [SerializeField] Sprite[] IconSprite = new Sprite[13];
     [SerializeField] GameObject NextIcon = null;
-    [SerializeField] GameObject NowIcon = null;
+    GameObject NowIcon = null;
     int FCnt = 0;
     bool FirstAction = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        NowIcon = this.transform.Find("NowAction").gameObject;
-        NextIcon = this.transform.Find("NextAction").gameObject;
+        //NowIcon = this.transform.Find("NowAction").gameObject;
+        NextIcon = this.transform.Find("NowAction").gameObject;
         FCnt = 0;
         FirstAction = false;
     }
@@ -46,12 +46,20 @@ public class ShowIcon : MonoBehaviour
 
     void ReferenceAction(int ActionNumber)
     {
-        switch(RhythmManager.Instance.ActionArray[ActionNumber])
+        //NowAction(ActionNumber);
+
+        NextAction(ActionNumber);
+
+    }
+
+    void NowAction(int ActionNumber)
+    {
+        switch (RhythmManager.Instance.ActionArray[ActionNumber])
         {
             case RhythmManager.RhythmAction.Umbrella:
-                
+
                 NowIcon.GetComponent<Image>().sprite = IconSprite[0];
-                    break;
+                break;
 
             case RhythmManager.RhythmAction.Recorder:
 
@@ -93,12 +101,14 @@ public class ShowIcon : MonoBehaviour
                 NowIcon.GetComponent<Image>().sprite = IconSprite[9];
                 break;
         }
+    }
 
-        if(ActionNumber == 7)
+    void NextAction(int ActionNumber)
+    {
+        if (ActionNumber == 7)
         {
             ActionNumber = -1;
         }
-
         switch (RhythmManager.Instance.ActionArray[ActionNumber + 1])
         {
             case RhythmManager.RhythmAction.Umbrella:

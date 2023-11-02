@@ -9,30 +9,30 @@ public class MoveHand : MonoBehaviour
 {
     [SerializeField] private Vector3 HandPosition = new Vector3(50.0f, -82.0f, 0.0f);       //ハンドの初期位置
     [SerializeField] private float MoveSpeed = 0.1f;                                        //移動スピード
-    [SerializeField] private RectTransform Icon_Transform = null;                           //アイコンの位置、話したときに戻す用
+    //[SerializeField] private RectTransform Icon_Transform = null;                           //アイコンの位置、話したときに戻す用
     [SerializeField] private bool DragJudge = false;                                        //アイコンを掴めるかどうかの確認
     [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか 
     [SerializeField] public GameObject Catch_Icon = null;                                  //アイコン保管用（多分消せる）
     [SerializeField] private Vector3 Catch_IconPosition = Vector3.zero;                     //移動する際に使用する位置座標（後で変数にして削除予定）
     public static MoveHand instance;                                                        //ノートボックスを格納するためのインスタンス化
     [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
-    [SerializeField] int FlameCount = 0;                                                    //
-    [SerializeField] int NoteNum = 0;
-    [SerializeField] bool NoteCollision = false;
-    [SerializeField] private MovieChange Movie = null;
-    [SerializeField] bool ChangeScene = false;
+    [SerializeField] int FlameCount = 0;                                                    //フレーム確認
+    [SerializeField] int NoteNum = 0;                                                       //ノート数確認用
+    [SerializeField] bool NoteCollision = false;                                            //ノートにぶつかっているか確認用
+    [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用
+    [SerializeField] bool ChangeScene = false;                                              //シーンチェンジ用
 
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
+        instance = this;                                                                    //インスタンス化
     }
 
     void Start()
     {
         HandPosition = new Vector3(50.0f, -82.0f, 0.0f);
-        Icon_Transform = this.GetComponent<RectTransform>();
-        Icon_Transform.TransformPoint(HandPosition);
+        RectTransform HandTransform = this.GetComponent<RectTransform>();
+        HandTransform.TransformPoint(HandPosition);
         DragAndDrop = false;
         FlameCount = 0;
         NoteNum = 0;
@@ -41,7 +41,6 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("OnCollisionEnter2D: " + collision.gameObject.name);      //確認用　あとで削除予定
         if (DragAndDrop == false && collision.gameObject.tag == "Icon")
         {
             DragJudge = true;
@@ -127,8 +126,8 @@ public class MoveHand : MonoBehaviour
         {
             DoCarryIcon();
             MoveChange();
-            //HandPosition = new Vector3(HandPosition.x + MoveSpeed * Input.GetAxis("Vertical"), HandPosition.y + MoveSpeed * Input.GetAxis("Horizontal"), 0.0f);
-            Icon_Transform.localPosition = HandPosition;
+            RectTransform HandTransform = this.GetComponent<RectTransform>();
+            HandTransform.localPosition = HandPosition;
             if (DragAndDrop == true)
             {
                 Catch_Icon.GetComponent<RectTransform>().localPosition = Catch_IconPosition;
@@ -143,7 +142,7 @@ public class MoveHand : MonoBehaviour
         }
 
 
-        if (ChangeScene == true && Input.GetKeyDown("joystick button 1"))
+        if (ChangeScene == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
         {
             SceneManager.LoadScene("ShimokawaraScene 1");
             RhythmManager.Instance.FCnt = 0;
@@ -156,35 +155,57 @@ public class MoveHand : MonoBehaviour
         if (Input.GetAxis("Horizontal") > 0)
         {
             HandPosition.x = HandPosition.x + MoveSpeed;
+            if (HandPosition.x > 400.0f)
+            {
+                HandPosition.x = 400.0f;
+            }
             if (DragAndDrop == true)
             {
                 Catch_IconPosition.x += MoveSpeed;
+                
             }
 
         }
         else if (Input.GetAxis("Horizontal") < 0)
         {
             HandPosition.x = HandPosition.x + MoveSpeed * -1.0f;
+            if (HandPosition.x < -400.0f)
+            {
+                HandPosition.x = -400.0f;
+            }
+
             if (DragAndDrop == true)
             {
                 Catch_IconPosition.x += MoveSpeed * -1.0f;
+               
             }
         }
 
         if (Input.GetAxis("Vertical") > 0)
         {
             HandPosition.y = HandPosition.y + MoveSpeed;
+            if (HandPosition.y > 320.0f)
+            {
+                HandPosition.y = 320.0f;
+            }
+
             if (DragAndDrop == true)
             {
                 Catch_IconPosition.y += MoveSpeed;
+               
             }
         }
         else if (Input.GetAxis("Vertical") < 0)
         {
             HandPosition.y = HandPosition.y + MoveSpeed * -1.0f;
+            if (HandPosition.y < -320.0f)
+            {
+                HandPosition.y = -320.0f;
+            }
             if (DragAndDrop == true)
             {
                 Catch_IconPosition.y += MoveSpeed * -1.0f;
+                
             }
         }
     }
@@ -193,7 +214,7 @@ public class MoveHand : MonoBehaviour
     {
         if (DragAndDrop == false)
         {
-            if (Input.GetKeyDown("joystick button 1") && DragJudge == true)
+            if ((Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space) )&& DragJudge == true)
             {
                 DragAndDrop = true;
                 GameObject CloneIconBox = null;
@@ -202,7 +223,7 @@ public class MoveHand : MonoBehaviour
                 CloneIconBox.transform.SetSiblingIndex(3);
                 CloneIconBox.name = Catch_Icon.name;
             }
-            else if (Input.GetKeyDown("joystick button 0") && NoteCollision == true)
+            else if ((Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Backspace)) && NoteCollision == true)
             {
                 NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
                 RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
@@ -210,7 +231,7 @@ public class MoveHand : MonoBehaviour
         }
         else if (DragAndDrop == true)
         {
-            if (Input.GetKeyDown("joystick button 1") && NoteCollision == true)
+            if ((Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)) && NoteCollision == true)
             {
                 switch (Catch_Icon.GetComponent<Image>().sprite.name)
                 {
@@ -266,12 +287,12 @@ public class MoveHand : MonoBehaviour
 
                 }
             }
-            else if (Input.GetKeyDown("joystick button 1") && NoteCollision == false)
+            else if ((Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)) && NoteCollision == false)
             {
                 DragAndDrop = false;
                 Destroy(Catch_Icon);
             }
-            else if (Input.GetKeyDown("joystick button 0") && NoteCollision == true)
+            else if ((Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Backspace)) && NoteCollision == true)
             {
                 NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
                 RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
