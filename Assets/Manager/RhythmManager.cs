@@ -53,6 +53,10 @@ public class RhythmManager : MonoBehaviour
             case GAME_STATE.Game:
                 FixedGame();
                 break;
+
+            case GAME_STATE.DeadPlayer:
+                FCnt = 0;
+                break;
             default:
                 if(SceneManager.GetActiveScene().name == "SetScene")
                 {
