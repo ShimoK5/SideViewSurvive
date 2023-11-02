@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Sugawara/SetScene.unity
+    guid: ccb77658fe880f046b2f0a1af2f323c6
+  - enabled: 1
     path: Assets/Scenes/Shimokawara/ShimokawaraScene 1.unity
     guid: 964425755c74a8d4ab44044f0334f67f
+  - enabled: 1
+    path: Assets/Scenes/Fukui/Result/Result.unity
+    guid: c52c225bd6ac3aa4a94524f59e6077d1
   m_configObjects: {}
