@@ -117,6 +117,12 @@ public class MoveHand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ChangeScene == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
+        {
+            SceneManager.LoadScene("ShimokawaraScene 1");
+            RhythmManager.Instance.FCnt = 0;
+        }
+
 
         if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
         {
@@ -142,11 +148,7 @@ public class MoveHand : MonoBehaviour
         }
 
 
-        if (ChangeScene == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
-        {
-            SceneManager.LoadScene("ShimokawaraScene 1");
-            RhythmManager.Instance.FCnt = 0;
-        }
+        
 
     }
 

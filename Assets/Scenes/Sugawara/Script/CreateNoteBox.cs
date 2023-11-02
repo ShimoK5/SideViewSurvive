@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class CreateNoteBox : MonoBehaviour
@@ -21,6 +22,7 @@ public class CreateNoteBox : MonoBehaviour
             CloneNote = Instantiate(PrefabNote, PrefabPosition, Quaternion.identity);
             CloneNote.name = "Note" + (NoteNum + 1);
             CloneNote.tag = "Note";
+            CloneNote.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceBox(RhythmManager.Instance.ActionArray[NoteNum]);
             CloneNote.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
             CloneNote.transform.SetSiblingIndex(HierarchyNumber);
             MoveHand.instance.NoteBox[NoteNum] = CloneNote;

@@ -199,6 +199,42 @@ public class AssetManager : MonoBehaviour
         }
     }
 
+    public Sprite ReferenceBox(RhythmManager.RhythmAction Action)
+    {
+        switch (Action)
+        {
+            case RhythmManager.RhythmAction.Umbrella:
+                return SpriteAsset[0];
+
+            case RhythmManager.RhythmAction.Recorder:
+                return SpriteAsset[1];
+
+            case RhythmManager.RhythmAction.Eraser:
+                return SpriteAsset[2];
+
+            case RhythmManager.RhythmAction.Sacrifice:
+                return SpriteAsset[3];
+
+            case RhythmManager.RhythmAction.AirCannon:
+                return SpriteAsset[4];
+
+            case RhythmManager.RhythmAction.Bag:
+                return SpriteAsset[5];
+
+            case RhythmManager.RhythmAction.Ruler:
+                return SpriteAsset[6];
+
+            case RhythmManager.RhythmAction.Whistle:
+                return SpriteAsset[7];
+
+            case RhythmManager.RhythmAction.None:
+                return SpriteAsset[8];
+
+            default:
+                return SpriteAsset[8];
+        }
+    }
+
     public Sprite ReferenceIcon(ActionName Action)
     {
         if(SpriteAsset.Length > 9)
