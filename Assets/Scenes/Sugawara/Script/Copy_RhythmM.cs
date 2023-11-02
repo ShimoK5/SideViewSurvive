@@ -48,34 +48,34 @@ public class Copy_RhythmM : MonoBehaviour
         {
             //アクションを指示する
             int ActionIndex = FCnt / BeatTempo - 1;
-            switch (ActionArray[ActionIndex])
-            {
-                case RhythmAction.Umbrella:
-                    //Player.instance.SetOuterState(PLAYER_STATE.GYM_CLOTHES);
-                    break;
+            //switch (ActionArray[ActionIndex])
+            //{
+            //    case RhythmAction.Umbrella:
+            //        //Player.instance.SetOuterState(PLAYER_STATE.GYM_CLOTHES);
+            //        break;
 
-                case RhythmAction.Recorder:
-                    //Player.instance.SetOuterState(PLAYER_STATE.RECORDER);
-                    break;
+            //    case RhythmAction.Recorder:
+            //        //Player.instance.SetOuterState(PLAYER_STATE.RECORDER);
+            //        break;
 
-                case RhythmAction.Eraser:
-                    //Player.instance.SetOuterState(PLAYER_STATE.ERASER);
-                    break;
+            //    case RhythmAction.Eraser:
+            //        //Player.instance.SetOuterState(PLAYER_STATE.ERASER);
+            //        break;
                 
-                case RhythmAction.Sacrifice:
-                   // Player.instance.SetOuterState(PLAYER_STATE.SACRIFICE);
-                    break;
+            //    case RhythmAction.Sacrifice:
+            //       // Player.instance.SetOuterState(PLAYER_STATE.SACRIFICE);
+            //        break;
 
 
-                case RhythmAction.None:
-                    ChangeStateDefault();
+            //    case RhythmAction.None:
+            //        ChangeStateDefault();
 
 
-                    break;
+            //        break;
 
-                default:
-                    break;
-            }
+            //    default:
+            //        break;
+            //}
 
         }
 

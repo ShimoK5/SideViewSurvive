@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RhythmManager : MonoBehaviour
 {
@@ -25,10 +26,23 @@ public class RhythmManager : MonoBehaviour
     public int FCnt = 0;//フレームカウント
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        //ActionArray = new RhythmAction[BeatNum];
+    }
+
     void Start()
     {
-        Instance = this;
-        //ActionArray = new RhythmAction[BeatNum];
+        DontDestroyOnLoad(gameObject);      //他シーン行ったときに削除されないように
+        FCnt = 0;
     }
 
     // Update is called once per frame
@@ -40,6 +54,10 @@ public class RhythmManager : MonoBehaviour
                 FixedGame();
                 break;
             default:
+                if(SceneManager.GetActiveScene().name == "SetScene")
+                {
+                    FixSet();
+                }
                 break;
         }
     }
@@ -134,6 +152,25 @@ public class RhythmManager : MonoBehaviour
             }
 
         }
+
+        //最終拍でフレームリセット
+        if (FCnt >= BeatNum * BeatTempo)
+        {
+            FCnt = 0;
+        }
+    }
+
+    void FixSet()
+    {
+        //フレームカウント加算
+        FCnt++;
+
+        //周期の直前にステートリセット
+        //if (FCnt % BeatTempo == BeatTempo - 1)
+        //{
+        //    ChangeStateDefault();
+        //}
+
 
         //最終拍でフレームリセット
         if (FCnt >= BeatNum * BeatTempo)
