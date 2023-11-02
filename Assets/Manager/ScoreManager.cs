@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour
     {
         m_Time = 0;
         m_Score = 0;
-        Multiply = 0;
+        Multiply = 1;
 
         //MultyPly加算
         for (int i = 0; i < RhythmManager.Instance.ActionArray.Length; i++)
