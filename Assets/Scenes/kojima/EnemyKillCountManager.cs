@@ -63,4 +63,10 @@ public class EnemyKillCountManager : MonoBehaviour
         DestroyEnemy += 1;
         Debug.Log(DestroyEnemy);
     }
+
+    public int GetDestroyEnemy()
+    {
+        return DestroyEnemy;
+    }
+
 }
