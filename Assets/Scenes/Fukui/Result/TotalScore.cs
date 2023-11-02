@@ -12,7 +12,7 @@ public class TotalScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // score = クラス名.getscore();
+        score = ScoreManager.instance.m_Score;
 
         ScoreText.text = string.Format("スコア:{0}", score);
     }

@@ -13,7 +13,7 @@ public class ResultKillCount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // killcount = クラス名.getkillcount();
+        killcount = EnemyKillCountManager.Instance.GetDestroyEnemy();
 
         KillCountText.text = string.Format("倒した数:{0}", killcount);
     }

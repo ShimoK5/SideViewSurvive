@@ -118,7 +118,7 @@ public class PlayerGoal : PlayerIF
     //　trackEntry.Completeに関数ポインターを渡す用
     public void SceneChange(TrackEntry trackEntry)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Result");
         Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
     }
 
