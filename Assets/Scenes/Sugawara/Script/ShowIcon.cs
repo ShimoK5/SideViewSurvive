@@ -30,7 +30,7 @@ public class ShowIcon : MonoBehaviour
             if(FirstAction == false)
             {
                 FirstAction = true;
-                NowIcon.GetComponent<Image>().sprite = IconSprite[8];
+                //NowIcon.GetComponent<Image>().sprite = IconSprite[8];
             }
             else
             {
