@@ -146,10 +146,12 @@ public class PauseManager : MonoBehaviour
             switch (PauseChoose)
             {
                 case (int)PAUSE_CHOOSE.SCREEN_SET:
+                    Time.timeScale = 1.0f;
                     SceneManager.LoadScene("SetScene");
                     break;
 
                 case (int)PAUSE_CHOOSE.BACK_TITLE:
+                    Time.timeScale = 1.0f;
                     SceneManager.LoadScene("Title");
                     break;
 

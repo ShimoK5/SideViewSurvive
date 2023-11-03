@@ -58,7 +58,7 @@ public class TitleStateManager : MonoBehaviour
                 WaitCnt++;
                 if (WaitCnt == WAIT_MAX_CNT)
                 {
-                    SceneManager.LoadScene("SetScene");
+                    SceneChangeManager.instance.SceneTransition("01_Movie");
                 }
                 break;
         }

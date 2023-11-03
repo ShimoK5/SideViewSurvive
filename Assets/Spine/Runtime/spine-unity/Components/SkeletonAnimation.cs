@@ -122,7 +122,7 @@ namespace Spine.Unity {
 					TrackEntry entry = state.GetCurrent(0);
 
 					//•¶Žš—ñŽæ“¾—p
-					Debug.Log(_animationName);
+					//Debug.Log(_animationName);
 					
 					
 					return entry == null ? null : entry.Animation.Name;
