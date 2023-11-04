@@ -28,7 +28,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] int AnimWaitFlame;
     int PauseStateCount;        //ポーズ画面でのカウント
 
-    float PauseBackGroundWidth;
+    float PauseBackGroundWidth; //通常の背景の横幅
 
     public static PauseManager instanse;
     public GameObject PauseCanvas;      //ポーズキャンバス
@@ -52,14 +52,24 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(SceneChangeManager.instance.isFade)
+        {
+            return;
+        }
+
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
                 //Pause入力あれば
                 if (InputManager_U.instanse.GetKeyTrigger(Key.Start))
                 {
+                    //ゲームステート変更
                     GameStateManager.instance.GameState = GAME_STATE.Pause;
+                    //タイムスケール変更
+                    Time.timeScale = 0f;
+                    //ポーズステート変更
                     PauseState = PAUSE_STATE.START;
+                    //選択物初期化
                     PauseChoose = 0;
                 }
                 break;
@@ -69,6 +79,7 @@ public class PauseManager : MonoBehaviour
                     InputManager_U.instanse.GetKeyTrigger(Key.A))
                 {
                     //GameStateManager.instance.GameState = GAME_STATE.Game;
+                    //ポーズステート変更
                     PauseState = PAUSE_STATE.END;
                     
                 }
@@ -82,11 +93,11 @@ public class PauseManager : MonoBehaviour
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
-                Time.timeScale = 1f;
+                
                 FixedGame();
                 break;
             case GAME_STATE.Pause:
-                Time.timeScale = 0f;
+                
                 FixedPause();
                 break;
             default:
@@ -97,6 +108,7 @@ public class PauseManager : MonoBehaviour
     }
     void FixedGame()
     {
+        Time.timeScale = 1f;
         //ポーズ画面非表示
         PauseCanvas.SetActive(false);
     }
@@ -147,12 +159,13 @@ public class PauseManager : MonoBehaviour
             {
                 case (int)PAUSE_CHOOSE.SCREEN_SET:
                     Time.timeScale = 1.0f;
-                    SceneManager.LoadScene("SetScene");
+                    //SceneManager.LoadScene("SetScene");
+                    SceneChangeManager.instance.SceneTransition("SetScene");
                     break;
 
                 case (int)PAUSE_CHOOSE.BACK_TITLE:
                     Time.timeScale = 1.0f;
-                    SceneManager.LoadScene("Title");
+                    SceneChangeManager.instance.SceneTransition("Title");
                     break;
 
                 case (int)PAUSE_CHOOSE.CLOSE_PAUUSE:

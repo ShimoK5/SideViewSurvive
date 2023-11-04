@@ -103,7 +103,7 @@ public class PlayerDead : PlayerIF
 
     public void SceneChange(TrackEntry trackEntry)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneChangeManager.instance.SceneTransition(SceneManager.GetActiveScene().name);
         Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
     }
 
