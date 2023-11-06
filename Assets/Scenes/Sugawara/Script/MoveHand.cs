@@ -127,7 +127,8 @@ public class MoveHand : MonoBehaviour
     {
         if (ChangeScene == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
         {
-            SceneManager.LoadScene("ShimokawaraScene 1");
+            SceneChangeManager.instance.SceneTransition("ShimokawaraScene 1");
+            //SceneManager.LoadScene("ShimokawaraScene 1");
             RhythmManager.Instance.FCnt = 0;
         }
 
