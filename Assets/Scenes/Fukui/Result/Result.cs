@@ -16,7 +16,8 @@ public class Result : MonoBehaviour
     {
         if (Input.GetKeyDown("space") /*|| Input.GetButtonDown("Action1")*/) //スペースキー、Aボタン
         {
-            SceneManager.LoadScene("SetScene");
+            //SceneManager.LoadScene("SetScene");
+            SceneChangeManager.instance.SceneTransition("SetScene");
         }
     }
 }
