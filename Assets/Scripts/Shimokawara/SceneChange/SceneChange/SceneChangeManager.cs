@@ -6,15 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class SceneChangeManager : MonoBehaviour
 {
+    public enum TransitionType {
+    Black,
+    Obj
+    }
+
+
     public static SceneChangeManager instance;
 
     public bool isFade;
 
-    string sceneName;
+    string SceneName;
 
-    Animator animator;
+    Animator m_Animator;
 
-    [SerializeField] float waitTime;
+    TransitionType NowTransitionType = TransitionType.Black;
+
+    const float DEFAULT_WAIT_TIME = 0.5f;
+    float NowWaitTime = 0.0f;
 
     private void Awake()
     {
@@ -28,7 +37,7 @@ public class SceneChangeManager : MonoBehaviour
            Destroy(this.gameObject);
        }
 
-        animator = this.GetComponent<Animator>();
+        m_Animator = this.GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -37,19 +46,38 @@ public class SceneChangeManager : MonoBehaviour
         
     }
 
-    public void SceneTransition(string scenename)
+    public void SceneTransition(string scenename, float waitTime = DEFAULT_WAIT_TIME, TransitionType tt = TransitionType.Obj)
     {
+        //フェード中じゃなければ
         if (!isFade)
         {
-            sceneName = scenename;
+            //シーンネーム保存
+            SceneName = scenename;
+            //待ち時間保存
+            NowWaitTime = waitTime;
+            //遷移タイプ保存
+            NowTransitionType = tt;
+            //フラグオン
             isFade = true;
-            animator.Play("FadeIn");
+            //タイプによってトランジション変更
+            switch (NowTransitionType)
+            {
+                case TransitionType.Black:
+                    m_Animator.Play("FadeIn");
+                    break;
+                case TransitionType.Obj:
+                    
+                    m_Animator.Play("TransitionIn");
+                    break;
+            }
+
+            
         }
     }
 
     void LoadScene()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(SceneName);
         StartCoroutine(nameof(Wait));
 
     }
@@ -61,7 +89,16 @@ public class SceneChangeManager : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(waitTime);
-        animator.Play("FadeOut");
+        yield return new WaitForSeconds(NowWaitTime);
+        switch (NowTransitionType)
+        {
+            case TransitionType.Black:
+                m_Animator.Play("FadeOut");
+                
+                break;
+            case TransitionType.Obj:
+                m_Animator.Play("TransitionOut");
+                break;
+        }
     }
 }

@@ -23,7 +23,7 @@ public class CameraPos : MonoBehaviour
     [SerializeField] int StartMovieFlame;
     int StartMovieFlameCount = 0;
 
-    [Header("死亡アニメーションのフレーム数")]
+    [Header("死亡アニメーションのカメラ近づきフレーム数")]
     [SerializeField] int DeadMovieFlame;
     int DeadMovieFlameCnt = 0;
     Vector3 DeadPlayerFirstCameraPos;
@@ -128,6 +128,8 @@ public class CameraPos : MonoBehaviour
         {
             GameStateManager.instance.GameState = GAME_STATE.Game;
             transform.position = new Vector3(MinX, transform.position.y, transform.position.z);
+            //スタート演出
+
         }
     }
 
