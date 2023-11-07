@@ -35,7 +35,7 @@ public class PauseManager : MonoBehaviour
     public GameObject PauseBackGround;  //ポーズ背景
     public GameObject[] ButtonArray = new  GameObject [(int)PAUSE_CHOOSE.PAUSE_STATE_MAX];//ボタン
     public GameObject Flame;    //枠
-   
+    public BlurParam BlurCanvas;        //ぼかしキャンバス
 
     // Start is called before the first frame update
     void Awake()
@@ -222,5 +222,8 @@ public class PauseManager : MonoBehaviour
             ButtonArray[i].GetComponent<Image>().color = new Color(1, 1, 1, Parm);
         }
         Flame.GetComponent<Image>().color = new Color(1, 1, 1, Parm);
+
+        //ぼかしの強さ変更
+        BlurCanvas.SetBlurParam(Parm * 30);
     }
 }

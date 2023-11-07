@@ -287,4 +287,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7199d07c4cf8a14bbecbf6538885801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RollEndCnt: 120
+  RollEndCnt: 60
