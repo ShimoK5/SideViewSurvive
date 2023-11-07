@@ -7,6 +7,7 @@
         _GlitchIntensity ("Glitch Intensity", Range(0,1)) = 0.1
         _BlockScale("Block Scale", Range(1,50)) = 10
         _NoiseSpeed("Noise Speed", Range(1,10)) = 10
+        [Toggle(FILL_WITH_RED)]_BoolSwitch("Switch",Float) = 0
     }
     SubShader {
         Tags { "RenderType"="Opaque" }
@@ -17,7 +18,8 @@
             #pragma vertex vert
             #pragma fragment frag
             
-            #include "UnityCG.cginc"
+            //#include "UnityCG.cginc"
+            #pragma shader_feature FILL_WITH_RED
 
             struct appdata {
                 float4 vertex : POSITION;
@@ -33,6 +35,7 @@
             float _GlitchIntensity;
             float _BlockScale;
             float _NoiseSpeed;
+            float _BoolSwitch;
 
             v2f vert (appdata v) {
                 v2f o;
@@ -59,6 +62,8 @@
             fixed4 frag (v2f i) : SV_Target {
                 float4 color;
                 float2 gv = i.uv;
+
+                #ifdef FILL_WITH_RED
                 float noise = blockNoise(i.uv.y * _BlockScale);
                 noise += random(i.uv.x) * 0.3;
                 float2 randomvalue = noiserandom(float2(i.uv.y, _Time.y * _NoiseSpeed));
@@ -69,6 +74,16 @@
                 color.a = 1.0;
 
                 return color;
+               #else
+               color.r = tex2D(_MainTex, gv).r;
+               color.g = tex2D(_MainTex, gv).g;
+               color.b = tex2D(_MainTex, gv).b;
+               color.a = 1.0;
+
+                return color;
+                #endif
+
+               
             }
             ENDCG
             }

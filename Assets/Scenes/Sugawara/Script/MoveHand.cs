@@ -21,6 +21,10 @@ public class MoveHand : MonoBehaviour
     [SerializeField] bool NoteCollision = false;                                            //ノートにぶつかっているか確認用
     [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用
     [SerializeField] bool ChangeScene = false;                                              //シーンチェンジ用
+    [SerializeField] int ChangeMovieFlame = 0;                                         //シーンの変化に対応したフレーム数
+    [SerializeField] bool MovieNoise = false;
+    [SerializeField] GameObject MovieObject;
+    [SerializeField] Material Ma;
 
     // Start is called before the first frame update
     void Awake()
@@ -128,7 +132,6 @@ public class MoveHand : MonoBehaviour
         if (ChangeScene == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
         {
             SceneChangeManager.instance.SceneTransition("ShimokawaraScene 1");
-            //SceneManager.LoadScene("ShimokawaraScene 1");
             RhythmManager.Instance.FCnt = 0;
         }
 
@@ -156,6 +159,22 @@ public class MoveHand : MonoBehaviour
             FlameCount = 0;
         }
 
+        if(MovieNoise == true)
+        {
+            Ma = MovieObject.GetComponent<RawImage>().material;
+            //var material = GetComponent<Renderer>().material;
+            Ma.SetFloat("_BoolSwitch",1.0f);
+            Ma.EnableKeyword("FILL_WITH_RED");
+            ChangeMovieFlame += 1;
+            if (ChangeMovieFlame > 180)
+            {
+                Ma.SetFloat("_BoolSwitch", 0.0f);
+                ChangeMovieFlame = 0;
+                MovieNoise = false;
+                Ma.DisableKeyword("FILL_WITH_RED");
+            }
+        }
+       
 
         
 
@@ -313,7 +332,12 @@ public class MoveHand : MonoBehaviour
 
     void ChangeMovie(string Name)
     {
-        switch(Name)
+        if (MovieNoise == false)
+        {
+            MovieNoise = true;
+        }
+        ChangeMovieFlame = 0;
+        switch (Name)
         {
             case ("0"):
                 Movie.Change(RhythmManager.RhythmAction.Umbrella);
