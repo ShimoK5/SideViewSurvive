@@ -19,7 +19,7 @@ public class SacrificeImage : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Cnt++;
         if(Cnt <= RollEndCnt)
