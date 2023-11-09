@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Reflection;
+using Spine;
 
 public class PlayerRun : PlayerIF
 {
+    TrackEntry m_TrackEntry = null;
+
+    bool DoneRightStep = false;
+    bool DoneLeftStep = false;
+
     public PlayerRun(PlayerIF oldPlayer)
     {
         if (Player.instance.GetAnim().Anim.AnimationName != "normal/run")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/run", true);
+        {
+            m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/run", true);
+            m_TrackEntry.Complete += FlagReset;
+        }
+
         CopyPlayer(oldPlayer);
+        DoneRightStep = false;
+        DoneLeftStep = false;
+
     }
 
     public override void CustumUpdate()
@@ -23,6 +36,7 @@ public class PlayerRun : PlayerIF
 
     public override void CustumFixed()
     {
+
         //過去情報保存
         KeepOld();
         //勢い減少 
@@ -43,6 +57,30 @@ public class PlayerRun : PlayerIF
         //JumpKeyDown = false;
         //共通更新
         FixedCommon();
+
+        //足音SE
+        if (m_TrackEntry != null)
+        {
+            if(!DoneRightStep)
+            {
+                if (m_TrackEntry.TrackTime > 0.0f)
+                {
+                    DoneRightStep = true;
+                    Debug.Log("RightStep" + m_TrackEntry.TrackTime);
+                    SoundManager.instance.SEPlay("仮SE");
+                }
+            }
+            if (!DoneLeftStep)
+            {
+                if (m_TrackEntry.TrackTime > 0.0f + 0.333f)
+                {
+                    DoneLeftStep = true;
+                    Debug.Log("LeftStep" + m_TrackEntry.TrackTime);
+                    SoundManager.instance.SEPlay("仮SE");
+                }
+            }
+        }
+
     }
 
     //状態遷移
@@ -56,6 +94,14 @@ public class PlayerRun : PlayerIF
         {
             NextPlayerState = PLAYER_STATE.AIR;
         }
+    }
+
+    //フラグリセット
+    void FlagReset(TrackEntry trackEntry)
+    {
+        
+        DoneRightStep = false;
+        DoneLeftStep = false;
     }
 
 }

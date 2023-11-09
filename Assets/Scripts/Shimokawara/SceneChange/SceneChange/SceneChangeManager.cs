@@ -22,7 +22,7 @@ public class SceneChangeManager : MonoBehaviour
 
     TransitionType NowTransitionType = TransitionType.Black;
 
-    const float DEFAULT_WAIT_TIME = 0.0f;
+    const float DEFAULT_WAIT_TIME = 0.2f;
     float NowWaitTime = 0.0f;
 
     private void Awake()
