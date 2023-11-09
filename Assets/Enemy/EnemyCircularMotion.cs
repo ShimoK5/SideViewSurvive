@@ -79,9 +79,9 @@ public class EnemyCircularMotion : EnemyIF
     }
     public override void HitUnder(Block block)
     {
-        Debug.Log("床");
-        isGround = true;
-        StandBlock = block;
+        //Debug.Log("床");
+        //isGround = true;
+        //StandBlock = block;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
         tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
         SelfVel.y = 0.0f;

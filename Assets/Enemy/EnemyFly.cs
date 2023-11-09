@@ -6,6 +6,8 @@ using System.Reflection;
 
 public class EnemyFly : EnemyIF
 {
+    private int FlameCount = 0;
+
     public EnemyFly(EnemyIF oldEnemy)
     {
         //EnemyAnim.instans.Anim.SetTrigger("Run");
@@ -25,8 +27,16 @@ public class EnemyFly : EnemyIF
         SlowDown(GROUND_VEL_MULTI, GROUND_VEL_MULTI);
         //自由落下
         //Fall();
-        //横移動
-        MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);
+        //縦移動
+        FlameCount++;
+        if (FlameCount > 120)
+            FlameCount = 0;
+
+        if (FlameCount < 60)
+            SelfVel.y = -MAX_RUN_SPEED;
+        else if (FlameCount > 60)
+            SelfVel.y = MAX_RUN_SPEED;
+
         //ジャンプ処理
         //Jump();
         //状態遷移
@@ -41,7 +51,7 @@ public class EnemyFly : EnemyIF
 
     public override void HitUnder(Block block)
     {
-        Debug.Log("床");
+        //Debug.Log("床");
         //isGround = true;
         //StandBlock = block;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
