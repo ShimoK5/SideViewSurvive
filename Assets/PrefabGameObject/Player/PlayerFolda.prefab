@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 1d99134d10df8094882ddc8d038744b8, type: 2}
-  initialSkinName: 
+  initialSkinName: Emotion/normal2
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0

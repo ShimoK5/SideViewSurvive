@@ -106,21 +106,24 @@ public class PlayerIF : PawnIF
     //横移動   
     protected void MoveX(float maxSpeed , float addSpeed)
     {
-        //移動処理
-        if (InputManager_FU.instanse.GetKey(Key.Right)) // キー入力判定
+        if(InputManager_FU.instanse)
         {
-            
-            if (SelfVel.x <= maxSpeed)
+            //移動処理
+            if (InputManager_FU.instanse.GetKey(Key.Right)) // キー入力判定
             {
-                SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
+
+                if (SelfVel.x <= maxSpeed)
+                {
+                    SelfVel.x = Mathf.Min(maxSpeed, SelfVel.x + addSpeed);
+                }
             }
-        }
-        if (InputManager_FU.instanse.GetKey(Key.Left)) // キー入力判定
-        {
-            
-            if (SelfVel.x >= -maxSpeed)
+            if (InputManager_FU.instanse.GetKey(Key.Left)) // キー入力判定
             {
-                SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
+
+                if (SelfVel.x >= -maxSpeed)
+                {
+                    SelfVel.x = Mathf.Max(-maxSpeed, SelfVel.x - addSpeed);
+                }
             }
         }
     }
@@ -154,11 +157,15 @@ public class PlayerIF : PawnIF
     //ジャンプ
     protected void Jump()
     {
-        if (InputManager_FU.instanse.GetKeyTrigger(Key.A) && isGround) // キー入力判定
+        if(InputManager_FU.instanse)
         {
-            //NextPlayerState = PLAYER_STATE.AIR;
-            SelfVel.y = 20.0f * MultiplyNum;
+            if (InputManager_FU.instanse.GetKeyTrigger(Key.A) && isGround) // キー入力判定
+            {
+                //NextPlayerState = PLAYER_STATE.AIR;
+                SelfVel.y = 20.0f * MultiplyNum;
+            }
         }
+        
     }
     //状態遷移
     protected virtual void ChangeNextState() 
