@@ -36,9 +36,13 @@ public class TitleStateManager : MonoBehaviour
         switch (state)
         { 
             case State.Normal:
-                if (Input.anyKeyDown)
+                if(!SceneChangeManager.instance.isFade)
                 {
-                    state = State.After;
+                    if (Input.anyKeyDown)
+                    {
+                        SoundManager.instance.SEPlay("仮SE");
+                        state = State.After;
+                    }
                 }
                 break;
             case State.After:
