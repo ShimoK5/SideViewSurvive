@@ -9,7 +9,6 @@ public class MoveHand : MonoBehaviour
 {
     [SerializeField] private Vector3 HandPosition = new Vector3(0.0f, 0.0f, 0.0f);       //ハンドの初期位置
     [SerializeField] private float MoveSpeed = 0.1f;                                        //移動スピード
-    //[SerializeField] private RectTransform Icon_Transform = null;                           //アイコンの位置、話したときに戻す用
     [SerializeField] private bool DragJudge = false;                                        //アイコンを掴めるかどうかの確認
     [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか 
     [SerializeField] public GameObject Catch_Icon = null;                                  //アイコン保管用（多分消せる）
@@ -19,11 +18,11 @@ public class MoveHand : MonoBehaviour
     [SerializeField] int FlameCount = 0;                                                    //フレーム確認
     [SerializeField] int NoteNum = 0;                                                       //ノート数確認用
     [SerializeField] bool NoteCollision = false;                                            //ノートにぶつかっているか確認用
-    [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用
     [SerializeField] bool ChangeScene = false;                                              //シーンチェンジ用
     [SerializeField] int ChangeMovieFlame = 0;                                         //シーンの変化に対応したフレーム数
     [SerializeField] bool MovieNoise = false;
     [SerializeField] GameObject MovieObject;
+    [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用
     [SerializeField] Material Ma;
 
     // Start is called before the first frame update
@@ -41,6 +40,7 @@ public class MoveHand : MonoBehaviour
         FlameCount = 0;
         NoteNum = 0;
         NoteCollision = false;
+        Movie = MovieObject.GetComponent<MovieChange>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)

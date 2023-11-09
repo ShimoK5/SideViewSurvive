@@ -18,7 +18,6 @@
             #pragma vertex vert
             #pragma fragment frag
             
-            //#include "UnityCG.cginc"
             #pragma shader_feature FILL_WITH_RED
 
             struct appdata {
