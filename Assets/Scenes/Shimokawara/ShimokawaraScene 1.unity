@@ -1897,12 +1897,6 @@ Transform:
   m_Father: {fileID: 1724194771}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!20 &683450620 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 478669018316514210, guid: c9fe8fc461622fe48853b1bba11934a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 478669018415115491}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &697730580
 GameObject:
   m_ObjectHideFlags: 0
@@ -4487,7 +4481,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 683450620}
+      objectReference: {fileID: 0}
     - target: {fileID: 3253575579725759256, guid: ae415019ed2a5e64696256080138b6ec,
         type: 3}
       propertyPath: m_PlaneDistance
@@ -6523,6 +6517,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 478669018316514271, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: m_TagString
+      value: UICamera
+      objectReference: {fileID: 0}
     - target: {fileID: 4008923266302692941, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: m_Enabled
@@ -6548,7 +6547,7 @@ PrefabInstance:
     - target: {fileID: 46403644, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 683450620}
+      objectReference: {fileID: 0}
     - target: {fileID: 46403644, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
       propertyPath: m_PlaneDistance
       value: 10
@@ -6643,7 +6642,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 683450620}
+      objectReference: {fileID: 0}
     - target: {fileID: 744650808210095153, guid: 33a291d5c7a77b44cac5dd8c8b1fd719,
         type: 3}
       propertyPath: m_PlaneDistance
