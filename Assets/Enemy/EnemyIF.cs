@@ -93,7 +93,7 @@ public class EnemyIF : PawnIF
     protected void FixedCommon()
     {
         //残像処理
-        AfterImage();
+        //AfterImage();
     }
 
     //速度反映関数

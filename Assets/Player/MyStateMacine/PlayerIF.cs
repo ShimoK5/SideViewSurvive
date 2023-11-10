@@ -30,6 +30,7 @@ public class PlayerIF : PawnIF
 
    
     public bool isGround = true;   //地面に触れているかのフラグ
+    public bool OldisGround = true;
     public Vector2 SelfVel;         //自己速度
     public Vector2 OtherVel;        //外部速度
     public Vector2 AllVel;          //合算速度
@@ -47,6 +48,7 @@ public class PlayerIF : PawnIF
         NextPlayerState = oldPlayer.NextPlayerState;
 
         isGround = oldPlayer.isGround;
+        OldisGround = oldPlayer.OldisGround;
         SelfVel = oldPlayer.SelfVel;
         OtherVel = oldPlayer.OtherVel;
         //JumpKeyDown = oldPlayer.JumpKeyDown;
@@ -91,9 +93,27 @@ public class PlayerIF : PawnIF
     protected void FixedCommon()
     {
         //残像処理
-        AfterImage();
+        //AfterImage();
         //移動床追従
         //FollowMoveBlock();
+
+        if(isGround != OldisGround)
+        {
+            if(isGround)
+            {
+                //プレハブ生成
+                GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerLanding");
+                Effect = Instantiate(Effect, tf.transform.position, tf.transform.rotation);
+            }
+            else
+            {
+                //プレハブ生成
+                GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerJumping");
+                Effect = Instantiate(Effect, tf.transform.position, tf.transform.rotation);
+            }
+        }
+
+        OldisGround = isGround;
     }
 
     //速度反映関数

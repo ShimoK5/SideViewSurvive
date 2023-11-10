@@ -23,6 +23,7 @@ public class PauseManager : MonoBehaviour
 
 
     int PauseChoose = (int)PAUSE_CHOOSE.SCREEN_SET;     //選択中のPouse
+    int OldPauseChoose = (int)PAUSE_CHOOSE.SCREEN_SET;
     PAUSE_STATE PauseState = PAUSE_STATE.START;         //ポーズの状態
     [Header("ポーズアニメ待ち時間(フレーム)")]
     [SerializeField] int AnimWaitFlame;
@@ -207,8 +208,20 @@ public class PauseManager : MonoBehaviour
 
         PauseChoose = (PauseChoose + (int)PAUSE_CHOOSE.PAUSE_STATE_MAX) % (int)PAUSE_CHOOSE.PAUSE_STATE_MAX;
 
-        //カーソル移動
-        Flame.transform.position = ButtonArray[PauseChoose].transform.position;
+        if(OldPauseChoose != PauseChoose)
+        {
+            //カーソル移動
+            Flame.transform.position = ButtonArray[PauseChoose].transform.position;
+            //プレハブ生成 カーソル選択エフェクト
+            GameObject Effect = (GameObject)Resources.Load("Prefabs/ShimoTest");
+            Effect = Instantiate(Effect, ButtonArray[PauseChoose].transform.position, ButtonArray[PauseChoose].transform.rotation);
+            //親子関係
+            Effect.transform.parent = PauseCanvas.transform;
+            Effect.transform.localScale = new Vector3(500, 500, 500);
+            Effect.GetComponent<ParticleSystem>().Play(true);
+            OldPauseChoose = PauseChoose;
+        }
+
     }
 
     //キャンバス内のもののアルファ値を変更
