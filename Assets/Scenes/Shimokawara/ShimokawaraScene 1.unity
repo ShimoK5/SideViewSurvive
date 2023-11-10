@@ -1897,6 +1897,12 @@ Transform:
   m_Father: {fileID: 1724194771}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!20 &683450620 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 478669018316514210, guid: c9fe8fc461622fe48853b1bba11934a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 478669018415115491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &697730580
 GameObject:
   m_ObjectHideFlags: 0
@@ -4470,12 +4476,22 @@ PrefabInstance:
     - target: {fileID: 3253575579725759256, guid: ae415019ed2a5e64696256080138b6ec,
         type: 3}
       propertyPath: m_RenderMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3253575579725759256, guid: ae415019ed2a5e64696256080138b6ec,
         type: 3}
       propertyPath: m_PixelPerfect
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3253575579725759256, guid: ae415019ed2a5e64696256080138b6ec,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 683450620}
+    - target: {fileID: 3253575579725759256, guid: ae415019ed2a5e64696256080138b6ec,
+        type: 3}
+      propertyPath: m_PlaneDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3253575579725759257, guid: ae415019ed2a5e64696256080138b6ec,
         type: 3}
@@ -6521,13 +6537,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 46403641, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 46403644, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 46403644, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 683450620}
+    - target: {fileID: 46403644, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 46403645, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1758422814, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1758422815, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -6601,6 +6633,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 744650808210095153, guid: 33a291d5c7a77b44cac5dd8c8b1fd719,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 744650808210095153, guid: 33a291d5c7a77b44cac5dd8c8b1fd719,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 683450620}
+    - target: {fileID: 744650808210095153, guid: 33a291d5c7a77b44cac5dd8c8b1fd719,
+        type: 3}
+      propertyPath: m_PlaneDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 744650808210095157, guid: 33a291d5c7a77b44cac5dd8c8b1fd719,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744650808210095158, guid: 33a291d5c7a77b44cac5dd8c8b1fd719,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33a291d5c7a77b44cac5dd8c8b1fd719, type: 3}
@@ -6990,7 +7047,7 @@ PrefabInstance:
     - target: {fileID: 7323444327955935837, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}
       propertyPath: GameState
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7323444327955935838, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}
