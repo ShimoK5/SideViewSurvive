@@ -10,6 +10,7 @@ TagManager:
   - Platform_Default
   - Note
   - Icon
+  - UICamera
   layers:
   - Default
   - TransparentFX

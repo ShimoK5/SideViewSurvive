@@ -32,7 +32,7 @@ public class PressAnyButton : MonoBehaviour
         rtf = GetComponent<RectTransform>();
         img = GetComponent<Image>();
 
-        DefaultPos = rtf.position;
+        DefaultPos = rtf.localPosition;
         DefaultScale = rtf.localScale;
         DefaultColor = img.color;
         AnotherPos = DefaultPos + new Vector3(0, -20, 0);
@@ -65,13 +65,13 @@ public class PressAnyButton : MonoBehaviour
 
         if((NormalCnt / 30) % 2 == 0)
         {
-            rtf.position = DefaultPos;
+            rtf.localPosition = DefaultPos;
             rtf.localScale = DefaultScale;
             img.color = DefaultColor;
         }
         else
         {
-            rtf.position = AnotherPos;
+            rtf.localPosition = AnotherPos;
             rtf.localScale = AnotherScale;
             img.color = AnotherColor;
         }
@@ -81,7 +81,7 @@ public class PressAnyButton : MonoBehaviour
     {
         WaitCnt++;
 
-        rtf.position = DefaultPos;
+        rtf.localPosition = DefaultPos;
         rtf.localScale = DefaultScale;
 
         if (WaitCnt >= TitleStateManager.instans.WAIT_MAX_CNT - 30)

@@ -224,6 +224,6 @@ public class PauseManager : MonoBehaviour
         Flame.GetComponent<Image>().color = new Color(1, 1, 1, Parm);
 
         //ぼかしの強さ変更
-        BlurCanvas.SetBlurParam(Parm * 30);
+        BlurCanvas.SetBlurParam(Parm * 90);
     }
 }
