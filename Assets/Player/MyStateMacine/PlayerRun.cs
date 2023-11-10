@@ -66,7 +66,7 @@ public class PlayerRun : PlayerIF
                 if (m_TrackEntry.TrackTime > 0.0f)
                 {
                     DoneRightStep = true;
-                    Debug.Log("RightStep" + m_TrackEntry.TrackTime);
+                    SoundManager.instance.SEStop();
                     SoundManager.instance.SEPlay("仮SE");
                 }
             }
@@ -75,7 +75,7 @@ public class PlayerRun : PlayerIF
                 if (m_TrackEntry.TrackTime > 0.0f + 0.333f)
                 {
                     DoneLeftStep = true;
-                    Debug.Log("LeftStep" + m_TrackEntry.TrackTime);
+                    SoundManager.instance.SEStop();
                     SoundManager.instance.SEPlay("仮SE");
                 }
             }
