@@ -28,20 +28,12 @@ public class RhythmManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
         //ActionArray = new RhythmAction[BeatNum];
     }
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);      //他シーン行ったときに削除されないように
         FCnt = 0;
     }
 
@@ -54,9 +46,9 @@ public class RhythmManager : MonoBehaviour
                 FixedGame();
                 break;
 
-            case GAME_STATE.DeadPlayer:
-                FCnt = 0;
-                break;
+            //case GAME_STATE.DeadPlayer:
+            //    FCnt = 0;
+            //    break;
             default:
                 if(SceneManager.GetActiveScene().name == "SetScene")
                 {
