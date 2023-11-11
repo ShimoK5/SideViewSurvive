@@ -213,12 +213,11 @@ public class PauseManager : MonoBehaviour
             //カーソル移動
             Flame.transform.position = ButtonArray[PauseChoose].transform.position;
             //プレハブ生成 カーソル選択エフェクト
-            GameObject Effect = (GameObject)Resources.Load("Prefabs/ShimoTest");
+            GameObject Effect = (GameObject)Resources.Load("Prefabs/Particle System");
             Effect = Instantiate(Effect, ButtonArray[PauseChoose].transform.position, ButtonArray[PauseChoose].transform.rotation);
             //親子関係
             Effect.transform.parent = PauseCanvas.transform;
-            Effect.transform.localScale = new Vector3(500, 500, 500);
-            Effect.GetComponent<ParticleSystem>().Play(true);
+            Effect.transform.localScale = new Vector3(1, 1, 1);
             OldPauseChoose = PauseChoose;
         }
 

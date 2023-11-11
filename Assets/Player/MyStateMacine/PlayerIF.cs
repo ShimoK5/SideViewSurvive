@@ -103,14 +103,16 @@ public class PlayerIF : PawnIF
             {
                 //プレハブ生成
                 GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerLanding");
-                Effect = Instantiate(Effect, tf.transform.position, tf.transform.rotation);
+                Effect = Instantiate(Effect, tf.transform.position, Quaternion.Euler(0,-90,0));
             }
-            else
-            {
+            //崖から降りた時に出ちゃうから中止
+            //else
+            //{
+                
                 //プレハブ生成
-                GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerJumping");
-                Effect = Instantiate(Effect, tf.transform.position, tf.transform.rotation);
-            }
+                //GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerJumping");
+                //Effect = Instantiate(Effect, tf.transform.position, Quaternion.Euler(0, -90, 0));
+            //}
         }
 
         OldisGround = isGround;
@@ -183,6 +185,9 @@ public class PlayerIF : PawnIF
             {
                 //NextPlayerState = PLAYER_STATE.AIR;
                 SelfVel.y = 20.0f * MultiplyNum;
+                GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerJumping");
+                Effect = Instantiate(Effect, tf.transform.position, Quaternion.Euler(0, -90, 0));
+
             }
         }
         
