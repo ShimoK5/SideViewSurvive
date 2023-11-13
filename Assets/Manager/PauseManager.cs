@@ -218,6 +218,14 @@ public class PauseManager : MonoBehaviour
             //親子関係
             Effect.transform.parent = PauseCanvas.transform;
             Effect.transform.localScale = new Vector3(1, 1, 1);
+            //プレハブ生成 カーソル選択エフェクト
+            GameObject Effect2 = (GameObject)Resources.Load("Prefabs/ShimoTest");
+            Effect2 = Instantiate(Effect2, ButtonArray[PauseChoose].transform.position, ButtonArray[PauseChoose].transform.rotation);
+            //親子関係
+            Effect2.transform.parent = PauseCanvas.transform;
+            Effect2.transform.localScale = new Vector3(100, 100, 1);
+
+
             OldPauseChoose = PauseChoose;
         }
 

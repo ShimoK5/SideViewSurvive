@@ -11,6 +11,13 @@ public class PlayerUmbrella : PlayerIF
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
+
+        //プレハブ生成 エフェクト
+        GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_Umbrella");
+        Effect = Instantiate(Effect, tf.transform.position,tf.transform.rotation);
+        //親子関係
+        Effect.transform.parent = tf;
+
         //プレハブ生成
         GameObject GymClothesSmall = (GameObject)Resources.Load("Umbrella");
         GymClothesSmall = Instantiate(GymClothesSmall, tf.transform.position, Quaternion.Euler(-90, tf.transform.eulerAngles.y - 90, 0));

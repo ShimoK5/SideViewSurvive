@@ -322,7 +322,7 @@ void Start()
         {
 			ReturnTwoDirection.ObjDirection1 = HIT_DIRECTION.NON_HIT;
 			ReturnTwoDirection.ObjDirection2 = HIT_DIRECTION.NON_HIT;
-			Debug.Log("埋もれ");
+			//Debug.Log("埋もれ");
 		}
 		//元々上辺or下辺に衝突する位置にいた
 		/*else*/ if (VertualOldMin1.x < Max2.x && VertualOldMax1.x > Min2.x)

@@ -11,6 +11,11 @@ public class PlayerEraser : PlayerIF
         CopyPlayer(oldPlayer);
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
+
+        //プレハブ生成 エフェクト
+        GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PencilMuzzle");
+        Effect = Instantiate(Effect, tf.transform.position, tf.transform.rotation);
+
         //プレハブ生成
         GameObject Eraser = (GameObject)Resources.Load("Eraser");
         Eraser = Instantiate(Eraser, tf.transform.position, tf.transform.rotation);
