@@ -7,6 +7,6 @@ public class FindUICamera : MonoBehaviour
     void Awake()
     {
         GetComponent<Canvas>().worldCamera = GameObject.FindWithTag("UICamera").GetComponent<Camera>();
-        GetComponent<Canvas>().planeDistance = 15;
+        GetComponent<Canvas>().planeDistance = 5;
     }
 }

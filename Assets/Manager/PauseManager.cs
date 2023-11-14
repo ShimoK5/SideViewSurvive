@@ -48,6 +48,8 @@ public class PauseManager : MonoBehaviour
     {
         PauseBackGroundWidth = PauseBackGround.GetComponent<RectTransform>().sizeDelta.x;
         PauseCanvas.SetActive(false);
+        BlurCanvas.gameObject.SetActive(true);
+        BlurCanvas.SetBlurParam(0);
     }
 
     // Update is called once per frame

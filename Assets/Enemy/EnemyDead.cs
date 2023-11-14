@@ -34,14 +34,14 @@ public class EnemyDead : EnemyIF
         if(FCnt > 6)
         {
             GameObject myPrefab;//プレハブをGameObject型で取得
-            myPrefab = (GameObject)Resources.Load("SpringEffect");//プレハブをGameObject型で取得
+            myPrefab = (GameObject)Resources.Load("Prefabs/vfx_EnemyDeathMagenta");//プレハブをGameObject型で取得
             GameObject Obj = Instantiate(myPrefab, tf.position, Quaternion.identity);
-
-            Destroy(tf.gameObject);
 
             //マネージャーに加算を送るフラグtrueなら
             if(DeadCntFlag)
                 EnemyKillCountManager.Instance.DestroyCountUp();
+
+            Destroy(tf.gameObject);
 
         }
         ////過去情報保存
