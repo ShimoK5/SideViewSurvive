@@ -243,6 +243,10 @@ public class Enemy : MonoBehaviour
     {
         m_Enemy.DeadVector = vel.normalized;
         m_Enemy.DeadCntFlag = deadCntFlag;
+        if(deadCntFlag)
+        {
+            CameraPos.instance.HitSwing(new Vector3(m_Enemy.DeadVector.x, m_Enemy.DeadVector.y, 0));
+        }
     }
 
     public ENEMY_STATE GetEnemyState()

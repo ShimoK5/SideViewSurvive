@@ -19,6 +19,16 @@ public class CameraPos : MonoBehaviour
     float MinX;         //カメラの最低X座標
     float MaxX;         //カメラの最高X座標
 
+    Vector3 DefaultPos = Vector3.zero;  //正常な位置
+    Vector3 SwingAddValue = Vector3.zero;    //カメラ座標に加算する値（敵ヒット時など）
+    int HitSwingCnt = 0;
+    Vector3 FirstSwingVector = Vector3.zero;
+    bool bHitSwing = false;
+    [Header("ヒット振動距離の長さ")]
+    [SerializeField] float MAX_SWING_RANGE ;
+    [Header("ヒット振動時間の長さ")]
+    [SerializeField] int MAX_SWING_CNT; 
+
     [Header("スタートアニメーションのフレーム数")]
     [SerializeField] int StartMovieFlame;
     int StartMovieFlameCount = 0;
@@ -49,11 +59,13 @@ public class CameraPos : MonoBehaviour
         MaxX = MaxObj.x - Zurashi;
 
         instance = this;
-        //targetオブジェクトを取得
-
+        
         ZoomCamera = false;
-
+        //targetオブジェクトを取得
         targetObj = GameObject.Find("Player");
+
+        DefaultPos = transform.position;
+
         FollowObj();
 
         StartMovieInit();
@@ -90,26 +102,109 @@ public class CameraPos : MonoBehaviour
     {
         if(LockY)
         {
-            transform.position = new Vector3(targetObj.transform.position.x /*+ ZurashiX*/,
-            transform.position.y,
-            transform.position.z);
+            DefaultPos = new Vector3(targetObj.transform.position.x /*+ ZurashiX*/,
+            DefaultPos.y,
+            DefaultPos.z);
         }
         else
         {
-            transform.position = new Vector3(targetObj.transform.position.x /*+ ZurashiX*/,
+            DefaultPos = new Vector3(targetObj.transform.position.x /*+ ZurashiX*/,
             targetObj.transform.position.y + cameraPosY,
-            transform.position.z);
+            DefaultPos.z);
         }
 
-        if(transform.position.x <= MinX)
+        if(DefaultPos.x <= MinX)
         {
-            transform.position = new Vector3(MinX, transform.position.y, transform.position.z);
+            DefaultPos = new Vector3(MinX, DefaultPos.y, DefaultPos.z);
         }
-        if(transform.position.x >= MaxX)
+        if(DefaultPos.x >= MaxX)
         {
-            transform.position = new Vector3(MaxX, transform.position.y, transform.position.z);
+            DefaultPos = new Vector3(MaxX, DefaultPos.y, DefaultPos.z);
+        }
+
+        //ヒット振動の更新
+        HitSwingUpdate();
+
+        //適用
+        transform.position = DefaultPos + SwingAddValue;
+    }
+
+    public void HitSwing(Vector3 direction)
+    {
+        bHitSwing = true;
+        HitSwingCnt = 0;
+        FirstSwingVector = direction.normalized;
+    }
+
+    //ヒット振動の更新
+    void HitSwingUpdate()
+    {
+        if (bHitSwing)
+        {
+            HitSwingCnt++;
+
+            //　Temp = 6 5 4 3 2 1 0 
+            int Temp = MAX_SWING_CNT - HitSwingCnt;
+
+            //大きさ
+            float SwingRange = Temp * MAX_SWING_RANGE;
+
+            //大きさと正規化向きをかける
+            if(HitSwingCnt == 1)
+            {
+                SwingAddValue = FirstSwingVector.normalized * SwingRange;
+            }
+            else
+            {
+                float Angle = Random.Range(0.0f, 6.28f);
+                Vector3 SwingVector = Vector3.zero;
+                SwingVector.x = Mathf.Cos(Angle);
+                SwingVector.y = Mathf.Sin(Angle);
+                SwingAddValue = SwingVector.normalized * SwingRange;
+            }
+            
+
+            //時間が終わったら
+            if (HitSwingCnt >= MAX_SWING_CNT)
+            {
+                HitSwingCnt = 0;
+                bHitSwing = false;
+                SwingAddValue = Vector3.zero;
+            }
         }
     }
+
+
+    //void HitSwingUpdate()
+    //{
+    //    if(bHitSwing)
+    //    {
+    //        HitSwingCnt++;
+
+    //        //　Temp = 0 1 2 3 2 1 0
+    //        int Temp;
+    //        if(HitSwingCnt <= MAX_SWING_CNT / 2)
+    //        {
+    //            Temp = HitSwingCnt;
+    //        }
+    //        else
+    //        {
+    //            Temp = MAX_SWING_CNT - HitSwingCnt;
+    //        }
+    //        //大きさ
+    //        float SwingRange = Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, Temp, MAX_SWING_CNT / 2, 0, MAX_SWING_RANGE);
+    //        //大きさと正規化向きをかける
+    //        SwingAddValue = FirstSwingVector.normalized * SwingRange;
+
+    //        //時間が終わったら
+    //        if (HitSwingCnt >= MAX_SWING_CNT)
+    //        {
+    //            HitSwingCnt = 0;
+    //            bHitSwing = false;
+    //            SwingAddValue = Vector3.zero;
+    //        }
+    //    }
+    //}
 
     void StartMovieUpdate()
     {
