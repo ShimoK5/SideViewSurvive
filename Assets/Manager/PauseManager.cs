@@ -223,7 +223,7 @@ public class PauseManager : MonoBehaviour
             Effect2 = Instantiate(Effect2, ButtonArray[PauseChoose].transform.position, ButtonArray[PauseChoose].transform.rotation);
             //親子関係
             Effect2.transform.parent = PauseCanvas.transform;
-            Effect2.transform.localScale = new Vector3(100, 100, 1);
+            Effect2.transform.localScale = new Vector3(100, 100, 100);
 
 
             OldPauseChoose = PauseChoose;
