@@ -37,10 +37,15 @@ void Start()
     {
 		switch (GameStateManager.instance.GameState)
 		{
-			//case GAME_STATE.Game:
-			default:
+			case GAME_STATE.StartPlayerMotion:
+			case GAME_STATE.Game:
+			case GAME_STATE.DeadPlayer:
+			case GAME_STATE.EndPlayerMotion:
 				FixedGame();
 				break;
+			//default:
+			//	FixedGame();
+			//	break;
 		}
 	}
 

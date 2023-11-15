@@ -25,6 +25,9 @@ public class GameStateManager : MonoBehaviour
     GameObject UI_Canvas;
     void Awake()
     {
+#if !UNITY_EDITOR
+        GameState = GAME_STATE.StartFade;
+#endif
         instance = this;
     }
 
@@ -38,36 +41,53 @@ public class GameStateManager : MonoBehaviour
     {
         switch (GameState)
         {
-            case GAME_STATE.DeadPlayerStop:
-                //カウント加算
-                DeadPlayerStopCnt++;
-                //アニメーションストップ
-                Player.instance.GetAnim().Anim.timeScale = 0;
-                
-                if(UI_Canvas.activeSelf == true)
-                {
-                    //UIキャンバス非表示
-                    UI_Canvas.SetActive(false);
-                    //プレハブ生成
-                    GameObject Canvas = (GameObject)Resources.Load("DeadEffectCanvas");
-                    Canvas = Instantiate(Canvas,Vector3.zero, Quaternion.Euler(Vector3.zero));
-                }
-                   
-
-                //25フレ止めた後
-                if (DeadPlayerStopCnt > 25)
-                {
-                    //アニメーション再開
-                    Player.instance.GetAnim().Anim.timeScale = 1;
-                    //ゲームステート変更
-                    GameState = GAME_STATE.DeadPlayer;
-                }
-               
-
+            case GAME_STATE.StartFade:
+                StartFadeFixed();
                 break;
+
+            case GAME_STATE.DeadPlayerStop:
+                DeadPlayerStopFixed();
+                break;
+
 
         }
 
+    }
+
+    void StartFadeFixed()
+    {
+        if(!SceneChangeManager.instance.isFade)
+        {
+            GameState = GAME_STATE.StartCameraMotion;
+        }
+    }
+
+
+    void DeadPlayerStopFixed()
+    {
+        //カウント加算
+        DeadPlayerStopCnt++;
+        //アニメーションストップ
+        Player.instance.GetAnim().Anim.timeScale = 0;
+
+        if (UI_Canvas.activeSelf == true)
+        {
+            //UIキャンバス非表示
+            UI_Canvas.SetActive(false);
+            //プレハブ生成
+            GameObject Canvas = (GameObject)Resources.Load("DeadEffectCanvas");
+            Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+        }
+
+
+        //25フレ止めた後
+        if (DeadPlayerStopCnt > 25)
+        {
+            //アニメーション再開
+            Player.instance.GetAnim().Anim.timeScale = 1;
+            //ゲームステート変更
+            GameState = GAME_STATE.DeadPlayer;
+        }
     }
 
     // Update is called once per frame
