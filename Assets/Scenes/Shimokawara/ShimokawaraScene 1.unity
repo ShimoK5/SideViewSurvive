@@ -6361,10 +6361,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 478669018269942160, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 478669018269942162, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 478669018269942166, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: MAX_SWING_CNT
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 478669018269942166, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: MAX_SWING_RANGE
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 478669018269942167, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
@@ -6636,17 +6651,17 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[1]
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[2]
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[3]
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
@@ -6656,17 +6671,17 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[5]
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[6]
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[7]
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169226, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}

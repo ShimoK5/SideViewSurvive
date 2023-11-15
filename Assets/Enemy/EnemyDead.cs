@@ -19,7 +19,7 @@ public class EnemyDead : EnemyIF
 
         //速度反映
         OtherVel = Vector2.zero;
-        SelfVel = DeadVector * 0.2f;
+        SelfVel = DeadVector * 0.8f;
     }
 
     public override void CustumUpdate()
@@ -31,7 +31,7 @@ public class EnemyDead : EnemyIF
     {
         FCnt++;
 
-        if(FCnt > 6)
+        if(FCnt > 7)
         {
             GameObject myPrefab;//プレハブをGameObject型で取得
             myPrefab = (GameObject)Resources.Load("Prefabs/vfx_EnemyDeathMagenta");//プレハブをGameObject型で取得
