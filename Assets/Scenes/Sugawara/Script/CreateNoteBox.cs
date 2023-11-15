@@ -8,17 +8,19 @@ public class CreateNoteBox : MonoBehaviour
 {
     [SerializeField] GameObject PrefabNote = null;
     [SerializeField] GameObject[] SelectNote = new GameObject[8];
-    [SerializeField] int HierarchyNumber = 3;   
+    [SerializeField] int HierarchyNumber = 3;
+    [SerializeField] float MoveWidth = 0.0f;
 
     void Start()
     {
         Vector3 PrefabPosition = this.transform.localPosition;
+        MoveWidth = PrefabPosition.x;
         float NotePosition = (this.GetComponent<RectTransform>().sizeDelta.x - PrefabNote.GetComponent<RectTransform>().sizeDelta.x * 2 - 20.0f) / 7;
         GameObject CloneNote = null;
         for (int NoteNum = 0; NoteNum < SelectNote.Length; NoteNum++)
         {
             PrefabPosition.x = (-(this.GetComponent<RectTransform>().sizeDelta.x) + PrefabNote.GetComponent<RectTransform>().sizeDelta.x * 2 + 20.0f) / 2
-                + NotePosition * NoteNum;
+                + NotePosition * NoteNum + MoveWidth;
             CloneNote = Instantiate(PrefabNote, PrefabPosition, Quaternion.identity);
             CloneNote.name = "Note" + (NoteNum + 1);
             CloneNote.tag = "Note";
