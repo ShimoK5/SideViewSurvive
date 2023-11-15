@@ -103,8 +103,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LockY: 0
   cameraPosY: 2
-  MAX_SWING_RANGE: 0.1
-  MAX_SWING_CNT: 4
+  ViewWidth: 0
+  ViewHeight: 0
+  MAX_SWING_RANGE: 0.2
+  MAX_SWING_CNT: 10
   StartMovieFlame: 180
   DeadMovieFlame: 30
   GoalMovieFlame: 30

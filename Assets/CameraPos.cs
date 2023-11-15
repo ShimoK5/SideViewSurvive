@@ -23,6 +23,7 @@ public class CameraPos : MonoBehaviour
     Vector3 SwingAddValue = Vector3.zero;    //カメラ座標に加算する値（敵ヒット時など）
     int HitSwingCnt = 0;
     Vector3 FirstSwingVector = Vector3.zero;
+    float SwingAngle = 0;
     bool bHitSwing = false;
 
     public float ViewWidth;     //映してる領域の横幅
@@ -158,6 +159,7 @@ public class CameraPos : MonoBehaviour
         bHitSwing = true;
         HitSwingCnt = 0;
         FirstSwingVector = direction.normalized;
+        SwingAngle = Mathf.Atan2(FirstSwingVector.y, FirstSwingVector.x);
     }
 
     //ヒット振動の更新
@@ -180,7 +182,9 @@ public class CameraPos : MonoBehaviour
             }
             else
             {
-                float Angle = Random.Range(0.0f, 6.28f);
+                //float Angle = Random.Range(0.0f, 6.28f);
+                SwingAngle += 6.28f * 2 / MAX_SWING_CNT;//二周する
+                float Angle = SwingAngle;
                 Vector3 SwingVector = Vector3.zero;
                 SwingVector.x = Mathf.Cos(Angle);
                 SwingVector.y = Mathf.Sin(Angle);
