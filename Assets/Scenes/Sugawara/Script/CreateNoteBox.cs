@@ -22,12 +22,12 @@ public class CreateNoteBox : MonoBehaviour
             PrefabPosition.x = (-(this.GetComponent<RectTransform>().sizeDelta.x) + PrefabNote.GetComponent<RectTransform>().sizeDelta.x * 2 + 20.0f) / 2
                 + NotePosition * NoteNum + MoveWidth;
             CloneNote = Instantiate(PrefabNote, PrefabPosition, Quaternion.identity);
-            CloneNote.name = "Note" + (NoteNum + 1);
+            CloneNote.name = "" + NoteNum;
             CloneNote.tag = "Note";
             CloneNote.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceBox(RhythmManager.Instance.ActionArray[NoteNum]);
             CloneNote.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
             CloneNote.transform.SetSiblingIndex(HierarchyNumber);
-            MoveHand.instance.NoteBox[NoteNum] = CloneNote;
+            InputRhythm.instance.NoteBox[NoteNum] = CloneNote;
         }
         Destroy(this.gameObject);
     }

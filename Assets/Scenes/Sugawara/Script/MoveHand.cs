@@ -9,13 +9,12 @@ public class MoveHand : MonoBehaviour
 {
     [SerializeField] private Vector3 HandPosition = new Vector3(0.0f, 0.0f, 0.0f);       //ハンドの初期位置
     [SerializeField] private float MoveSpeed = 0.1f;                                        //移動スピード
-    [SerializeField] private bool DragJudge = false;                                        //アイコンを掴めるかどうかの確認
-    [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか 
-    [SerializeField] public GameObject Catch_Icon = null;                                  //アイコン保管用（多分消せる）
+    [SerializeField] private bool TouchJudge = false;                                       //触っているかどうか
+    [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
+    [SerializeField] private GameObject Touch_Object = null;                                //触ったオブジェクト
+    [SerializeField] private GameObject Duplication_Object = null;                          //オブジェクトが重なってしまった場合
+    [SerializeField] private GameObject DragAndDropObject = null;
     [SerializeField] private Vector3 Catch_IconPosition = Vector3.zero;                     //移動する際に使用する位置座標（後で変数にして削除予定）
-    public static MoveHand instance;                                                        //ノートボックスを格納するためのインスタンス化
-    [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
-    [SerializeField] int FlameCount = 0;                                                    //フレーム確認
     [SerializeField] int NoteNum = 0;                                                       //ノート数確認用
     [SerializeField] bool NoteCollision = false;                                            //ノートにぶつかっているか確認用
     [SerializeField] bool ChangeScene = false;                                              //シーンチェンジ用
@@ -23,13 +22,14 @@ public class MoveHand : MonoBehaviour
     [SerializeField] bool MovieNoise = false;
     [SerializeField] GameObject MovieObject;
     [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用
+
+    [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
     [SerializeField] Material Ma;
 
+    [SerializeField] private bool DragJudge = false;                                        //アイコンを掴めるかどうかの確認
+    [SerializeField] public GameObject Catch_Icon = null;                                  //アイコン保管用（多分消せる）
+
     // Start is called before the first frame update
-    void Awake()
-    {
-        instance = this;                                                                    //インスタンス化
-    }
 
     void Start()
     {
@@ -37,49 +37,37 @@ public class MoveHand : MonoBehaviour
         RectTransform HandTransform = this.GetComponent<RectTransform>();
         HandTransform.TransformPoint(HandPosition);
         DragAndDrop = false;
-        FlameCount = 0;
         NoteNum = 0;
         NoteCollision = false;
         Movie = MovieObject.GetComponent<MovieChange>();
+        //DragAndDropObject = AssetManager.Instance.PrefabObject[0];
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (DragAndDrop == false && collision.gameObject.tag == "Icon")
+        if(collision.gameObject.tag == "Note" || collision.gameObject.name == "NextStage")
         {
-            DragJudge = true;
-            Catch_Icon = collision.gameObject;
-            ChangeMovie(Catch_Icon.name);
-            Catch_IconPosition = Catch_Icon.GetComponent<RectTransform>().localPosition;
-            Catch_Icon.GetComponent<Image>().color = Color.red;
-            //if (FlameCount % 5 == 0)
-            //{
-            //    NoteBox[NoteNum].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-            //}
-            //else
-            //{
-            //    NoteBox[NoteNum].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-            //}     いらんかもー
-
+            if (TouchJudge == false)
+            {
+                TouchJudge = true;
+                Touch_Object = collision.gameObject;
+            }
+            else
+            {
+                Duplication_Object = collision.gameObject;
+            }
+            
+        }
+        else if(collision.gameObject.name == "Target")
+        {
+            TouchJudge = true;
+            Touch_Object = collision.gameObject.transform.parent.gameObject;
+            collision.GetComponent<TargetCollision>().TouchImage();
+            ChangeMovie(Touch_Object.name);
         }
         else if (DragAndDrop == false && collision.gameObject.name == "NextStage")
         {
-            ChangeScene = true;
-            collision.gameObject.GetComponent<Text>().color = Color.red;
-           
-        }
-        else if(collision.gameObject.tag == "Note")
-        {
-            NoteCollision = true;
-            for(int i = 0; i < 8; i ++)
-            {
-                if(collision.gameObject.name == NoteBox[i].name)
-                {
-                    NoteNum = i;
-                    NoteBox[i].GetComponent<Image>().color = Color.red;
-                    //Debug.Log(collision.GetComponent<Image>().sprite.name);
-                }
-            }
+            collision.gameObject.GetComponent<Text>().color = Color.red;           
         }
         else
         {
@@ -91,72 +79,70 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (DragAndDrop == false && collision.gameObject.tag == "Icon" || collision.gameObject.tag == "Note")
-        {
-            //if (FlameCount % 5 == 0)
-            //{
-            //    collision.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-            //}
-            //else
-            //{
-            //    collision.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-            //}　　　いらんかもー
-
-        }
+      
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        DragJudge = false;
-        ChangeScene = false;
-        if (collision.gameObject.tag == "Icon")
+        if (collision.gameObject.tag == "Note" || collision.gameObject.name == "NextStage")
         {
-            collision.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            if (Duplication_Object == null)
+            {
+                TouchJudge = false;
+                Touch_Object = null;
+            }
+            else if(Duplication_Object != null)
+            {
+                TouchJudge = true;
+                Touch_Object = Duplication_Object;
+                Duplication_Object = null;
+            }
+
+            if (collision.gameObject.name == "NextStage")
+            {
+                collision.gameObject.GetComponent<Text>().color = Color.black;
+            }
         }
-        //SelectImage = null;
-        if (collision.gameObject.tag == "Note")
+        else if (collision.gameObject.name == "Target")
         {
-            NoteCollision = false;
-            collision.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            TouchJudge = false;
+            collision.GetComponent<TargetCollision>().DontTouchImage();
+            Touch_Object = null;
         }
-        if(collision.gameObject.name == "NextStage")
-        {
-            collision.gameObject.GetComponent<Text>().color = Color.black;
-        }
+
+        
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (ChangeScene == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
+        if(TouchJudge == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
         {
-            SceneChangeManager.instance.SceneTransition("ShimokawaraScene 1");
-            RhythmManager.Instance.FCnt = 0;
+            TouchDoPush();
         }
+        else if (TouchJudge == false && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
+        {
+            DoAButtonPush();
+        }
+
+        
 
 
         if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
         {
-            DoCarryIcon();
+           // DoCarryIcon();
         }
         else //  テンキーや3Dスティックの入力（GetAxis）がゼロではない時の動作
         {
-            DoCarryIcon();
+            //DoCarryIcon();
             MoveChange();
             RectTransform HandTransform = this.GetComponent<RectTransform>();
             HandTransform.localPosition = HandPosition;
             if (DragAndDrop == true)
             {
-                Catch_Icon.GetComponent<RectTransform>().localPosition = Catch_IconPosition;
+                DragAndDropObject.GetComponent<RectTransform>().localPosition = HandPosition;
             }           
-        }
-
-        FlameCount += 1;
-       
-        if (FlameCount >=250)
-        {
-            FlameCount = 0;
         }
 
         if(MovieNoise == true)
@@ -240,95 +226,154 @@ public class MoveHand : MonoBehaviour
         }
     }
 
-    void DoCarryIcon()
+    void TouchDoPush()
     {
-        if (DragAndDrop == false)
+        if (Touch_Object.tag == "Icon")
         {
-            if (DragJudge == true &&(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
+            if (DragAndDrop == false)
             {
+                CreateCloneIcon();
                 DragAndDrop = true;
-                GameObject CloneIconBox = null;
-                CloneIconBox = Instantiate(Catch_Icon, Catch_IconPosition, Quaternion.identity);
-                CloneIconBox.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
-                CloneIconBox.transform.SetSiblingIndex(3);
-                CloneIconBox.name = Catch_Icon.name;
             }
-            else if (NoteCollision == true &&(Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Backspace)) )
+            else
             {
-                NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
+                DragAndDrop = false;
+                 Destroy(DragAndDropObject);
             }
         }
-        else if (DragAndDrop == true)
+        else if(Touch_Object.tag == "Note")
         {
-            if (NoteCollision == true &&(Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)) )
+            if (DragAndDrop == true)
             {
-                switch (Catch_Icon.GetComponent<Image>().sprite.name)
+                switch (DragAndDropObject.name)
                 {
-                    case ("Umbrella_Waku"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Umbrella);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Umbrella;
+                    case ("Umbrella"):
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Umbrella, Touch_Object.name);
                         break;
 
-                    case ("Quaver_Waku"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Recorder);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Recorder;
+                    case ("Recorder"):
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Recorder, Touch_Object.name);
                         break;
 
-                    case ("Eraser_Waku"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Eraser);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Eraser;
+                    case ("Eraser"):
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Eraser, Touch_Object.name);
                         break;
 
-                    case ("Scrifice_Waku"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Sacrifice);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Sacrifice;
+                    case ("Sacrifice"):
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Sacrifice, Touch_Object.name);
                         break;
 
-                    case ("AirCannon_Waku"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.AirCannon);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.AirCannon;
+                    case ("AirCannon"):
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.AirCannon, Touch_Object.name);
                         break;
 
-                    case ("Bag_Waku"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Bag);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Bag;
+                    case ("Bag"):
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Bag, Touch_Object.name);
                         break;
 
-                    case ("Ruler_Waku"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Ruler);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Ruler;
+                    case ("Ruler"):
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Ruler, Touch_Object.name);
                         break;
 
-                    case ("Whistle_Waku"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Whistle);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Whistle;
+                    case ("Whistle"):
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Whistle, Touch_Object.name);
                         break;
 
                     case ("None"):
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
                         break;
 
                     default:
-                        NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
-                        RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
+                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
                         break;
 
                 }
             }
-            else if ((Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)) && NoteCollision == false)
+            else
+            {
+                InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
+            }
+        }
+        else if (Touch_Object.name == "NextStage")
+        {
+            if (DragAndDrop == false)
+            {
+                SceneChangeManager.instance.SceneTransition("ShimokawaraScene 1");
+                RhythmManager.Instance.FCnt = 0;
+            }
+            else
             {
                 DragAndDrop = false;
-                Destroy(Catch_Icon);
-            }
-            else if ((Input.GetKeyDown("joystick button 0") || Input.GetKeyDown(KeyCode.Backspace)) && NoteCollision == true)
-            {
-                NoteBox[NoteNum].GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
+                Destroy(DragAndDropObject);
             }
         }
     }
+
+    void DoAButtonPush()
+    {
+        if(DragAndDrop == true)
+        {
+            DragAndDrop = false;
+            Destroy(DragAndDropObject);
+        }
+    }
+    
+    void CreateCloneIcon()
+    {
+    
+        GameObject CloneIconBox = null;
+        CloneIconBox = Instantiate(AssetManager.Instance.PrefabObject[0], HandPosition, Quaternion.identity);
+        CloneIconBox.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
+        CloneIconBox.transform.SetSiblingIndex(3);
+        CloneIconBox.name = Touch_Object.name;
+        switch (CloneIconBox.name)
+        {
+            case ("Umbrella"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Umbrella);
+                break;
+
+            case ("Recorder"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Recorder);
+                break;
+
+            case ("Eraser"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Eraser);
+                break;
+
+            case ("Sacrifice"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Sacrifice);
+                break;
+
+            case ("AirCannon"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.AirCannon);
+                break;
+
+            case ("Bag"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Bag);
+                break;
+
+            case ("Ruler"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Ruler);
+                break;
+
+            case ("Whistle"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Whistle);
+                break;
+
+            case ("None"):
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
+                break;
+
+            default:
+                CloneIconBox.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
+                break;
+
+        }
+        DragAndDropObject = CloneIconBox;
+    }
+
+
+
 
     void ChangeMovie(string Name)
     {
@@ -339,35 +384,35 @@ public class MoveHand : MonoBehaviour
         ChangeMovieFlame = 0;
         switch (Name)
         {
-            case ("0"):
+            case ("Umbrella"):
                 Movie.Change(RhythmManager.RhythmAction.Umbrella);
                 break;
 
-            case ("1"):
+            case ("Recorder"):
                 Movie.Change(RhythmManager.RhythmAction.Recorder);
                 break;
 
-            case ("2"):
+            case ("Eraser"):
                 Movie.Change(RhythmManager.RhythmAction.Eraser);
                 break;
 
-            case ("3"):
+            case ("Sacrifice"):
                 Movie.Change(RhythmManager.RhythmAction.Sacrifice);
                 break;
 
-            case ("4"):
+            case ("AirCannon"):
                 Movie.Change(RhythmManager.RhythmAction.AirCannon);
                 break;
 
-            case ("5"):
+            case ("Bag"):
                 Movie.Change(RhythmManager.RhythmAction.Bag);
                 break;
 
-            case ("6"):
+            case ("Ruler"):
                 Movie.Change(RhythmManager.RhythmAction.Ruler);
                 break;
 
-            case ("7"):
+            case ("Whistle"):
                 Movie.Change(RhythmManager.RhythmAction.Whistle);
                 break;
 

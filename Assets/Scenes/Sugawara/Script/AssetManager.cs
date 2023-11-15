@@ -26,6 +26,7 @@ public class AssetManager : MonoBehaviour
 
     public static AssetManager Instance;        //シングルトンするためのインスタンス
     [SerializeField] private Sprite[] SpriteAsset = default;      //格納するスプライトの配列
+    [SerializeField] public GameObject[] PrefabObject = default;   //プレハブ化したオブジェクトの配列
     [SerializeField] private AudioClip[] SEAsset = default;       //格納するSEの配列
     [SerializeField] private AudioClip[] BGMAsset = default;      //格納するBGMの配列
     [SerializeField] private float AudioVolume = 0.0f;
