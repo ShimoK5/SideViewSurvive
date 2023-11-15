@@ -245,7 +245,9 @@ public class Enemy : MonoBehaviour
         m_Enemy.DeadCntFlag = deadCntFlag;
         if(deadCntFlag)
         {
+            //ここにカメラ範囲内のif分を噛ませる
             CameraPos.instance.HitSwing(new Vector3(m_Enemy.DeadVector.x, m_Enemy.DeadVector.y, 0));
+            SoundManager.instance.SEPlay("仮SE");
         }
     }
 

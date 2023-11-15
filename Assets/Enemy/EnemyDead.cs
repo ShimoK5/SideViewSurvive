@@ -53,7 +53,7 @@ public class EnemyDead : EnemyIF
             //マネージャーに加算を送るフラグtrueなら
             if(DeadCntFlag)
                 EnemyKillCountManager.Instance.DestroyCountUp();
-
+            SoundManager.instance.SEPlay("仮SE");
             Destroy(tf.gameObject);
 
         }
