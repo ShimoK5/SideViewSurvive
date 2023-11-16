@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
   m_Shader: {fileID: 4800000, guid: c72d78a017dc6d84d97b2950403ea666, type: 3}
-  m_ShaderKeywords: FILL_WITH_RED
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BlockScale: 35.2
-    - _BoolSwitch: 1
+    - _BoolSwitch: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1

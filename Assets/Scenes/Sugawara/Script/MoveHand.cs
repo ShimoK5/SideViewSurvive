@@ -40,6 +40,7 @@ public class MoveHand : MonoBehaviour
         NoteNum = 0;
         NoteCollision = false;
         Movie = MovieObject.GetComponent<MovieChange>();
+        Movie.Change(RhythmManager.RhythmAction.None);
         //DragAndDropObject = AssetManager.Instance.PrefabObject[0];
     }
 
@@ -108,6 +109,7 @@ public class MoveHand : MonoBehaviour
             TouchJudge = false;
             collision.GetComponent<TargetCollision>().DontTouchImage();
             Touch_Object = null;
+            Movie.Change(RhythmManager.RhythmAction.None);
         }
 
         
@@ -414,6 +416,10 @@ public class MoveHand : MonoBehaviour
 
             case ("Whistle"):
                 Movie.Change(RhythmManager.RhythmAction.Whistle);
+                break;
+
+            case ("None"):
+                Movie.Change(RhythmManager.RhythmAction.None);
                 break;
 
             default:
