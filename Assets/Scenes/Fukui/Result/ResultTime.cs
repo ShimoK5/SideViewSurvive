@@ -14,7 +14,7 @@ public class ResultTime : MonoBehaviour
     {
         // time = クラス名.gettime();
 
-        TimeText.text = string.Format("タイム:{0}", time);
+        TimeText.text = string.Format("{0}", time);
     }
 
     // Update is called once per frame

@@ -14,7 +14,7 @@ public class ResultDifficulty : MonoBehaviour
     {
         // difficulty = クラス名.getdifficulty();
 
-        DifficultyText.text = string.Format("難易度    Lv.{0}", difficulty);
+        DifficultyText.text = string.Format("    Lv.{0}", difficulty);
     }
 
     // Update is called once per frame

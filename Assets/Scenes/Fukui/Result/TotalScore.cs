@@ -14,7 +14,7 @@ public class TotalScore : MonoBehaviour
     {
         score = ScoreManager.instance.m_Score;
 
-        ScoreText.text = string.Format("スコア:{0}", score);
+        ScoreText.text = string.Format("{0}", score);
     }
 
     // Update is called once per frame

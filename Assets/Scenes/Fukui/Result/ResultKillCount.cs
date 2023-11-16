@@ -15,7 +15,7 @@ public class ResultKillCount : MonoBehaviour
     {
         killcount = EnemyKillCountManager.Instance.GetDestroyEnemy();
 
-        KillCountText.text = string.Format("倒した数:{0}", killcount);
+        KillCountText.text = string.Format("{0}", killcount);
     }
 
     // Update is called once per frame
