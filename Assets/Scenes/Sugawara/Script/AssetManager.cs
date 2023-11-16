@@ -279,5 +279,92 @@ public class AssetManager : MonoBehaviour
         }
         
     }
+
+    public Sprite ReferenceFlavor(RhythmManager.RhythmAction Action)
+    {
+       if (SpriteAsset.Length > 16)
+       {
+            switch (Action)
+            {
+                case RhythmManager.RhythmAction.Umbrella:
+                    return SpriteAsset[17];
+
+                case RhythmManager.RhythmAction.Recorder:
+                    return SpriteAsset[18];
+
+                case RhythmManager.RhythmAction.Eraser:
+                    return SpriteAsset[19];
+
+                case RhythmManager.RhythmAction.Sacrifice:
+                    return SpriteAsset[20];
+
+                case RhythmManager.RhythmAction.AirCannon:
+                    return SpriteAsset[21];
+
+                case RhythmManager.RhythmAction.Bag:
+                    return SpriteAsset[22];
+
+                case RhythmManager.RhythmAction.Ruler:
+                    return SpriteAsset[23];
+
+                case RhythmManager.RhythmAction.Whistle:
+                    return SpriteAsset[24];
+
+                case RhythmManager.RhythmAction.None:
+                    return SpriteAsset[25];
+
+                default:
+                    return SpriteAsset[25];
+            }
+        }
+        else
+        {
+            return SpriteAsset[8];
+        }
+    }
+
+    public Sprite ReferenceHeader(RhythmManager.RhythmAction Action)
+    {
+        if (SpriteAsset.Length > 16)
+        {
+            switch (Action)
+            {
+                case RhythmManager.RhythmAction.Umbrella:
+                    return SpriteAsset[26];
+
+                case RhythmManager.RhythmAction.Recorder:
+                    return SpriteAsset[27];
+
+                case RhythmManager.RhythmAction.Eraser:
+                    return SpriteAsset[28];
+
+                case RhythmManager.RhythmAction.Sacrifice:
+                    return SpriteAsset[29];
+
+                case RhythmManager.RhythmAction.AirCannon:
+                    return SpriteAsset[30];
+
+                case RhythmManager.RhythmAction.Bag:
+                    return SpriteAsset[31];
+
+                case RhythmManager.RhythmAction.Ruler:
+                    return SpriteAsset[32];
+
+                case RhythmManager.RhythmAction.Whistle:
+                    return SpriteAsset[33];
+
+                case RhythmManager.RhythmAction.None:
+                    return SpriteAsset[34];
+
+                default:
+                    return SpriteAsset[34];
+            }
+        }
+        else
+        {
+            return SpriteAsset[8];
+        }
+    }
+
 }
 
