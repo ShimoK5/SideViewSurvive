@@ -27,3 +27,4 @@ public class RectTransForm : MonoBehaviour
         //変更した位置をRectTransformに格納する
         donoTransForm.localPosition = donoPosition;
     }
+}
