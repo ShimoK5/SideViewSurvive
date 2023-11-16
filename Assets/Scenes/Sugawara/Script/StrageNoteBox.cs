@@ -12,11 +12,13 @@ public class StrageNoteBox : MonoBehaviour
     [SerializeField] private Sprite[] PresetSprite = new Sprite[PresetSpriteSize];
     [SerializeField] private AudioClip[] ActionSE = new AudioClip[PresetSpriteSize];
     [SerializeField] private AudioSource audioSource = null;
+    [SerializeField] private bool ChangeNoteBox = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        ChangeNoteBox = false;
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = 0.03f;
 
@@ -78,6 +80,57 @@ public class StrageNoteBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(ChangeNoteBox == false)
+        {
+            if (PresetSpriteSize != 0)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    NoteBox = transform.GetChild(i).gameObject;
+
+                    switch (Rhythm.ActionArray[i])
+                    {
+                        case RhythmAction.Umbrella:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[0];
+                            break;
+
+                        case RhythmAction.Recorder:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[1];
+                            break;
+
+                        case RhythmAction.Eraser:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[2];
+                            break;
+
+                        case RhythmAction.Sacrifice:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[3];
+                            break;
+
+                        case RhythmAction.AirCannon:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[4];
+                            break;
+
+                        case RhythmAction.Bag:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[5];
+                            break;
+
+                        case RhythmAction.Ruler:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[6];
+                            break;
+
+                        case RhythmAction.Whistle:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[7];
+                            break;
+
+                        default:
+                            NoteBox.GetComponent<Image>().sprite = PresetSprite[8];
+                            break;
+                    }
+                }
+
+            }
+            ChangeNoteBox = true;
+        }
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InputRhythm : MonoBehaviour
@@ -10,7 +11,8 @@ public class InputRhythm : MonoBehaviour
     [SerializeField] private bool Changer = false;                                                      //シーン変更の際に使用する変数
     public bool UpdateRhythmManager = false;                                                            //変更があった際に使用する変数
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう
-    public GameObject[] NoteBox = new GameObject[8];                                                    //ノートボックス格納
+    public GameObject[] NoteBox = new GameObject[8];   //ノートボックス格納
+    private string SceneName = null;
 
     void Awake()
     {
@@ -31,12 +33,24 @@ public class InputRhythm : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        SceneName = SceneManager.GetActiveScene().name;
+        for(int Number = 0;Number < 8;Number++)
+        {
+            Action[Number] = RhythmManager.RhythmAction.None;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(UpdateRhythmManager == true)
+        if(SceneManager.GetActiveScene().name != SceneName)
+        {
+            ResetSceneAction();
+            ChangeSceneAction();
+        }
+
+
+        if (UpdateRhythmManager == true)
         {
             for(int Number = 0; Number < 8; Number++)
             {
