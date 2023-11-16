@@ -1262,6 +1262,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7323444327955935837, guid: 7cf61d8f6a7119843836ec0d59f36525,
+        type: 3}
+      propertyPath: GameState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7323444327955935838, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}
       propertyPath: m_Name
@@ -1525,7 +1530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &756528790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2298,7 +2303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 291.2549, y: 20.00034}
+  m_AnchoredPosition: {x: 270, y: 20.000813}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1240981865
@@ -2390,7 +2395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 0}
+  m_AnchoredPosition: {x: -270.86642, y: 0}
   m_SizeDelta: {x: 300, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1242062429
@@ -2803,7 +2808,7 @@ PrefabInstance:
     - target: {fileID: 1244842618536964186, guid: ae1fbb0bc10f98c4c9275a5e7a1f5aff,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2952347358569358918, guid: ae1fbb0bc10f98c4c9275a5e7a1f5aff,
         type: 3}
@@ -2940,8 +2945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 201.32791, y: 33.904613}
-  m_SizeDelta: {x: 100, y: 300}
+  m_AnchoredPosition: {x: 185, y: 33}
+  m_SizeDelta: {x: 50, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1451578922
 MonoBehaviour:
@@ -2962,7 +2967,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3f516d74f509bb544968fe2f3d2705ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86546dd7b64db68468752c4be63c3b7c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

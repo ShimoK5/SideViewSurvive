@@ -15,7 +15,7 @@ public class TargetCollision : MonoBehaviour
     {
         Parent = this.transform.parent.gameObject;
         ImageColor = Color.white;
-        ImageColor.a = 0.8f;
+        ImageColor.a = 0.7f;
     }
 
     // Update is called once per frame
@@ -24,9 +24,9 @@ public class TargetCollision : MonoBehaviour
         if(ChangeAlfa == false)
         {
             ImageColor.a -= ChangeSpeedAlfa;
-            if(ImageColor.a <= 0.8f)
+            if(ImageColor.a <= 0.7f)
             {
-                ImageColor.a = 0.8f;
+                ImageColor.a = 0.7f;
             }
         }
         else
