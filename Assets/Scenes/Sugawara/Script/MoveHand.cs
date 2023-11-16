@@ -22,7 +22,8 @@ public class MoveHand : MonoBehaviour
     [SerializeField] bool MovieNoise = false;
     [SerializeField] GameObject MovieObject;
     [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用
-
+    private Color Translucent;
+    private Color entity;
     [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
     [SerializeField] Material Ma;
 
@@ -43,6 +44,9 @@ public class MoveHand : MonoBehaviour
         Movie.Change(RhythmManager.RhythmAction.None);
         ChangeFlavor("None");
         ChangeHeader("None");
+        Translucent = Color.white;
+        Translucent.a = 0.5f;
+        entity = Color.white;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +57,7 @@ public class MoveHand : MonoBehaviour
             {
                 TouchJudge = true;
                 Touch_Object = collision.gameObject;
+                Touch_Object.GetComponent<Image>().color = entity;
             }
             else
             {
@@ -87,6 +92,11 @@ public class MoveHand : MonoBehaviour
         {
             collision.gameObject.GetComponent<Text>().color = Color.red;
         }
+
+        //if(Duplication_Object != null)
+        //{
+            
+        //}
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -95,13 +105,16 @@ public class MoveHand : MonoBehaviour
         {
             if (Duplication_Object == null)
             {
+                Touch_Object.GetComponent<Image>().color = Translucent;
                 TouchJudge = false;
                 Touch_Object = null;
             }
             else if(Duplication_Object != null)
             {
                 TouchJudge = true;
+                Touch_Object.GetComponent<Image>().color = Translucent;
                 Touch_Object = Duplication_Object;
+                Touch_Object.GetComponent<Image>().color = entity;
                 Duplication_Object = null;
             }
 
