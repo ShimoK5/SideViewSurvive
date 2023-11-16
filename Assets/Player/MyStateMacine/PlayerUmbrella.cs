@@ -6,7 +6,7 @@ public class PlayerUmbrella : PlayerIF
 {
     public PlayerUmbrella(PlayerIF oldPlayer)
     {
-        if (Player.instance.GetAnim().Anim.AnimationName != "unbrella/unbrella_atteck")
+        //if (Player.instance.GetAnim().Anim.AnimationName != "unbrella/unbrella_atteck")
             Player.instance.GetAnim().Anim.state.SetAnimation(0, "unbrella/unbrella_atteck", true);
         CopyPlayer(oldPlayer);
         //減速

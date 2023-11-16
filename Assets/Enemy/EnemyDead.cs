@@ -8,8 +8,17 @@ public class EnemyDead : EnemyIF
 {
     int FCnt = 0;
 
+    float DeadVectorMulti = 0.8f;
+    int DeadFlame = 7;
+
     public EnemyDead(EnemyIF oldEnemy)
     {
+        if (TempEnemyDeadData.instance)
+        {
+            DeadVectorMulti = TempEnemyDeadData.instance.DeadVectorMulti;
+            DeadFlame = TempEnemyDeadData.instance.DeadFlame;
+        }
+
         //EnemyAnim.instans.Anim.SetTrigger("Run");
         CopyEnemy(oldEnemy);
         FCnt = 0;
@@ -19,7 +28,11 @@ public class EnemyDead : EnemyIF
 
         //速度反映
         OtherVel = Vector2.zero;
-        SelfVel = DeadVector * 0.2f;
+        SelfVel = DeadVector * DeadVectorMulti;
+
+        
+
+       
     }
 
     public override void CustumUpdate()
@@ -31,7 +44,7 @@ public class EnemyDead : EnemyIF
     {
         FCnt++;
 
-        if(FCnt > 6)
+        if(FCnt > DeadFlame)
         {
             GameObject myPrefab;//プレハブをGameObject型で取得
             myPrefab = (GameObject)Resources.Load("Prefabs/vfx_EnemyDeathMagenta");//プレハブをGameObject型で取得
@@ -39,8 +52,11 @@ public class EnemyDead : EnemyIF
 
             //マネージャーに加算を送るフラグtrueなら
             if(DeadCntFlag)
+            {
                 EnemyKillCountManager.Instance.DestroyCountUp();
-
+                SoundManager.instance.SEPlay("仮SE");
+            }
+               
             Destroy(tf.gameObject);
 
         }

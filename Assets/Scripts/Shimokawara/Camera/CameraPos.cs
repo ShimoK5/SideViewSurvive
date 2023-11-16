@@ -23,7 +23,12 @@ public class CameraPos : MonoBehaviour
     Vector3 SwingAddValue = Vector3.zero;    //カメラ座標に加算する値（敵ヒット時など）
     int HitSwingCnt = 0;
     Vector3 FirstSwingVector = Vector3.zero;
+    float SwingAngle = 0;
     bool bHitSwing = false;
+
+    public float ViewWidth;     //映してる領域の横幅
+    public float ViewHeight;    //映してる領域の縦幅
+
     [Header("ヒット振動距離の長さ")]
     [SerializeField] float MAX_SWING_RANGE ;
     [Header("ヒット振動時間の長さ")]
@@ -50,13 +55,23 @@ public class CameraPos : MonoBehaviour
         Vector3 MinObj = GameObject.Find("StartObj").transform.position;
         Vector3 MaxObj = GameObject.Find("GoalObj").transform.position;
 
-        float TanTheta = Mathf.Tan(51.225f * Mathf.Deg2Rad);
+        //視野角の半分のTanを保存
+        float TanThetaX = Mathf.Tan(VerticalToHorizontalFov(GetComponent<Camera>().fieldOfView, GetComponent<Camera>().aspect) * 0.5f * Mathf.Deg2Rad);
+        float TanThetaY = Mathf.Tan(GetComponent<Camera>().fieldOfView * 0.5f * Mathf.Deg2Rad);
+        //カメラ座標Zからプレイヤーが立つ中心位置のZの距離
         float DistanceZ = Mathf.Abs(transform.position.z - MinObj.z);//プレイヤーの壁をメイン
+        //カメラ座標Zからブロックの手前座標Zの距離
         //float DistanceZ = Mathf.Abs(transform.position.z - (-1));//ますをメイン
-        float Zurashi = TanTheta * DistanceZ  -2.5f;
+        
+        //映してる領域を保存
+        ViewWidth = TanThetaX * DistanceZ * 2;
+        ViewHeight = TanThetaY * DistanceZ * 2;
 
-        MinX = MinObj.x + Zurashi;
-        MaxX = MaxObj.x - Zurashi;
+        //MinXとMaxXobjからどれだけ離した位置で止めるのかの距離保存
+        float ZurashiX = TanThetaX * DistanceZ  -2.5f;
+
+        MinX = MinObj.x + ZurashiX;
+        MaxX = MaxObj.x - ZurashiX;
 
         instance = this;
         
@@ -71,8 +86,18 @@ public class CameraPos : MonoBehaviour
         StartMovieInit();
     }
 
+    private float VerticalToHorizontalFov(float horizontalFov, float aspectRatio)
+    {
+        return 2f * Mathf.Rad2Deg *  Mathf.Atan(Mathf.Tan(horizontalFov * 0.5f * Mathf.Deg2Rad) * aspectRatio);
+    }
+
     public void FixedUpdate()
     {
+        //GameObject myPrefab = (GameObject)Resources.Load("CubeParent");//プレハブをGameObject型で取得
+        //GameObject Obj = Instantiate(myPrefab, new Vector3 (transform.position.x, transform.position.y,Player.instance.transform.position.z)  + new Vector3(ViewWidth * 0.5f, ViewHeight * 0.5f, 0), Quaternion.identity);
+        //GameObject Obj2 = Instantiate(myPrefab, new Vector3 (transform.position.x, transform.position.y,Player.instance.transform.position.z)  - new Vector3(ViewWidth * 0.5f, ViewHeight * 0.5f, 0), Quaternion.identity);
+        //GameObject Obj3 = Instantiate(myPrefab, new Vector3 (transform.position.x, transform.position.y,Player.instance.transform.position.z)  - new Vector3(0,0, 0), Quaternion.identity);
+
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.StartCameraMotion:
@@ -134,6 +159,7 @@ public class CameraPos : MonoBehaviour
         bHitSwing = true;
         HitSwingCnt = 0;
         FirstSwingVector = direction.normalized;
+        SwingAngle = Mathf.Atan2(FirstSwingVector.y, FirstSwingVector.x);
     }
 
     //ヒット振動の更新
@@ -156,7 +182,9 @@ public class CameraPos : MonoBehaviour
             }
             else
             {
-                float Angle = Random.Range(0.0f, 6.28f);
+                //float Angle = Random.Range(0.0f, 6.28f);
+                SwingAngle += 6.28f * 2 / MAX_SWING_CNT;//二周する
+                float Angle = SwingAngle;
                 Vector3 SwingVector = Vector3.zero;
                 SwingVector.x = Mathf.Cos(Angle);
                 SwingVector.y = Mathf.Sin(Angle);

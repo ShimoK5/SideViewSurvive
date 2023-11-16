@@ -9,7 +9,7 @@ public class PlayerRuler : PlayerIF
 
     public PlayerRuler(PlayerIF oldPlayer)
     {
-        if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
+        //if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
             Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
         CopyPlayer(oldPlayer);
         //横移動
