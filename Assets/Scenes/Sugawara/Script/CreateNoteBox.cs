@@ -10,6 +10,7 @@ public class CreateNoteBox : MonoBehaviour
     [SerializeField] GameObject[] SelectNote = new GameObject[8];
     [SerializeField] int HierarchyNumber = 3;
     [SerializeField] float MoveWidth = 0.0f;
+    Color ImageColor = Color.white;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class CreateNoteBox : MonoBehaviour
         MoveWidth = PrefabPosition.x;
         float NotePosition = (this.GetComponent<RectTransform>().sizeDelta.x - PrefabNote.GetComponent<RectTransform>().sizeDelta.x * 2 - 20.0f) / 7;
         GameObject CloneNote = null;
+        ImageColor.a = 0.5f;
         for (int NoteNum = 0; NoteNum < SelectNote.Length; NoteNum++)
         {
             PrefabPosition.x = (-(this.GetComponent<RectTransform>().sizeDelta.x) + PrefabNote.GetComponent<RectTransform>().sizeDelta.x * 2 + 20.0f) / 2
@@ -25,6 +27,7 @@ public class CreateNoteBox : MonoBehaviour
             CloneNote.name = "" + NoteNum;
             CloneNote.tag = "Note";
             CloneNote.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceBox(RhythmManager.Instance.ActionArray[NoteNum]);
+            CloneNote.GetComponent<Image>().color = ImageColor;
             CloneNote.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
             CloneNote.transform.SetSiblingIndex(HierarchyNumber);
             InputRhythm.instance.NoteBox[NoteNum] = CloneNote;

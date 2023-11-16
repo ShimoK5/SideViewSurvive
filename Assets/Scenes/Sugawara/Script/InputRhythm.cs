@@ -13,6 +13,8 @@ public class InputRhythm : MonoBehaviour
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう
     public GameObject[] NoteBox = new GameObject[8];   //ノートボックス格納
     private string SceneName = null;
+    private int DelayChange = 240;
+    private bool SceneChange = false; 
 
     void Awake()
     {
@@ -27,6 +29,8 @@ public class InputRhythm : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            ResetSceneAction();
+            ChangeSceneAction();
         }
     }
     // Start is called before the first frame update
@@ -47,57 +51,40 @@ public class InputRhythm : MonoBehaviour
         {
             ResetSceneAction();
             ChangeSceneAction();
+            SceneName = SceneManager.GetActiveScene().name;
         }
 
+        if(SceneManager.GetActiveScene().name == "ShimokawaraScene 1")
+        {
+            int PlayerHItPoint = Player.instance.HitPoint;
+            if(PlayerHItPoint <= 0)
+            {
+                SceneChange = true;
+            }
+        }
+
+        if(SceneChange == true)
+        {
+            DelayChange -= 1;
+            if(DelayChange >= 0)
+            {
+                SceneChange = false;
+                DelayChange = 240;
+                SceneName = "Change";
+            }
+        }
 
         if (UpdateRhythmManager == true)
         {
-            for(int Number = 0; Number < 8; Number++)
+            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "SetScene")
             {
-                switch(Action[Number])
-                {
-                    case RhythmManager.RhythmAction.Umbrella:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Umbrella;
-                        break;
-
-                    case RhythmManager.RhythmAction.Recorder:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Recorder;
-                        break;
-
-                    case RhythmManager.RhythmAction.Eraser:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Eraser;
-                        break;
-
-                    case RhythmManager.RhythmAction.Sacrifice:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Sacrifice;
-                        break;
-
-                    case RhythmManager.RhythmAction.AirCannon:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.AirCannon;
-                        break;
-
-                    case RhythmManager.RhythmAction.Bag:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Bag;
-                        break;
-
-                    case RhythmManager.RhythmAction.Ruler:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Ruler;
-                        break;
-
-                    case RhythmManager.RhythmAction.Whistle:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Whistle;
-                        break;
-
-                    case RhythmManager.RhythmAction.None:
-                        RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.None;
-                        break;
-
-                    default:
-                        break;
-                }
+                ChangeRhythmManager();
             }
-
-            UpdateRhythmManager = false;
+            if (SceneManager.GetActiveScene().name == "SetScene")
+            {
+                ChangeNoteBox();
+            }
+                UpdateRhythmManager = false;
         }
     }
 
@@ -215,6 +202,103 @@ public class InputRhythm : MonoBehaviour
 
         }
     }
+
+    void ChangeRhythmManager()
+    {
+        for (int Number = 0; Number < 8; Number++)
+        {
+            switch (Action[Number])
+            {
+                case RhythmManager.RhythmAction.Umbrella:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Umbrella;
+                    break;
+
+                case RhythmManager.RhythmAction.Recorder:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Recorder;
+                    break;
+
+                case RhythmManager.RhythmAction.Eraser:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Eraser;
+                    break;
+
+                case RhythmManager.RhythmAction.Sacrifice:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Sacrifice;
+                    break;
+
+                case RhythmManager.RhythmAction.AirCannon:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.AirCannon;
+                    break;
+
+                case RhythmManager.RhythmAction.Bag:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Bag;
+                    break;
+
+                case RhythmManager.RhythmAction.Ruler:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Ruler;
+                    break;
+
+                case RhythmManager.RhythmAction.Whistle:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.Whistle;
+                    break;
+
+                case RhythmManager.RhythmAction.None:
+                    RhythmManager.Instance.ActionArray[Number] = RhythmManager.RhythmAction.None;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    void ChangeNoteBox()
+    {
+        for (int Number = 0; Number < 8; Number++)
+        {
+            switch (Action[Number])
+            {
+                case RhythmManager.RhythmAction.Umbrella:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Umbrella);
+                    break;
+
+                case RhythmManager.RhythmAction.Recorder:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Recorder);
+                    break;
+
+                case RhythmManager.RhythmAction.Eraser:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Eraser);
+                    break;
+
+                case RhythmManager.RhythmAction.Sacrifice:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Sacrifice);
+                    break;
+
+                case RhythmManager.RhythmAction.AirCannon:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.AirCannon);
+                    break;
+
+                case RhythmManager.RhythmAction.Bag:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Bag);
+                    break;
+
+                case RhythmManager.RhythmAction.Ruler:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Ruler);
+                    break;
+
+                case RhythmManager.RhythmAction.Whistle:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Whistle);
+                    break;
+
+                case RhythmManager.RhythmAction.None:
+                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.None);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
 
     public void ChangeSceneAction()
     {
