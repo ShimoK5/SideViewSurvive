@@ -24,6 +24,7 @@ public class PlayerIF : PawnIF
     static protected float GLAVITY = 0.68f * MultiplyNum;       //重力
     static protected float ACTION_VEL_MULTI = 0.8f;     //アクション中の減速率
     public float KNOCK_BACK_POWER = 20 * MultiplyNum;   //ノックバックの強さ
+    static protected int MAX_AIRBORNE_FLAME = 60;          //滞空時間
 
     public  PLAYER_STATE PlayerState { get; set; } = PLAYER_STATE.STAND;
     public PLAYER_STATE NextPlayerState { get; set; } = PLAYER_STATE.STAND;
@@ -37,9 +38,11 @@ public class PlayerIF : PawnIF
     //protected bool JumpKeyDown = false; //ジャンプキーを押しているかどうか            
     static AfterImage AfterImageInstanse = new AfterImage();
 
-    public bool ActionInvisible;
-
-
+    public bool ActionInvisible;    //アクション無敵フラグ
+    public int AirBorneFlame;       //滞空したフレーム数
+    public bool AlreadyAirBorne = false;    //既に浮遊したかどうかのフラグ
+    public bool NowAirBorne = false;        //浮遊中かどうかのフラグ
+    
     //コピー関数
     //全ての変数をコピーする
     protected void CopyPlayer(PlayerIF oldPlayer)
@@ -54,6 +57,9 @@ public class PlayerIF : PawnIF
         //JumpKeyDown = oldPlayer.JumpKeyDown;
         tf = oldPlayer.tf;
         Size = oldPlayer.Size;
+        AirBorneFlame = oldPlayer.AirBorneFlame;
+        AlreadyAirBorne = oldPlayer.AlreadyAirBorne;
+        NowAirBorne = oldPlayer.NowAirBorne;
     }
 
     //PlayerIF(PlayerIF oldPlayer)
@@ -78,6 +84,7 @@ public class PlayerIF : PawnIF
         Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
         //JumpKeyDown = false;
         ActionInvisible = false;
+        AirBorneFlame = 0;
         //PlayerAnim.instans.Anim.SetInteger("AnimStateCnt", 1);
     }
     public virtual void CustumUpdate()//仮想関数
@@ -211,6 +218,74 @@ public class PlayerIF : PawnIF
             Debug.Log("Fly");
 
         }
+    }
+
+    //滞空
+    protected void AirBorneCheck(bool canAirborne)//引数は滞空可能かどうか
+    {
+        //入力instanceなければ
+        if (!InputManager_FU.instanse)
+        {
+            return;
+        }
+        //地上なら
+        if (isGround )
+        {
+            ResetAirborneData();
+            return;
+        }
+        //引数滞在不可なら
+        if (!canAirborne)
+        {
+            //直前まで浮遊していたら
+            if (NowAirBorne)
+            {
+                //既に浮遊したフラグをオン
+                AlreadyAirBorne = true;
+            }
+
+            return;
+        }
+
+
+        //入力ありかつ下降中かつまだ浮遊してないかつ制限時間を超えていなければ
+        if (InputManager_FU.instanse.GetKey(Key.A) && 
+            SelfVel.y <= 0 &&
+            !AlreadyAirBorne &&
+            AirBorneFlame <= MAX_AIRBORNE_FLAME) 
+        {
+            //下降を止める
+            SelfVel.y = 0;
+            OtherVel.y = 0;
+            //カウントを加算する
+            AirBorneFlame++;
+            //現在の浮遊状態を保存
+            NowAirBorne = true;
+
+            GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerJumping");
+            Effect = Instantiate(Effect, tf.transform.position, Quaternion.Euler(0, -90, 0));
+
+        }
+        else
+        {
+            //直前まで浮遊していたら
+            if (NowAirBorne)
+            {
+                //既に浮遊したフラグをオン
+                AlreadyAirBorne = true;
+            }
+            //現在の浮遊状態を保存
+            NowAirBorne = false;
+        }
+        
+        
+    }
+
+    void ResetAirborneData()
+    {
+        NowAirBorne = false;
+        AlreadyAirBorne = false;
+        AirBorneFlame = 0;
     }
 
     public override void HitUnder(Block block)

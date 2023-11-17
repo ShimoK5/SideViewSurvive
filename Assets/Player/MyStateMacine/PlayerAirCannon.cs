@@ -62,6 +62,8 @@ public class PlayerAirCannon : PlayerIF
             //Jump();
             //状態遷移
             ChangeNextState();
+            //浮遊
+            AirBorneCheck(false);
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -83,6 +85,8 @@ public class PlayerAirCannon : PlayerIF
             ChangeDirection();
             //状態遷移
             ChangeNextState();
+            //浮遊
+            AirBorneCheck(false);
             //速度反映
             MovePlayer();
             //フラグリセット
