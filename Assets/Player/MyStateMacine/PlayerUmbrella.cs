@@ -54,6 +54,8 @@ public class PlayerUmbrella : PlayerIF
             Jump();
             //状態遷移
             //ChangeNextState();
+            //浮遊
+            AirBorneCheck(true);
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -75,6 +77,8 @@ public class PlayerUmbrella : PlayerIF
             ChangeDirection();
             //状態遷移
             //ChangeNextState();
+            //浮遊
+            AirBorneCheck(true);
             //速度反映
             MovePlayer();
             //フラグリセット

@@ -45,6 +45,8 @@ public class PlayerRecorder : PlayerIF
             Jump();
             //状態遷移
             //ChangeNextState();
+            //浮遊
+            AirBorneCheck(true);
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -66,6 +68,8 @@ public class PlayerRecorder : PlayerIF
             ChangeDirection();
             //状態遷移
             //ChangeNextState();
+            //浮遊
+            AirBorneCheck(true);
             //速度反映
             MovePlayer();
             //フラグリセット
