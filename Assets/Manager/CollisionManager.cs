@@ -40,6 +40,7 @@ void Start()
 			case GAME_STATE.StartPlayerMotion:
 			case GAME_STATE.Game:
 			case GAME_STATE.DeadPlayer:
+			case GAME_STATE.DeadPlayerStop:
 			case GAME_STATE.EndPlayerMotion:
 				FixedGame();
 				break;
