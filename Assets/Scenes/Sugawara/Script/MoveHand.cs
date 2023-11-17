@@ -22,7 +22,8 @@ public class MoveHand : MonoBehaviour
     [SerializeField] bool MovieNoise = false;
     [SerializeField] GameObject MovieObject;
     [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用
-
+    private Color Translucent;
+    private Color entity;
     [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
     [SerializeField] Material Ma;
 
@@ -41,7 +42,11 @@ public class MoveHand : MonoBehaviour
         NoteCollision = false;
         Movie = MovieObject.GetComponent<MovieChange>();
         Movie.Change(RhythmManager.RhythmAction.None);
-        //DragAndDropObject = AssetManager.Instance.PrefabObject[0];
+        ChangeFlavor("None");
+        ChangeHeader("None");
+        Translucent = Color.white;
+        Translucent.a = 0.5f;
+        entity = Color.white;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -52,6 +57,7 @@ public class MoveHand : MonoBehaviour
             {
                 TouchJudge = true;
                 Touch_Object = collision.gameObject;
+                Touch_Object.GetComponent<Image>().color = entity;
             }
             else
             {
@@ -65,6 +71,8 @@ public class MoveHand : MonoBehaviour
             Touch_Object = collision.gameObject.transform.parent.gameObject;
             collision.GetComponent<TargetCollision>().TouchImage();
             ChangeMovie(Touch_Object.name);
+            ChangeFlavor(Touch_Object.name);
+            ChangeHeader(Touch_Object.name);
         }
         else if (DragAndDrop == false && collision.gameObject.name == "NextStage")
         {
@@ -80,7 +88,15 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-      
+        if (DragAndDrop == false && collision.gameObject.name == "NextStage")
+        {
+            collision.gameObject.GetComponent<Text>().color = Color.red;
+        }
+
+        //if(Duplication_Object != null)
+        //{
+            
+        //}
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -89,13 +105,16 @@ public class MoveHand : MonoBehaviour
         {
             if (Duplication_Object == null)
             {
+                Touch_Object.GetComponent<Image>().color = Translucent;
                 TouchJudge = false;
                 Touch_Object = null;
             }
             else if(Duplication_Object != null)
             {
                 TouchJudge = true;
+                Touch_Object.GetComponent<Image>().color = Translucent;
                 Touch_Object = Duplication_Object;
+                Touch_Object.GetComponent<Image>().color = entity;
                 Duplication_Object = null;
             }
 
@@ -110,6 +129,8 @@ public class MoveHand : MonoBehaviour
             collision.GetComponent<TargetCollision>().DontTouchImage();
             Touch_Object = null;
             Movie.Change(RhythmManager.RhythmAction.None);
+            ChangeFlavor("None");
+            ChangeHeader("None");
         }
 
         
@@ -326,7 +347,7 @@ public class MoveHand : MonoBehaviour
         GameObject CloneIconBox = null;
         CloneIconBox = Instantiate(AssetManager.Instance.PrefabObject[0], HandPosition, Quaternion.identity);
         CloneIconBox.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
-        CloneIconBox.transform.SetSiblingIndex(3);
+        CloneIconBox.transform.SetSiblingIndex(14);
         CloneIconBox.name = Touch_Object.name;
         switch (CloneIconBox.name)
         {
@@ -420,6 +441,98 @@ public class MoveHand : MonoBehaviour
 
             case ("None"):
                 Movie.Change(RhythmManager.RhythmAction.None);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    void ChangeFlavor(string Name)
+    {
+        GameObject Flavor = GameObject.Find("Flavor");
+        switch (Name)
+        {
+            case ("Umbrella"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Umbrella);
+                break;
+
+            case ("Recorder"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Recorder);
+                break;
+
+            case ("Eraser"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Eraser);
+                break;
+
+            case ("Sacrifice"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Sacrifice);
+                break;
+
+            case ("AirCannon"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.AirCannon);
+                break;
+
+            case ("Bag"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Bag);
+                break;
+
+            case ("Ruler"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Ruler);
+                break;
+
+            case ("Whistle"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Whistle);
+                break;
+
+            case ("None"):
+                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.None);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    void ChangeHeader(string Name)
+    {
+        GameObject Header = GameObject.Find("Header");
+        switch (Name)
+        {
+            case ("Umbrella"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Umbrella);
+                break;
+
+            case ("Recorder"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Recorder);
+                break;
+
+            case ("Eraser"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Eraser);
+                break;
+
+            case ("Sacrifice"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Sacrifice);
+                break;
+
+            case ("AirCannon"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.AirCannon);
+                break;
+
+            case ("Bag"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Bag);
+                break;
+
+            case ("Ruler"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Ruler);
+                break;
+
+            case ("Whistle"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Whistle);
+                break;
+
+            case ("None"):
+                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.None);
                 break;
 
             default:

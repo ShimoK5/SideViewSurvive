@@ -13,6 +13,8 @@ public class InputRhythm : MonoBehaviour
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう
     public GameObject[] NoteBox = new GameObject[8];   //ノートボックス格納
     private string SceneName = null;
+    private int DelayChange = 240;
+    private bool SceneChange = false; 
 
     void Awake()
     {
@@ -27,6 +29,8 @@ public class InputRhythm : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            ResetSceneAction();
+            ChangeSceneAction();
         }
     }
     // Start is called before the first frame update
@@ -50,6 +54,25 @@ public class InputRhythm : MonoBehaviour
             SceneName = SceneManager.GetActiveScene().name;
         }
 
+        if(SceneManager.GetActiveScene().name == "ShimokawaraScene 1")
+        {
+            int PlayerHItPoint = Player.instance.HitPoint;
+            if(PlayerHItPoint <= 0)
+            {
+                SceneChange = true;
+            }
+        }
+
+        if(SceneChange == true)
+        {
+            DelayChange -= 1;
+            if(DelayChange >= 0)
+            {
+                SceneChange = false;
+                DelayChange = 240;
+                SceneName = "Change";
+            }
+        }
 
         if (UpdateRhythmManager == true)
         {
