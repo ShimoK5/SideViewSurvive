@@ -57,7 +57,7 @@ public class MoveHand : MonoBehaviour
             {
                 TouchJudge = true;
                 Touch_Object = collision.gameObject;
-                Touch_Object.GetComponent<Image>().color = entity;
+                //Touch_Object.GetComponent<Image>().color = entity;
             }
             else
             {
@@ -105,7 +105,7 @@ public class MoveHand : MonoBehaviour
         {
             if (Duplication_Object == null)
             {
-                Touch_Object.GetComponent<Image>().color = Translucent;
+                //Touch_Object.GetComponent<Image>().color = Translucent;
                 TouchJudge = false;
                 Touch_Object = null;
             }
@@ -175,7 +175,7 @@ public class MoveHand : MonoBehaviour
             Ma.SetFloat("_BoolSwitch",1.0f);
             Ma.EnableKeyword("FILL_WITH_RED");
             ChangeMovieFlame += 1;
-            if (ChangeMovieFlame > 180)
+            if (ChangeMovieFlame > 60)
             {
                 Ma.SetFloat("_BoolSwitch", 0.0f);
                 ChangeMovieFlame = 0;
