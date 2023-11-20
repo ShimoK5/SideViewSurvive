@@ -258,16 +258,32 @@ void Start()
 		}
 
 		if (Under != -1)
+        {
 			pawn.HitUnder(Blocks[Under]);
+			//Debug.Log("下ヒット");
+		}
+			
 
 		if (Top != -1)
+        {
 			pawn.HitTop(Blocks[Top]);
+			//Debug.Log("上ヒット");
+		}
+			
 
 		if (Left != -1)
+        {
 			pawn.HitLeft(Blocks[Left]);
+			//Debug.Log("左ヒット");
+		}
+			
 
 		if (Right != -1)
+        {
 			pawn.HitRight(Blocks[Right]);
+			//Debug.Log("右ヒット");
+		}
+			
 
 		//どこでも下に当たっていなければ
 		if (!ObjHitUnder)
@@ -323,15 +339,15 @@ void Start()
 #endif // 0
 
 		//元々埋もれている （当たらない	）
-		if(VertualOldMax1.x > Min2.x && VertualOldMin1.x < Max2.x &&
-			VertualOldMax1.y > Min2.y && VertualOldMin1.y < Max2.y)
+		if(VertualOldMax1.x - 0.01f > Min2.x && VertualOldMin1.x + 0.01f < Max2.x &&
+			VertualOldMax1.y - 0.01f > Min2.y && VertualOldMin1.y + 0.01f < Max2.y)
         {
 			ReturnTwoDirection.ObjDirection1 = HIT_DIRECTION.NON_HIT;
 			ReturnTwoDirection.ObjDirection2 = HIT_DIRECTION.NON_HIT;
-			//Debug.Log("埋もれ");
+			Debug.LogError("埋もれ Pos = " + pos1 + "OldPos = " + old_pos1);
 		}
 		//元々上辺or下辺に衝突する位置にいた
-		/*else*/ if (VertualOldMin1.x < Max2.x && VertualOldMax1.x > Min2.x)
+		else if (VertualOldMin1.x < Max2.x && VertualOldMax1.x > Min2.x)
 		{
 			if (ObjVertualVel1.y >= 0.0f)//仮想的にoblj１が下向きに進んでいる
 			{
@@ -366,6 +382,7 @@ void Start()
 		///////////程度に関わらず 仮想的に斜めに衝突している
 		else
 		{
+			//Debug.Log("斜め");
 			CollisionNaname(ref ReturnTwoDirection, ObjVertualVel1, VertualOldMax1, VertualOldMin1, Max2, Min2, naname_check);
 		}
 
