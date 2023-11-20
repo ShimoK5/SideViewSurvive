@@ -89,13 +89,13 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         //ゴール演出
-        //if(transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
-        //{
-        //    transform.position = new Vector3(GoalPosX, transform.position.y, transform.position.z);
-        //    GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
-        //}
+        if (transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
+        {
+            transform.position = new Vector3(GoalPosX, transform.position.y, transform.position.z);
+            GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
+        }
         //プレイヤー死亡演出
-        /*else*/ if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
+        else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
             GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
             
@@ -338,10 +338,17 @@ public class Player : MonoBehaviour
             HitPoint = Mathf.Max(0, HitPoint - 1);
 
             //被ダメ演出呼び出し
+            //HPまだあれば
             if(HitPoint > 0)
             {
+                CameraPos2.instance.HitSwing(new Vector3(EtoP_Vel.x, EtoP_Vel.y, 0));
                 GameObject Canvas = (GameObject)Resources.Load("DamageEffectCanvas");
                 Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+            }
+            //HP０
+            else
+            {
+
             }
             
         }

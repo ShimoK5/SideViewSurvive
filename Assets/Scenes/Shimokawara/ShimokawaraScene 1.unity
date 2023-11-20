@@ -1187,7 +1187,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7226801412340814116, guid: 5f4f9d7374aa3cb46b22bde10f3cedbd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f4f9d7374aa3cb46b22bde10f3cedbd, type: 3}
 --- !u!1 &253537409
 GameObject:
@@ -2885,7 +2886,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7226801412340814116, guid: be4bf354722e9684ea960e28cff58920, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: be4bf354722e9684ea960e28cff58920, type: 3}
 --- !u!1001 &750749783
 PrefabInstance:
@@ -7684,7 +7686,7 @@ PrefabInstance:
     - target: {fileID: 7523365710698175439, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: FLAME_MOVE_RANGE_X
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9fe8fc461622fe48853b1bba11934a4, type: 3}

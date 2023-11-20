@@ -19,7 +19,7 @@ public class CameraPos2 : MonoBehaviour
     float MinX;         //カメラの最低X座標
     float MaxX;         //カメラの最高X座標
 
-    Vector3 DefaultPos = Vector3.zero;  //正常な位置
+    public Vector3 DefaultPos = Vector3.zero;  //正常な位置
     Vector3 SwingAddValue = Vector3.zero;    //カメラ座標に加算する値（敵ヒット時など）
     int HitSwingCnt = 0;
     Vector3 FirstSwingVector = Vector3.zero;
@@ -77,7 +77,7 @@ public class CameraPos2 : MonoBehaviour
         //MaxX = MaxObj.x - ZurashiX;
 
         MinX = MinObj.x;
-        MaxX = MaxObj.x;
+        MaxX = MaxObj.x - ZurashiX;
 
 
         instance = this;
@@ -88,7 +88,7 @@ public class CameraPos2 : MonoBehaviour
 
         DefaultPos = new Vector3(MinX, targetObj.transform.position.y + cameraPosY, transform.position.z);
 
-        FollowObj();
+        GameUpdate();
 
         StartMovieInit();
     }
@@ -113,7 +113,7 @@ public class CameraPos2 : MonoBehaviour
 
             case GAME_STATE.Game:
 
-                FollowObj();
+                GameUpdate();
                 //別ステートで使う座標保存
                 DeadPlayerFirstCameraPos = transform.position;
                 GoalPlayerFirstCameraPos = transform.position;
@@ -130,7 +130,7 @@ public class CameraPos2 : MonoBehaviour
         }
     }
 
-    public void FollowObj()
+    public void GameUpdate()
     {
         if (LockY)
         {
@@ -153,10 +153,11 @@ public class CameraPos2 : MonoBehaviour
         //}
         if (DefaultPos.x >= MaxX)
         {
+            DefaultPos.x = MaxX;
             if ( GameStateManager.instance.GameState == GAME_STATE.Game)
             {
-                DefaultPos.x = MaxX;
-                GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
+                
+                //GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
             }
         }
 

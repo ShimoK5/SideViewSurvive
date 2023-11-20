@@ -18,10 +18,10 @@ public class OtonaBlock : Block
         switch (BlockType)
         {
             case BLOCK_TYPE.LEFT:
-                PosX = CameraPos2.instance.transform.position.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
+                PosX = CameraPos2.instance.DefaultPos.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
                 break;
             case BLOCK_TYPE.RIGHT:
-                PosX = CameraPos2.instance.transform.position.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
+                PosX = CameraPos2.instance.DefaultPos.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
                 break;
         }
         transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
@@ -38,10 +38,10 @@ public class OtonaBlock : Block
                 switch (BlockType)
                 {
                     case BLOCK_TYPE.LEFT:
-                        PosX = CameraPos2.instance.transform.position.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
+                        PosX = CameraPos2.instance.DefaultPos.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
                         break;
                     case BLOCK_TYPE.RIGHT:
-                        PosX = CameraPos2.instance.transform.position.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
+                        PosX = CameraPos2.instance.DefaultPos.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
                         break;
                 }
                 transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
