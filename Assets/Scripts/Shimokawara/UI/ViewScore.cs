@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class StopWatch : MonoBehaviour
+public class ViewScore : MonoBehaviour
 {
     TextMeshProUGUI Text;
 
@@ -18,7 +18,7 @@ public class StopWatch : MonoBehaviour
     {
         if(ScoreManager.instance)
         {
-            Text.text = ((int)ScoreManager.instance.m_Time).ToString();
+            Text.text = ((int)ScoreManager.instance.m_Score).ToString();
         }
     }
 }

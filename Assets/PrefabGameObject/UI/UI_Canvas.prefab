@@ -403,6 +403,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   audioSource: {fileID: 1932457527045283767}
+  ChangeNoteBox: 0
 --- !u!82 &1932457527045283767
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1088,7 +1089,7 @@ GameObject:
   - component: {fileID: 5805674387049556273}
   - component: {fileID: 8022600397870900956}
   m_Layer: 5
-  m_Name: StopWatch
+  m_Name: ViewScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1221,7 +1222,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4691225100433955989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5275f1665d2c8b44900d6298dcc187f, type: 3}
+  m_Script: {fileID: 11500000, guid: 292250182ca75db4799670347f31963d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6736198344420554505
