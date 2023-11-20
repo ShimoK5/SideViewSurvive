@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 478669018269942160}
   - component: {fileID: 478669018269942161}
   - component: {fileID: 478669018269942166}
+  - component: {fileID: 7523365710698175439}
   - component: {fileID: 478669018269942165}
   - component: {fileID: 674216910}
   m_Layer: 0
@@ -96,7 +97,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478669018269942162}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfed2045a94fd624fbe4d9ca2bf80a44, type: 3}
   m_Name: 
@@ -105,6 +106,29 @@ MonoBehaviour:
   cameraPosY: 2
   ViewWidth: 0
   ViewHeight: 0
+  MAX_SWING_RANGE: 0.2
+  MAX_SWING_CNT: 10
+  StartMovieFlame: 180
+  DeadMovieFlame: 30
+  GoalMovieFlame: 30
+  ZoomCamera: 0
+--- !u!114 &7523365710698175439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478669018269942162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa002b00f5752943ba1883bdacbe726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LockY: 0
+  cameraPosY: 2
+  ViewWidth: 0
+  ViewHeight: 0
+  FLAME_MOVE_RANGE_X: 0.02
   MAX_SWING_RANGE: 0.2
   MAX_SWING_CNT: 10
   StartMovieFlame: 180

@@ -89,13 +89,13 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         //ゴール演出
-        if(transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
-        {
-            transform.position = new Vector3(GoalPosX, transform.position.y, transform.position.z);
-            GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
-        }
+        //if(transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
+        //{
+        //    transform.position = new Vector3(GoalPosX, transform.position.y, transform.position.z);
+        //    GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
+        //}
         //プレイヤー死亡演出
-        else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
+        /*else*/ if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
             GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
             

@@ -7572,6 +7572,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7523365710698175439, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: FLAME_MOVE_RANGE_X
+      value: 0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9fe8fc461622fe48853b1bba11934a4, type: 3}
 --- !u!1001 &744650807792732060
@@ -7782,7 +7787,7 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[0]
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
@@ -8029,7 +8034,7 @@ PrefabInstance:
     - target: {fileID: 7323444327955935837, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}
       propertyPath: GameState
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7323444327955935838, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}

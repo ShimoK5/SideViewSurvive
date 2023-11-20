@@ -54,7 +54,7 @@ public class PlayerGoal : PlayerIF
         if (isGround)
         {
             //カメラズーム開始
-            CameraPos.instance.ZoomCamera = true;
+            CameraPos2.instance.ZoomCamera = true;
 
             //ゴールアニメーション開始
             if (Player.instance.GetAnim().Anim.AnimationName != "normal/walking")

@@ -135,7 +135,7 @@ public class MoveBlock2 : Block
             OldNormalizeTime = 0;
         }
 
-        CameraPos.instance.FixedUpdate();
+        //CameraPos2.instance.FixedUpdate();
 
     }
     void VelDirection()
