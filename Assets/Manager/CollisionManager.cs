@@ -13,6 +13,7 @@ public class CollisionManager : MonoBehaviour
 		HIT_RIGHT,
 		HIT_LEFT,
 		HIT_NANAME,
+		HIT_UMORE,
 		HIT_MAX
 	};
 
@@ -77,6 +78,9 @@ void Start()
 		bool ObjHitUnder = false;
 		bool MenHit = false;
 
+		//食い込み判定
+		bool UmoreFlag = false;
+
 		int Under = -1;
 		int Top = -1;
 		int Left = -1;
@@ -91,6 +95,11 @@ void Start()
 				//プレイヤーのあたりかたで分岐
 				switch (CollisionBB(pawn.tf.transform.position, pawn.OldPos, Blocks[i].transform.position, Blocks[i].OldPos, pawn.Size, Blocks[i].Size, false).ObjDirection1)
 				{
+					case HIT_DIRECTION.HIT_UMORE:
+						MenHit = true;
+						UmoreFlag = true;
+						break;
+
 					case HIT_DIRECTION.HIT_UNDER:
 						if (Blocks[i].GetComponent<TopOnlyBlock2>() && InputManager_FU.instanse.GetKey(Key.Down))
 						{
@@ -292,6 +301,13 @@ void Start()
 			pawn.NonHitUnder();
 		}
 
+		//埋もれていれば
+		if(UmoreFlag)
+        {
+			//埋もれている時ようの処理
+			pawn.Umore();
+        }
+
 	}
 
 
@@ -342,9 +358,9 @@ void Start()
 		if(VertualOldMax1.x - 0.01f > Min2.x && VertualOldMin1.x + 0.01f < Max2.x &&
 			VertualOldMax1.y - 0.01f > Min2.y && VertualOldMin1.y + 0.01f < Max2.y)
         {
-			ReturnTwoDirection.ObjDirection1 = HIT_DIRECTION.NON_HIT;
-			ReturnTwoDirection.ObjDirection2 = HIT_DIRECTION.NON_HIT;
-			Debug.LogError("埋もれ Pos = " + pos1 + "OldPos = " + old_pos1);
+			ReturnTwoDirection.ObjDirection1 = HIT_DIRECTION.HIT_UMORE;
+			ReturnTwoDirection.ObjDirection2 = HIT_DIRECTION.HIT_UMORE;
+			Debug.Log("埋もれ Pos = " + pos1 + "OldPos = " + old_pos1);
 		}
 		//元々上辺or下辺に衝突する位置にいた
 		else if (VertualOldMin1.x < Max2.x && VertualOldMax1.x > Min2.x)

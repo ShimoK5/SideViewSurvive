@@ -13,6 +13,7 @@ public class PawnIF : MonoBehaviour
     public virtual void HitRight(Block block) { }
     public virtual void HitLeft(Block block) { }
     public virtual void NonHitUnder() { }
+    public virtual void Umore() { }
 
     // Start is called before the first frame update
     void Start()

@@ -324,6 +324,15 @@ public class PlayerIF : PawnIF
         StandBlock = null;
     }
 
+    public override void Umore()
+    {
+        if ( GameStateManager.instance.GameState == GAME_STATE.Game)
+        {
+            GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
+
+        }
+    }
+
 #if false
     //全方位とのあたり判定
     protected void HitAround()
