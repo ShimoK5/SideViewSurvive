@@ -53,7 +53,7 @@ public class CameraPos2 : MonoBehaviour
     public bool ZoomCamera = false;
 
 
-    void Start()
+    void Awake()
     {
         Vector3 MinObj = GameObject.Find("StartObj").transform.position;
         Vector3 MaxObj = GameObject.Find("GoalObj").transform.position;

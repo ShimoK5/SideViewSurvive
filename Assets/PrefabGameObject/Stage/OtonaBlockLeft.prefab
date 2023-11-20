@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5792781450573955228}
   - component: {fileID: 7581966802893941614}
   - component: {fileID: 1267977829957114769}
-  - component: {fileID: 7226801412340814116}
   - component: {fileID: 3677803251012849137}
+  - component: {fileID: 7733602494006588978}
   m_Layer: 0
-  m_Name: OtonaBlock
+  m_Name: OtonaBlockLeft
   m_TagString: Platform_Default
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,20 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7226801412340814116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830915794324250175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 102666b9853e8df419fe2075d12670d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 0, y: 0, z: 0}
-  OldPos: {x: 0, y: 0, z: 0}
 --- !u!114 &3677803251012849137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,3 +107,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff5eadc8cc5cab45bf604cdc5175f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7733602494006588978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830915794324250175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2647eaf03234eef4abf0379884b48476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 0, y: 0, z: 0}
+  OldPos: {x: 0, y: 0, z: 0}
+  BlockType: 0

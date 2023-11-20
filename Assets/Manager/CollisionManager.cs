@@ -86,12 +86,25 @@ void Start()
 		int Left = -1;
 		int Right = -1;
 
+		
+		//エネミーかどうか
+		bool isEnemy = (bool)(pawn.GetType().IsSubclassOf(typeof(EnemyIF)));
+
 		//斜め以外を先に見る   並んだブロックに当たるのを回避するため 
 		for (int i = 0; i < Blocks.Length; i++)//全ブロック見るよ
 		{
+			//大人壁とエネミーのあたり判定をなくす
+			if (isEnemy && Blocks[i].GetComponent<OtonaBlock>())
+			{
+				continue;
+			}
+
 			//横長ブロックと上下だけ取る
 			if (Blocks[i])//i番目がnullではない (=使っているなら)
 			{
+
+				
+
 				//プレイヤーのあたりかたで分岐
 				switch (CollisionBB(pawn.tf.transform.position, pawn.OldPos, Blocks[i].transform.position, Blocks[i].OldPos, pawn.Size, Blocks[i].Size, false).ObjDirection1)
 				{
@@ -207,6 +220,12 @@ void Start()
 		{
 			for (int i = 0; i < Blocks.Length; i++)//全ブロック見るよ
 			{
+				//大人壁とエネミーのあたり判定をなくす
+				if (isEnemy && Blocks[i].GetComponent<OtonaBlock>())
+				{
+					continue;
+				}
+
 				if (Blocks[i])//i番目がnullではない (=使っているなら)
 				{
 					//プレイヤーのあたりかたで分岐
