@@ -22,6 +22,7 @@ public class Sacrifice: PawnIF
         FCnt = 0;
 
         tf = GetComponent<Transform>();
+        OldPos = tf.transform.position;
         //tf.transform.localEulerAngles = new Vector3(0, 90, 0);
         Size = tf.transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
     }
