@@ -14,17 +14,22 @@ public class OtonaBlock : Block
     {
         Size = transform.GetComponent<MeshRenderer>().GetComponent<MeshRenderer>().bounds.size;
 
-        float PosX = 0;
-        switch (BlockType)
+        if (CameraPos2.instance.GetComponent<CameraPos2>().enabled)
         {
-            case BLOCK_TYPE.LEFT:
-                PosX = CameraPos2.instance.DefaultPos.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
-                break;
-            case BLOCK_TYPE.RIGHT:
-                PosX = CameraPos2.instance.DefaultPos.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
-                break;
+            float PosX = 0;
+            switch (BlockType)
+            {
+                case BLOCK_TYPE.LEFT:
+                    PosX = CameraPos2.instance.DefaultPos.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
+                    break;
+                case BLOCK_TYPE.RIGHT:
+                    PosX = CameraPos2.instance.DefaultPos.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
+                    break;
+            }
+            transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
         }
-        transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
+
+        
     }
 
     void FixedUpdate()
@@ -34,17 +39,20 @@ public class OtonaBlock : Block
             case GAME_STATE.Game:
                 OldPos = transform.position;
 
-                float PosX = 0;
-                switch (BlockType)
+                if (CameraPos2.instance.GetComponent<CameraPos2>().enabled)
                 {
-                    case BLOCK_TYPE.LEFT:
-                        PosX = CameraPos2.instance.DefaultPos.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
-                        break;
-                    case BLOCK_TYPE.RIGHT:
-                        PosX = CameraPos2.instance.DefaultPos.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
-                        break;
+                    float PosX = 0;
+                    switch (BlockType)
+                    {
+                        case BLOCK_TYPE.LEFT:
+                            PosX = CameraPos2.instance.DefaultPos.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
+                            break;
+                        case BLOCK_TYPE.RIGHT:
+                            PosX = CameraPos2.instance.DefaultPos.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
+                            break;
+                    }
+                    transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
                 }
-                transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
 
                 break;
         }

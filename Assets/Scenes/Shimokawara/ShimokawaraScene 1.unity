@@ -7618,6 +7618,11 @@ PrefabInstance:
       propertyPath: MAX_SWING_RANGE
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 478669018269942166, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 478669018269942167, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7687,6 +7692,11 @@ PrefabInstance:
         type: 3}
       propertyPath: FLAME_MOVE_RANGE_X
       value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523365710698175439, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9fe8fc461622fe48853b1bba11934a4, type: 3}

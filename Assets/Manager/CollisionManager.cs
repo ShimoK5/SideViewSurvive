@@ -220,6 +220,12 @@ void Start()
 		{
 			for (int i = 0; i < Blocks.Length; i++)//全ブロック見るよ
 			{
+				//大人壁は斜め見ない
+				if (Blocks[i].GetComponent<OtonaBlock>())
+				{
+					continue;
+				}
+
 				//大人壁とエネミーのあたり判定をなくす
 				if (isEnemy && Blocks[i].GetComponent<OtonaBlock>())
 				{
@@ -374,8 +380,8 @@ void Start()
 #endif // 0
 
 		//元々埋もれている （当たらない	）
-		if(VertualOldMax1.x - 0.01f > Min2.x && VertualOldMin1.x + 0.01f < Max2.x &&
-			VertualOldMax1.y - 0.01f > Min2.y && VertualOldMin1.y + 0.01f < Max2.y)
+		if(VertualOldMax1.x - 0.001f > Min2.x && VertualOldMin1.x + 0.001f < Max2.x &&
+			VertualOldMax1.y - 0.001f > Min2.y && VertualOldMin1.y + 0.001f < Max2.y)
         {
 			ReturnTwoDirection.ObjDirection1 = HIT_DIRECTION.HIT_UMORE;
 			ReturnTwoDirection.ObjDirection2 = HIT_DIRECTION.HIT_UMORE;
