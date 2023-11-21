@@ -2707,6 +2707,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 478669018269942166, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 478669018269942167, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2765,6 +2770,11 @@ PrefabInstance:
     - target: {fileID: 4008923264540196864, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523365710698175439, guid: c9fe8fc461622fe48853b1bba11934a4,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
