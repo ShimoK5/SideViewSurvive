@@ -76,7 +76,7 @@ public class CameraPos2 : MonoBehaviour
         //MinX = MinObj.x + ZurashiX;
         //MaxX = MaxObj.x - ZurashiX;
 
-        MinX = MinObj.x;
+        MinX = MinObj.x + ZurashiX - 2;
         MaxX = MaxObj.x - ZurashiX;
 
 
@@ -263,10 +263,11 @@ public class CameraPos2 : MonoBehaviour
 
         if (StartMovieFlameCount >= StartMovieFlame)
         {
-            GameStateManager.instance.GameState = GAME_STATE.Game;
+            
             transform.position = new Vector3(MinX, transform.position.y, transform.position.z);
             //スタート演出
-
+            GameStateManager.instance.GameState = GAME_STATE.StartPlayerMotion;
+            //GameObject.Find("main_house").GetComponent<HouseAnimation>().PlayOpenAnim();
         }
     }
 

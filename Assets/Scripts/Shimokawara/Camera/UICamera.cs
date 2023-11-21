@@ -21,7 +21,7 @@ public class UICamera : MonoBehaviour
         {
             case GAME_STATE.StartFade:
             case GAME_STATE.StartCameraMotion:
-            case GAME_STATE.StartPlayerMotion:
+            
             case GAME_STATE.DeadPlayerStop:
             case GAME_STATE.DeadPlayer:
             case GAME_STATE.EndPlayerMotion:
@@ -29,6 +29,7 @@ public class UICamera : MonoBehaviour
                 m_Camera.enabled = false;
                 break;
 
+            case GAME_STATE.StartPlayerMotion:
             case GAME_STATE.Game:
             case GAME_STATE.Pause:
                 m_Camera.enabled = true;

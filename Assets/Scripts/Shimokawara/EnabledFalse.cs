@@ -14,6 +14,8 @@ public class EnabledFalse : MonoBehaviour
     {
 #if !UNITY_EDITOR
         this.GetComponent<Renderer>(). enabled = false;
+#else
+        this.GetComponent<Renderer>().enabled = false;
 #endif
     }
 

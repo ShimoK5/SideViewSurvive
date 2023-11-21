@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     int InvincibleFlameCount = 0;           //ダメージ時加算カウント
     float GoalPosX = 0;                       //ゴールのX座標
     PlayerAnimSpine PlayerAnim;
+    MeshRenderer PlayerMeshRenderer;
 
     void Awake()
     {
@@ -53,6 +54,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         PlayerAnim = GameObject.Find("PlayerAnim").GetComponent<PlayerAnimSpine>();
+        PlayerMeshRenderer = GameObject.Find("PlayerAnim").GetComponent<MeshRenderer>();
+        PlayerMeshRenderer.enabled = false;
 
         OuterNextState = PLAYER_STATE.NONE;
 
@@ -104,6 +107,7 @@ public class Player : MonoBehaviour
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
+                PlayerMeshRenderer.enabled = true;
                 FixedGame();
                 break;
 
@@ -121,7 +125,7 @@ public class Player : MonoBehaviour
 
             case GAME_STATE.StartPlayerMotion:
             
-                m_Player.CustumFixed();
+                //m_Player.CustumFixed();
                 break;
             default:
                 break;
