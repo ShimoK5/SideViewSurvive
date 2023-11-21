@@ -294,29 +294,57 @@ public class PlayerIF : PawnIF
         isGround = true;
         float YPos = block.transform.position.y + (block.Size.y + Size.y) / 2;
         tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
-        SelfVel.y = 0.0f;
-        OtherVel.y = 0.0f;
+        
+        if(SelfVel.y + OtherVel.y <= 0)
+        {
+            SelfVel.y = 0;
+            OtherVel.y = 0;
+
+        }
+        //SelfVel.y = Mathf.Max(0.0f , SelfVel.y) ;
+        //OtherVel.y = Mathf.Max(0.0f, OtherVel.y);
     }
     public override void HitTop(Block block) 
     {
         float YPos = block.transform.position.y - (block.Size.y + Size.y) / 2;
         tf.transform.position = new Vector3(tf.transform.position.x, YPos, tf.transform.position.z);
-        SelfVel.y = 0.0f;
-        OtherVel.y = 0.0f;
+        
+        if (SelfVel.y + OtherVel.y >= 0)
+        {
+            SelfVel.y = 0;
+            OtherVel.y = 0;
+        }
+
+        //SelfVel.y   = Mathf.Min(0.0f , SelfVel.y) ;
+        //OtherVel.y  = Mathf.Min(0.0f, OtherVel.y);
     }
     public override void HitRight(Block block) 
     {
         float XPos = block.transform.position.x - (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
-        SelfVel.x = 0.0f;
-        OtherVel.x = 0.0f;
+
+        if (SelfVel.x + OtherVel.x >= 0)
+        {
+            SelfVel.x = 0;
+            OtherVel.x = 0;
+        }
+
+        //SelfVel.x   = Mathf.Min(0.0f , SelfVel.x) ;
+        //OtherVel.x  = Mathf.Min(0.0f, OtherVel.x);
     }
     public override void HitLeft(Block block) 
     {
         float XPos = block.transform.position.x + (block.Size.x + Size.x) / 2;
         tf.transform.position = new Vector3(XPos, tf.transform.position.y, tf.transform.position.z);
-        SelfVel.x = 0.0f;
-        OtherVel.x = 0.0f;
+
+        if (SelfVel.x + OtherVel.x <= 0)
+        {
+            SelfVel.x = 0;
+            OtherVel.x = 0;
+        }
+
+        //SelfVel.x = Mathf.Max(0.0f , SelfVel.x) ;
+        //OtherVel.x = Mathf.Max(0.0f, OtherVel.x);
     }
     public override void NonHitUnder() 
     {
