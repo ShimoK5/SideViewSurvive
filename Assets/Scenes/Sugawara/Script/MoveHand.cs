@@ -57,13 +57,17 @@ public class MoveHand : MonoBehaviour
             {
                 TouchJudge = true;
                 Touch_Object = collision.gameObject;
-                //Touch_Object.GetComponent<Image>().color = entity;
+               
             }
             else
             {
                 Duplication_Object = collision.gameObject;
             }
             
+        }
+        else if(collision.gameObject.tag == "Note")
+        {
+            Touch_Object.GetComponent<Image>().color = entity;
         }
         else if(collision.gameObject.name == "Target")
         {
@@ -101,15 +105,22 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Note" || collision.gameObject.name == "NextStage")
+        //if (collision.gameObject.tag == "Note" || collision.gameObject.name == "NextStage")
+        //{
+            
+
+           
+        //}
+       /* else*/ if(collision.gameObject.tag == "Note")
         {
+            Debug.Log("いるか？");
             if (Duplication_Object == null)
             {
-                //Touch_Object.GetComponent<Image>().color = Translucent;
+                Touch_Object.GetComponent<Image>().color = Translucent;
                 TouchJudge = false;
                 Touch_Object = null;
             }
-            else if(Duplication_Object != null)
+            else if (Duplication_Object != null)
             {
                 TouchJudge = true;
                 Touch_Object.GetComponent<Image>().color = Translucent;
@@ -117,11 +128,7 @@ public class MoveHand : MonoBehaviour
                 Touch_Object.GetComponent<Image>().color = entity;
                 Duplication_Object = null;
             }
-
-            if (collision.gameObject.name == "NextStage")
-            {
-                collision.gameObject.GetComponent<Text>().color = Color.black;
-            }
+            
         }
         else if (collision.gameObject.name == "Target")
         {
@@ -132,8 +139,14 @@ public class MoveHand : MonoBehaviour
             ChangeFlavor("None");
             ChangeHeader("None");
         }
+        else if (collision.gameObject.name == "NextStage")
+        {
+            TouchJudge = false;
+            collision.gameObject.GetComponent<Text>().color = Color.black;
+            Touch_Object = null;
+        }
 
-        
+
     }
 
 
