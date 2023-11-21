@@ -207,9 +207,9 @@ public class MoveHand : MonoBehaviour
         if (Input.GetAxis("Horizontal") > 0)
         {
             HandPosition.x = HandPosition.x + MoveSpeed;
-            if (HandPosition.x > 400.0f)
+            if (HandPosition.x > 380.0f)
             {
-                HandPosition.x = 400.0f;
+                HandPosition.x = 380.0f;
             }
             if (DragAndDrop == true)
             {
@@ -221,9 +221,9 @@ public class MoveHand : MonoBehaviour
         else if (Input.GetAxis("Horizontal") < 0)
         {
             HandPosition.x = HandPosition.x + MoveSpeed * -1.0f;
-            if (HandPosition.x < -400.0f)
+            if (HandPosition.x < -60.0f)
             {
-                HandPosition.x = -400.0f;
+                HandPosition.x = -60.0f;
             }
 
             if (DragAndDrop == true)
