@@ -13,8 +13,9 @@ public class InputRhythm : MonoBehaviour
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう
     public GameObject[] NoteBox = new GameObject[8];   //ノートボックス格納
     private string SceneName = null;
-    private int DelayChange = 240;
-    private bool SceneChange = false; 
+    private int DelayChange = 0;
+    private bool SceneChange = false;
+    int PlayerHItPoint = 0;
 
     void Awake()
     {
@@ -56,23 +57,33 @@ public class InputRhythm : MonoBehaviour
 
         if(SceneManager.GetActiveScene().name == "ShimokawaraScene 1")
         {
-            int PlayerHItPoint = Player.instance.HitPoint;
-            if(PlayerHItPoint <= 0)
+            if (SceneChange == true)
+            {
+                DelayChange += 1;
+                if(GameStateManager.instance.GameState == GAME_STATE.StartCameraMotion)
+                {
+                    SceneName = "Change";
+                }
+
+                if (DelayChange > 700)
+                {
+                    Debug.Log(DelayChange);
+                    SceneChange = false;
+                    DelayChange = 0;
+                    StrageNoteBox Strage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
+                    Debug.Log(Strage);
+                    Strage.Change();
+                    Debug.Break();
+                }
+            }
+            PlayerHItPoint = Player.instance.HitPoint;
+            if(GameStateManager.instance.GameState == GAME_STATE.DeadPlayerStop)
             {
                 SceneChange = true;
             }
         }
 
-        if(SceneChange == true)
-        {
-            DelayChange -= 1;
-            if(DelayChange >= 0)
-            {
-                SceneChange = false;
-                DelayChange = 240;
-                SceneName = "Change";
-            }
-        }
+       
 
         if (UpdateRhythmManager == true)
         {

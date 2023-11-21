@@ -80,6 +80,11 @@ public class StrageNoteBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ChangeNoteBox = false;
+        }
+
         if(ChangeNoteBox == false)
         {
             if (PresetSpriteSize != 0)
@@ -223,5 +228,10 @@ public class StrageNoteBox : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void Change()
+    {
+        ChangeNoteBox = false;        
     }
 }
