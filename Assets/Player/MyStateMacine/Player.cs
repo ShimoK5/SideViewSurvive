@@ -100,6 +100,8 @@ public class Player : MonoBehaviour
         //プレイヤー死亡演出
         else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
+            //プレイヤーが通常色になる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f, 1f));
             GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
             CameraPos2.instance.HitSwing(new Vector3(0, -1, 0));
         }
