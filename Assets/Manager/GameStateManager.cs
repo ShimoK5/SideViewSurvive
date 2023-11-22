@@ -80,8 +80,8 @@ public class GameStateManager : MonoBehaviour
         }
 
 
-        //25フレ止めた後
-        if (DeadPlayerStopCnt > 25)
+        //35フレ止めた後
+        if (DeadPlayerStopCnt > 35)
         {
             //アニメーション再開
             Player.instance.GetAnim().Anim.timeScale = 1;

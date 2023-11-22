@@ -356,8 +356,8 @@ public class PlayerIF : PawnIF
     {
         if ( GameStateManager.instance.GameState == GAME_STATE.Game)
         {
-            GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
-
+            //GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
+            Player.instance.HitPoint = 0;
         }
     }
 

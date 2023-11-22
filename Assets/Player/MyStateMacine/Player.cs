@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
             GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
-            
+            CameraPos2.instance.HitSwing(new Vector3(0, -1, 0));
         }
 
         switch (GameStateManager.instance.GameState)
@@ -348,8 +348,8 @@ public class Player : MonoBehaviour
                 //カメラ揺れ
                 CameraPos2.instance.HitSwing(new Vector3(EtoP_Vel.x, EtoP_Vel.y, 0));
                 //キャンバスプレハブ生成
-                GameObject Canvas = (GameObject)Resources.Load("DamageEffectCanvas");
-                Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+                //GameObject Canvas = (GameObject)Resources.Load("DamageEffectCanvas");
+                //Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
             }
             //HP０
             else

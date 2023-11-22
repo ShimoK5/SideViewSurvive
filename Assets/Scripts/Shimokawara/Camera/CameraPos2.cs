@@ -41,6 +41,11 @@ public class CameraPos2 : MonoBehaviour
     [SerializeField] int StartMovieFlame;
     int StartMovieFlameCount = 0;
 
+    [Header("死亡アニメーションの前のカメラ近づきフレーム数")]
+    [SerializeField] int DeadStopMovieFlame;
+    int DeadStopMovieFlameCnt = 0;
+    Vector3 DeadStopPlayerFirstCameraPos;
+
     [Header("死亡アニメーションのカメラ近づきフレーム数")]
     [SerializeField] int DeadMovieFlame;
     int DeadMovieFlameCnt = 0;
@@ -115,8 +120,13 @@ public class CameraPos2 : MonoBehaviour
 
                 GameUpdate();
                 //別ステートで使う座標保存
-                DeadPlayerFirstCameraPos = transform.position;
-                GoalPlayerFirstCameraPos = transform.position;
+                //DeadPlayerFirstCameraPos = transform.position;
+                //GoalPlayerFirstCameraPos = transform.position;
+                break;
+
+
+            case GAME_STATE.DeadPlayerStop:
+                DeadPlayerStopUpdate();
                 break;
 
             case GAME_STATE.DeadPlayer:
@@ -280,6 +290,11 @@ public class CameraPos2 : MonoBehaviour
 
     void DeadPlayerUpdate()
     {
+        if(DeadMovieFlameCnt == 0)
+        {
+            DeadPlayerFirstCameraPos = transform.position;
+        }
+
         DeadMovieFlameCnt++;
 
         Vector3 GoPos = new Vector3(targetObj.transform.position.x,
@@ -298,10 +313,47 @@ public class CameraPos2 : MonoBehaviour
         }
     }
 
+    void DeadPlayerStopUpdate()
+    {
+        if (DeadStopMovieFlameCnt == 0)
+        {
+            DeadStopPlayerFirstCameraPos = transform.position;
+        }
+
+        DeadStopMovieFlameCnt++;
+
+        Vector3 GoPos = new Vector3(targetObj.transform.position.x,
+            targetObj.transform.position.y, transform.position.z);
+
+        float NowWariai = Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, DeadStopMovieFlameCnt, DeadStopMovieFlame, 0.0f, 1.0f);
+
+        Vector3 NowPos = Vector3.Lerp(DeadStopPlayerFirstCameraPos, GoPos, NowWariai);
+
+        DefaultPos = NowPos;
+
+        if (DeadStopMovieFlameCnt >= DeadStopMovieFlame)
+        {
+            DefaultPos = GoPos;
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        //ヒット振動の更新
+        HitSwingUpdate();
+
+        //適用
+        transform.position = DefaultPos + SwingAddValue;
+
+    }
     void EndMovieUpdate()
     {
         if (ZoomCamera)
         {
+            //最初にふぁーすとPos保存
+            if(GoalMovieFlameCnt == 0)
+            {
+                GoalPlayerFirstCameraPos = transform.position;
+            }
+
             GoalMovieFlameCnt++;
 
             Vector3 GoPos = new Vector3(targetObj.transform.position.x,
