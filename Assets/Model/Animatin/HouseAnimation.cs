@@ -35,6 +35,9 @@ public class HouseAnimation : MonoBehaviour
 
             if(Cnt >= 12 )
             {
+                GameObject Canvas = (GameObject)Resources.Load("Youkan/StartCanvas");
+                Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+
                 GameStateManager.instance.GameState = GAME_STATE.Game;
             }
 

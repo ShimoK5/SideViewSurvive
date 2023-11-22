@@ -7330,7 +7330,7 @@ PrefabInstance:
     - target: {fileID: 350641408259404599, guid: af4f5bcd325702f42957814bae9f3b29,
         type: 3}
       propertyPath: HitPoint
-      value: 3
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 3041548197106704859, guid: af4f5bcd325702f42957814bae9f3b29,
         type: 3}
@@ -8101,7 +8101,7 @@ PrefabInstance:
     - target: {fileID: 7323444327955935837, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}
       propertyPath: GameState
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7323444327955935838, guid: 7cf61d8f6a7119843836ec0d59f36525,
         type: 3}

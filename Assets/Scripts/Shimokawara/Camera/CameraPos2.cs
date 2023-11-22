@@ -292,13 +292,17 @@ public class CameraPos2 : MonoBehaviour
     {
         if(DeadMovieFlameCnt == 0)
         {
+            //プレハブ生成
+            GameObject Canvas = (GameObject)Resources.Load("Youkan/GameOverCanvas");
+            Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+
             DeadPlayerFirstCameraPos = transform.position;
         }
 
         DeadMovieFlameCnt++;
 
         Vector3 GoPos = new Vector3(targetObj.transform.position.x,
-            targetObj.transform.position.y, -3);
+            targetObj.transform.position.y + 0.6f, -3);
 
         float NowWariai = Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, DeadMovieFlameCnt, DeadMovieFlame, 0.0f, 1.0f);
 
@@ -357,7 +361,7 @@ public class CameraPos2 : MonoBehaviour
             GoalMovieFlameCnt++;
 
             Vector3 GoPos = new Vector3(targetObj.transform.position.x,
-                targetObj.transform.position.y, -3);
+                targetObj.transform.position.y + 0.6f, -3);
 
             float NowWariai = Easing.EasingTypeFloat(EASING_TYPE.SINE_INOUT, GoalMovieFlameCnt, GoalMovieFlame, 0.0f, 1.0f);
 

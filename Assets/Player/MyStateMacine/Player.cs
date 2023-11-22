@@ -95,15 +95,24 @@ public class Player : MonoBehaviour
         if (transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
             transform.position = new Vector3(GoalPosX, transform.position.y, transform.position.z);
+            //プレイヤーが通常色になる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f, 1f));
+            //ステート変更
             GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
+            //プレハブ生成
+            GameObject Canvas = (GameObject)Resources.Load("Youkan/GoalCanvas");
+            Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
         }
         //プレイヤー死亡演出
         else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
             //プレイヤーが通常色になる処理
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f, 1f));
+            //ステート変更
             GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
+            //カメラ揺れ
             CameraPos2.instance.HitSwing(new Vector3(0, -1, 0));
+
         }
 
         switch (GameStateManager.instance.GameState)
