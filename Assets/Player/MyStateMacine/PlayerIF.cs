@@ -244,6 +244,9 @@ public class PlayerIF : PawnIF
                 AlreadyAirBorne = true;
             }
 
+            //現在の浮遊状態を保存
+            NowAirBorne = false;
+
             return;
         }
 
@@ -262,8 +265,8 @@ public class PlayerIF : PawnIF
             //現在の浮遊状態を保存
             NowAirBorne = true;
 
-            GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerJumping");
-            Effect = Instantiate(Effect, tf.transform.position, Quaternion.Euler(0, -90, 0));
+            //GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerJumping");
+            //Effect = Instantiate(Effect, tf.transform.position, Quaternion.Euler(0, -90, 0));
 
         }
         else
