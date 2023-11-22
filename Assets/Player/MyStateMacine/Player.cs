@@ -345,7 +345,9 @@ public class Player : MonoBehaviour
             //HPまだあれば
             if(HitPoint > 0)
             {
+                //カメラ揺れ
                 CameraPos2.instance.HitSwing(new Vector3(EtoP_Vel.x, EtoP_Vel.y, 0));
+                //キャンバスプレハブ生成
                 GameObject Canvas = (GameObject)Resources.Load("DamageEffectCanvas");
                 Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
             }
@@ -382,18 +384,31 @@ public class Player : MonoBehaviour
 
         if (DamageInvincible)
         {
+#if false
             //プレイヤーが赤くなる処理
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 0.6f, 0.6f));
+#else
+            //プレイヤーが点滅する処理
+            if(InvincibleFlameCount / 8 % 2 == 0)
+            {
+                PlayerAnim.Anim.skeleton.SetColor(new Color(1, 1, 1 , 0.9f));
+            }
+            else
+            {
+                PlayerAnim.Anim.skeleton.SetColor(new Color(1, 1, 1, 0.6f));
+            }
+#endif
+
         }
         else if (m_Player.ActionInvisible)
         {
             //プレイヤーが黄色くなる処理
-            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 0.6f));
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 0.6f,1f));
         }
         else
         {
             //プレイヤーが通常色になる処理
-            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f));
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f,1f));
         }
     }
 
