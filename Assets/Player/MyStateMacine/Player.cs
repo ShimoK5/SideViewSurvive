@@ -99,9 +99,7 @@ public class Player : MonoBehaviour
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f, 1f));
             //ステート変更
             GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
-            //プレハブ生成
-            GameObject Canvas = (GameObject)Resources.Load("Youkan/GoalCanvas");
-            Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+            
         }
         //プレイヤー死亡演出
         else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)

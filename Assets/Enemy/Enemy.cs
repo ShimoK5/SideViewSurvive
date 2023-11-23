@@ -28,6 +28,9 @@ public class Enemy : MonoBehaviour
     //[Header("円運動用の半径")]
     //public float Radius = 0.0f;
 
+    //画面内にいるかどうかのフラグ
+    public bool inScreen = false;
+
     ENEMY_STATE OuterNextState;//外部から編集されたNextState
 
     void Awake()
@@ -83,6 +86,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Check_inScreen();
+
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
@@ -115,6 +120,23 @@ public class Enemy : MonoBehaviour
         {
             m_Enemy.CustumFixed();
             IsOnes = true;
+        }
+    }
+
+    void Check_inScreen()
+    {
+        float CameraMinX = CameraPos2.instance.transform.position.x - CameraPos2.instance.ViewWidth * 0.5f;
+        float CameraMaxX = CameraPos2.instance.transform.position.x + CameraPos2.instance.ViewWidth * 0.5f;
+        float EnemyMinX = transform.position.x - m_Enemy.Size.x * 0.5f;
+        float EnemyMaxX = transform.position.x + m_Enemy.Size.x * 0.5f;
+
+        if (EnemyMinX <= CameraMaxX && EnemyMaxX >= CameraMinX)
+        {
+            inScreen = true;
+        }
+        else
+        {
+            inScreen = false;
         }
     }
 

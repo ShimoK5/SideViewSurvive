@@ -362,7 +362,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &4362818403940556774
+--- !u!1001 &384485142752618444
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -374,6 +374,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoalCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4362818405072302572, guid: 2b45afa6fa8113c45a12358bb2cd6cc5,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1975236572}
     - target: {fileID: 4362818405072302573, guid: 2b45afa6fa8113c45a12358bb2cd6cc5,
         type: 3}
       propertyPath: m_LocalPosition.x
