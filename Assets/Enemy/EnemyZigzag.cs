@@ -6,12 +6,13 @@ using System.Reflection;
 
 public class EnemyZigzag : EnemyIF
 {
-    private int FlameCount = 0;
+    //private int FlameCount = 0;
 
     public EnemyZigzag(EnemyIF oldEnemy)
     {
         //EnemyAnim.instans.Anim.SetTrigger("Run");
         CopyEnemy(oldEnemy);
+        SelfVel = new Vector2(-MAX_RUN_SPEED, MAX_RUN_SPEED);
     }
 
     public override void CustumUpdate()
@@ -28,14 +29,13 @@ public class EnemyZigzag : EnemyIF
         //自由落下
         Fall();
         //移動
-        FlameCount++;
-        if (FlameCount > 120)
-            FlameCount = 0;
+        //FlameCount++;
+        //if (FlameCount > 120)
+        //    FlameCount = 0;
 
-        if(FlameCount < 60)
-            SelfVel = new Vector2(-MAX_RUN_SPEED, MAX_RUN_SPEED);
-        else if(FlameCount > 60)
-            SelfVel = new Vector2(-MAX_RUN_SPEED, -MAX_RUN_SPEED);
+        if (RhythmManager.Instance.FCnt % 60 == 0)
+            SelfVel.y *= -1.0f;
+        
 
         //MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);
         //MoveY(MAX_RUN_SPEED, ADD_RUN_SPEED);
