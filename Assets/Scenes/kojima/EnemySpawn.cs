@@ -109,7 +109,7 @@ public class EnemySpawn : MonoBehaviour
         Vector3 Size = transform.GetComponent<MeshRenderer>().bounds.size;
         float RandomPosX = Random.Range(-Size.x / 2, Size.x / 2);
         float RandomPosY = Random.Range(-Size.y / 2, Size.y / 2);
-        SpownPos = transform.position + new Vector3(RandomPosX, RandomPosY, 0.0f);
+        SpownPos = transform.position + new Vector3(RandomPosX, RandomPosY, -0.5f);
 
         if(Collision(SpownPos))
         {

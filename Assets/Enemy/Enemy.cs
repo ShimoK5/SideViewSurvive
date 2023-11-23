@@ -138,6 +138,12 @@ public class Enemy : MonoBehaviour
         {
             inScreen = false;
         }
+
+        //スクリーン外且つ左なら消す処理
+        //if(inScreen == false  && transform.position.x < CameraPos2.instance.transform.position.x)
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
 
     void CheckState()
