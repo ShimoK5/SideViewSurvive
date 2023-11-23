@@ -126,12 +126,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LockY: 0
   cameraPosY: 2
+  DefaultPos: {x: 0, y: 0, z: 0}
   ViewWidth: 0
   ViewHeight: 0
   FLAME_MOVE_RANGE_X: 0.02
   MAX_SWING_RANGE: 0.2
   MAX_SWING_CNT: 10
   StartMovieFlame: 180
+  DeadStopMovieFlame: 25
   DeadMovieFlame: 30
   GoalMovieFlame: 30
   ZoomCamera: 0

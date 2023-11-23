@@ -95,13 +95,22 @@ public class Player : MonoBehaviour
         if (transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
             transform.position = new Vector3(GoalPosX, transform.position.y, transform.position.z);
+            //プレイヤーが通常色になる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f, 1f));
+            //ステート変更
             GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
+            
         }
         //プレイヤー死亡演出
         else if (HitPoint <= 0 && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
+            //プレイヤーが通常色になる処理
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f, 1f));
+            //ステート変更
             GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
-            
+            //カメラ揺れ
+            CameraPos2.instance.HitSwing(new Vector3(0, -1, 0));
+
         }
 
         switch (GameStateManager.instance.GameState)
@@ -345,9 +354,11 @@ public class Player : MonoBehaviour
             //HPまだあれば
             if(HitPoint > 0)
             {
+                //カメラ揺れ
                 CameraPos2.instance.HitSwing(new Vector3(EtoP_Vel.x, EtoP_Vel.y, 0));
-                GameObject Canvas = (GameObject)Resources.Load("DamageEffectCanvas");
-                Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+                //キャンバスプレハブ生成
+                //GameObject Canvas = (GameObject)Resources.Load("DamageEffectCanvas");
+                //Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
             }
             //HP０
             else
@@ -382,18 +393,31 @@ public class Player : MonoBehaviour
 
         if (DamageInvincible)
         {
+#if false
             //プレイヤーが赤くなる処理
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 0.6f, 0.6f));
+#else
+            //プレイヤーが点滅する処理
+            if(InvincibleFlameCount / 8 % 2 == 0)
+            {
+                PlayerAnim.Anim.skeleton.SetColor(new Color(1, 1, 1 , 0.9f));
+            }
+            else
+            {
+                PlayerAnim.Anim.skeleton.SetColor(new Color(1, 1, 1, 0.6f));
+            }
+#endif
+
         }
         else if (m_Player.ActionInvisible)
         {
             //プレイヤーが黄色くなる処理
-            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 0.6f));
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 0.6f,1f));
         }
         else
         {
             //プレイヤーが通常色になる処理
-            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f));
+            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f,1f));
         }
     }
 
