@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: goal
+  m_Name: goal_2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,13 +19,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 112.33}
-        inSlope: {x: 0, y: 0, z: -703.3838}
-        outSlope: {x: 0, y: 0, z: -703.3838}
+        value: {x: 0, y: 0, z: -112.33}
+        inSlope: {x: 0, y: 0, z: 625.38214}
+        outSlope: {x: 0, y: 0, z: 625.38214}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
-        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.32292232}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.07941987}
       - serializedVersion: 3
         time: 0.6666667
         value: {x: 0, y: 0, z: 0}
@@ -202,13 +202,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 112.33
-        inSlope: -703.3838
-        outSlope: -703.3838
+        value: -112.33
+        inSlope: 625.38214
+        outSlope: 625.38214
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.32292232
+        outWeight: 0.07941987
       - serializedVersion: 3
         time: 0.6666667
         value: 0

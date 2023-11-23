@@ -357,8 +357,8 @@ public class CameraPos2 : MonoBehaviour
             {
                 GoalPlayerFirstCameraPos = transform.position;
                 //プレハブ生成
-                //GameObject Canvas = (GameObject)Resources.Load("Youkan/GoalCanvas");
-                //Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+                GameObject Canvas = (GameObject)Resources.Load("Youkan/GoalCanvas2");
+                Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
             }
 
             GoalMovieFlameCnt++;
@@ -377,8 +377,8 @@ public class CameraPos2 : MonoBehaviour
                 if(GoalMovieFlameCnt == GoalMovieFlame)
                 {
                     //プレハブ生成
-                    GameObject Canvas = (GameObject)Resources.Load("Youkan/GoalCanvas");
-                    Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
+                    //GameObject Canvas = (GameObject)Resources.Load("Youkan/GoalCanvas");
+                    //Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
                 }
                 transform.position = GoPos;
             }
