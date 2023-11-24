@@ -134,7 +134,7 @@ public class Enemy : MonoBehaviour
         {
             inScreen = true;
             //画面内にはいったら設置型は動かす
-            if(stationary)
+            if(stationary && GameStateManager.instance.GameState == GAME_STATE.Game)
                 Operation = true;
         }
         else
