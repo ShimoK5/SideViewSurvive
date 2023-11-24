@@ -7,6 +7,7 @@ using System.Reflection;
 public class EnemyZigzag : EnemyIF
 {
     //private int FlameCount = 0;
+    bool isUP = false;
 
     public EnemyZigzag(EnemyIF oldEnemy)
     {
@@ -27,15 +28,20 @@ public class EnemyZigzag : EnemyIF
         //勢い減少 
         SlowDown(GROUND_VEL_MULTI, GROUND_VEL_MULTI);
         //自由落下
-        Fall();
+        //Fall();
         //移動
         //FlameCount++;
         //if (FlameCount > 120)
         //    FlameCount = 0;
 
         if (RhythmManager.Instance.FCnt % 60 == 0)
-            SelfVel.y *= -1.0f;
-        
+            isUP = !isUP;
+
+        if(isUP)
+            SelfVel = new Vector2(-MAX_RUN_SPEED, MAX_RUN_SPEED);
+        else
+            SelfVel = new Vector2(-MAX_RUN_SPEED, -MAX_RUN_SPEED);
+
 
         //MoveX(MAX_RUN_SPEED, ADD_RUN_SPEED);
         //MoveY(MAX_RUN_SPEED, ADD_RUN_SPEED);
