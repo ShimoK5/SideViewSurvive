@@ -16,24 +16,30 @@ public class EnemyDelete : MonoBehaviour
         
     }
 
+    void FixedUpdate()
+    {
+       
+    }
+
     void OnTriggerExit(Collider other)
     {
         // Destroy everything that leaves the trigger
-        if (other.GetComponent<Enemy>())
-        {
-            //switch(other.GetComponent<Enemy>.)
-            Destroy(other.gameObject);
-        }
+        //if (other.GetComponent<Enemy>() && GameStateManager.instance.GameState == GAME_STATE.Game)
+        //{
+        //    //switch(other.GetComponent<Enemy>.)
+        //    if(other.GetComponent<Enemy>())
+        //        Destroy(other.gameObject);
+        //}
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Enemy>())
-        {
-            if (other.GetComponent<Enemy>().stationary)
-            {
-                other.GetComponent<Enemy>().Operation = true;
-            }
-        }
-    }
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.GetComponent<Enemy>() && GameStateManager.instance.GameState == GAME_STATE.Game)
+    //    {
+    //        if (other.GetComponent<Enemy>().stationary)
+    //        {
+    //            other.GetComponent<Enemy>().Operation = true;
+    //        }
+    //    }
+    //}
 }

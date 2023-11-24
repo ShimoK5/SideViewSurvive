@@ -133,17 +133,23 @@ public class Enemy : MonoBehaviour
         if (EnemyMinX <= CameraMaxX && EnemyMaxX >= CameraMinX)
         {
             inScreen = true;
+            //画面内にはいったら設置型は動かす
+            if(stationary)
+                Operation = true;
         }
         else
         {
             inScreen = false;
+            Operation = false;
         }
 
-        //スクリーン外且つ左なら消す処理
-        //if(inScreen == false  && transform.position.x < CameraPos2.instance.transform.position.x)
-        //{
-        //    Destroy(this.gameObject);
-        //}
+        //スクリーン外且つ左端まで流れたら消す処理
+        if (inScreen == false && GameStateManager.instance.GameState == GAME_STATE.Game && 
+            transform.position.x < CameraMinX)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     void CheckState()

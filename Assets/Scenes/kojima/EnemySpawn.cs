@@ -38,7 +38,8 @@ public class EnemySpawn : MonoBehaviour
 
     void FixedUpdate()
     {
-        FlameCount++;
+        if(GameStateManager.instance.GameState == GAME_STATE.Game)
+            FlameCount++;
 
         if (FlameCount > 30)
             FlameCount = 0;
