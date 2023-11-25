@@ -40,7 +40,7 @@ public class TitleStateManager : MonoBehaviour
                 {
                     if (Input.anyKeyDown)
                     {
-                        SoundManager.instance.SEPlay("仮SE");
+                        NewSoundManager.instance.PlaySE("仮SE");
                         state = State.After;
                     }
                 }

@@ -54,7 +54,7 @@ public class EnemyDead : EnemyIF
             if(DeadCntFlag)
             {
                 EnemyKillCountManager.Instance.DestroyCountUp();
-                SoundManager.instance.SEPlay("仮SE");
+                NewSoundManager.instance.PlaySE("仮SE");
             }
                
             Destroy(tf.gameObject);

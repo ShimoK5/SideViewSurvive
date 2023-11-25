@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2847566288453565378}
-  - component: {fileID: 2847566288453565381}
   - component: {fileID: 2847566288453565380}
   - component: {fileID: 2847566288453565383}
-  - component: {fileID: 2847566288453565382}
+  - component: {fileID: 6154549861293731684}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -34,29 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2847566288453565381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2847566288453565385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6afa94f6aa3ed047a3ceb3b450800a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BGMaudioSource: {fileID: 2847566288453565380}
-  SEaudioSource: {fileID: 2847566288453565383}
-  SEloopAudioSource: {fileID: 2847566288453565382}
-  keyBGM:
-  - name: "\u4EEEBGM"
-    audioClip: {fileID: 8300000, guid: e924e27d0f3791841a2b6cf42171521a, type: 3}
-  keySE:
-  - name: "\u4EEESE"
-    audioClip: {fileID: 8300000, guid: 42d383662ee4daf469cb262659349dfa, type: 3}
-  BGM_Volume: 1
-  SE_Volume: 1
 --- !u!82 &2847566288453565380
 AudioSource:
   m_ObjectHideFlags: 0
@@ -249,99 +225,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &2847566288453565382
-AudioSource:
+--- !u!114 &6154549861293731684
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2847566288453565385}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520efad9f668e2c4e9020fb3d57c3fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AS_BGMdic:
+    m_list:
+    - m_key: "\u4EEEBGM"
+      m_value: {fileID: 8300000, guid: e924e27d0f3791841a2b6cf42171521a, type: 3}
+  AS_SEdic:
+    m_list:
+    - m_key: "\u4EEESE"
+      m_value: {fileID: 8300000, guid: 42d383662ee4daf469cb262659349dfa, type: 3}
+  AS_BGM: {fileID: 2847566288453565380}
+  AS_SE: {fileID: 2847566288453565383}

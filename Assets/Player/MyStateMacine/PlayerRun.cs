@@ -69,7 +69,7 @@ public class PlayerRun : PlayerIF
                 {
                     DoneRightStep = true;
                     //SoundManager.instance.SEStop();
-                    SoundManager.instance.SEPlay("仮SE");
+                    NewSoundManager.instance.PlaySE("仮SE");
                 }
             }
             if (!DoneLeftStep)
@@ -78,7 +78,7 @@ public class PlayerRun : PlayerIF
                 {
                     DoneLeftStep = true;
                     //SoundManager.instance.SEStop();
-                    SoundManager.instance.SEPlay("仮SE");
+                    NewSoundManager.instance.PlaySE("仮SE");
                 }
             }
         }

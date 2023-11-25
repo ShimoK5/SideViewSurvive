@@ -282,7 +282,7 @@ public class Enemy : MonoBehaviour
             //if(Collision.BoundingBox())
             //ここにカメラ範囲内のif分を噛ませる
             CameraPos2.instance.HitSwing(new Vector3(m_Enemy.DeadVector.x, m_Enemy.DeadVector.y, 0));
-            SoundManager.instance.SEPlay("仮SE");
+            NewSoundManager.instance.PlaySE("仮SE");
         }
     }
 

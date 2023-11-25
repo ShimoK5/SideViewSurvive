@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OldSoundManager : MonoBehaviour
+public class NewSoundManager : MonoBehaviour
 {
     [Serializable]
     public class StringAudioClipKeyValuePair : SerializableKeyValuePair<string, AudioClip> { }
@@ -18,7 +18,7 @@ public class OldSoundManager : MonoBehaviour
     [SerializeField] AudioSource AS_BGM;
     [SerializeField] AudioSource AS_SE;
 
-    public static OldSoundManager instance;
+    public static NewSoundManager instance;
 
     public enum AS_TYPE
     {
@@ -39,7 +39,7 @@ public class OldSoundManager : MonoBehaviour
 
             Destroy(gameObject);
         }
-        instance = this;
+        //instance = this;
     }
 
     public void PlayBGM(string key, bool isloop = true)
@@ -61,9 +61,13 @@ public class OldSoundManager : MonoBehaviour
 
     public void StopBGM(string key) 
     {
+        //Debug.Log("StopBGM");
         Keynull(key, AS_TYPE.BGM);
 
+        
         AS_BGM.Stop();
+        AS_BGM.clip = null;
+        //Debug.Log("StopBGM");
     }
 
     public void PlaySE(string key)

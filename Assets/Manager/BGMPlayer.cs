@@ -17,10 +17,10 @@ public class BGMPlayer : MonoBehaviour
     {
 
     }
-    ~BGMPlayer()
-    {
-        SoundManager.instance.BGMStop();
-    }
+    //~BGMPlayer()
+    //{
+    //    NewSoundManager.instance.StopBGM(selectplayTitle);
+    //}
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +31,11 @@ public class BGMPlayer : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        NewSoundManager.instance.StopBGM(selectplayTitle);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -39,6 +44,6 @@ public class BGMPlayer : MonoBehaviour
 
     public void BGMPlaying()
     {
-        SoundManager.instance.BGMPlay(selectplayTitle, isloop);
+        NewSoundManager.instance.PlayBGM(selectplayTitle, isloop);
     }
 }
