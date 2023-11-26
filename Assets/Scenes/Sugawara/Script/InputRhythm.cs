@@ -67,13 +67,10 @@ public class InputRhythm : MonoBehaviour
 
                 if (DelayChange > 700)
                 {
-                    Debug.Log(DelayChange);
                     SceneChange = false;
                     DelayChange = 0;
                     StrageNoteBox Strage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
-                    Debug.Log(Strage);
                     Strage.Change();
-                    Debug.Break();
                 }
             }
             PlayerHItPoint = Player.instance.HitPoint;
