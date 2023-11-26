@@ -34,4 +34,12 @@ public class Eraser : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Block>())
+        {
+            Destroy (gameObject);
+        }
+    }
 }
