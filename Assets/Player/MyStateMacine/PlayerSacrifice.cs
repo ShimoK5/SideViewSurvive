@@ -7,8 +7,30 @@ public class PlayerSacrifice : PlayerIF
     public PlayerSacrifice(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "bear/throw")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/throw", true);
+            //Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/throw", true);
         CopyPlayer(oldPlayer);
+
+        if (!isGround)
+        {
+            //
+            //空中
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/jump_throw", true);
+        }
+        else
+        {
+            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
+            {
+                //走り
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/run_throw", true);
+            }
+            else
+            {
+                //立ち
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/throw", true);
+
+            }
+        }
+
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成

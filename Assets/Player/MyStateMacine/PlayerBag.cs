@@ -13,8 +13,11 @@ public class PlayerBag : PlayerIF
     public PlayerBag(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
+            
         CopyPlayer(oldPlayer);
+
+        Player.instance.GetAnim().Anim.state.SetAnimation(0, "hip_drow/hip_drow", true);
+
         //横移動消し
         SelfVel.x = 0;
         OtherVel.x = 0;

@@ -7,8 +7,30 @@ public class PlayerRecorder : PlayerIF
     public PlayerRecorder(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
+            //Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
         CopyPlayer(oldPlayer);
+
+        if (!isGround)
+        {
+            //
+            //空中
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_jump_attack", true);
+        }
+        else
+        {
+            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
+            {
+                //走り
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_run_attack", true);
+            }
+            else
+            {
+                //立ち
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_idel_attack", true);
+
+            }
+        }
+
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
         //プレハブ生成
