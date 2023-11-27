@@ -108,6 +108,8 @@ public class Player : MonoBehaviour
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f, 1f));
             //ステート変更
             GameStateManager.instance.GameState = GAME_STATE.DeadPlayerStop;
+            //エフェクト非表示
+            m_Player.NowAirBorne = false;
             //カメラ揺れ
             CameraPos2.instance.HitSwing(new Vector3(0, -1, 0));
 

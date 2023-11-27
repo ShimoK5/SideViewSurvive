@@ -8,8 +8,11 @@ public class PlayerDead : PlayerIF
 {
     public PlayerDead(PlayerIF oldPlayer)
     {
-        if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
+        if (Player.instance.GetAnim().Anim.AnimationName != "normal/death")
+        {
+            TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/death", true);
+            trackEntry.Complete += SceneChange;
+        }
         CopyPlayer(oldPlayer);
         //横移動消し
         SelfVel.x = 0;
@@ -42,9 +45,9 @@ public class PlayerDead : PlayerIF
     public override void CustumFixed()
     {
         //ゴールアニメーション開始
-        if (Player.instance.GetAnim().Anim.AnimationName != "normal/walking")
+        if (Player.instance.GetAnim().Anim.AnimationName != "normal/death")
         {
-            TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/walking", true);
+            TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/death", true);
             trackEntry.Complete += SceneChange;
         }
 
@@ -64,6 +67,8 @@ public class PlayerDead : PlayerIF
             //Jump();
             //状態遷移
             ChangeNextState();
+            //浮遊
+            AirBorneCheck(false);
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -85,6 +90,8 @@ public class PlayerDead : PlayerIF
             //ChangeDirection();
             //状態遷移
             ChangeNextState();
+            //浮遊
+            AirBorneCheck(false);
             //速度反映
             MovePlayer();
             //フラグリセット

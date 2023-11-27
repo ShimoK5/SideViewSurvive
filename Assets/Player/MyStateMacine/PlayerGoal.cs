@@ -78,6 +78,8 @@ public class PlayerGoal : PlayerIF
             //Jump();
             //状態遷移
             ChangeNextState();
+            //浮遊
+            AirBorneCheck(false);
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -99,6 +101,8 @@ public class PlayerGoal : PlayerIF
             //ChangeDirection();
             //状態遷移
             ChangeNextState();
+            //浮遊
+            AirBorneCheck(false);
             //速度反映
             MovePlayer();
             //フラグリセット
@@ -118,8 +122,8 @@ public class PlayerGoal : PlayerIF
     //　trackEntry.Completeに関数ポインターを渡す用
     public void SceneChange(TrackEntry trackEntry)
     {
-        //SceneChangeManager.instance.SceneTransition("Result");
-        //GameStateManager.instance.GameState = GAME_STATE.EndFade;
+        SceneChangeManager.instance.SceneTransition("Result");
+        GameStateManager.instance.GameState = GAME_STATE.EndFade;
         Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
     }
 
