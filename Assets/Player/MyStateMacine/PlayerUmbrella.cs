@@ -7,8 +7,30 @@ public class PlayerUmbrella : PlayerIF
     public PlayerUmbrella(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "unbrella/unbrella_atteck")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "unbrella/unbrella_atteck", true);
+            //Player.instance.GetAnim().Anim.state.SetAnimation(0, "unbrella/unbrella_atteck", true);
         CopyPlayer(oldPlayer);
+
+        if (!isGround)
+        {
+            //
+            //空中
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "unbrella/unbrella_jump_atteck", true);
+        }
+        else
+        {
+            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
+            {
+                //走り
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "unbrella/unbrella_run_atteck", true);
+            }
+            else
+            {
+                //立ち
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "unbrella/unbrella_atteck", true);
+
+            }
+        }
+
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
 

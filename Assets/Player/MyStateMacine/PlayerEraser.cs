@@ -6,9 +6,32 @@ public class PlayerEraser : PlayerIF
 {
     public PlayerEraser(PlayerIF oldPlayer)
     {
-        //if (Player.instance.GetAnim().Anim.AnimationName != "enbitsu/enbitsutama_idel_shoot")
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_idel_shoot", true);
         CopyPlayer(oldPlayer);
+
+        //if (Player.instance.GetAnim().Anim.AnimationName != "enbitsu/enbitsutama_idel_shoot")
+        if (!isGround)
+        {
+            //
+            //空中
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_jump_shoot", true);
+        }
+        else
+        {
+            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
+            {
+                //走り
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_run_shoot", true);
+            }
+            else
+            {
+                //立ち
+                Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_idel_shoot", true);
+
+            }
+        }
+
+            
+        
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
 
