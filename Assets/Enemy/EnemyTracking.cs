@@ -16,6 +16,9 @@ public class EnemyTracking : EnemyIF
     {
         //EnemyAnim.instans.Anim.SetTrigger("Run");
         CopyEnemy(oldEnemy);
+        Radian = Mathf.Atan2(PlayerPos.y - tf.transform.position.y, PlayerPos.x - tf.transform.position.x);
+        SaveVelX = Mathf.Cos(Radian) * MAX_RUN_SPEED;
+        SaveVelY = Mathf.Sin(Radian) * MAX_RUN_SPEED;
     }
 
     public override void CustumUpdate()

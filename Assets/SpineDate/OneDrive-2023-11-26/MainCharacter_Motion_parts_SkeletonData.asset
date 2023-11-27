@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MainCharacter_Motion_parts_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 33a57db2dc4eb474c812f3b46fd2624e, type: 2}
+  - {fileID: 11400000, guid: d7ba2dfa29b024c458429c9f7d6b65e0, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 4efea1eab3a5a4b4594487b2d808743e, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 8af173e2494dd6541b2ab6ab2ad57589, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
@@ -27,5 +27,5 @@ MonoBehaviour:
   fromAnimation: []
   toAnimation: []
   duration: []
-  defaultMix: 0.01
+  defaultMix: 0.08
   controller: {fileID: 0}

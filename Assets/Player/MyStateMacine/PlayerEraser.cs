@@ -18,7 +18,9 @@ public class PlayerEraser : PlayerIF
 
         //プレハブ生成
         GameObject Eraser = (GameObject)Resources.Load("Eraser");
-        Eraser = Instantiate(Eraser, tf.transform.position, tf.transform.rotation);
+        Eraser = Instantiate(Eraser, 
+            tf.transform.position + tf.transform.forward * (Size.z * 0.5f + Eraser.transform.lossyScale.x * 0.5f),
+            tf.transform.rotation);
         Eraser.GetComponent<Eraser>().Velocity = 0.5f * tf.transform.forward;
     }
 

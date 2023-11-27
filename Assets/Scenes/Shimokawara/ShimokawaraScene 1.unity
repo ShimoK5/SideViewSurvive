@@ -7457,6 +7457,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerFolda
       objectReference: {fileID: 0}
+    - target: {fileID: 3323292473437407481, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5112613557728287688, guid: af4f5bcd325702f42957814bae9f3b29,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -7857,42 +7862,42 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[0]
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[1]
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[2]
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[3]
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[4]
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[5]
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[6]
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[7]
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169226, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
