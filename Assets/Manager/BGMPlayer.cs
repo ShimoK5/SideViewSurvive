@@ -33,6 +33,7 @@ public class BGMPlayer : MonoBehaviour
 
     void OnDestroy()
     {
+        if(NewSoundManager.instance)
         NewSoundManager.instance.StopBGM(selectplayTitle);
     }
 
