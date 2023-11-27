@@ -7,15 +7,15 @@ using UnityEngine.UI;
 
 public class InputRhythm : MonoBehaviour
 {
-    public static  InputRhythm instance = null;
+    public static  InputRhythm instance = null;                                                         //インスタンス保管庫
     [SerializeField] private bool Changer = false;                                                      //シーン変更の際に使用する変数
     public bool UpdateRhythmManager = false;                                                            //変更があった際に使用する変数
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう
-    public GameObject[] NoteBox = new GameObject[8];   //ノートボックス格納
-    private string SceneName = null;
+    public GameObject[] NoteBox = new GameObject[8];                                                    //ノートボックス格納
+    private string SceneName = null;                                                                    //シーンネーム保管庫
     private int DelayChange = 0;
     private bool SceneChange = false;
-    int PlayerHItPoint = 0;
+    private bool FistGameChange = false;
 
     void Awake()
     {
@@ -46,7 +46,7 @@ public class InputRhythm : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(SceneManager.GetActiveScene().name != SceneName)
         {
@@ -62,18 +62,27 @@ public class InputRhythm : MonoBehaviour
                 DelayChange += 1;
                 if(GameStateManager.instance.GameState == GAME_STATE.StartCameraMotion)
                 {
-                    SceneName = "Change";
+                    
+                    SceneName = "Change"; 
+                    DelayChange = 0;
+                    StrageNoteBox Storage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
+                    Storage.Change();
+                    Debug.Log("Change");
+                    SceneChange = false;
                 }
 
-                if (DelayChange > 700)
+                if(GameStateManager.instance.GameState == GAME_STATE.Game)
                 {
-                    SceneChange = false;
-                    DelayChange = 0;
-                    StrageNoteBox Strage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
-                    Strage.Change();
+                    Debug.Log(DelayChange);
+                }
+
+                if (DelayChange > 400)
+                {
+                   
+                  
+                    
                 }
             }
-            PlayerHItPoint = Player.instance.HitPoint;
             if(GameStateManager.instance.GameState == GAME_STATE.DeadPlayerStop)
             {
                 SceneChange = true;

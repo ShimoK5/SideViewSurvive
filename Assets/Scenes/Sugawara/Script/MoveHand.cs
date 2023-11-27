@@ -7,28 +7,25 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class MoveHand : MonoBehaviour
 {
-    [SerializeField] private Vector3 HandPosition = new Vector3(0.0f, 0.0f, 0.0f);       //ハンドの初期位置
-    [SerializeField] private float MoveSpeed = 0.1f;                                        //移動スピード
+    [SerializeField] private Vector3 HandPosition = Vector3.zero;           //ハンドの初期位置
+    [SerializeField] private float MoveSpeed = 5.0f;                                        //移動スピード
     [SerializeField] private bool TouchJudge = false;                                       //触っているかどうか
     [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
     [SerializeField] private GameObject Touch_Object = null;                                //触ったオブジェクト
     [SerializeField] private GameObject Duplication_Object = null;                          //オブジェクトが重なってしまった場合
     [SerializeField] private GameObject DragAndDropObject = null;
     [SerializeField] private Vector3 Catch_IconPosition = Vector3.zero;                     //移動する際に使用する位置座標（後で変数にして削除予定）
-    [SerializeField] int NoteNum = 0;                                                       //ノート数確認用
     [SerializeField] bool NoteCollision = false;                                            //ノートにぶつかっているか確認用
     [SerializeField] bool ChangeScene = false;                                              //シーンチェンジ用
     [SerializeField] int ChangeMovieFlame = 0;                                         //シーンの変化に対応したフレーム数
     [SerializeField] bool MovieNoise = false;
     [SerializeField] GameObject MovieObject;
-    [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用
-    private Color Translucent;
-    private Color entity;
+    [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用   
     [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
     [SerializeField] Material Ma;
 
-    [SerializeField] private bool DragJudge = false;                                        //アイコンを掴めるかどうかの確認
-    [SerializeField] public GameObject Catch_Icon = null;                                  //アイコン保管用（多分消せる）
+    private Color Translucent;                                                              //表示する色が薄くなる用の変数保管用
+    private Color entity;                                                                   //表示する色が濃くなる用の変数保管用
 
     // Start is called before the first frame update
 
@@ -38,7 +35,6 @@ public class MoveHand : MonoBehaviour
         RectTransform HandTransform = this.GetComponent<RectTransform>();
         HandTransform.TransformPoint(HandPosition);
         DragAndDrop = false;
-        NoteNum = 0;
         NoteCollision = false;
         Movie = MovieObject.GetComponent<MovieChange>();
         Movie.Change(RhythmManager.RhythmAction.None);
@@ -84,9 +80,7 @@ public class MoveHand : MonoBehaviour
         }
         else
         {
-            DragJudge = false;
-            ChangeScene = false;
-            
+            ChangeScene = false;            
         }
     }
 
@@ -96,22 +90,11 @@ public class MoveHand : MonoBehaviour
         {
             collision.gameObject.GetComponent<Text>().color = Color.red;
         }
-
-        //if(Duplication_Object != null)
-        //{
-            
-        //}
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        //if (collision.gameObject.tag == "Note" || collision.gameObject.name == "NextStage")
-        //{
-            
-
-           
-        //}
-       /* else*/ if(collision.gameObject.tag == "Note")
+        if(collision.gameObject.tag == "Note")
         {
             Debug.Log("いるか？");
             if (Duplication_Object == null)
@@ -151,7 +134,7 @@ public class MoveHand : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(TouchJudge == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
         {
@@ -167,11 +150,9 @@ public class MoveHand : MonoBehaviour
 
         if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
         {
-           // DoCarryIcon();
         }
         else //  テンキーや3Dスティックの入力（GetAxis）がゼロではない時の動作
         {
-            //DoCarryIcon();
             MoveChange();
             RectTransform HandTransform = this.GetComponent<RectTransform>();
             HandTransform.localPosition = HandPosition;
@@ -184,7 +165,6 @@ public class MoveHand : MonoBehaviour
         if(MovieNoise == true)
         {
             Ma = MovieObject.GetComponent<RawImage>().material;
-            //var material = GetComponent<Renderer>().material;
             Ma.SetFloat("_BoolSwitch",1.0f);
             Ma.EnableKeyword("FILL_WITH_RED");
             ChangeMovieFlame += 1;
@@ -221,9 +201,9 @@ public class MoveHand : MonoBehaviour
         else if (Input.GetAxis("Horizontal") < 0)
         {
             HandPosition.x = HandPosition.x + MoveSpeed * -1.0f;
-            if (HandPosition.x < -60.0f)
+            if (HandPosition.x < -380.0f)
             {
-                HandPosition.x = -60.0f;
+                HandPosition.x = -380.0f;
             }
 
             if (DragAndDrop == true)
