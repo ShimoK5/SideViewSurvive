@@ -7,18 +7,17 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class MoveHand : MonoBehaviour
 {
-    [SerializeField] private Vector3 HandPosition = Vector3.zero;           //ハンドの初期位置
+    [SerializeField] private Vector3 HandPosition = Vector3.zero;                           //ハンドの初期位置
     [SerializeField] private float MoveSpeed = 5.0f;                                        //移動スピード
-    [SerializeField] private bool TouchJudge = false;                                       //触っているかどうか
-    [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
     [SerializeField] private GameObject Touch_Object = null;                                //触ったオブジェクト
     [SerializeField] private GameObject Duplication_Object = null;                          //オブジェクトが重なってしまった場合
-    [SerializeField] private GameObject DragAndDropObject = null;
-    [SerializeField] private Vector3 Catch_IconPosition = Vector3.zero;                     //移動する際に使用する位置座標（後で変数にして削除予定）
+    [SerializeField] private GameObject DragAndDrop_Object = null;                           //掴んでいるオブジェクト
+    [SerializeField] private bool TouchJudge = false;                                       //触っているかどうか
+    [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
     [SerializeField] bool NoteCollision = false;                                            //ノートにぶつかっているか確認用
     [SerializeField] bool ChangeScene = false;                                              //シーンチェンジ用
-    [SerializeField] int ChangeMovieFlame = 0;                                         //シーンの変化に対応したフレーム数
-    [SerializeField] bool MovieNoise = false;
+    [SerializeField] bool MovieNoise = false;                                               //ノイズ発生させたいかどうか（消す予定）
+    [SerializeField] int ChangeMovieFlame = 0;                                              //シーンの変化に対応したフレーム数　消す予定）
     [SerializeField] GameObject MovieObject;
     [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用   
     [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
@@ -31,7 +30,7 @@ public class MoveHand : MonoBehaviour
 
     void Start()
     {
-        HandPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        HandPosition = new Vector3(0.0f, 0.0f, -10.0f);
         RectTransform HandTransform = this.GetComponent<RectTransform>();
         HandTransform.TransformPoint(HandPosition);
         DragAndDrop = false;
@@ -47,13 +46,12 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Note" || collision.gameObject.name == "NextStage")
+        if(collision.gameObject.tag == "Note" )
         {
             if (TouchJudge == false)
             {
                 TouchJudge = true;
-                Touch_Object = collision.gameObject;
-               
+                Touch_Object = collision.gameObject;               
             }
             else
             {
@@ -74,10 +72,6 @@ public class MoveHand : MonoBehaviour
             ChangeFlavor(Touch_Object.name);
             ChangeHeader(Touch_Object.name);
         }
-        else if (DragAndDrop == false && collision.gameObject.name == "NextStage")
-        {
-            collision.gameObject.GetComponent<Text>().color = Color.red;           
-        }
         else
         {
             ChangeScene = false;            
@@ -86,17 +80,13 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (DragAndDrop == false && collision.gameObject.name == "NextStage")
-        {
-            collision.gameObject.GetComponent<Text>().color = Color.red;
-        }
+        
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Note")
-        {
-            Debug.Log("いるか？");
+        {           
             if (Duplication_Object == null)
             {
                 Touch_Object.GetComponent<Image>().color = Translucent;
@@ -122,10 +112,9 @@ public class MoveHand : MonoBehaviour
             ChangeFlavor("None");
             ChangeHeader("None");
         }
-        else if (collision.gameObject.name == "NextStage")
+        else 
         {
             TouchJudge = false;
-            collision.gameObject.GetComponent<Text>().color = Color.black;
             Touch_Object = null;
         }
 
@@ -136,29 +125,50 @@ public class MoveHand : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(TouchJudge == true && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
+        if(SetInputManager.instance.Ref_Button(SetInputManager.BUTTON.MENU_BUTTON))
+        {
+            SceneChangeManager.instance.SceneTransition("ShimokawaraScene 1");
+        }
+
+        if(DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.L1_BUTTON))
+        {
+            HandPosition.x = -270.0f;
+            HandPosition.y = -171.0f;
+            RectTransform HandTransform = this.GetComponent<RectTransform>();
+            HandTransform.localPosition = HandPosition;
+        }
+        else if(DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.R1_BUTTON))
+        {
+            HandPosition.x = -130.0f;
+            HandPosition.y = -171.0f;
+            RectTransform HandTransform = this.GetComponent<RectTransform>();
+            HandTransform.localPosition = HandPosition;
+        }
+
+        if(TouchJudge == true && SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
         {
             TouchDoPush();
         }
-        else if (TouchJudge == false && (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown(KeyCode.Space)))
+        else if (TouchJudge == false && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
         {
             DoAButtonPush();
         }
 
-        
 
+        float Horizon = SetInputManager.instance.Ref_Stick_Horizon(SetInputManager.BUTTON.LEFT_STICK);
+        float Vertical = SetInputManager.instance.Ref_Stick_Vertical(SetInputManager.BUTTON.LEFT_STICK);
 
-        if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
+        if (Horizon == 0.0f && Vertical == 0.0f)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
         {
         }
         else //  テンキーや3Dスティックの入力（GetAxis）がゼロではない時の動作
         {
-            MoveChange();
+            MoveChange(Horizon,Vertical);
             RectTransform HandTransform = this.GetComponent<RectTransform>();
             HandTransform.localPosition = HandPosition;
             if (DragAndDrop == true)
             {
-                DragAndDropObject.GetComponent<RectTransform>().localPosition = HandPosition;
+                DragAndDrop_Object.GetComponent<RectTransform>().localPosition = HandPosition;
             }           
         }
 
@@ -182,64 +192,12 @@ public class MoveHand : MonoBehaviour
 
     }
 
-    void MoveChange()
+    void MoveChange(float horizon,float vertical)    
     {
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            HandPosition.x = HandPosition.x + MoveSpeed;
-            if (HandPosition.x > 380.0f)
-            {
-                HandPosition.x = 380.0f;
-            }
-            if (DragAndDrop == true)
-            {
-                Catch_IconPosition.x += MoveSpeed;
-                
-            }
+      
 
-        }
-        else if (Input.GetAxis("Horizontal") < 0)
-        {
-            HandPosition.x = HandPosition.x + MoveSpeed * -1.0f;
-            if (HandPosition.x < -380.0f)
-            {
-                HandPosition.x = -380.0f;
-            }
-
-            if (DragAndDrop == true)
-            {
-                Catch_IconPosition.x += MoveSpeed * -1.0f;
-               
-            }
-        }
-
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            HandPosition.y = HandPosition.y + MoveSpeed;
-            if (HandPosition.y > 320.0f)
-            {
-                HandPosition.y = 320.0f;
-            }
-
-            if (DragAndDrop == true)
-            {
-                Catch_IconPosition.y += MoveSpeed;
-               
-            }
-        }
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            HandPosition.y = HandPosition.y + MoveSpeed * -1.0f;
-            if (HandPosition.y < -320.0f)
-            {
-                HandPosition.y = -320.0f;
-            }
-            if (DragAndDrop == true)
-            {
-                Catch_IconPosition.y += MoveSpeed * -1.0f;
-                
-            }
-        }
+        HandPosition.x = HandPosition.x + MoveSpeed * horizon;
+        HandPosition.y = HandPosition.y + MoveSpeed * vertical;
     }
 
     void TouchDoPush()
@@ -254,14 +212,14 @@ public class MoveHand : MonoBehaviour
             else
             {
                 DragAndDrop = false;
-                 Destroy(DragAndDropObject);
+                 Destroy(DragAndDrop_Object);
             }
         }
         else if(Touch_Object.tag == "Note")
         {
             if (DragAndDrop == true)
             {
-                switch (DragAndDropObject.name)
+                switch (DragAndDrop_Object.name)
                 {
                     case ("Umbrella"):
                         InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Umbrella, Touch_Object.name);
@@ -310,19 +268,13 @@ public class MoveHand : MonoBehaviour
                 InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
             }
         }
-        else if (Touch_Object.name == "NextStage")
-        {
-            if (DragAndDrop == false)
-            {
-                SceneChangeManager.instance.SceneTransition("ShimokawaraScene 1");
-                RhythmManager.Instance.FCnt = 0;
-            }
-            else
-            {
-                DragAndDrop = false;
-                Destroy(DragAndDropObject);
-            }
-        }
+        //else if (Touch_Object.name == "NextStage")
+        //{
+            
+                //DragAndDrop = false;
+                //Destroy(DragAndDrop_Object);
+            
+        //}
     }
 
     void DoAButtonPush()
@@ -330,7 +282,7 @@ public class MoveHand : MonoBehaviour
         if(DragAndDrop == true)
         {
             DragAndDrop = false;
-            Destroy(DragAndDropObject);
+            Destroy(DragAndDrop_Object);
         }
     }
     
@@ -385,7 +337,7 @@ public class MoveHand : MonoBehaviour
                 break;
 
         }
-        DragAndDropObject = CloneIconBox;
+        DragAndDrop_Object = CloneIconBox;
     }
 
 
