@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine;
 
 public class PlayerRecorder : PlayerIF
 {
+    TrackEntry m_TrackEntry;
+
     public PlayerRecorder(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
@@ -14,19 +17,19 @@ public class PlayerRecorder : PlayerIF
         {
             //
             //空中
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_jump_attack", true);
+            m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_jump_attack", true);
         }
         else
         {
             if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
             {
                 //走り
-                Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_run_attack", true);
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_run_attack", true);
             }
             else
             {
                 //立ち
-                Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_idel_attack", true);
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_idel_attack", true);
 
             }
         }
@@ -51,6 +54,47 @@ public class PlayerRecorder : PlayerIF
 
     public override void CustumFixed()
     {
+        //アニメーション
+        if (!isGround)
+        {
+            if (Player.instance.GetAnim().Anim.AnimationName != "recoder/recoder_jump_attack")
+            {
+                float NowTime = m_TrackEntry.TrackTime;
+                //空中
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_jump_attack", true);
+                m_TrackEntry.TrackTime = NowTime;
+            }
+
+        }
+        else
+        {
+            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
+            {
+
+                if (Player.instance.GetAnim().Anim.AnimationName != "recoder/recoder_run_attack")
+                {
+                    float NowTime = m_TrackEntry.TrackTime;
+                    //走り
+                    m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_run_attack", true);
+                    m_TrackEntry.TrackTime = NowTime;
+                }
+
+            }
+            else
+            {
+                if (Player.instance.GetAnim().Anim.AnimationName != "recoder/recoder_idel_attack")
+                {
+                    float NowTime = m_TrackEntry.TrackTime;
+                    //立ち
+                    m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "recoder/recoder_idel_attack", true);
+
+                    m_TrackEntry.TrackTime = NowTime;
+                }
+
+            }
+        }
+
+
         if (isGround)
         {
             //過去情報保存

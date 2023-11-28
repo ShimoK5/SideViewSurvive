@@ -1,31 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine;
 
 public class PlayerEraser : PlayerIF
 {
+
+    TrackEntry m_TrackEntry;
+
     public PlayerEraser(PlayerIF oldPlayer)
     {
         CopyPlayer(oldPlayer);
 
         //if (Player.instance.GetAnim().Anim.AnimationName != "enbitsu/enbitsutama_idel_shoot")
+        //アニメーション
         if (!isGround)
         {
             //
             //空中
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_jump_shoot", true);
+            m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_jump_shoot", true);
         }
         else
         {
             if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
             {
                 //走り
-                Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_run_shoot", true);
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_run_shoot", true);
             }
             else
             {
                 //立ち
-                Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_idel_shoot", true);
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_idel_shoot", true);
 
             }
         }
@@ -60,6 +65,46 @@ public class PlayerEraser : PlayerIF
 
     public override void CustumFixed()
     {
+        //アニメーション
+        if (!isGround)
+        {
+            if (Player.instance.GetAnim().Anim.AnimationName != "enbitsu/enbitsutama_jump_shoot")
+            {
+                float NowTime = m_TrackEntry.TrackTime;
+                //空中
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_jump_shoot", true);
+                m_TrackEntry.TrackTime = NowTime;
+            }
+
+        }
+        else
+        {
+            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
+            {
+
+                if (Player.instance.GetAnim().Anim.AnimationName != "enbitsu/enbitsutama_run_shoot")
+                {
+                    float NowTime = m_TrackEntry.TrackTime;
+                    //走り
+                    m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_run_shoot", true);
+                    m_TrackEntry.TrackTime = NowTime;
+                }
+
+            }
+            else
+            {
+                if (Player.instance.GetAnim().Anim.AnimationName != "enbitsu/enbitsutama_idel_shoot")
+                {
+                    float NowTime = m_TrackEntry.TrackTime;
+                    //立ち
+                    m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "enbitsu/enbitsutama_idel_shoot", true);
+
+                    m_TrackEntry.TrackTime = NowTime;
+                }
+
+            }
+        }
+
         if (isGround)
         {
             //過去情報保存

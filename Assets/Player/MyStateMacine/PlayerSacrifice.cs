@@ -1,32 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine;
 
 public class PlayerSacrifice : PlayerIF
 {
+    TrackEntry m_TrackEntry;
+
     public PlayerSacrifice(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "bear/throw")
             //Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/throw", true);
         CopyPlayer(oldPlayer);
 
+        //アニメーション
         if (!isGround)
         {
             //
             //空中
-            Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/jump_throw", true);
+            m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/jump_throw", true);
         }
         else
         {
             if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
             {
                 //走り
-                Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/run_throw", true);
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/run_throw", true);
             }
             else
             {
                 //立ち
-                Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/throw", true);
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/throw", true);
 
             }
         }
@@ -52,6 +56,47 @@ public class PlayerSacrifice : PlayerIF
 
     public override void CustumFixed()
     {
+        //アニメーション
+        if (!isGround)
+        {
+            if (Player.instance.GetAnim().Anim.AnimationName != "bear/jump_throw")
+            {
+                float NowTime = m_TrackEntry.TrackTime;
+                //空中
+                m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/jump_throw", true);
+                m_TrackEntry.TrackTime = NowTime;
+            }
+                
+        }
+        else
+        {
+            if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED)
+            {
+
+                if (Player.instance.GetAnim().Anim.AnimationName != "bear/run_throw")
+                {
+                    float NowTime = m_TrackEntry.TrackTime;
+                    //走り
+                    m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/run_throw", true);
+                    m_TrackEntry.TrackTime = NowTime;
+                }
+                
+            }
+            else
+            {
+                if (Player.instance.GetAnim().Anim.AnimationName != "bear/throw")
+                {
+                    float NowTime = m_TrackEntry.TrackTime;
+                    //立ち
+                    m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "bear/throw", true);
+
+                    m_TrackEntry.TrackTime = NowTime;
+                }
+                
+            }
+        }
+
+
         if (isGround)
         {
             //過去情報保存
