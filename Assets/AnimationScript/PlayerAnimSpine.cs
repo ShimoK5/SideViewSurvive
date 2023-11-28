@@ -6,12 +6,24 @@ using Spine.Unity;
 public class PlayerAnimSpine : MonoBehaviour
 {
     public SkeletonAnimation Anim;
-
-    int FCnt = 0;
+    [Header("Runアニメーション再生倍率")]
+    [SerializeField] float RunSpeed = 1.5f;  
 
     void Awake()
     {
         Anim = GetComponent<SkeletonAnimation>();
+    }
+
+    void FixedUpdate()
+    {
+        if (Anim.AnimationName == "normal/run")
+        {
+            Anim.state.TimeScale = RunSpeed;
+        }
+        else
+        {
+            Anim.state.TimeScale = 1.0f;
+        }
     }
 
 #if false
