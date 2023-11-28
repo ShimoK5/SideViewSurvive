@@ -82,9 +82,14 @@ public class Sacrifice: PawnIF
         FCnt++;
         if (FCnt >= LifeCnt)
         {
-            GameObject myPrefab;//プレハブをGameObject型で取得
-            myPrefab = (GameObject)Resources.Load("SpringEffect");//プレハブをGameObject型で取得
-            GameObject Obj = Instantiate(myPrefab, tf.position, Quaternion.identity);
+            //GameObject myPrefab;//プレハブをGameObject型で取得
+            //myPrefab = (GameObject)Resources.Load("SpringEffect");//プレハブをGameObject型で取得
+            //GameObject Obj = Instantiate(myPrefab, tf.position, Quaternion.identity);
+
+            GameObject Effect;//プレハブをGameObject型で取得
+            Effect = (GameObject)Resources.Load("Prefabs/vfx_SacrificeDeath");//プレハブをGameObject型で取得
+            GameObject Obj = Instantiate(Effect, tf.position, Quaternion.identity);
+
 
             Destroy(tf.gameObject);
         }

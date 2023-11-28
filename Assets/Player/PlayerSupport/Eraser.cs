@@ -39,7 +39,11 @@ public class Eraser : MonoBehaviour
     {
         if (other.GetComponent<Block>())
         {
-            Destroy (gameObject);
+            GameObject Effect;//プレハブをGameObject型で取得
+            Effect = (GameObject)Resources.Load("Prefabs/vfx_PencilDeath");//プレハブをGameObject型で取得
+            GameObject Obj = Instantiate(Effect, transform. position, Quaternion.identity);
+
+            Destroy(gameObject);
         }
     }
 }
