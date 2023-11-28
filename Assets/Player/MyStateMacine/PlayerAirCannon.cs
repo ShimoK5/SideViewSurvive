@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine;
 
 public class PlayerAirCannon : PlayerIF
 {
+    int FCnt = 0;
+
     public PlayerAirCannon(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
             //Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
         CopyPlayer(oldPlayer);
 
-        Player.instance.GetAnim().Anim.state.SetAnimation(0, "aircanon/aircannon_fly", true);
+        TrackEntry m_TrackEntry;
+        m_TrackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "aircanon/aircanon_punch", true);
+        m_TrackEntry.TrackTime = 0.4f;
 
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
@@ -49,6 +54,13 @@ public class PlayerAirCannon : PlayerIF
 
     public override void CustumFixed()
     {
+        FCnt++;
+        //アニメーション変更
+        if(FCnt >= 11)
+        {
+            Player.instance.GetAnim().Anim.state.SetAnimation(0, "aircanon/aircannon_fly", true);
+        }
+
         if (isGround)
         {
             //過去情報保存
