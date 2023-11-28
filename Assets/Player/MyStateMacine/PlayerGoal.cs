@@ -57,9 +57,9 @@ public class PlayerGoal : PlayerIF
             CameraPos2.instance.ZoomCamera = true;
 
             //ゴールアニメーション開始
-            if (Player.instance.GetAnim().Anim.AnimationName != "normal/walking")
+            if (Player.instance.GetAnim().Anim.AnimationName != "GOAL/GOAL")
             {
-                TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/walking", true);
+                TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "GOAL/GOAL", false);
                 trackEntry.Complete += SceneChange;
             }
                
@@ -124,7 +124,7 @@ public class PlayerGoal : PlayerIF
     {
         SceneChangeManager.instance.SceneTransition("Result");
         GameStateManager.instance.GameState = GAME_STATE.EndFade;
-        Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
+        //Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
     }
 
 }

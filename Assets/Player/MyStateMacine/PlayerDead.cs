@@ -10,7 +10,7 @@ public class PlayerDead : PlayerIF
     {
         if (Player.instance.GetAnim().Anim.AnimationName != "normal/death")
         {
-            TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/death", true);
+            TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/death", false);
             trackEntry.Complete += SceneChange;
         }
         CopyPlayer(oldPlayer);
@@ -47,7 +47,7 @@ public class PlayerDead : PlayerIF
         //ゴールアニメーション開始
         if (Player.instance.GetAnim().Anim.AnimationName != "normal/death")
         {
-            TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/death", true);
+            TrackEntry trackEntry = Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/death", false);
             trackEntry.Complete += SceneChange;
         }
 
@@ -110,8 +110,8 @@ public class PlayerDead : PlayerIF
 
     public void SceneChange(TrackEntry trackEntry)
     {
-        SceneChangeManager.instance.SceneTransition(SceneManager.GetActiveScene().name);
-        Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
+        SceneChangeManager.instance.SceneTransition("SetScene");
+        //Player.instance.GetAnim().Anim.state.SetAnimation(0, "normal/idle", true);
     }
 
 }

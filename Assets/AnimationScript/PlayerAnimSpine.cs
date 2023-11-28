@@ -7,7 +7,7 @@ public class PlayerAnimSpine : MonoBehaviour
 {
     public SkeletonAnimation Anim;
     [Header("Runアニメーション再生倍率")]
-    [SerializeField] float RunSpeed = 1.5f;  
+    [SerializeField] float RunSpeed = 1.8f;  
 
     void Awake()
     {
