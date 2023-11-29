@@ -17,8 +17,8 @@ public class ProgressPos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LocalMinX = GameObject.Find("BarStart").GetComponent<RectTransform>().localPosition.x;
-        LocalMaxX = GameObject.Find("BarEnd").GetComponent<RectTransform>().localPosition.x;
+        LocalMinX = GameObject.Find("BarStartTemp").GetComponent<RectTransform>().localPosition.x;
+        LocalMaxX = GameObject.Find("BarEndTemp").GetComponent<RectTransform>().localPosition.x;
 
         WorldMinX = GameObject.Find("StartObj").transform.position.x;
         WorldMaxX = GameObject.Find("GoalObj").transform.position.x;

@@ -28,7 +28,8 @@ public class LifeCanvas : MonoBehaviour
             {
                 if (NowHitPoint <= i)
                 {
-                    LifeArray[i].GetComponent<Image>().color = Color.black;
+                    //LifeArray[i].GetComponent<Image>().color = Color.black;
+                    LifeArray[i].GetComponent<Image>().enabled = false;
                 }
             }
         }
