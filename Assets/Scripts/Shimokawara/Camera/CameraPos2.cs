@@ -157,7 +157,8 @@ public class CameraPos2 : MonoBehaviour
         else
         {
             float DefaultY = DefaultPos.y - cameraPosY; //現在のY座標
-            if(DefaultY > targetObj.transform.position.y)
+
+            if(DefaultY > targetObj.transform.position.y)//上にいる場合の処理
             {
                 CameraFollowVelY = (targetObj.transform.position.y - DefaultY) * CAMERA_FOLLOW_VEL_Y_MULTI;
 
@@ -170,7 +171,7 @@ public class CameraPos2 : MonoBehaviour
 
                 //DefaultY = Mathf.Max(DefaultY - FLAME_MOVE_RANGE_Y, targetObj.transform.position.y);
             }
-            else
+            else//下にいる場合の処理
             {
                 CameraFollowVelY = (targetObj.transform.position.y - DefaultY) * CAMERA_FOLLOW_VEL_Y_MULTI;
 
