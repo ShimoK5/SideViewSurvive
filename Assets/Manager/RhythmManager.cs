@@ -23,7 +23,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] public RhythmAction[] ActionArray = new RhythmAction[BeatNum];
     [Header("リズム間隔（フレーム数）")]
     [SerializeField] public int BeatTempo;
-    public int FCnt = 1;//フレームカウント
+    public int FCnt = 0;//フレームカウント
 
     // Start is called before the first frame update
     void Awake()
@@ -34,7 +34,7 @@ public class RhythmManager : MonoBehaviour
 
     void Start()
     {
-        FCnt = 1;
+        FCnt = 0;
     }
 
     // Update is called once per frame
@@ -90,29 +90,19 @@ public class RhythmManager : MonoBehaviour
     {
 
         //フレームカウント加算
-        //FCnt++;
-
-        if(InputManager_FU.instanse.GetKeyTrigger(Key.B))
-        {
-            FCnt += 28;
-        }
+        FCnt++;
 
         //周期の直前にステートリセット
         if (FCnt % BeatTempo == BeatTempo - 1)
         {
             ChangeStateDefault();
-            FCnt += 1;
         }
 
         //周期が来たら
         if (FCnt % BeatTempo == 0)
         {
-
             //アクションを指示する
             int ActionIndex = FCnt / BeatTempo - 1;
-
-            FCnt += 1;
-
             switch (ActionArray[ActionIndex])
             {
                 case RhythmAction.Umbrella:
