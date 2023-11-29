@@ -36,6 +36,12 @@ public class PlayerRecorder : PlayerIF
 
         //減速
         SelfVel.x *= ACTION_VEL_MULTI;
+
+        //プレハブ生成 エフェクト
+        GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_Recorder");
+        Effect = Instantiate(Effect, tf.transform.position, tf.transform.rotation);
+        //親子関係
+        Effect.transform.parent = tf;
         //プレハブ生成
         GameObject SoundWaves = (GameObject)Resources.Load("SoundWaves");
         SoundWaves = Instantiate(SoundWaves, tf.transform.position, Quaternion.Euler(90,0,0));
