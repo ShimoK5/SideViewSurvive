@@ -33,16 +33,17 @@ public class InputRhythm : MonoBehaviour
             ResetSceneAction();
             ChangeSceneAction();
         }
+
+        for (int Number = 0; Number < 8; Number++)
+        {
+            Action[Number] = RhythmManager.RhythmAction.None;
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        SceneName = SceneManager.GetActiveScene().name;
-        for(int Number = 0;Number < 8;Number++)
-        {
-            Action[Number] = RhythmManager.RhythmAction.None;
-        }
+        SceneName = SceneManager.GetActiveScene().name;       
     }
 
     // Update is called once per frame
@@ -53,43 +54,8 @@ public class InputRhythm : MonoBehaviour
             ResetSceneAction();
             ChangeSceneAction();
             SceneName = SceneManager.GetActiveScene().name;
+            FistGameChange = true;
         }
-
-        if(SceneManager.GetActiveScene().name == "ShimokawaraScene 1")
-        {
-            if (SceneChange == true)
-            {
-                DelayChange += 1;
-                if(GameStateManager.instance.GameState == GAME_STATE.StartCameraMotion)
-                {
-                    
-                    SceneName = "Change"; 
-                    DelayChange = 0;
-                    StrageNoteBox Storage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
-                    Storage.Change();
-                    Debug.Log("Change");
-                    SceneChange = false;
-                }
-
-                if(GameStateManager.instance.GameState == GAME_STATE.Game)
-                {
-                    Debug.Log(DelayChange);
-                }
-
-                if (DelayChange > 400)
-                {
-                   
-                  
-                    
-                }
-            }
-            if(GameStateManager.instance.GameState == GAME_STATE.DeadPlayerStop)
-            {
-                SceneChange = true;
-            }
-        }
-
-       
 
         if (UpdateRhythmManager == true)
         {
@@ -101,8 +67,62 @@ public class InputRhythm : MonoBehaviour
             {
                 ChangeNoteBox();
             }
-                UpdateRhythmManager = false;
+            UpdateRhythmManager = false;
         }
+
+        if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1")
+        {
+            if (GameStateManager.instance.GameState == GAME_STATE.StartFade)
+            {
+                if (FistGameChange == true)
+                {
+                    StrageNoteBox Storage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
+                    Storage.Change();
+                    FistGameChange = false;
+                }
+                             
+            }
+
+            //if (SceneChange == true)
+            //{
+            //    DelayChange += 1;
+            //    if(GameStateManager.instance.GameState == GAME_STATE.StartFade)
+            //    {
+
+            //        SceneName = "Change"; 
+            //        DelayChange = 0;
+            //        StrageNoteBox Storage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
+            //        Storage.Change();
+            //        Debug.Log("Change");
+            //        SceneChange = false;
+            //        FistGameChange = false;
+            //        if (FistGameChange == true)
+            //        {
+
+            //        }
+            //    }
+
+            //    if(GameStateManager.instance.GameState == GAME_STATE.Game)
+            //    {
+            //        Debug.Log(DelayChange);
+            //    }
+
+            //    if (DelayChange > 400)
+            //    {
+
+
+
+            //    }
+            //}
+            //if(GameStateManager.instance.GameState == GAME_STATE.DeadPlayerStop)
+            //{
+            //    SceneChange = true;
+            //}
+        }
+
+
+
+        
     }
 
     public void ChangeNoteBox(RhythmManager.RhythmAction ArrayAction,string NoteName)
@@ -208,12 +228,11 @@ public class InputRhythm : MonoBehaviour
                 {
                     NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.None);
                     RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
-                    Action[NoteNum] = RhythmManager.RhythmAction.None;
+                    Action[NoteNum] = RhythmManager.RhythmAction.None;                    
                 }
                 else
                 {
-                    Debug.Log("どこのノートなの？");
-                    break;
+                    Debug.Log("どこのノートなの？");                   
                 }
                 break;
 

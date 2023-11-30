@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,6 +23,8 @@ public class MoveHand : MonoBehaviour
     [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用   
     [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
     [SerializeField] Material Ma;
+
+    bool Changetouch = false;
 
     private Color Translucent;                                                              //表示する色が薄くなる用の変数保管用
     private Color entity;                                                                   //表示する色が濃くなる用の変数保管用
@@ -51,17 +54,13 @@ public class MoveHand : MonoBehaviour
             if (TouchJudge == false)
             {
                 TouchJudge = true;
-                Touch_Object = collision.gameObject;               
+                Touch_Object = collision.gameObject;
+                Touch_Object.GetComponent<Image>().color = entity;
             }
             else
             {
                 Duplication_Object = collision.gameObject;
-            }
-            
-        }
-        else if(collision.gameObject.tag == "Note")
-        {
-            Touch_Object.GetComponent<Image>().color = entity;
+            }            
         }
         else if(collision.gameObject.name == "Target")
         {
@@ -80,7 +79,11 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        
+        if(Changetouch == true)
+        {
+            Touch_Object = collision.gameObject;
+            Changetouch = false;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -93,7 +96,7 @@ public class MoveHand : MonoBehaviour
                 TouchJudge = false;
                 Touch_Object = null;
             }
-            else if (Duplication_Object != null)
+            else 
             {
                 TouchJudge = true;
                 Touch_Object.GetComponent<Image>().color = Translucent;
@@ -145,13 +148,23 @@ public class MoveHand : MonoBehaviour
             HandTransform.localPosition = HandPosition;
         }
 
-        if(TouchJudge == true && SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
+        if(TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.B_BUTTON))
         {
-            TouchDoPush();
+            DeleteNote();
         }
-        else if (TouchJudge == false && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
+
+
+        if(TouchJudge == true && SetInputManager.instance.Ref_Button(SetInputManager.BUTTON.A_BUTTON))
         {
-            DoAButtonPush();
+            CatchIcon();
+        }
+        else if(TouchJudge == false && DragAndDrop == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
+        {
+            DragIcon();
+        }
+        else if (DragAndDrop == true && TouchJudge == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
+        {
+            DropIcon();
         }
 
 
@@ -194,13 +207,11 @@ public class MoveHand : MonoBehaviour
 
     void MoveChange(float horizon,float vertical)    
     {
-      
-
         HandPosition.x = HandPosition.x + MoveSpeed * horizon;
         HandPosition.y = HandPosition.y + MoveSpeed * vertical;
     }
 
-    void TouchDoPush()
+    void CatchIcon()
     {
         if (Touch_Object.tag == "Icon")
         {
@@ -208,14 +219,26 @@ public class MoveHand : MonoBehaviour
             {
                 CreateCloneIcon();
                 DragAndDrop = true;
+                TouchJudge = false;
             }
             else
             {
-                DragAndDrop = false;
-                 Destroy(DragAndDrop_Object);
+               
             }
-        }
-        else if(Touch_Object.tag == "Note")
+        }       
+    }
+
+    void DragIcon()
+    {
+        Debug.Log("DragIcon");
+        DragAndDrop = false;
+        Destroy(DragAndDrop_Object);
+    }
+
+    void DropIcon()
+    {
+        Debug.Log("DropIcon");
+        if (Touch_Object.tag == "Note")
         {
             if (DragAndDrop == true)
             {
@@ -267,28 +290,25 @@ public class MoveHand : MonoBehaviour
             {
                 InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
             }
+
+            Destroy(DragAndDrop_Object);
+            Changetouch = true;
+            TouchJudge = true;
+            DragAndDrop = false;
         }
-        //else if (Touch_Object.name == "NextStage")
-        //{
-            
-                //DragAndDrop = false;
-                //Destroy(DragAndDrop_Object);
-            
-        //}
+       
     }
 
-    void DoAButtonPush()
+    void DeleteNote()
     {
-        if(DragAndDrop == true)
+        if (Touch_Object.tag == "Note")
         {
-            DragAndDrop = false;
-            Destroy(DragAndDrop_Object);
+            InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
         }
     }
-    
+
     void CreateCloneIcon()
-    {
-    
+    {    
         GameObject CloneIconBox = null;
         CloneIconBox = Instantiate(AssetManager.Instance.PrefabObject[0], HandPosition, Quaternion.identity);
         CloneIconBox.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);

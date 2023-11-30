@@ -6,22 +6,21 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class CreateNoteBox : MonoBehaviour
 {
-    [SerializeField] GameObject PrefabNote = null;
-    [SerializeField] GameObject[] SelectNote = new GameObject[8];
-    [SerializeField] int HierarchyNumber = 3;
-    [SerializeField] float MoveWidth = 0.0f;
-    Color ImageColor = Color.white;
+    [SerializeField] GameObject PrefabNote = null;                  //どのプレハブをノートとして使うか
+    [SerializeField] GameObject[] SelectNote = new GameObject[8];   //ノートを8つ分作成するよう
+    [SerializeField] int HierarchyNumber = 3;                       //ヒエラルキーの場所指定
+    Color ImageColor = Color.white;                                 //アルファ値変更用
 
     void Start()
     {
         Vector3 PrefabPosition = this.transform.localPosition;
-        MoveWidth = PrefabPosition.x;
-        float NotePosition = (this.GetComponent<RectTransform>().sizeDelta.x - PrefabNote.GetComponent<RectTransform>().sizeDelta.x * 2 - 20.0f) / 7;
+        float MoveWidth = PrefabPosition.x;
+        float NotePosition = (this.GetComponent<RectTransform>().sizeDelta.x - PrefabNote.GetComponent<RectTransform>().sizeDelta.x  - 10.0f ) / 7;
         GameObject CloneNote = null;
         ImageColor.a = 0.5f;
         for (int NoteNum = 0; NoteNum < SelectNote.Length; NoteNum++)
         {
-            PrefabPosition.x = (-(this.GetComponent<RectTransform>().sizeDelta.x) + PrefabNote.GetComponent<RectTransform>().sizeDelta.x * 2 + 20.0f) / 2
+            PrefabPosition.x = (-(this.GetComponent<RectTransform>().sizeDelta.x) + PrefabNote.GetComponent<RectTransform>().sizeDelta.x + 5.0f) / 2
                 + NotePosition * NoteNum + MoveWidth;
             CloneNote = Instantiate(PrefabNote, PrefabPosition, Quaternion.identity);
             CloneNote.name = "" + NoteNum;
@@ -32,11 +31,11 @@ public class CreateNoteBox : MonoBehaviour
             CloneNote.transform.SetSiblingIndex(HierarchyNumber);
             InputRhythm.instance.NoteBox[NoteNum] = CloneNote;
         }
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 
     // Update is called once per frame
-    void FixUpdate()
+    void FixedUpdate()
     {
         
     }

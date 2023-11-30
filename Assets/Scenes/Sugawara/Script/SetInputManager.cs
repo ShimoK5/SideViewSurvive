@@ -78,7 +78,6 @@ public class SetInputManager : MonoBehaviour
         if(Input.GetKey("joystick button 0") || Input.GetKey(A_Button))
         {
             Push_Button[(int)BUTTON.A_BUTTON] = true;
-            Debug.Log("A押し出来てます");
         }      
 
         if (Input.GetKey("joystick button 1") || Input.GetKey(B_Button))

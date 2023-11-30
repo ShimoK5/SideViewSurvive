@@ -180,13 +180,13 @@ public class StrageNoteBox : MonoBehaviour
 
     public void Change()
     {
-
+        GameObject StrageRhythmManager = GameObject.Find("RhythmManager");
+        Rhythm = StrageRhythmManager.GetComponent<RhythmManager>();
         if (PresetSpriteSize != 0)
         {
             for (int i = 0; i < 8; i++)
-            {
+            {              
                 NoteBox = transform.GetChild(i).gameObject;
-
                 switch (Rhythm.ActionArray[i])
                 {
                     case RhythmAction.Umbrella:
