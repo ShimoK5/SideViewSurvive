@@ -14,7 +14,7 @@ public class EnemyIF : PawnIF
     //static public KeyCode jumpKey = KeyCode.Space; //ジャンプキー
     static float MultiplyNum = 1.0f / 120;
     static protected float STAND_SPEED = 0.4f * MultiplyNum;      //これ以下のスピードならRunからStand
-    static protected float MAX_RUN_SPEED = 8 * MultiplyNum;       //地上最大速度
+    static protected float MAX_RUN_SPEED = 4 * MultiplyNum;       //地上最大速度
     static protected float ADD_RUN_SPEED = 2.5f * MultiplyNum;    //地上加速度
     static protected float MAX_AIR_SPEED = 4 * MultiplyNum;       //空中最大速度
     //static protected float MAX_AIR_SPEED = 6;       //空中最大速度
