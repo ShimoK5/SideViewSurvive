@@ -9,6 +9,7 @@ public enum ENEMY_STATE
     ZIGZAG,
     TRACKING,
     CIRCLE,
+    STOP,
     DEAD
 }
 
@@ -71,6 +72,10 @@ public class Enemy : MonoBehaviour
             
             case ENEMY_STATE.CIRCLE:
                 m_Enemy = new EnemyCircularMotion(m_Enemy);
+                break;
+
+            case ENEMY_STATE.STOP:
+                m_Enemy = new EnemyStoping(m_Enemy);
                 break;
 
             default:
@@ -191,6 +196,10 @@ public class Enemy : MonoBehaviour
 
             case ENEMY_STATE.CIRCLE:
                 m_Enemy = new EnemyCircularMotion(m_Enemy);
+                break;
+
+            case ENEMY_STATE.STOP:
+                m_Enemy = new EnemyStoping(m_Enemy);
                 break;
 
             case ENEMY_STATE.DEAD:
