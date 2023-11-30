@@ -32,6 +32,11 @@ public class CameraPos2 : MonoBehaviour
     [Header("強制スクロールの速さ（1Fあたりの距離）")]
     [SerializeField] float FLAME_MOVE_RANGE_X;
 
+    [Header("縦追従の倍率")]
+    [SerializeField] float CAMERA_FOLLOW_VEL_Y_MULTI;
+
+    float CameraFollowVelY = 0;//カメラで追従する勢い
+
     [Header("ヒット振動距離の長さ")]
     [SerializeField] float MAX_SWING_RANGE;
     [Header("ヒット振動時間の長さ")]
@@ -151,9 +156,38 @@ public class CameraPos2 : MonoBehaviour
         }
         else
         {
+            float DefaultY = DefaultPos.y - cameraPosY; //現在のY座標
+
+            if(DefaultY > targetObj.transform.position.y)//上にいる場合の処理
+            {
+                CameraFollowVelY = (targetObj.transform.position.y - DefaultY) * CAMERA_FOLLOW_VEL_Y_MULTI;
+
+                DefaultY += CameraFollowVelY;
+                if(DefaultY <= targetObj.transform.position.y)
+                {
+                    DefaultY = targetObj.transform.position.y;
+                    CameraFollowVelY = 0;
+                }
+
+                //DefaultY = Mathf.Max(DefaultY - FLAME_MOVE_RANGE_Y, targetObj.transform.position.y);
+            }
+            else//下にいる場合の処理
+            {
+                CameraFollowVelY = (targetObj.transform.position.y - DefaultY) * CAMERA_FOLLOW_VEL_Y_MULTI;
+
+                DefaultY += CameraFollowVelY;
+                if (DefaultY >= targetObj.transform.position.y)
+                {
+                    DefaultY = targetObj.transform.position.y;
+                    CameraFollowVelY = 0;
+                }
+
+                //DefaultY = Mathf.Min(DefaultY + FLAME_MOVE_RANGE_Y, targetObj.transform.position.y);
+            }
+
             //横に移動
             DefaultPos = new Vector3(DefaultPos.x + FLAME_MOVE_RANGE_X /*+ ZurashiX*/,
-            targetObj.transform.position.y + cameraPosY,
+            DefaultY + cameraPosY, /*targetObj.transform.position.y + cameraPosY,*/
             DefaultPos.z);
         }
 
