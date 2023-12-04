@@ -7,6 +7,8 @@ public class PlayerAirCannon : PlayerIF
 {
     int FCnt = 0;
 
+    GameObject Effect;
+
     public PlayerAirCannon(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
@@ -26,6 +28,12 @@ public class PlayerAirCannon : PlayerIF
         //無敵
         ActionInvisible = true;
 
+        //プレハブ生成 エフェクト
+        Effect = (GameObject)Resources.Load("Prefabs/vfx_AirCannon");
+        Effect = Instantiate(Effect, tf.transform.position, tf.transform.rotation);
+        //親子関係
+        Effect.transform.parent = tf;
+
         //プレハブ生成
         GameObject AirCannonAir = (GameObject)Resources.Load("AirCannonAir");
         AirCannonAir = Instantiate(AirCannonAir, tf.transform.position, tf.transform.rotation);
@@ -38,6 +46,8 @@ public class PlayerAirCannon : PlayerIF
     ~PlayerAirCannon()
     {
         ActionInvisible = false;
+        if (Effect)
+            GameObject.Destroy(Effect);
     }
 
 

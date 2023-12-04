@@ -60,7 +60,11 @@ void Start()
 		Enemy[] Enemys = GameObject.FindObjectsOfType<Enemy>();
 		for (int i = 0; i < Enemys.Length; i++)
 		{
-			MoveObjHitBlock(Enemys[i].GetM_Enemy());
+			//スクリーン内のものだけ判定
+			if(Enemys[i].inScreen)
+            {
+				MoveObjHitBlock(Enemys[i].GetM_Enemy());
+			}
 		}
 
 		//身代わり
