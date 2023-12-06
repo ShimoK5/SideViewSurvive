@@ -10,6 +10,9 @@ public class BagShockWave : MonoBehaviour
     [SerializeField] float MinLifeDistance;
 
     float LifeDistance;   //滞在距離
+    int MaxLifeCnt;          //最大滞在カウント
+    int LifeCnt = 0;            //滞在カウント
+    float LifeTime;       //滞在時間
 
     [Header("最大サイズ（ワールド）")]
     [SerializeField] float MaxSize;
@@ -20,7 +23,7 @@ public class BagShockWave : MonoBehaviour
 
     Vector3 FirstPos;//初期位置
 
-    public Vector3 Velocity;
+    public Vector3 Velocity; //等速直線運動のテイでの速さ
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +43,15 @@ public class BagShockWave : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position += Velocity;
+        LifeCnt++;
 
+        //transform.position += Velocity;
+        int Hugou = (int)Mathf.Sign(Velocity.x);
+        float PosX = Easing.QuadOut(LifeCnt, MaxLifeCnt, FirstPos.x, (FirstPos.x + LifeDistance * Hugou));
 
-        if((transform.position - FirstPos).magnitude >= LifeDistance)
+        transform.position = new Vector3(PosX, transform.position.y, transform.position.z);
+
+        if(LifeCnt >= MaxLifeCnt)
         {
             Destroy(gameObject);
         }
@@ -54,6 +62,8 @@ public class BagShockWave : MonoBehaviour
         LifeDistance = Mathf.Lerp(MinLifeDistance, MaxLifeDistance, zeroToOne);
         Size = Mathf.Lerp(MinSize, MaxSize, zeroToOne);
         transform.localScale = new Vector3(Size, Size, Size);
+        MaxLifeCnt = (int)(LifeDistance / Mathf.Abs(Velocity.x));
+        LifeTime = MaxLifeCnt * (1.0f / 60);
     }
 
     public float GetSize()
