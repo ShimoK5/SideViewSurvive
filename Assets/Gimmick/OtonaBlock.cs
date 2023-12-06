@@ -8,6 +8,7 @@ public class OtonaBlock : Block
     }
 
     public BLOCK_TYPE BlockType;
+    bool LeftUpdateOnce = true;
 
 
     void Start()
@@ -45,7 +46,15 @@ public class OtonaBlock : Block
                     switch (BlockType)
                     {
                         case BLOCK_TYPE.LEFT:
-                            PosX = CameraPos2.instance.DefaultPos.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
+                            if(LeftUpdateOnce)
+                            {
+                                PosX = CameraPos2.instance.DefaultPos.x - CameraPos2.instance.ViewWidth * 0.5f - Size.x * 0.5f;
+                                LeftUpdateOnce = false;
+                            }
+                            else
+                            {
+                                PosX = OldPos.x;
+                            }
                             break;
                         case BLOCK_TYPE.RIGHT:
                             PosX = CameraPos2.instance.DefaultPos.x + CameraPos2.instance.ViewWidth * 0.5f + Size.x * 0.5f;
