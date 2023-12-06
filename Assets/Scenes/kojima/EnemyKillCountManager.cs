@@ -36,7 +36,8 @@ public class EnemyKillCountManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject); 
-        DestroyEnemy = 0;    
+        DestroyEnemy = 0;
+        DestroyHighScoreEnemy = 0;
     }
 
     // Update is called once per frame
@@ -46,10 +47,11 @@ public class EnemyKillCountManager : MonoBehaviour
         {
             InitOnce = false;
             //初期化
-            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1")
+            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game")
             {
                 //初期化
                 DestroyEnemy = 0;
+                DestroyHighScoreEnemy = 0;
             }
         }
 
