@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     static public Player instance;  //静的な実態
     PlayerIF m_Player;              //ステートマシーンの実態
 
-    public PLAYER_STATE Temp;       //ReadOnly
+    public PLAYER_STATE TempState;       //ReadOnly
 
     PLAYER_STATE OuterNextState;//外部から編集されたNextState
     public int HitPoint;        //HP
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Temp = m_Player.PlayerState;
+        TempState = m_Player.PlayerState;
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:

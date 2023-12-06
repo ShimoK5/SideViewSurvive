@@ -123,6 +123,13 @@ public class PlayerIF : PawnIF
         }
 
         OldisGround = isGround;
+
+        //ヒップドロップの軌跡しまう
+        if(Player.instance.TempState != PLAYER_STATE.BAG)
+        {
+            Player.instance.GetComponent<TrailRenderer>().enabled = false;
+        }
+
     }
 
     //速度反映関数

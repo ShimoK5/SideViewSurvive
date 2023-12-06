@@ -7773,7 +7773,7 @@ PrefabInstance:
     - target: {fileID: 4008923264540196864, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4008923266302692943, guid: c9fe8fc461622fe48853b1bba11934a4,
         type: 3}
@@ -8011,12 +8011,12 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[1]
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[2]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
@@ -8031,7 +8031,7 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[5]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}

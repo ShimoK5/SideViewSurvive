@@ -10,6 +10,8 @@ public class PlayerBag : PlayerIF
 
     bool PrefabOnce = true;
 
+    TrailRenderer tr;
+
     public PlayerBag(PlayerIF oldPlayer)
     {
         //if (Player.instance.GetAnim().Anim.AnimationName != "normal/idle")
@@ -17,6 +19,10 @@ public class PlayerBag : PlayerIF
         CopyPlayer(oldPlayer);
 
         Player.instance.GetAnim().Anim.state.SetAnimation(0, "hip_drow/hip_drow", true);
+
+        tr = Player.instance.GetComponent<TrailRenderer>();
+        //軌跡出現
+        tr.enabled = true;
 
 #if false
         //横移動消し
@@ -44,6 +50,11 @@ public class PlayerBag : PlayerIF
     }
     ~PlayerBag()
     {
+        //軌跡しまう
+        //Debug.Log("~PlayerBag");
+        //Player.instance.GetComponent<TrailRenderer>().enabled = false;
+        //Debug.Log(Player.instance.GetComponent<TrailRenderer>().enabled);
+
         ActionInvisible = false;
     }
 
@@ -74,7 +85,7 @@ public class PlayerBag : PlayerIF
             //過去情報保存
             KeepOld();
             //勢い減少
-            //SlowDown(GROUND_VEL_MULTI, GROUND_VEL_MULTI);
+            SlowDown(GROUND_VEL_MULTI, GROUND_VEL_MULTI);
             //自由落下
             Fall();
             //横移動
@@ -96,12 +107,15 @@ public class PlayerBag : PlayerIF
         }
         else
         {
+            //軌跡出現
+            tr.enabled = true;
+
             AirFlameCnt++;
 
             //過去情報保存
             KeepOld();
             //勢い減少
-            //SlowDown(AIR_VEL_MULTI, GROUND_VEL_MULTI);
+            SlowDown(AIR_VEL_MULTI, GROUND_VEL_MULTI);
             //自由落下
             Fall();
             //横移動       下降中の横移動を減らす
@@ -133,6 +147,10 @@ public class PlayerBag : PlayerIF
 
     void CreatePrefab()
     {
+        //エフェクトプレハブ生成
+        GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_BagLanding");
+        Effect = Instantiate(Effect, tf.transform.position - new Vector3(0, Size.y * 0.5f, 0), tf.transform.rotation);
+
         //プレハブ生成
         GameObject BagShockWave = (GameObject)Resources.Load("BagShockWave");
         BagShockWave = Instantiate(BagShockWave, tf.transform.position, tf.transform.rotation);

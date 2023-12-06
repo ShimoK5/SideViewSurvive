@@ -316,8 +316,16 @@ public class Enemy : MonoBehaviour
             other.GetComponent<Player>().HitEnemy(-PtoE_Vel);
             //EnemyDead化　＆　DeadVector編集
             SetOuterState(ENEMY_STATE.DEAD);
-            SetEnemyDeadData(PtoE_Vel.normalized,false);
 
+            //条件分岐で点数はいるか決まる
+            if(Player.instance.GetM_Player().ActionInvisible)
+            {
+                SetEnemyDeadData(PtoE_Vel.normalized, true);
+            }
+            else
+            {
+                SetEnemyDeadData(PtoE_Vel.normalized, false);
+            }
         }
     }
 }

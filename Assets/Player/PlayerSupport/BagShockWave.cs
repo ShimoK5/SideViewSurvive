@@ -25,6 +25,11 @@ public class BagShockWave : MonoBehaviour
 
     public Vector3 Velocity; //等速直線運動のテイでの速さ
 
+    public ParticleSystem Wave1;
+    public ParticleSystem Wave2;
+    public ParticleSystem Star;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +60,12 @@ public class BagShockWave : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //エフェクト
+        // Particle Systemのmainモジュールを取得
+        var WaveMainModule1 = Wave1.main;
+        // 任意の新しいlifetimeを設定
+        WaveMainModule1.startLifetime = LifeTime;
     }
 
     public void SetParam(float zeroToOne)
@@ -64,6 +75,26 @@ public class BagShockWave : MonoBehaviour
         transform.localScale = new Vector3(Size, Size, Size);
         MaxLifeCnt = (int)(LifeDistance / Mathf.Abs(Velocity.x));
         LifeTime = MaxLifeCnt * (1.0f / 60);
+
+        //エフェクト
+        // Particle Systemのmainモジュールを取得
+        var WaveMainModule1 = Wave1.main;
+        // 任意の新しいlifetimeを設定
+        WaveMainModule1.startLifetime = LifeTime;
+        
+        // Particle Systemのmainモジュールを取得
+        var WaveMainModule2 = Wave2.main;
+        // 任意の新しいlifetimeを設定
+        WaveMainModule2.startLifetime = LifeTime;
+
+        // Particle Systemのmainモジュールを取得
+        var StarMainModule = Star.main;
+        //particleSystemの停止
+        Star.Stop();
+        // 任意の新しいDurationを設定
+        StarMainModule.duration = LifeTime;
+        //particleSystemの再開
+        Star.Play();
     }
 
     public float GetSize()
