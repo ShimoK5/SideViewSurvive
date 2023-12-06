@@ -42,8 +42,13 @@ public class Player : MonoBehaviour
     bool DamageInvincible = false;            //無敵かどうか
     int InvincibleFlameCount = 0;           //ダメージ時加算カウント
     float GoalPosX = 0;                       //ゴールのX座標
-    PlayerAnimSpine PlayerAnim;
-    MeshRenderer PlayerMeshRenderer;
+    PlayerAnimSpine PlayerAnim;                 //プレイヤーのアニメーション
+    MeshRenderer PlayerMeshRenderer;            //プレイヤーのレンダラー
+
+    public bool inScreen = true;                   //スクリーン内かどうか
+    public int ScreenOutCnt = 0;
+    [Header("スクリーンを何フレーム出たら死ぬか")]
+    [SerializeField] public int MAX_SCREEN_OUT_CNT;  //ダメージクールタイム（無敵時間）
 
     void Awake()
     {
@@ -141,6 +146,9 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+
+        //スクリーン内判定
+        Check_inScreen();
     }
 
     void FixedGame()
@@ -148,6 +156,48 @@ public class Player : MonoBehaviour
         DamageCheck();
         CheckState();
         m_Player.CustumFixed();
+    }
+
+    void Check_inScreen()
+    {
+        float CameraMinX = CameraPos2.instance.transform.position.x - CameraPos2.instance.ViewWidth * 0.5f;
+        float CameraMaxX = CameraPos2.instance.transform.position.x + CameraPos2.instance.ViewWidth * 0.5f;
+        float EnemyMinX = transform.position.x - m_Player.Size.x * 0.5f;
+        float EnemyMaxX = transform.position.x + m_Player.Size.x * 0.5f;
+
+        if (EnemyMinX <= CameraMaxX && EnemyMaxX >= CameraMinX)
+        {
+            inScreen = true;
+        }
+        else
+        {
+            inScreen = false;
+        }
+
+       
+        if(GameStateManager.instance.GameState == GAME_STATE.Game)
+        {
+            //スクリーン外ならカウントアップする
+            if (inScreen == false )
+            {
+                ScreenOutCnt = Mathf.Min(ScreenOutCnt + 1, MAX_SCREEN_OUT_CNT);
+            }
+            //スクリーン内ならカウントダウンする
+            else
+            {
+                int CountDownNum = 3;
+                ScreenOutCnt = Mathf.Max(ScreenOutCnt - CountDownNum, 0);
+            }
+
+            
+
+        }
+        //一定時間スクリーンから出たら死亡
+        if (ScreenOutCnt >= MAX_SCREEN_OUT_CNT)
+        {
+            HitPoint = 0;
+        }
+
     }
 
     void CheckState()
