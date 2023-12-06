@@ -149,11 +149,11 @@ public class PlayerBag : PlayerIF
     {
         //エフェクトプレハブ生成
         GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_BagLanding");
-        Effect = Instantiate(Effect, tf.transform.position - new Vector3(0, Size.y * 0.5f, 0), tf.transform.rotation);
+        Effect = Instantiate(Effect, tf.transform.position + new Vector3(0, - Size.y * 0.5f + 0.02f, 0), tf.transform.rotation);
 
         //プレハブ生成
         GameObject BagShockWave = (GameObject)Resources.Load("BagShockWave");
-        BagShockWave = Instantiate(BagShockWave, tf.transform.position, tf.transform.rotation);
+        BagShockWave = Instantiate(BagShockWave, tf.transform.position, Quaternion.Euler(0, 90, 0));
 
         //vel渡し
         BagShockWave.GetComponent<BagShockWave>().Velocity = new Vector3(0.4f, 0, 0);
@@ -166,7 +166,7 @@ public class PlayerBag : PlayerIF
 
         //プレハブ生成
         GameObject BagShockWave2 = (GameObject)Resources.Load("BagShockWave");
-        BagShockWave2 = Instantiate(BagShockWave2, tf.transform.position, tf.transform.rotation);
+        BagShockWave2 = Instantiate(BagShockWave2, tf.transform.position, Quaternion.Euler(0,-90,0));
 
         //vel渡し
         BagShockWave2.GetComponent<BagShockWave>().Velocity = new Vector3(-0.4f, 0, 0);

@@ -92,7 +92,7 @@ public class BagShockWave : MonoBehaviour
         //particleSystemの停止
         Star.Stop();
         // 任意の新しいDurationを設定
-        StarMainModule.duration = LifeTime;
+        StarMainModule.duration = LifeTime + 0.05f;
         //particleSystemの再開
         Star.Play();
     }
