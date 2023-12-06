@@ -8,7 +8,8 @@ public class ScoreManager : MonoBehaviour
 {
 #if true
     public static ScoreManager instance = null;     //マネージャーのシングルトン化
-    public int m_KIllCount;
+    public int m_DefaultKIllCount;
+    public int m_HightScoreKIllCount;
     public int m_Score;
     int Multiply = 1;
 
@@ -59,8 +60,9 @@ public class ScoreManager : MonoBehaviour
         {
             //if (GameStateManager.instance.GameState == GAME_STATE.Game)
             {
-                m_KIllCount = EnemyKillCountManager.Instance.GetDestroyEnemy();
-                m_Score = m_KIllCount * 100;
+                m_DefaultKIllCount = EnemyKillCountManager.Instance.GetDestroyEnemy();
+                m_HightScoreKIllCount = EnemyKillCountManager.Instance.DestroyHighScoreEnemy;
+                m_Score = (m_DefaultKIllCount * 100) + (m_HightScoreKIllCount * 500);
                 m_Score *= Multiply;
             }
         }
@@ -68,7 +70,8 @@ public class ScoreManager : MonoBehaviour
 
     void InitGame()
     {
-        m_KIllCount = 0;
+        m_DefaultKIllCount = 0;
+        m_HightScoreKIllCount = 0;
         m_Score = 0;
         Multiply = 1;
 
