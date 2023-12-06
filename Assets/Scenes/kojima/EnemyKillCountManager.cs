@@ -7,6 +7,7 @@ public class EnemyKillCountManager : MonoBehaviour
 {
     static EnemyKillCountManager instance = null;     //マネージャーのシングルトン化
     [SerializeField] public int DestroyEnemy;       //倒したエネミー数
+    [SerializeField] public int DestroyHighScoreEnemy;      //倒したハイスコアエネミー数
 
 
     static bool InitOnce = true;        //ゲーム起動時のみリセットするフラグ
@@ -58,10 +59,16 @@ public class EnemyKillCountManager : MonoBehaviour
         //Instance.Hoge();//※1　ほかでHogeの関数を使用するならこの書き方で問題ない 
     }
 
-    public void DestroyCountUp()          //別のスクリプトで関数呼び出し愛時にはこんな感じで作成　※1
+    public void DestroyCountUp() 
     {
         DestroyEnemy += 1;
-        Debug.Log(DestroyEnemy);
+        //Debug.Log(DestroyEnemy);
+    }
+
+    public void DestroyHighScoreCountUp()
+    {
+        DestroyHighScoreEnemy += 1;
+        //Debug.Log(DestroyEnemy);
     }
 
     public int GetDestroyEnemy()

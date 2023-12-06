@@ -38,6 +38,7 @@ public class EnemyIF : PawnIF
     public Vector2 DeadVector;      //Dead時のベクトル
 
     public bool DeadCntFlag = true;               //死亡時加算するかのフラグ（）
+    public bool HighScoreflag = false;            //ハイスコアかどうかの引継ぎ用フラグ
 
     //コピー関数
     //全ての変数をコピーする

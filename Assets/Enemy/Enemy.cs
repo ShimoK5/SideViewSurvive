@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     [Header("設置型")]
     public bool stationary = false;
 
+    [Header("高スコア型")]
+    [SerializeField] bool HighScore = false;
+
     [Header("エネミーのタイプ")]
     [SerializeField] ENEMY_STATE InitEnmyType;
     //[Header("円運動用の半径")]
@@ -84,7 +87,7 @@ public class Enemy : MonoBehaviour
 
         }
 
-
+        m_Enemy.HighScoreflag = HighScore;
         
     }
 
@@ -210,6 +213,8 @@ public class Enemy : MonoBehaviour
                 break;
 
         }
+
+        m_Enemy.HighScoreflag = HighScore;
     }
 
     //外部からステート変更
