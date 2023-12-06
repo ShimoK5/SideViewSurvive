@@ -53,6 +53,9 @@ public class EnemyDead : EnemyIF
             //マネージャーに加算を送るフラグtrueなら
             if(DeadCntFlag)
             {
+                if(HighScoreflag)
+                    EnemyKillCountManager.Instance.DestroyHighScoreCountUp();
+
                 EnemyKillCountManager.Instance.DestroyCountUp();
                 NewSoundManager.instance.PlaySE("仮SE");
             }
