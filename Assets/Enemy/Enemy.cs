@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
                 break;
 
             case ENEMY_STATE.FORMATION:
-                m_Enemy = new EnemyStoping(m_Enemy);
+                m_Enemy = new EnemyFormation(m_Enemy);
                 break;
 
             default:
