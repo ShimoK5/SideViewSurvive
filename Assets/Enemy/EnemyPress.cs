@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemyPress : EnemyIF
 {
-    int FlameCount = 0;
+    int MoveFlameCount = 0;
+    int PressDelay = -1;
+    bool Press = false; 
+
     public EnemyPress(EnemyIF oldEnemy)
     {
         //EnemyAnim.instans.Anim.SetTrigger("Run");
@@ -25,14 +28,31 @@ public class EnemyPress : EnemyIF
         //自由落下
         //Fall();
         //縦移動
-        FlameCount++;
-        if (FlameCount > 300)
-            FlameCount = 0;
+        MoveFlameCount++;
 
-        if (FlameCount < 60)
-            SelfVel.y = -MAX_RUN_SPEED;
-        else if (FlameCount > 60)
-            SelfVel.y = MAX_RUN_SPEED;
+        if (MoveFlameCount > 300)
+        {
+            MoveFlameCount = 0;
+            PressDelay = 40;
+        }
+        else if(PressDelay >= 0)
+        {
+            if(PressDelay == 0)
+                Press = true;
+
+            PressDelay--;
+            SelfVel.x = 0;
+        }
+        
+        if(MoveFlameCount != 0)
+        {
+            Vector3 playerPos = Player.instance.transform.position;
+            float sign = Mathf.Sign(playerPos.x - tf.position.x);
+            SelfVel.x = 8 * (1.0f / 120) * 0.9f * sign;
+        }
+
+
+
 
         //ジャンプ処理
         //Jump();
