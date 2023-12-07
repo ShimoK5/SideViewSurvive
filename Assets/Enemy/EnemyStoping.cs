@@ -7,6 +7,7 @@ using System.Reflection;
 public class EnemyStoping : EnemyIF
 {
     private int FlameCount = 0;
+    private float Radian;
 
     public EnemyStoping(EnemyIF oldEnemy)
     {
@@ -36,6 +37,36 @@ public class EnemyStoping : EnemyIF
         //    SelfVel.y = -MAX_RUN_SPEED;
         //else if (FlameCount > 60)
         //    SelfVel.y = MAX_RUN_SPEED;
+
+        Sacrifice[] SacrificeArray = GameObject.FindObjectsOfType<Sacrifice>();
+
+        if (SacrificeArray.Length != 0)
+        {
+            //最短距離保存変数。とりあえずクッソでかい値いれとく
+            float ShortestDistance = 1000000.0f;
+            int NeerIndex = 0;
+
+            // for回す
+            for (int i = 0; i < SacrificeArray.Length; i++)
+            {
+                float DistanceX = SacrificeArray[i].transform.position.x - tf.transform.position.x;
+                float DistanceY = SacrificeArray[i].transform.position.y - tf.transform.position.y;
+
+                float Distance = DistanceX * DistanceX + DistanceY * DistanceY;
+
+                if (Distance < ShortestDistance)
+                {
+                    ShortestDistance = Distance;
+                    NeerIndex = i;
+                }
+            }
+            //一番近い奴に追従するように書く
+            //PlayerPos = Player.instance.transform.position;
+            Radian = Mathf.Atan2(SacrificeArray[NeerIndex].transform.position.y - tf.transform.position.y,
+                                        SacrificeArray[NeerIndex].transform.position.x - tf.transform.position.x);
+            SelfVel.x = Mathf.Cos(Radian) * MAX_RUN_SPEED * 1.3f;
+            SelfVel.y = Mathf.Sin(Radian) * MAX_RUN_SPEED * 1.3f;
+        }
 
         //ジャンプ処理
         //Jump();
