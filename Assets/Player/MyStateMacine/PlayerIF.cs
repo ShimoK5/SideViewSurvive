@@ -14,13 +14,13 @@ public class PlayerIF : PawnIF
     static public KeyCode jumpKey = KeyCode.Space; //ジャンプキー
     static protected float MultiplyNum = 1.0f / 60;
     static protected float STAND_SPEED = 0.4f * MultiplyNum;      //これ以下のスピードならRunからStand
-    static protected float MAX_RUN_SPEED = 8 * MultiplyNum * 1.5f;       //地上最大速度
-    static protected float ADD_RUN_SPEED = 2.5f * MultiplyNum * 1.5f;    //地上加速度
+    static protected float MAX_RUN_SPEED = 8 * MultiplyNum * 1.0f;       //地上最大速度
+    static protected float ADD_RUN_SPEED = 2.5f * MultiplyNum * 1.0f;    //地上加速度
     static protected float MAX_AIR_SPEED = 4 * MultiplyNum;       //空中最大速度
     //static protected float MAX_AIR_SPEED = 6;       //空中最大速度
     static protected float ADD_AIR_SPEED = 1.25f * MultiplyNum;       //空中最大速度
     static protected float GROUND_VEL_MULTI = 0.81f;    //地上減速（摩擦）
-    static protected float AIR_VEL_MULTI = 0.998f;      //空中減速（空気抵抗）
+    static protected float AIR_VEL_MULTI = 0.8f;      //空中減速（空気抵抗）
     static protected float GLAVITY = 0.68f * MultiplyNum;       //重力
     static protected float ACTION_VEL_MULTI = 0.8f;     //アクション中の減速率
     public float KNOCK_BACK_POWER = 20 * MultiplyNum;   //ノックバックの強さ
