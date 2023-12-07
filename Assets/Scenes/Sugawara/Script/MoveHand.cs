@@ -2,49 +2,61 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class MoveHand : MonoBehaviour
 {
+    [System.Serializable]
+    public class ActionType
+    {
+        public RhythmManager.RhythmAction[] ActionFolder = new RhythmManager.RhythmAction[8];
+    }
+
+    public ActionType[] array = new ActionType[2];
+
     [SerializeField] private Vector3 HandPosition = Vector3.zero;                           //ハンドの初期位置
-    [SerializeField] private float MoveSpeed = 5.0f;                                        //移動スピード
+    private Vector3 IconShift = new Vector3(-40.0f,0.0f,0.0f);                                               //アイコンの位置ずれ
+    private Vector2 ShiftOffset = new Vector2(-30.0f, 0.0f);                                //当たり判定のずれ
+    private Vector2 MoveR1Position = new Vector2(-750.0f,-850.0f);                          //R1押したときの移動場所
+    private Vector2 MoveL1Position = new Vector2(-1050.0f, -850.0f);                        //L1押したときの移動場所
+    private Vector2 MaxMovePosition = new Vector2(650.0f, 100.0f);
+    private Vector2 MinMovePosition = new Vector2(-600.0f, -900.0f);
+    [SerializeField] private float MoveSpeed = 10.0f;                                        //移動スピード
+    [SerializeField] private int FreezeTime = 180;                                          //最初に動かせなくする用
+    [SerializeField] private int CountTime = 0;                                             //セット画面が始まってからのカウント
+    [SerializeField] private string touch_Name = null;                                      //触れたオブジェクトを判断するよう
     [SerializeField] private GameObject Touch_Object = null;                                //触ったオブジェクト
     [SerializeField] private GameObject Duplication_Object = null;                          //オブジェクトが重なってしまった場合
     [SerializeField] private GameObject DragAndDrop_Object = null;                           //掴んでいるオブジェクト
     [SerializeField] private bool TouchJudge = false;                                       //触っているかどうか
     [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
     [SerializeField] bool NoteCollision = false;                                            //ノートにぶつかっているか確認用
-    [SerializeField] bool ChangeScene = false;                                              //シーンチェンジ用
-    [SerializeField] bool MovieNoise = false;                                               //ノイズ発生させたいかどうか（消す予定）
-    [SerializeField] int ChangeMovieFlame = 0;                                              //シーンの変化に対応したフレーム数　消す予定）
-    [SerializeField] GameObject MovieObject;
-    [SerializeField] private MovieChange Movie = null;                                      //ムービー変化する用   
-    [SerializeField] public GameObject[] NoteBox = new GameObject[8];                       //ノートボックスを格納する用
-    [SerializeField] Material Ma;
+    //[SerializeField] bool ChangeTarget = false;                                              //シーンチェンジ用
 
-    bool Changetouch = false;
+    
+    bool ChangeTouch = false;
 
-    private Color Translucent;                                                              //表示する色が薄くなる用の変数保管用
-    private Color entity;                                                                   //表示する色が濃くなる用の変数保管用
+   
 
     // Start is called before the first frame update
 
     void Start()
     {
         HandPosition = new Vector3(0.0f, 0.0f, -10.0f);
+        FreezeTime = 180;
+        CountTime = 0;
+        touch_Name = null;
         RectTransform HandTransform = this.GetComponent<RectTransform>();
         HandTransform.TransformPoint(HandPosition);
         DragAndDrop = false;
         NoteCollision = false;
-        Movie = MovieObject.GetComponent<MovieChange>();
-        Movie.Change(RhythmManager.RhythmAction.None);
+        GameObject MovieObject = GameObject.Find("Movie");
+        MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Whistle);
         ChangeFlavor("None");
         ChangeHeader("None");
-        Translucent = Color.white;
-        Translucent.a = 0.5f;
-        entity = Color.white;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -55,34 +67,45 @@ public class MoveHand : MonoBehaviour
             {
                 TouchJudge = true;
                 Touch_Object = collision.gameObject;
-                Touch_Object.GetComponent<Image>().color = entity;
             }
             else
             {
                 Duplication_Object = collision.gameObject;
             }            
-        }
-        else if(collision.gameObject.name == "Target")
+        }       
+        else if(collision.gameObject.tag == "Icon")
         {
-            TouchJudge = true;
-            Touch_Object = collision.gameObject.transform.parent.gameObject;
-            collision.GetComponent<TargetCollision>().TouchImage();
-            ChangeMovie(Touch_Object.name);
-            ChangeFlavor(Touch_Object.name);
-            ChangeHeader(Touch_Object.name);
+            if (DragAndDrop == false)
+            {
+                touch_Name = collision.GetComponent<Change_Name_Item>().ItemName();
+                ChangeFlavor(touch_Name);
+                ChangeHeader(touch_Name);
+                ChangeMovie(touch_Name);
+                collision.GetComponent<Change_Name_Item>().Collision();
+                TouchJudge = true;
+            }
         }
-        else
+        else if(collision.gameObject.tag == "PlatForm")
         {
-            ChangeScene = false;            
+            Touch_Object = collision.gameObject;
         }
     }
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(Changetouch == true)
+        if(ChangeTouch == true)
         {
-            Touch_Object = collision.gameObject;
-            Changetouch = false;
+            if (collision.gameObject.tag == "Note")
+            {
+                Touch_Object = collision.gameObject;
+                ChangeTouch = false;
+            }
+            else if(collision.gameObject.tag == "PlatForm")
+            {
+                touch_Name = collision.GetComponent<Change_Name_Item>().ItemName();
+                TouchJudge = true;
+            }
+                
         }
     }
 
@@ -92,28 +115,27 @@ public class MoveHand : MonoBehaviour
         {           
             if (Duplication_Object == null)
             {
-                Touch_Object.GetComponent<Image>().color = Translucent;
                 TouchJudge = false;
                 Touch_Object = null;
             }
             else 
             {
                 TouchJudge = true;
-                Touch_Object.GetComponent<Image>().color = Translucent;
                 Touch_Object = Duplication_Object;
-                Touch_Object.GetComponent<Image>().color = entity;
                 Duplication_Object = null;
             }
             
         }
-        else if (collision.gameObject.name == "Target")
+        else if(collision.gameObject.tag == "PlatForm")
         {
-            TouchJudge = false;
-            collision.GetComponent<TargetCollision>().DontTouchImage();
+            Touch_Object.GetComponent<Change_Name_Item>().Collision();
             Touch_Object = null;
-            Movie.Change(RhythmManager.RhythmAction.None);
+            TouchJudge = false;
+            touch_Name = null;
             ChangeFlavor("None");
             ChangeHeader("None");
+            ChangeMovie("None");
+            //ChangeTarget = true;           
         }
         else 
         {
@@ -128,98 +150,135 @@ public class MoveHand : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(SetInputManager.instance.Ref_Button(SetInputManager.BUTTON.MENU_BUTTON))
+        CountTime += 1;
+        if (CountTime < FreezeTime)
         {
-            SceneChangeManager.instance.SceneTransition("ShimokawaraScene 1");
+            return;
         }
+        else if (CountTime >= FreezeTime)
+        {
+            InputRhythm.instance.ArrayAction(array[0]);
+            InputRhythm.instance.ChangeNoteBox();
+            CountTime = FreezeTime;
 
-        if(DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.L1_BUTTON))
-        {
-            HandPosition.x = -270.0f;
-            HandPosition.y = -171.0f;
-            RectTransform HandTransform = this.GetComponent<RectTransform>();
-            HandTransform.localPosition = HandPosition;
-        }
-        else if(DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.R1_BUTTON))
-        {
-            HandPosition.x = -130.0f;
-            HandPosition.y = -171.0f;
-            RectTransform HandTransform = this.GetComponent<RectTransform>();
-            HandTransform.localPosition = HandPosition;
-        }
+            CustomTimeLine.instance.StopTimeLine();
 
-        if(TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.B_BUTTON))
-        {
-            DeleteNote();
-        }
-
-
-        if(TouchJudge == true && SetInputManager.instance.Ref_Button(SetInputManager.BUTTON.A_BUTTON))
-        {
-            CatchIcon();
-        }
-        else if(TouchJudge == false && DragAndDrop == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
-        {
-            DragIcon();
-        }
-        else if (DragAndDrop == true && TouchJudge == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
-        {
-            DropIcon();
-        }
-
-
-        float Horizon = SetInputManager.instance.Ref_Stick_Horizon(SetInputManager.BUTTON.LEFT_STICK);
-        float Vertical = SetInputManager.instance.Ref_Stick_Vertical(SetInputManager.BUTTON.LEFT_STICK);
-
-        if (Horizon == 0.0f && Vertical == 0.0f)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
-        {
-        }
-        else //  テンキーや3Dスティックの入力（GetAxis）がゼロではない時の動作
-        {
-            MoveChange(Horizon,Vertical);
-            RectTransform HandTransform = this.GetComponent<RectTransform>();
-            HandTransform.localPosition = HandPosition;
+            //掴んでいるときの画像を変更する
             if (DragAndDrop == true)
             {
-                DragAndDrop_Object.GetComponent<RectTransform>().localPosition = HandPosition;
-            }           
-        }
-
-        if(MovieNoise == true)
-        {
-            Ma = MovieObject.GetComponent<RawImage>().material;
-            Ma.SetFloat("_BoolSwitch",1.0f);
-            Ma.EnableKeyword("FILL_WITH_RED");
-            ChangeMovieFlame += 1;
-            if (ChangeMovieFlame > 60)
+                if (this.transform.childCount != 0)
+                {
+                    this.transform.GetChild(0).gameObject.SetActive(false);
+                    this.transform.GetChild(1).gameObject.SetActive(true);
+                    this.GetComponent<BoxCollider2D>().offset = ShiftOffset;
+                }
+            }
+            else
             {
-                Ma.SetFloat("_BoolSwitch", 0.0f);
-                ChangeMovieFlame = 0;
-                MovieNoise = false;
-                Ma.DisableKeyword("FILL_WITH_RED");
+                if (this.transform.childCount != 0)
+                {
+                    this.transform.GetChild(0).gameObject.SetActive(true);
+                    this.transform.GetChild(1).gameObject.SetActive(false);
+                    this.GetComponent<BoxCollider2D>().offset = Vector2.zero;
+                }
+
+                //if(ChangeTarget == true)
+                //{
+                //    Debug.Log("1");
+
+                //}
+            }
+
+            if (DragAndDrop == false && SetInputManager.instance.Ref_Button(SetInputManager.BUTTON.MENU_BUTTON))         //掴んでいないでMenuボタンを押したとき
+            {
+                SceneChangeManager.instance.SceneTransition(NextSceneName.Instance.Ref_NextSceneName());
+            }
+
+            if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.L1_BUTTON))       //掴んでいないでL1ボタンを押したとき
+            {
+                HandPosition.x = MoveL1Position.x;
+                HandPosition.y = MoveL1Position.y;
+                RectTransform HandTransform = this.GetComponent<RectTransform>();
+                HandTransform.localPosition = HandPosition;
+            }
+            else if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.R1_BUTTON))  //掴んでいないでR1ボタンを押したとき
+            {
+                HandPosition.x = MoveR1Position.x;
+                HandPosition.y = MoveR1Position.y;
+                RectTransform HandTransform = this.GetComponent<RectTransform>();
+                HandTransform.localPosition = HandPosition;
+            }
+
+            if (TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.B_BUTTON))          //触れていてBボタンを押したとき
+            {
+                DeleteNote();
+            }
+
+            if (TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.A_BUTTON))
+            {//触れていてAボタンを押した瞬間
+                CatchIcon();
+            }
+            else if (TouchJudge == false && DragAndDrop == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
+            {//掴んでいる状態で触れたおらず、Aボタンを離したとき
+                DragIcon();
+            }
+            else if (DragAndDrop == true && TouchJudge == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
+            {//掴んでいる状態で触れていて、Aボタンを離したとき
+                DropIcon();
+            }
+
+            float Horizon = SetInputManager.instance.Ref_Stick_Horizon(SetInputManager.BUTTON.LEFT_STICK);
+            float Vertical = SetInputManager.instance.Ref_Stick_Vertical(SetInputManager.BUTTON.LEFT_STICK);
+
+            if (Horizon == 0.0f && Vertical == 0.0f)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
+            {
+            }
+            else //  テンキーや3Dスティックの入力（GetAxis）がゼロではない時の動作
+            {
+                MoveChange(Horizon, Vertical);
+                RectTransform HandTransform = this.GetComponent<RectTransform>();
+                HandTransform.localPosition = HandPosition;
+                if (DragAndDrop == true)
+                {
+                    DragAndDrop_Object.GetComponent<RectTransform>().localPosition = HandPosition + IconShift;
+                }
             }
         }
-       
-
-        
-
     }
 
     void MoveChange(float horizon,float vertical)    
     {
         HandPosition.x = HandPosition.x + MoveSpeed * horizon;
+        if(HandPosition.x > MaxMovePosition.x)
+        {
+            HandPosition.x = MaxMovePosition.x;
+        }
+        else if(HandPosition.x < MinMovePosition.x)
+        {
+            HandPosition.x = MinMovePosition.x;
+        }
         HandPosition.y = HandPosition.y + MoveSpeed * vertical;
+        if (HandPosition.y > MaxMovePosition.y)
+        {
+            HandPosition.y = MaxMovePosition.y;
+        }
+        else if (HandPosition.y < MinMovePosition.y)
+        {
+            HandPosition.y = MinMovePosition.y;
+        }
+
     }
 
     void CatchIcon()
     {
-        if (Touch_Object.tag == "Icon")
+        if (touch_Name != null)
         {
             if (DragAndDrop == false)
             {
                 CreateCloneIcon();
                 DragAndDrop = true;
                 TouchJudge = false;
+                //ChangeTarget = true;
             }
             else
             {
@@ -230,90 +289,50 @@ public class MoveHand : MonoBehaviour
 
     void DragIcon()
     {
-        Debug.Log("DragIcon");
-        DragAndDrop = false;
+        DragAndDrop = false;       
         Destroy(DragAndDrop_Object);
+        //Debug.Log("2");
     }
 
     void DropIcon()
     {
-        Debug.Log("DropIcon");
+        //Debug.Log("DropIcon");
         if (Touch_Object.tag == "Note")
         {
             if (DragAndDrop == true)
             {
-                switch (DragAndDrop_Object.name)
-                {
-                    case ("Umbrella"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Umbrella, Touch_Object.name);
-                        break;
-
-                    case ("Recorder"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Recorder, Touch_Object.name);
-                        break;
-
-                    case ("Eraser"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Eraser, Touch_Object.name);
-                        break;
-
-                    case ("Sacrifice"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Sacrifice, Touch_Object.name);
-                        break;
-
-                    case ("AirCannon"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.AirCannon, Touch_Object.name);
-                        break;
-
-                    case ("Bag"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Bag, Touch_Object.name);
-                        break;
-
-                    case ("Ruler"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Ruler, Touch_Object.name);
-                        break;
-
-                    case ("Whistle"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.Whistle, Touch_Object.name);
-                        break;
-
-                    case ("None"):
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
-                        break;
-
-                    default:
-                        InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
-                        break;
-
-                }
+                Touch_Object.GetComponent<ChangeMetronome>().StorageIcon(DragAndDrop_Object.name);
             }
             else
             {
-                InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
+                Touch_Object.GetComponent<ChangeMetronome>().StorageIcon("None");
             }
 
             Destroy(DragAndDrop_Object);
-            Changetouch = true;
+            ChangeTouch = true;
             TouchJudge = true;
             DragAndDrop = false;
         }
-       
+        
     }
 
     void DeleteNote()
     {
         if (Touch_Object.tag == "Note")
         {
-            InputRhythm.instance.ChangeNoteBox(RhythmManager.RhythmAction.None, Touch_Object.name);
+            Touch_Object.GetComponent<ChangeMetronome>().StorageIcon("None");
         }
     }
 
     void CreateCloneIcon()
-    {    
+    {
+        Vector3 IconPosition = HandPosition + IconShift;
         GameObject CloneIconBox = null;
-        CloneIconBox = Instantiate(AssetManager.Instance.PrefabObject[0], HandPosition, Quaternion.identity);
-        CloneIconBox.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
-        CloneIconBox.transform.SetSiblingIndex(14);
-        CloneIconBox.name = Touch_Object.name;
+        CloneIconBox = Instantiate(AssetManager.Instance.PrefabObject[0], IconPosition, Quaternion.identity);
+        CloneIconBox.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        CloneIconBox.transform.SetParent(GameObject.Find("Set_anim").transform, false);
+        CloneIconBox.transform.SetSiblingIndex(20);
+        CloneIconBox.name = touch_Name;
         switch (CloneIconBox.name)
         {
             case ("Umbrella"):
@@ -365,47 +384,43 @@ public class MoveHand : MonoBehaviour
 
     void ChangeMovie(string Name)
     {
-        if (MovieNoise == false)
-        {
-            MovieNoise = true;
-        }
-        ChangeMovieFlame = 0;
+        GameObject MovieObject = GameObject.Find("Movie");
         switch (Name)
         {
             case ("Umbrella"):
-                Movie.Change(RhythmManager.RhythmAction.Umbrella);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Umbrella);
                 break;
 
             case ("Recorder"):
-                Movie.Change(RhythmManager.RhythmAction.Recorder);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Recorder);
                 break;
 
             case ("Eraser"):
-                Movie.Change(RhythmManager.RhythmAction.Eraser);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Eraser);
                 break;
 
             case ("Sacrifice"):
-                Movie.Change(RhythmManager.RhythmAction.Sacrifice);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Sacrifice);
                 break;
 
             case ("AirCannon"):
-                Movie.Change(RhythmManager.RhythmAction.AirCannon);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.AirCannon);
                 break;
 
             case ("Bag"):
-                Movie.Change(RhythmManager.RhythmAction.Bag);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Bag);
                 break;
 
             case ("Ruler"):
-                Movie.Change(RhythmManager.RhythmAction.Ruler);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Ruler);
                 break;
 
             case ("Whistle"):
-                Movie.Change(RhythmManager.RhythmAction.Whistle);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Whistle);
                 break;
 
             case ("None"):
-                Movie.Change(RhythmManager.RhythmAction.None);
+                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.None);
                 break;
 
             default:
