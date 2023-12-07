@@ -217,6 +217,10 @@ public class EnemyIF : PawnIF
         return MAX_RUN_SPEED;
     }
 
+    public virtual void Go()
+    {
+
+    }
 
 #if false
     //全方位とのあたり判定
