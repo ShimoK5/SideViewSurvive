@@ -46,7 +46,7 @@ public class EnemyFormationManager : MonoBehaviour
 
         if(AllInScreen)
         {
-            Debug.Log(AllInScreen);
+
             Cnt++;
 
             if(Cnt == 90)
