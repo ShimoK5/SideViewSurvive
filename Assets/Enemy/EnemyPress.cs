@@ -26,7 +26,7 @@ public class EnemyPress : EnemyIF
         //Fall();
         //縦移動
         FlameCount++;
-        if (FlameCount > 120)
+        if (FlameCount > 300)
             FlameCount = 0;
 
         if (FlameCount < 60)
