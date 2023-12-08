@@ -9,7 +9,8 @@ public class SceneChangeManager : MonoBehaviour
     public enum TransitionType {
     Black,
     Obj,
-    Fukui
+    Fukui,
+    Fukui2
     }
 
 
@@ -47,7 +48,7 @@ public class SceneChangeManager : MonoBehaviour
         
     }
 
-    public void SceneTransition(string scenename, float waitTime = DEFAULT_WAIT_TIME, TransitionType tt = TransitionType.Fukui)
+    public void SceneTransition(string scenename, float waitTime = DEFAULT_WAIT_TIME, TransitionType tt = TransitionType.Fukui2)
     {
         //フェード中じゃなければ
         if (!isFade)
@@ -73,6 +74,10 @@ public class SceneChangeManager : MonoBehaviour
 
                 case TransitionType.Fukui:
                     m_Animator.Play("FukuiFadeIn");
+                    break;
+                
+                case TransitionType.Fukui2:
+                    m_Animator.Play("FukuiFadeIn2");
                     break;
             }
 
@@ -107,6 +112,10 @@ public class SceneChangeManager : MonoBehaviour
 
             case TransitionType.Fukui:
                 m_Animator.Play("FukuiFadeOut");
+                break;
+            
+            case TransitionType.Fukui2:
+                m_Animator.Play("FukuiFadeOut2");
                 break;
         }
     }

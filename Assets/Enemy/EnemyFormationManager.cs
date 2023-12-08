@@ -46,24 +46,30 @@ public class EnemyFormationManager : MonoBehaviour
 
         if(AllInScreen)
         {
-            Debug.Log(AllInScreen);
+
             Cnt++;
 
-            if(Cnt == 90)
+            for (int i = 0; i < EnemyFormations.Length; i++)
+
             {
-                for (int i = 0; i < EnemyFormations.Length; i++)
+                if (Cnt == 90 + i * 10)
                 {
+
                     //エネミーあれば
                     if (EnemyFormations[i])
                     {
                         //Goに変える
                         EnemyFormations[i].GetM_Enemy().Go();
                     }
-                }
 
-                //信号送ったら破棄
-                Destroy(gameObject);
+                    if(i == EnemyFormations.Length - 1)
+                    {
+                        //全部信号送ったら破棄
+                        Destroy(gameObject);
+                    }
+                }
             }
+                
 
             
         }

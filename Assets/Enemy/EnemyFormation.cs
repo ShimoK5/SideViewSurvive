@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyFormation : EnemyIF
 {
+    int IdleCnt = 0;
     enum FORMATION_STATE
     {
         IDLE,
@@ -42,6 +43,24 @@ public class EnemyFormation : EnemyIF
         switch (FormationState)
         { 
             case FORMATION_STATE.IDLE:
+                //カウント加算
+                IdleCnt++;
+
+                int Temp;
+                //10以下なら
+                if((IdleCnt % 40)<= 20 )
+                {
+                    //IdleCntをそのまま使う
+                    Temp = (IdleCnt % 40);
+                }
+                else
+                {
+                    Temp = 20 * 2 - (IdleCnt % 40); 
+                }
+
+                //Y高さ移動
+                tf.position = new Vector3(tf.position.x, StartPosY + Temp * 0.03f, tf.position.z);
+
                 SelfVel.x = 0;
                 SelfVel.y = 0;
                 break;
@@ -49,7 +68,9 @@ public class EnemyFormation : EnemyIF
             case FORMATION_STATE.GO:
                 //Y高さ合わせ
                 tf.position = new Vector3(tf.position.x, StartPosY, tf.position.z);
-                SelfVel.x = -MAX_RUN_SPEED * 9;
+                SelfVel.x = Mathf.Max(SelfVel.x - MAX_RUN_SPEED * 2, -MAX_RUN_SPEED * 15);
+
+                //SelfVel.x = -MAX_RUN_SPEED * 9;
                 SelfVel.y = 0;
                 break;
         }
