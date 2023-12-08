@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField] int InvisibleCoolTime;  //ダメージクールタイム（無敵時間）
     bool DamageInvincible = false;            //無敵かどうか
     int InvincibleFlameCount = 0;           //ダメージ時加算カウント
+    int ActionInvisibleAnimCount = 0;       //無敵アニメーション用のカウント
     float GoalPosX = 0;                       //ゴールのX座標
     PlayerAnimSpine PlayerAnim;                 //プレイヤーのアニメーション
     MeshRenderer PlayerMeshRenderer;            //プレイヤーのレンダラー
@@ -96,6 +97,9 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        //プレイヤーが通常色になる処理
+        PlayerAnim.GetComponent<Renderer>().material.SetFloat("_FillPhase", 0.0f);
+
         //ゴール演出
         if (transform.position.x >= GoalPosX && GameStateManager.instance.GameState == GAME_STATE.Game)
         {
@@ -463,11 +467,32 @@ public class Player : MonoBehaviour
         }
         else if (m_Player.ActionInvisible)
         {
-            //プレイヤーが黄色くなる処理
-            PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 0.6f,1f));
+            ActionInvisibleAnimCount++;
+
+
+            if (ActionInvisibleAnimCount / 8 % 2 == 0)
+            {
+                //プレイヤーが白くなる処理
+                PlayerAnim.GetComponent<Renderer>().material. SetFloat("_FillPhase", 0.5f);
+            }
+            else
+            {
+                //プレイヤーが通常色になる処理
+                PlayerAnim.GetComponent<Renderer>().material.SetFloat("_FillPhase", 0.0f);
+            }
+
+            //あふれ防止
+            if(ActionInvisibleAnimCount >= 16)
+            {
+                ActionInvisibleAnimCount = 0;
+            }
+            
         }
         else
         {
+            //アニメ用カウントリセット
+            ActionInvisibleAnimCount = 0;
+
             //プレイヤーが通常色になる処理
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f,1f));
         }

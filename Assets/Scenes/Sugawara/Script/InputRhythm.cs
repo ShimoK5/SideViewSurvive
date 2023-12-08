@@ -11,7 +11,7 @@ public class InputRhythm : MonoBehaviour
     [SerializeField] private bool Changer = false;                                                      //シーン変更の際に使用する変数
     public bool UpdateRhythmManager = false;                                                            //変更があった際に使用する変数
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう
-    public GameObject[] NoteBox = new GameObject[8];                                                    //ノートボックス格納
+    //public GameObject[] NoteBox = new GameObject[8];                                                    //ノートボックス格納
     private string SceneName = null;                                                                    //シーンネーム保管庫
     private int DelayChange = 0;
     private bool SceneChange = false;
@@ -22,10 +22,10 @@ public class InputRhythm : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            for(int Number = 0; Number < 8;Number++)
-            {
-                NoteBox[Number] = null;
-            }
+            //for(int Number = 0; Number < 8;Number++)
+            //{
+            //    NoteBox[Number] = null;
+            //}
         }
         else
         {
@@ -59,7 +59,7 @@ public class InputRhythm : MonoBehaviour
 
         if (UpdateRhythmManager == true)
         {
-            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "SetScene")
+            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "SetScene" || SceneManager.GetActiveScene().name == "Game")
             {
                 ChangeRhythmManager();
             }
@@ -70,7 +70,7 @@ public class InputRhythm : MonoBehaviour
             UpdateRhythmManager = false;
         }
 
-        if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1")
+        if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game")
         {
             if (GameStateManager.instance.GameState == GAME_STATE.StartFade)
             {
@@ -79,165 +79,12 @@ public class InputRhythm : MonoBehaviour
                     StrageNoteBox Storage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
                     Storage.Change();
                     FistGameChange = false;
-                }
-                             
-            }
-
-            //if (SceneChange == true)
-            //{
-            //    DelayChange += 1;
-            //    if(GameStateManager.instance.GameState == GAME_STATE.StartFade)
-            //    {
-
-            //        SceneName = "Change"; 
-            //        DelayChange = 0;
-            //        StrageNoteBox Storage = GameObject.Find("NoteBox").GetComponent<StrageNoteBox>();
-            //        Storage.Change();
-            //        Debug.Log("Change");
-            //        SceneChange = false;
-            //        FistGameChange = false;
-            //        if (FistGameChange == true)
-            //        {
-
-            //        }
-            //    }
-
-            //    if(GameStateManager.instance.GameState == GAME_STATE.Game)
-            //    {
-            //        Debug.Log(DelayChange);
-            //    }
-
-            //    if (DelayChange > 400)
-            //    {
-
-
-
-            //    }
-            //}
-            //if(GameStateManager.instance.GameState == GAME_STATE.DeadPlayerStop)
-            //{
-            //    SceneChange = true;
-            //}
-        }
-
-
-
-        
+                }                             
+            }          
+        }       
     }
 
-    public void ChangeNoteBox(RhythmManager.RhythmAction ArrayAction,string NoteName)
-    {
-        int NoteNum = 0;
-        switch (NoteName)
-        {
-            case "0":
-                NoteNum = 0;
-                break;
-
-            case "1":
-                NoteNum = 1;
-                break;
-
-            case "2":
-                NoteNum = 2;
-                break;
-
-            case "3":
-                NoteNum = 3;
-                break;
-
-            case "4":
-                NoteNum = 4;
-                break;
-
-            case "5":
-                NoteNum = 5;
-                break;
-
-            case "6":
-                NoteNum = 6;
-                break;
-
-            case "7":
-                NoteNum = 7;
-                break;
-
-            default: 
-                return;
-        }
-
-
-        switch(ArrayAction)
-        {
-            case RhythmManager.RhythmAction.Umbrella:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Umbrella); 
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Umbrella;
-                Action[NoteNum] = RhythmManager.RhythmAction.Umbrella;
-                break;
-
-            case RhythmManager.RhythmAction.Recorder:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Recorder);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Recorder;
-                Action[NoteNum] = RhythmManager.RhythmAction.Recorder;
-                break;
-
-            case RhythmManager.RhythmAction.Eraser:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Eraser);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Eraser;
-                Action[NoteNum] = RhythmManager.RhythmAction.Eraser;
-                break;
-
-            case RhythmManager.RhythmAction.Sacrifice:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Sacrifice);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Sacrifice;
-                Action[NoteNum] = RhythmManager.RhythmAction.Sacrifice;
-                break;
-
-            case RhythmManager.RhythmAction.AirCannon:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.AirCannon);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.AirCannon;
-                Action[NoteNum] = RhythmManager.RhythmAction.AirCannon;
-                break;
-
-            case RhythmManager.RhythmAction.Bag:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Bag);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Bag;
-                Action[NoteNum] = RhythmManager.RhythmAction.Bag;
-                break;
-
-            case RhythmManager.RhythmAction.Ruler:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Ruler);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Ruler;
-                Action[NoteNum] = RhythmManager.RhythmAction.Ruler;
-                break;
-
-            case RhythmManager.RhythmAction.Whistle:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Whistle);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.Whistle;
-                Action[NoteNum] = RhythmManager.RhythmAction.Whistle;
-                break;
-
-            case RhythmManager.RhythmAction.None:
-                NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.None);
-                RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
-                Action[NoteNum] = RhythmManager.RhythmAction.None;
-                break;
-
-            default:
-                if (NoteNum >= 0 && NoteNum <= 7)
-                {
-                    NoteBox[NoteNum].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.None);
-                    RhythmManager.Instance.ActionArray[NoteNum] = RhythmManager.RhythmAction.None;
-                    Action[NoteNum] = RhythmManager.RhythmAction.None;                    
-                }
-                else
-                {
-                    Debug.Log("どこのノートなの？");                   
-                }
-                break;
-
-        }
-    }
+  
 
     void ChangeRhythmManager()
     {
@@ -287,51 +134,70 @@ public class InputRhythm : MonoBehaviour
         }
     }
 
-    void ChangeNoteBox()
+
+    public void ChangeMetronome(int Number,RhythmManager.RhythmAction ArrayAction)
     {
-        for (int Number = 0; Number < 8; Number++)
+        Action[Number] = ArrayAction;
+    }
+
+    public void ChangeNoteBox()
+    {
+        for(int Number = 0;Number < 8;Number++)
         {
-            switch (Action[Number])
+            GameObject Metronome = null;
+            switch (Number)
             {
-                case RhythmManager.RhythmAction.Umbrella:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Umbrella);
+                case 0:
+                    Metronome = GameObject.Find("frame_item0_1");
+                    Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     break;
 
-                case RhythmManager.RhythmAction.Recorder:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Recorder);
+                case 1:
+                    Metronome = GameObject.Find("frame_item0_2");
+                    Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     break;
 
-                case RhythmManager.RhythmAction.Eraser:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Eraser);
+                case 2:
+                    Metronome = GameObject.Find("frame_item0_3");
+                    Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     break;
 
-                case RhythmManager.RhythmAction.Sacrifice:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Sacrifice);
+                case 3:
+                    Metronome = GameObject.Find("frame_item0_4");
+                    Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     break;
 
-                case RhythmManager.RhythmAction.AirCannon:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.AirCannon);
+                case 4:
+                    Metronome = GameObject.Find("frame_item0_5");
+                    Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     break;
 
-                case RhythmManager.RhythmAction.Bag:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Bag);
+                case 5:
+                    Metronome = GameObject.Find("frame_item0_6");
+                    Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     break;
 
-                case RhythmManager.RhythmAction.Ruler:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Ruler);
+                case 6:
+                    Metronome = GameObject.Find("frame_item0_7");
+                    Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     break;
 
-                case RhythmManager.RhythmAction.Whistle:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.Whistle);
-                    break;
-
-                case RhythmManager.RhythmAction.None:
-                    NoteBox[Number].GetComponent<NoteObject>().ChangeAction(RhythmManager.RhythmAction.None);
+                case 7:
+                    Metronome = GameObject.Find("frame_item0_8");
+                    Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     break;
 
                 default:
                     break;
             }
+        }
+    }
+
+   public void ArrayAction(MoveHand.ActionType ActionArray)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            Action[i] = ActionArray.ActionFolder[i];
         }
     }
 
