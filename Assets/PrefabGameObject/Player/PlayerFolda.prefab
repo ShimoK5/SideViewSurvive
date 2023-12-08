@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 6814b91ab97e59247a17629d7be90a8b, type: 2}
-  initialSkinName: 
+  initialSkinName: Emotion/unbrella
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
