@@ -108,6 +108,15 @@ public class Enemy : MonoBehaviour
         }
 
         m_Enemy.HighScoreflag = HighScore;
+
+        if(HighScore)
+        {
+            //プレハブ生成 エフェクト
+            GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_EnemyHighScore");
+            Effect = Instantiate(Effect, transform.position, transform.rotation);
+            //親子関係
+            Effect.transform.parent = transform;
+        }
         
     }
 

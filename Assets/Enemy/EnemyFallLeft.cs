@@ -38,6 +38,7 @@ public class EnemyFallLeft : EnemyIF
                 }
             case FallState.Walk:
                 {
+                    Fall();
                     //横移動
                     break;
                 }
