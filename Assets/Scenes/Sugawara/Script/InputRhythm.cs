@@ -10,8 +10,7 @@ public class InputRhythm : MonoBehaviour
     public static  InputRhythm instance = null;                                                         //インスタンス保管庫
     [SerializeField] private bool Changer = false;                                                      //シーン変更の際に使用する変数
     public bool UpdateRhythmManager = false;                                                            //変更があった際に使用する変数
-    [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう
-    //public GameObject[] NoteBox = new GameObject[8];                                                    //ノートボックス格納
+    [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう 
     private string SceneName = null;                                                                    //シーンネーム保管庫
     private int DelayChange = 0;
     private bool SceneChange = false;
