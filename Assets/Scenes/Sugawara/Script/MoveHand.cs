@@ -25,7 +25,7 @@ public class MoveHand : MonoBehaviour
     [SerializeField] private GameObject DragAndDrop_Object = null;                           //掴んでいるオブジェクト
     [SerializeField] private bool TouchJudge = false;                                       //触っているかどうか
     [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
-    [SerializeField] bool NoteCollision = false;                                            //ノートにぶつかっているか確認用
+    [SerializeField] bool FistNoteChange = false;                                            //ノートにぶつかっているか確認用
     //[SerializeField] bool ChangeTarget = false;                                              //シーンチェンジ用
 
     
@@ -44,7 +44,7 @@ public class MoveHand : MonoBehaviour
         RectTransform HandTransform = this.GetComponent<RectTransform>();
         HandTransform.TransformPoint(HandPosition);
         DragAndDrop = false;
-        NoteCollision = false;
+        FistNoteChange = true;
         GameObject MovieObject = GameObject.Find("Movie");
         MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Whistle);
         ChangeFlavor("None");
@@ -149,8 +149,12 @@ public class MoveHand : MonoBehaviour
         }
         else if (CountTime >= FreezeTime)
         {
-            InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
-            InputRhythm.instance.ChangeNoteBox();
+            if (FistNoteChange == true)
+            {
+                InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
+                InputRhythm.instance.ChangeNoteBox();               
+                FistNoteChange = false;
+            }
             CountTime = FreezeTime;
 
             CustomTimeLine.instance.StopTimeLine();

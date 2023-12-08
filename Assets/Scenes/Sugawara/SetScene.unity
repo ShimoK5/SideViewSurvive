@@ -388,7 +388,7 @@ MonoBehaviour:
   DragAndDrop_Object: {fileID: 0}
   TouchJudge: 0
   DragAndDrop: 0
-  NoteCollision: 0
+  FistNoteChange: 0
 --- !u!61 &25661098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3817,7 +3817,7 @@ MonoBehaviour:
   DragAndDrop_Object: {fileID: 0}
   TouchJudge: 0
   DragAndDrop: 0
-  NoteCollision: 0
+  FistNoteChange: 0
 --- !u!114 &710285777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4036,7 +4036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1bad6477a4078b745b086d6a9d46e262, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 497c9f458268a8a4ca6e8dd267763415, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6600,7 +6600,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bfa9224221cf53742ba8dc13b343e68a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec3791a34df74d248a64f1f0a7849efc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7046,7 +7046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5495cb8515bd849a1204178860e7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scene: 0
+  Scene: 1
 --- !u!4 &1112356146
 Transform:
   m_ObjectHideFlags: 0
@@ -9563,7 +9563,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 34794d5c524b9ab4a9b0e52e3049abea, type: 3}
   - {fileID: 21300000, guid: dcc84b9c9d8fde4489f308e716485e21, type: 3}
   - {fileID: 21300000, guid: 987b2644373a41549a8acdde7bc13dc6, type: 3}
-  - {fileID: 21300000, guid: be087828817b35344836490117e23c7e, type: 3}
+  - {fileID: 21300000, guid: ae6bb96140b9a844ba09aaced71c82a5, type: 3}
   - {fileID: 21300000, guid: 3cbd9e28926f5ed4e8402ec664c29c72, type: 3}
   - {fileID: 21300000, guid: e5ce0b9a48d7876409a61717a91f83dc, type: 3}
   - {fileID: 21300000, guid: 7ad6b7a69aa92804f8fda865deccff4f, type: 3}
@@ -11867,7 +11867,7 @@ RectTransform:
   m_GameObject: {fileID: 1934918445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 0.7, z: 1}
+  m_LocalScale: {x: 2.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 725449401}
   m_RootOrder: 0
