@@ -378,7 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebb6ddc42c8bb4483fe5cf7a506627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionFolder: 0000000000000000000000000000000000000000000000000000000000000000
   HandPosition: {x: 0, y: 0, z: 0}
   MoveSpeed: 10
   FreezeTime: 180
@@ -651,6 +650,52 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &66695439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66695441}
+  - component: {fileID: 66695440}
+  m_Layer: 0
+  m_Name: ActionFolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &66695440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66695439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99bed0521f414940bba5157a6b60937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TypeArray:
+  - ActionArray: 0000000000000000000000000800000000000000000000000000000008000000
+  - ActionArray: 0000000000000000000000000800000000000000000000000000000008000000
+--- !u!4 &66695441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66695439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 126.68926, y: 295.7426, z: -480.9212}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &76933543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3762,7 +3807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebb6ddc42c8bb4483fe5cf7a506627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionFolder: 0000000000000000000000000000000000000000000000000000000000000000
   HandPosition: {x: 0, y: 0, z: -10}
   MoveSpeed: 7
   FreezeTime: 180

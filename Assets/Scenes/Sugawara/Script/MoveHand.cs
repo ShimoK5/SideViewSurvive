@@ -9,14 +9,6 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class MoveHand : MonoBehaviour
 {
-    [System.Serializable]
-    public class ActionType
-    {
-        public RhythmManager.RhythmAction[] ActionFolder = new RhythmManager.RhythmAction[8];
-    }
-
-    public ActionType[] array = new ActionType[2];
-
     [SerializeField] private Vector3 HandPosition = Vector3.zero;                           //ハンドの初期位置
     private Vector3 IconShift = new Vector3(-40.0f,0.0f,0.0f);                                               //アイコンの位置ずれ
     private Vector2 ShiftOffset = new Vector2(-30.0f, 0.0f);                                //当たり判定のずれ
@@ -157,7 +149,7 @@ public class MoveHand : MonoBehaviour
         }
         else if (CountTime >= FreezeTime)
         {
-            InputRhythm.instance.ArrayAction(array[0]);
+            InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
             InputRhythm.instance.ChangeNoteBox();
             CountTime = FreezeTime;
 
