@@ -193,11 +193,11 @@ public class InputRhythm : MonoBehaviour
         }
     }
 
-   public void ArrayAction(MoveHand.ActionType ActionArray)
+   public void ArrayAction(ActionFolder.ActionType ActionArray)
     {
         for (int i = 0; i < 8; i++)
         {
-            Action[i] = ActionArray.ActionFolder[i];
+            Action[i] = ActionArray.ActionArray[i];
         }
     }
 
