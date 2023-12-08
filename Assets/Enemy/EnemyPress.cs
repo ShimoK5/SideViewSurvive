@@ -78,7 +78,7 @@ public class EnemyPress : EnemyIF
         if (isGround && Press)
         {
             SelfVel.y = 0.0f;
-            Delay = 5;
+            Delay = 15;
             Press = false;
         }
 

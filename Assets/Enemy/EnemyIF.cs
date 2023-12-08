@@ -221,6 +221,11 @@ public class EnemyIF : PawnIF
     {
 
     }
+    
+    public virtual void Drop()
+    {
+
+    }
 
 #if false
     //全方位とのあたり判定
