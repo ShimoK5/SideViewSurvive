@@ -29,7 +29,7 @@ public class CreateNoteBox : MonoBehaviour
             CloneNote.GetComponent<Image>().color = ImageColor;
             CloneNote.transform.SetParent(GameObject.Find("SetRhythmUI").transform, false);
             CloneNote.transform.SetSiblingIndex(HierarchyNumber);
-            InputRhythm.instance.NoteBox[NoteNum] = CloneNote;
+            //InputRhythm.instance.NoteBox[NoteNum] = CloneNote;
         }
         //Destroy(this.gameObject);
     }

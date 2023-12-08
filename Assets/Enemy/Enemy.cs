@@ -10,6 +10,10 @@ public enum ENEMY_STATE
     TRACKING,
     CIRCLE,
     STOP,
+    PRESS,
+    FALL_LEFT,
+    FALL_RIGHT,
+    FORMATION,
     DEAD
 }
 
@@ -79,6 +83,22 @@ public class Enemy : MonoBehaviour
 
             case ENEMY_STATE.STOP:
                 m_Enemy = new EnemyStoping(m_Enemy);
+                break;
+
+            case ENEMY_STATE.PRESS:
+                m_Enemy = new EnemyPress(m_Enemy);
+                break;
+
+            case ENEMY_STATE.FALL_LEFT:
+                m_Enemy = new EnemyFallLeft(m_Enemy);
+                break;
+
+            case ENEMY_STATE.FALL_RIGHT:
+                m_Enemy = new EnemyFallRight(m_Enemy);
+                break;
+
+            case ENEMY_STATE.FORMATION:
+                m_Enemy = new EnemyFormation(m_Enemy);
                 break;
 
             default:
