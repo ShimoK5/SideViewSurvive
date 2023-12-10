@@ -42,7 +42,8 @@ public class PlayerIF : PawnIF
     public int AirBorneFlame;       //滞空したフレーム数
     public bool AlreadyAirBorne = false;    //既に浮遊したかどうかのフラグ
     public bool NowAirBorne = false;        //浮遊中かどうかのフラグ
-    
+    public bool AlreadyReleaseA = false;
+
     //コピー関数
     //全ての変数をコピーする
     protected void CopyPlayer(PlayerIF oldPlayer)
@@ -60,6 +61,7 @@ public class PlayerIF : PawnIF
         AirBorneFlame = oldPlayer.AirBorneFlame;
         AlreadyAirBorne = oldPlayer.AlreadyAirBorne;
         NowAirBorne = oldPlayer.NowAirBorne;
+        AlreadyReleaseA = oldPlayer.AlreadyReleaseA;
     }
 
     //PlayerIF(PlayerIF oldPlayer)
@@ -230,6 +232,14 @@ public class PlayerIF : PawnIF
     //滞空
     protected void AirBorneCheck(bool canAirborne)//引数は滞空可能かどうか
     {
+        //空中且つジャンプボタン押していなければ
+        if (!isGround && !InputManager_FU.instanse.GetKey(Key.A))
+        {
+            AlreadyReleaseA = true;
+
+        }
+
+
         //入力instanceなければ
         if (!InputManager_FU.instanse)
         {
@@ -257,12 +267,14 @@ public class PlayerIF : PawnIF
             return;
         }
 
-
-        //入力ありかつ下降中かつまだ浮遊してないかつ制限時間を超えていなければ
+        
+        //入力ありかつ   下降中かつ　←なくなった
+        //まだ浮遊してないかつ制限時間を超えていなければ かつ空中でジャンプボタンを離していれば
         if (InputManager_FU.instanse.GetKey(Key.A) && 
-            SelfVel.y <= 0 &&
+            //SelfVel.y <= 0 &&
             !AlreadyAirBorne &&
-            AirBorneFlame <= MAX_AIRBORNE_FLAME) 
+            AirBorneFlame <= MAX_AIRBORNE_FLAME &&
+            AlreadyReleaseA) 
         {
             //下降を止める
             SelfVel.y = 0;
@@ -296,6 +308,7 @@ public class PlayerIF : PawnIF
         NowAirBorne = false;
         AlreadyAirBorne = false;
         AirBorneFlame = 0;
+        AlreadyReleaseA = false;
     }
 
     public override void HitUnder(Block block)
