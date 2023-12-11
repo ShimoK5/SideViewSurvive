@@ -54,7 +54,8 @@ public class DangerCanvas : MonoBehaviour
 
         Vector3 Position = Vector3.zero;
         Position.x = CameraPos2.instance.transform.position.x - CameraPos2.instance.ViewWidth * 0.5f 
-            + GetComponent<RectTransform>().sizeDelta.x * 0.5f;
+            + GetComponent<RectTransform>().sizeDelta.x * GetComponent<RectTransform>().lossyScale.x * 0.5f;
+        //Debug.Log(GetComponent<RectTransform>().sizeDelta.x * GetComponent<RectTransform>().lossyScale.x);
         Position.y = Player.instance.transform.position.y;
         Position.z = Player.instance.transform.rotation.z;
 

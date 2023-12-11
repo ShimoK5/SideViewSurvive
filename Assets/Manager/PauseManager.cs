@@ -168,7 +168,7 @@ public class PauseManager : MonoBehaviour
 
                 case (int)PAUSE_CHOOSE.BACK_TITLE:
                     Time.timeScale = 1.0f;
-                    SceneChangeManager.instance.SceneTransition("Title");
+                    SceneChangeManager.instance.SceneTransition("UI_title");
                     break;
 
                 case (int)PAUSE_CHOOSE.CLOSE_PAUUSE:
