@@ -8090,12 +8090,12 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[0]
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[1]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
@@ -8110,12 +8110,12 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[4]
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[5]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}

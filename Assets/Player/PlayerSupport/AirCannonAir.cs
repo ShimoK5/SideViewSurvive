@@ -34,4 +34,16 @@ public class AirCannonAir : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Block>())
+        {
+            GameObject Effect;//プレハブをGameObject型で取得
+            Effect = (GameObject)Resources.Load("Prefabs/vfx_AirCannonAirDeath");//プレハブをGameObject型で取得
+            GameObject Obj = Instantiate(Effect, transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
+        }
+    }
 }

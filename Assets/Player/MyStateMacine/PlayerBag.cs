@@ -163,6 +163,10 @@ public class PlayerBag : PlayerIF
         BagShockWave.transform.position = new Vector3(BagShockWave.transform.position.x,
             BagShockWave.transform.position.y + (BagShockWave.GetComponent<BagShockWave>().GetSize() - 2) * 0.5f,
             BagShockWave.transform.position.z);
+        //横調整
+        BagShockWave.transform.position = new Vector3(BagShockWave.transform.position.x + (BagShockWave.transform.lossyScale.x * 0.5f + Size.x * 0.5f),
+            BagShockWave.transform.position.y ,
+            BagShockWave.transform.position.z);
 
         //プレハブ生成
         GameObject BagShockWave2 = (GameObject)Resources.Load("BagShockWave");
@@ -176,5 +180,9 @@ public class PlayerBag : PlayerIF
         BagShockWave2.transform.position = new Vector3(BagShockWave2.transform.position.x,
             BagShockWave2.transform.position.y + (BagShockWave2.GetComponent<BagShockWave>().GetSize() - 2) * 0.5f,
             BagShockWave2.transform.position.z);
+        //横調整
+        BagShockWave.transform.position = new Vector3(BagShockWave.transform.position.x - (BagShockWave.transform.lossyScale.x * 0.5f + Size.x * 0.5f),
+            BagShockWave.transform.position.y,
+            BagShockWave.transform.position.z);
     }
 }
