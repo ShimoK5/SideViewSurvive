@@ -7,6 +7,7 @@ public class EnemyFallRight : EnemyIF
 
     Vector3 StartPos; //初期座標
     FallState state = FallState.Idle;
+    int Count = 0;
 
     public EnemyFallRight(EnemyIF oldEnemy)
     {
@@ -27,7 +28,10 @@ public class EnemyFallRight : EnemyIF
                 break;
             case FallState.Fall:
                 {
-                    Fall();
+                    if (Count > 0)
+                        SelfVel.y = MAX_RUN_SPEED * 2;
+                    else
+                        Fall();
                     break;
                 }
             case FallState.Walk:
@@ -45,6 +49,9 @@ public class EnemyFallRight : EnemyIF
             SelfVel.x = -MAX_RUN_SPEED;
         }
 
+        if (Count != 0)
+            Count--;
+
         //ジャンプ処理
         //Jump();
         //状態遷移
@@ -60,6 +67,7 @@ public class EnemyFallRight : EnemyIF
     public override void Drop()
     {
         state = FallState.Fall;
+        Count = 10;
     }
 
     public override void HitUnder(Block block)
