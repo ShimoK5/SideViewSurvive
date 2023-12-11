@@ -214,6 +214,7 @@ public class PauseManager : MonoBehaviour
         {
             //カーソル移動
             Flame.transform.position = ButtonArray[PauseChoose].transform.position;
+#if false
             //プレハブ生成 カーソル選択エフェクト
             GameObject Effect = (GameObject)Resources.Load("Prefabs/Particle System");
             Effect = Instantiate(Effect, ButtonArray[PauseChoose].transform.position, ButtonArray[PauseChoose].transform.rotation);
@@ -226,7 +227,7 @@ public class PauseManager : MonoBehaviour
             //親子関係
             Effect2.transform.parent = PauseCanvas.transform;
             Effect2.transform.localScale = new Vector3(100, 100, 100);
-
+#endif
 
             OldPauseChoose = PauseChoose;
         }
@@ -246,6 +247,6 @@ public class PauseManager : MonoBehaviour
         Flame.GetComponent<Image>().color = new Color(1, 1, 1, Parm);
 
         //ぼかしの強さ変更
-        BlurCanvas.SetBlurParam(Parm * 90);
+        BlurCanvas.SetBlurParam(Parm * 300);
     }
 }
