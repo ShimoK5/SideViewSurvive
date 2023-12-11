@@ -34,39 +34,43 @@ public class StrageNoteBox : MonoBehaviour
                     switch (Rhythm.ActionArray[i])
                     {
                         case RhythmAction.Umbrella:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[0];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[0]);
                             break;
 
                         case RhythmAction.Recorder:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[1];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[1]);
                             break;
 
                         case RhythmAction.Eraser:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[2];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[2]);
                             break;
 
                         case RhythmAction.Sacrifice:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[3];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[3]);
                             break;
 
                         case RhythmAction.AirCannon:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[4];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[4]);
                             break;
 
                         case RhythmAction.Bag:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[5];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[5]);
                             break;
 
                         case RhythmAction.Ruler:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[6];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[6]);
                             break;
 
                         case RhythmAction.Whistle:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[7];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[7]);
+                            break;
+
+                        case RhythmAction.None:
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[8]);
                             break;
 
                         default:
-                            NoteBox.GetComponent<Image>().sprite = PresetSprite[8];
+                            NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[9]);
                             break;
                     }
                 }
@@ -190,39 +194,43 @@ public class StrageNoteBox : MonoBehaviour
                 switch (Rhythm.ActionArray[i])
                 {
                     case RhythmAction.Umbrella:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[0];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[0]);
                         break;
 
                     case RhythmAction.Recorder:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[1];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[1]);
                         break;
 
                     case RhythmAction.Eraser:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[2];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[2]);
                         break;
 
                     case RhythmAction.Sacrifice:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[3];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[3]);
                         break;
 
                     case RhythmAction.AirCannon:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[4];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[4]);
                         break;
 
                     case RhythmAction.Bag:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[5];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[5]);
                         break;
 
                     case RhythmAction.Ruler:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[6];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[6]);
                         break;
 
                     case RhythmAction.Whistle:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[7];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[7]);
+                        break;
+
+                    case RhythmAction.None:
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[8]);
                         break;
 
                     default:
-                        NoteBox.GetComponent<Image>().sprite = PresetSprite[8];
+                        NoteBox.GetComponent<Change_NoteBox>().ChangeSprite(Rhythm.ActionArray[i], PresetSprite[9]);
                         break;
                 }
             }
