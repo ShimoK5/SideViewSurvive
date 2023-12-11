@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class EnemyPress : EnemyIF
 {
+    enum PressState
+    {
+        search,
+        stop,
+        press,
+        up,
+        none
+    }
+
     int MoveFlameCount = 0; //頭上調整時間
-    int PressDelay = -1; //落下前動作待機時間(-1は非稼働)
     int Delay = -1; //動作待機時間(-1は非稼働)
     bool Press = false; //落下許可フラグ
     bool Return = false; //再浮遊フラグ
     Vector3 StartPos; //初期座標(戻る高さの取得
+    PressState State; //現在のステート
+    PressState PreviousState; //1f前のステート
+    PressState OldState; //ステート変更前のステート
 
     public EnemyPress(EnemyIF oldEnemy)
     {
         //EnemyAnim.instans.Anim.SetTrigger("Run");
         CopyEnemy(oldEnemy);
         StartPos = tf.transform.position;
+        State = PressState.search;
+        PreviousState = OldState = PressState.none;
     }
 
     public override void CustumUpdate()
@@ -27,79 +40,99 @@ public class EnemyPress : EnemyIF
     {
         //過去情報保存
         KeepOld();
+
+        if(PreviousState != State)
+        {
+            OldState = PreviousState;
+            PreviousState = State;
+        }
+        //Debug.Log(State);
+
         //勢い減少 
-        SlowDown(GROUND_VEL_MULTI, GROUND_VEL_MULTI);
+        //SlowDown(GROUND_VEL_MULTI, GROUND_VEL_MULTI);
         //自由落下
         //Fall();
 
-        //
-        if(!Press && !Return && Delay == -1 && PressDelay == -1)
-        MoveFlameCount++;
+        switch (State)
+        {
+            case PressState.search:
+                {
+                    Vector3 playerPos = Player.instance.transform.position;
+                    float sign = Mathf.Sign(playerPos.x - tf.position.x);
 
-        //地面接触時の停止時間カウントダウン
+                    SelfVel.y = 0.0f;
+                    SelfVel.x = 8 * (1.0f / 65) * sign;
+
+                    if (playerPos.x - tf.position.x < SelfVel.x)
+                        SelfVel.x = playerPos.x - tf.position.x;
+
+                    if (MoveFlameCount > 200)
+                    {
+                        State = PressState.stop;
+                        MoveFlameCount = 0;
+                        Delay = 30;
+                    }
+
+                    break;
+                }
+
+            case PressState.stop:
+                {
+                    SelfVel.x = 0.0f;
+                    SelfVel.y = 0.0f;
+
+                    if(Delay == 0)
+                    {
+                        if (OldState == PressState.search)
+                        {
+                            State = PressState.press;
+                            Delay = 10;
+                        }
+
+                        if(OldState == PressState.press)
+                            State = PressState.up;
+                    }
+
+                    break;
+                }
+
+            case PressState.press:
+                {
+                    
+                    if (Delay > 0)
+                        SelfVel.y = MAX_RUN_SPEED * 2;
+                    else
+                    {
+                        SelfVel.y = -MAX_RUN_SPEED * 5.0f;
+                        Fall();
+                    }
+
+                    if(isGround)
+                    {
+                        State = PressState.stop;
+                        Delay = 30;
+                    }
+                    break;
+                }
+
+            case PressState.up:
+                {
+                    SelfVel.y = MAX_RUN_SPEED * 2.0f;
+
+                    if (tf.position.y > StartPos.y)
+                    {
+                        SelfVel.y = 0.0f;
+                        State = PressState.search;
+                    }
+                    break;
+                }
+        }
+
+        if (State == PressState.search)
+            MoveFlameCount++;
+
         if (Delay > 0)
             Delay--;
-
-        //300fたったら頭上移動を停止させる
-        if (MoveFlameCount > 200)
-        {
-            MoveFlameCount = 0;
-            PressDelay = 30;
-        }
-        else if(PressDelay >= 0) //動作停止時間が稼働中の場合
-        {
-            //待機カウント終了
-            if(PressDelay == 0)
-                Press = true;
-
-            PressDelay--;
-            SelfVel.x = 0.0f;
-        }
-        
-        //頭上位置調整のための移動制御(調整時間がある場合の間)
-        if(MoveFlameCount != 0)
-        {
-            Vector3 playerPos = Player.instance.transform.position;
-            float sign = Mathf.Sign(playerPos.x - tf.position.x);
-            SelfVel.x = 8 * (1.0f / 65) * sign;
-        }
-
-        //落下許可が下りているとき落下
-        if(Press)
-        {
-            //停止カウンターを非稼働に
-            PressDelay = -1;
-
-            Fall();
-            SelfVel.y = -MAX_RUN_SPEED * 5.0f;
-        }
-
-        //地面についたら移動を止めて一定時間停止
-        if (isGround && Press)
-        {
-            SelfVel.y = 0.0f;
-            Delay = 15;
-            Press = false;
-        }
-
-        //停止カウンター0の場合、浮遊を開始
-        if(Delay == 0)
-        {
-            Return = true;
-
-            //停止カウンターを非稼働に
-            Delay = -1;
-        }
-
-        //浮遊命令が出ているとき最初の高さまで浮遊
-        if (Return)
-        {
-            SelfVel.y = MAX_RUN_SPEED;
-            if (tf.position.y > StartPos.y)
-            {
-                Return = false;
-            }
-        }
 
         //ジャンプ処理
         //Jump();
