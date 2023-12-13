@@ -35,7 +35,9 @@ public class PauseManager : MonoBehaviour
     public GameObject PauseCanvas;      //ポーズキャンバス
     public GameObject PauseBackGround;  //ポーズ背景
     public GameObject[] ButtonArray = new  GameObject [(int)PAUSE_CHOOSE.PAUSE_STATE_MAX];//ボタン
+    public GameObject[] OtherObjArray;  //その他
     public GameObject Flame;    //枠
+    public GameObject MoyaMoyaCanvas;   //手動ぼかし
     public BlurParam BlurCanvas;        //ぼかしキャンバス
 
     // Start is called before the first frame update
@@ -50,6 +52,7 @@ public class PauseManager : MonoBehaviour
         PauseCanvas.SetActive(false);
         BlurCanvas.gameObject.SetActive(true);
         BlurCanvas.SetBlurParam(0);
+        MoyaMoyaCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -114,6 +117,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         //ポーズ画面非表示
         PauseCanvas.SetActive(false);
+        MoyaMoyaCanvas.SetActive(false);
     }
 
     void FixedPause()
@@ -140,6 +144,7 @@ public class PauseManager : MonoBehaviour
         PauseStateCount++;
         //ポーズ画面表示
         PauseCanvas.SetActive(true);
+        MoyaMoyaCanvas.SetActive(true);
 
         SetParm((float)(PauseStateCount) / AnimWaitFlame);
 
@@ -168,7 +173,7 @@ public class PauseManager : MonoBehaviour
 
                 case (int)PAUSE_CHOOSE.BACK_TITLE:
                     Time.timeScale = 1.0f;
-                    SceneChangeManager.instance.SceneTransition("Title");
+                    SceneChangeManager.instance.SceneTransition("UI_title");
                     break;
 
                 case (int)PAUSE_CHOOSE.CLOSE_PAUUSE:
@@ -244,9 +249,15 @@ public class PauseManager : MonoBehaviour
         {
             ButtonArray[i].GetComponent<Image>().color = new Color(1, 1, 1, Parm);
         }
+
+        for (int i = 0; i < OtherObjArray.Length; i++)
+        {
+            OtherObjArray[i].GetComponent<Image>().color = new Color(1, 1, 1, Parm);
+        }
+
         Flame.GetComponent<Image>().color = new Color(1, 1, 1, Parm);
 
         //ぼかしの強さ変更
-        BlurCanvas.SetBlurParam(Parm * 300);
+        BlurCanvas.SetBlurParam(Parm * 90);
     }
 }
