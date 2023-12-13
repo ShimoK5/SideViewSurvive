@@ -8100,12 +8100,12 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[1]
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[2]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
@@ -8120,12 +8120,12 @@ PrefabInstance:
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[5]
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
       propertyPath: ActionArray.Array.data[6]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 853708478047169221, guid: 47998e63d4ab77b459a287fd437005a5,
         type: 3}
@@ -8480,7 +8480,7 @@ PrefabInstance:
     - target: {fileID: 5040906132235562284, guid: 26f70ea735258ab40b2e33b06f1bcd2b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 189
+      value: 166.5
       objectReference: {fileID: 0}
     - target: {fileID: 5040906132235562284, guid: 26f70ea735258ab40b2e33b06f1bcd2b,
         type: 3}

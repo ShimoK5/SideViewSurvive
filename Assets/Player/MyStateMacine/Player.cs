@@ -469,20 +469,27 @@ public class Player : MonoBehaviour
         {
             ActionInvisibleAnimCount++;
 
-
+            //0～7
             if (ActionInvisibleAnimCount / 8 % 2 == 0)
             {
+                float ZeroToOne = (float)ActionInvisibleAnimCount / 8;
+                float Parm = ZeroToOne * 0.5f;
+
                 //プレイヤーが白くなる処理
-                PlayerAnim.GetComponent<Renderer>().material. SetFloat("_FillPhase", 0.5f);
+                PlayerAnim.GetComponent<Renderer>().material. SetFloat("_FillPhase", Parm);
             }
+            //8～15
             else
             {
+                float ZeroToOne = (float)(16 - ActionInvisibleAnimCount) / 8;
+                float Parm = ZeroToOne * 0.5f;
+
                 //プレイヤーが通常色になる処理
-                PlayerAnim.GetComponent<Renderer>().material.SetFloat("_FillPhase", 0.0f);
+                PlayerAnim.GetComponent<Renderer>().material.SetFloat("_FillPhase", Parm);
             }
 
             //あふれ防止
-            if(ActionInvisibleAnimCount >= 16)
+            if(ActionInvisibleAnimCount >= 15)
             {
                 ActionInvisibleAnimCount = 0;
             }
