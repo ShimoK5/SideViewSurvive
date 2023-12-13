@@ -108,6 +108,11 @@ public class Player : MonoBehaviour
             PlayerAnim.Anim.skeleton.SetColor(new Color(1f, 1f, 1f, 1f));
             //ステート変更
             GameStateManager.instance.GameState = GAME_STATE.EndPlayerMotion;
+
+            //BGM止める
+            NewSoundManager.instance.StopBGM();
+            //SE
+            NewSoundManager.instance.PlaySE("ゲームクリア音");
             
         }
         //プレイヤー死亡演出
@@ -405,6 +410,10 @@ public class Player : MonoBehaviour
             PlayerStateIsDamage();
 #endif
             HitPoint = Mathf.Max(0, HitPoint - 1);
+
+            //SE
+            NewSoundManager.instance.PlaySE("ライフ減少音");
+            
 
             //被ダメ演出呼び出し
             //HPまだあれば

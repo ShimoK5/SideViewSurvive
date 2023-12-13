@@ -57,7 +57,8 @@ public class EnemyDead : EnemyIF
                     EnemyKillCountManager.Instance.DestroyHighScoreCountUp();
 
                 EnemyKillCountManager.Instance.DestroyCountUp();
-                NewSoundManager.instance.PlaySE("仮SE");
+                //ばくはつのSEはいったんなし
+                //NewSoundManager.instance.PlaySE("仮SE");
             }
                
             Destroy(tf.gameObject);

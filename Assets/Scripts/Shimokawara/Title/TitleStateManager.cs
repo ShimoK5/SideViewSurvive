@@ -49,7 +49,7 @@ public class TitleStateManager : MonoBehaviour
                 {
                     if (Input.anyKeyDown)
                     {
-                        NewSoundManager.instance.PlaySE("仮SE");
+                        NewSoundManager.instance.PlaySE("決定音");
                         state = State.After;
                     }
                 }

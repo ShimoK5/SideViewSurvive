@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Youkan/UI_title.unity
     guid: b36c31d97c770084897cdef05350a509
   - enabled: 1
-    path: Assets/Scenes/Shimokawara/Title.unity
-    guid: cdb5f43528b8f2a469d732662bafa82d
-  - enabled: 1
     path: Assets/Scenes/Sugawara/SetScene.unity
     guid: ccb77658fe880f046b2f0a1af2f323c6
   - enabled: 1
@@ -23,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shimokawara/01_Movie.unity
     guid: 7c995cddd792b7f4f925ff5212572f4e
+  - enabled: 1
+    path: Assets/Scenes/Shimokawara/02_Movie.unity
+    guid: 6fdf07cda97e5184c995d6a3a575c0ec
   - enabled: 1
     path: Assets/Scenes/Shimokawara/GameKUso.unity
     guid: f4da57a6fc17b6347937c297a1093eba

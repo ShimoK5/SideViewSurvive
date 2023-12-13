@@ -28,6 +28,8 @@ public class CircleGauge : MonoBehaviour
             if ((param += speed) >= 1)
             {
                 SceneChangeManager.instance.SceneTransition(nextSceneName);
+                //SE
+                NewSoundManager.instance.PlaySE("決定音");
                 this.enabled = false;
                 //param = 0;
             }

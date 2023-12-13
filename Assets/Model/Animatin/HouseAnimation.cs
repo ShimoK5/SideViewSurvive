@@ -39,6 +39,12 @@ public class HouseAnimation : MonoBehaviour
                 Canvas = Instantiate(Canvas, Vector3.zero, Quaternion.Euler(Vector3.zero));
 
                 GameStateManager.instance.GameState = GAME_STATE.Game;
+                
+                //BGM一度止める
+                NewSoundManager.instance.StopBGM();
+
+                //SE鳴らす
+                NewSoundManager.instance.PlaySE("スタートホイッスル");
             }
 
         }
