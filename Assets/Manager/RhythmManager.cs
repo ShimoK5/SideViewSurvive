@@ -25,6 +25,9 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] public int BeatTempo;
     public int FCnt = 0;//フレームカウント
 
+    string[] BGMName = { "InGame1", "InGame2", "InGame3", "InGame4" } ;
+    int PlayBGMCnt = 0;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -88,6 +91,25 @@ public class RhythmManager : MonoBehaviour
 
     void FixedGame()
     {
+        //週の初めに
+        if(FCnt == 0)
+        {
+            //2週に一回 
+            if (PlayBGMCnt % 2 == 0)
+            {
+                NewSoundManager.instance.StopBGM();
+                NewSoundManager.instance.PlayBGM(BGMName[PlayBGMCnt / 2]);
+            }
+            //カウント加算
+            PlayBGMCnt++;
+            //あふれ防止
+            if (PlayBGMCnt >= 8)
+            {
+                PlayBGMCnt = 0;
+            }
+
+        }
+
 
         //フレームカウント加算
         FCnt++;

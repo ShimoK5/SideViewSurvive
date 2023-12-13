@@ -69,6 +69,8 @@ public class PauseManager : MonoBehaviour
                 //Pause入力あれば
                 if (InputManager_U.instanse.GetKeyTrigger(Key.Start))
                 {
+                    //SE
+                    NewSoundManager.instance.PlaySE("決定音");
                     //ゲームステート変更
                     GameStateManager.instance.GameState = GAME_STATE.Pause;
                     //タイムスケール変更
@@ -84,6 +86,9 @@ public class PauseManager : MonoBehaviour
                 if (InputManager_U.instanse.GetKeyTrigger(Key.Start) ||
                     InputManager_U.instanse.GetKeyTrigger(Key.A))
                 {
+                    //SE
+                    NewSoundManager.instance.PlaySE("決定音");
+
                     //GameStateManager.instance.GameState = GAME_STATE.Game;
                     //ポーズステート変更
                     PauseState = PAUSE_STATE.END;
@@ -233,6 +238,8 @@ public class PauseManager : MonoBehaviour
             Effect2.transform.parent = PauseCanvas.transform;
             Effect2.transform.localScale = new Vector3(100, 100, 100);
 #endif
+            //SE
+            NewSoundManager.instance.PlaySE("選択音");
 
             OldPauseChoose = PauseChoose;
         }
