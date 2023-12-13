@@ -28,7 +28,7 @@ public class MoveBeetBar : MonoBehaviour
             GameObject rhythm = GameObject.Find("RhythmManager");
             Manager = rhythm.GetComponent<RhythmManager>();
             FirstCount = true;
-            Move_BarSpeed = 150 * (BarTransForm.localScale.x) / Manager.BeatTempo;
+            Move_BarSpeed = (270.0f) / (Manager.BeatTempo * 8);
         }
 
         Tempo = Manager.FCnt;
