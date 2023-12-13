@@ -10,15 +10,10 @@ public class StrageNoteBox : MonoBehaviour
     [SerializeField] private RhythmManager Rhythm = null;
     [SerializeField] private static int PresetSpriteSize = 15;
     [SerializeField] private Sprite[] PresetSprite = new Sprite[PresetSpriteSize];
-    //[SerializeField] private AudioClip[] ActionSE = new AudioClip[PresetSpriteSize];
-    //[SerializeField] private AudioSource audioSource = null;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        //audioSource = GetComponent<AudioSource>();
-        //audioSource.volume = 0.03f;
 
         if (Rhythm == null)
         {
