@@ -203,6 +203,8 @@ public class PlayerIF : PawnIF
                 SelfVel.y = 20.0f * MultiplyNum;
                 GameObject Effect = (GameObject)Resources.Load("Prefabs/vfx_PlayerJumping");
                 Effect = Instantiate(Effect, tf.transform.position, Quaternion.Euler(0, -90, 0));
+                //SE
+                NewSoundManager.instance.PlaySE("プレイヤージャンプ");
 
             }
         }
@@ -281,6 +283,11 @@ public class PlayerIF : PawnIF
             OtherVel.y = 0;
             //カウントを加算する
             AirBorneFlame++;
+            //今始めたところならSE鳴らす
+            if(!NowAirBorne)
+            {
+                NewSoundManager.instance.PlaySE("踏ん張り音");
+            }
             //現在の浮遊状態を保存
             NowAirBorne = true;
 

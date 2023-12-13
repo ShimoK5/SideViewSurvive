@@ -59,10 +59,10 @@ public class NewSoundManager : MonoBehaviour
         AS_BGM.Play();
     }
 
-    public void StopBGM(string key) 
+    public void StopBGM(/*string key*/) 
     {
         //Debug.Log("StopBGM");
-        Keynull(key, AS_TYPE.BGM);
+        //Keynull(key, AS_TYPE.BGM);
 
         
         AS_BGM.Stop();

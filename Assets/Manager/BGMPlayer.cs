@@ -34,7 +34,7 @@ public class BGMPlayer : MonoBehaviour
     void OnDestroy()
     {
         if(NewSoundManager.instance)
-        NewSoundManager.instance.StopBGM(selectplayTitle);
+        NewSoundManager.instance.StopBGM(/*selectplayTitle*/);
     }
 
     // Update is called once per frame
