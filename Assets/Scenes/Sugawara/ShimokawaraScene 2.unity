@@ -957,22 +957,22 @@ PrefabInstance:
     - target: {fileID: 5761807137641337403, guid: 74d57fde4f392e94ca0be20bb7e6e928,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5761807137641337403, guid: 74d57fde4f392e94ca0be20bb7e6e928,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5761807137641337403, guid: 74d57fde4f392e94ca0be20bb7e6e928,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.5
+      value: -0.22
       objectReference: {fileID: 0}
     - target: {fileID: 5761807137641337403, guid: 74d57fde4f392e94ca0be20bb7e6e928,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3.5
+      value: 3.48
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2171683456465429743, guid: 74d57fde4f392e94ca0be20bb7e6e928, type: 3}
