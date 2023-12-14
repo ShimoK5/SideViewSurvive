@@ -95,15 +95,15 @@ public class RhythmManager : MonoBehaviour
         if(FCnt == 0)
         {
             //2週に一回 
-            if (PlayBGMCnt % 2 == 0)
+            if (PlayBGMCnt % 1 == 0)
             {
                 NewSoundManager.instance.StopBGM();
-                NewSoundManager.instance.PlayBGM(BGMName[PlayBGMCnt / 2]);
+                NewSoundManager.instance.PlayBGM(BGMName[PlayBGMCnt / 1]);
             }
             //カウント加算
             PlayBGMCnt++;
             //あふれ防止
-            if (PlayBGMCnt >= 8)
+            if (PlayBGMCnt >= 4 * 1)
             {
                 PlayBGMCnt = 0;
             }

@@ -12,8 +12,6 @@ public class InputRhythm : MonoBehaviour
     public bool UpdateRhythmManager = false;                                                            //変更があった際に使用する変数
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう 
     private string SceneName = null;                                                                    //シーンネーム保管庫
-    private int DelayChange = 0;
-    private bool SceneChange = false;
     private bool FistGameChange = false;
 
     void Awake()
@@ -21,10 +19,6 @@ public class InputRhythm : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            //for(int Number = 0; Number < 8;Number++)
-            //{
-            //    NoteBox[Number] = null;
-            //}
         }
         else
         {
@@ -80,7 +74,9 @@ public class InputRhythm : MonoBehaviour
                     FistGameChange = false;
                 }                             
             }          
-        }       
+        }
+
+        
     }
 
   
@@ -214,5 +210,10 @@ public class InputRhythm : MonoBehaviour
     {
         Changer = false;
         UpdateRhythmManager = false;
+    }
+
+    public bool Ref_FirstScene()
+    {
+        return (FistGameChange);
     }
 }
