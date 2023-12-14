@@ -190,8 +190,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Temp: 0
   Operation: 0
-  stationary: 0
+  stationary: 1
   HighScore: 0
+  OneWeyFlame: 60
   InitEnmyType: 2
   FirstSprite: {fileID: 21300000, guid: 6484b64039ae876468ea851770734e51, type: 3}
   SecondSprite: {fileID: 21300000, guid: 6484b64039ae876468ea851770734e51, type: 3}

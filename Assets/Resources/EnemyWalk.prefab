@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Temp: 0
   Operation: 0
-  stationary: 0
+  stationary: 1
   HighScore: 0
   OneWeyFlame: 60
   InitEnmyType: 1
