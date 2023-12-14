@@ -11,27 +11,38 @@ public class CustomTimeLine : MonoBehaviour
     private bool Stop = false;
     [SerializeField]private Animator mAnimator;
     [SerializeField]private GameObject mGameObject;
+    int NowAnimation = 0;
+    private int StopAnimation = 360;
+
     // Start is called before the first frame update
     void Awake()
     {
+        NowAnimation = 0;
         instance = this;
         mDirector = this.GetComponent<PlayableDirector>();
         Stop = false;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(Stop == true)
+        NowAnimation += 1;
+
+        if(NowAnimation >= StopAnimation)
         {
+            Stop = true;
+        }
+        if (Stop == true)
+        {
+            NowAnimation = StopAnimation;
             mDirector.Stop();
             mAnimator.enabled = false;
             mGameObject.SetActive(false);
         }
     }
 
-    public void StopTimeLine()
-    {
-        Stop = true;
-    }
+    //public void StopTimeLine()
+    //{
+    //    Stop = true;
+    //}
 }
