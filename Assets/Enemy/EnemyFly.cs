@@ -29,12 +29,12 @@ public class EnemyFly : EnemyIF
         //Fall();
         //縦移動
         FlameCount++;
-        if (FlameCount > 120)
+        if (FlameCount > FlyOneWeyFlame * 2)
             FlameCount = 0;
 
-        if (FlameCount < 60)
+        if (FlameCount < FlyOneWeyFlame)
             SelfVel.y = -MAX_RUN_SPEED;
-        else if (FlameCount > 60)
+        else if (FlameCount > FlyOneWeyFlame)
             SelfVel.y = MAX_RUN_SPEED;
 
         //ジャンプ処理

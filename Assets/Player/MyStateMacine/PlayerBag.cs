@@ -158,7 +158,8 @@ public class PlayerBag : PlayerIF
         //vel渡し
         BagShockWave.GetComponent<BagShockWave>().Velocity = new Vector3(0.4f, 0, 0);
         //値渡し
-        BagShockWave.GetComponent<BagShockWave>().SetParam((float)AirFlameCnt / RhythmManager.Instance.BeatTempo);
+        //BagShockWave.GetComponent<BagShockWave>().SetParam((float)AirFlameCnt / RhythmManager.Instance.BeatTempo);
+        BagShockWave.GetComponent<BagShockWave>().SetParam((float)AirFlameCnt / 30);
         //高さ調整
         BagShockWave.transform.position = new Vector3(BagShockWave.transform.position.x,
             BagShockWave.transform.position.y + (BagShockWave.GetComponent<BagShockWave>().GetSize() - 2) * 0.5f,
@@ -175,7 +176,8 @@ public class PlayerBag : PlayerIF
         //vel渡し
         BagShockWave2.GetComponent<BagShockWave>().Velocity = new Vector3(-0.4f, 0, 0);
         //値渡し
-        BagShockWave2.GetComponent<BagShockWave>().SetParam((float)AirFlameCnt / RhythmManager.Instance.BeatTempo);
+        //BagShockWave2.GetComponent<BagShockWave>().SetParam((float)AirFlameCnt / RhythmManager.Instance.BeatTempo);
+        BagShockWave2.GetComponent<BagShockWave>().SetParam((float)AirFlameCnt / 30);
         //高さ調整
         BagShockWave2.transform.position = new Vector3(BagShockWave2.transform.position.x,
             BagShockWave2.transform.position.y + (BagShockWave2.GetComponent<BagShockWave>().GetSize() - 2) * 0.5f,

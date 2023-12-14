@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public enum ENEMY_STATE
 {
     NONE,
@@ -31,8 +32,18 @@ public class Enemy : MonoBehaviour
     [Header("高スコア型")]
     [SerializeField] bool HighScore = false;
 
+    [Header("片道のフレーム数(Fly用)")]
+    [SerializeField] int OneWeyFlame = 60;
+
     [Header("エネミーのタイプ")]
     [SerializeField] ENEMY_STATE InitEnmyType;
+
+    [SerializeField] Sprite FirstSprite;                //１コマ目の画像保管場所
+    [SerializeField] Sprite SecondSprite;               //２コマ目の画像保管場所
+    SpriteRenderer ThisSpriteRenderer = null;      //オブジェクトのSpriteRenderer保管場所
+    [SerializeField] GameObject childObject = null;  //子オブジェクト保管庫
+   
+
     //[Header("円運動用の半径")]
     //public float Radius = 0.0f;
 
@@ -44,6 +55,8 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         //instance = this;
+        childObject = this.transform.GetChild(0).gameObject; //子オブジェクト取得
+        ThisSpriteRenderer = childObject.GetComponent<SpriteRenderer>();　　//ここも変更
     }
 
     void OnEnable()
@@ -67,6 +80,7 @@ public class Enemy : MonoBehaviour
 
             case ENEMY_STATE.FLY:
                 m_Enemy = new EnemyFly(m_Enemy);
+                m_Enemy.FlyOneWeyFlame = OneWeyFlame;
                 break;
             
             case ENEMY_STATE.ZIGZAG:
@@ -152,6 +166,16 @@ public class Enemy : MonoBehaviour
 
     void FixedGame()
     {
+        //15フレーム以上の時に画像処理を行う
+        if (RhythmManager.Instance.FCnt % RhythmManager.Instance.BeatTempo >= 15)
+        {
+            ThisSpriteRenderer.sprite = SecondSprite;
+        }
+        else
+        {
+            ThisSpriteRenderer.sprite = FirstSprite;
+        }
+
         CheckState();
         if ((stationary != !Operation) || !IsOnes)
         {
