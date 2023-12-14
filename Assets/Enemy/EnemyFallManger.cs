@@ -7,11 +7,13 @@ public class EnemyFallManger : MonoBehaviour
     [SerializeField] public Enemy[] EnemyFalls;
     bool AllInScreen = false;
     bool Fall = false;
+    float EnemyLeftPos;
 
     // Start is called before the first frame update
     void Start()
     {
         AllInScreen = false;
+        EnemyLeftPos = EnemyFalls[0].transform.position.x;
     }
 
     // Update is called once per frame
@@ -43,7 +45,7 @@ public class EnemyFallManger : MonoBehaviour
             AllInScreen = true;
         }
 
-        if (EnemyFalls[0].transform.position.x <
+        if (EnemyLeftPos <
             Player.instance.transform.position.x)
         {
             Fall = true;
