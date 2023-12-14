@@ -26,7 +26,7 @@ public class MoveHand : MonoBehaviour
     [SerializeField] private bool TouchJudge = false;                                       //触っているかどうか
     [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
     [SerializeField] bool FistNoteChange = false;                                            //ノートにぶつかっているか確認用
-    //[SerializeField] bool ChangeTarget = false;                                              //シーンチェンジ用
+    [SerializeField] bool Check = false;                                              //シーンチェンジ用
 
     
     bool ChangeTouch = false;
@@ -44,7 +44,8 @@ public class MoveHand : MonoBehaviour
         RectTransform HandTransform = this.GetComponent<RectTransform>();
         HandTransform.TransformPoint(HandPosition);
         DragAndDrop = false;
-        FistNoteChange = true;
+        FistNoteChange = false;
+        Check = false;
         GameObject MovieObject = GameObject.Find("Movie");
         MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Whistle);
         ChangeFlavor("None");
@@ -145,19 +146,22 @@ public class MoveHand : MonoBehaviour
         CountTime += 1;
         if (CountTime < FreezeTime)
         {
-            return;
+            return;            
         }
         else if (CountTime >= FreezeTime)
         {
-            if (FistNoteChange == true)
+            if (Check == false)
             {
-                InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
-                InputRhythm.instance.ChangeNoteBox();               
-                FistNoteChange = false;
+                FistNoteChange = InputRhythm.instance.Ref_FirstScene();
+                if (FistNoteChange == false)
+                {
+                    InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
+                    InputRhythm.instance.ChangeNoteBox();
+                    FistNoteChange = true;
+                }
+                Check = true;
             }
             CountTime = FreezeTime;
-
-            //CustomTimeLine.instance.StopTimeLine();
 
             //掴んでいるときの画像を変更する
             if (DragAndDrop == true)
@@ -192,17 +196,11 @@ public class MoveHand : MonoBehaviour
 
             if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.L1_BUTTON))       //掴んでいないでL1ボタンを押したとき
             {
-                HandPosition.x = MoveL1Position.x;
-                HandPosition.y = MoveL1Position.y;
-                RectTransform HandTransform = this.GetComponent<RectTransform>();
-                HandTransform.localPosition = HandPosition;
+                InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
             }
             else if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.R1_BUTTON))  //掴んでいないでR1ボタンを押したとき
             {
-                HandPosition.x = MoveR1Position.x;
-                HandPosition.y = MoveR1Position.y;
-                RectTransform HandTransform = this.GetComponent<RectTransform>();
-                HandTransform.localPosition = HandPosition;
+                InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(1));
             }
 
             if (TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.B_BUTTON))          //触れていてBボタンを押したとき
@@ -287,12 +285,10 @@ public class MoveHand : MonoBehaviour
     {
         DragAndDrop = false;       
         Destroy(DragAndDrop_Object);
-        //Debug.Log("2");
     }
 
     void DropIcon()
     {
-        //Debug.Log("DropIcon");
         if (Touch_Object.tag == "Note")
         {
             if (DragAndDrop == true)
