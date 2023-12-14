@@ -57,14 +57,49 @@ public class EnemyPress : EnemyIF
         {
             case PressState.search:
                 {
-                    Vector3 playerPos = Player.instance.transform.position;
-                    float sign = Mathf.Sign(playerPos.x - tf.position.x);
+                    // Sacrifice クラス型の配列に、シーン上すべてのSacrificeをぶち込む
+                    Sacrifice[] SacrificeArray = GameObject.FindObjectsOfType<Sacrifice>();
 
-                    SelfVel.y = 0.0f;
-                    SelfVel.x = 8 * (1.0f / 65) * sign;
+                    if (SacrificeArray.Length == 0)
+                    {
+                        Vector3 playerPos = Player.instance.transform.position;
+                        float sign = Mathf.Sign(playerPos.x - tf.position.x);
 
-                    if (playerPos.x - tf.position.x < SelfVel.x)
-                        SelfVel.x = playerPos.x - tf.position.x;
+                        SelfVel.y = 0.0f;
+                        SelfVel.x = 8 * (1.0f / 65) * sign;
+
+                        if (playerPos.x - tf.position.x < SelfVel.x)
+                            SelfVel.x = playerPos.x - tf.position.x;
+                    }
+                    else 
+                    {
+                        //最短距離保存変数。とりあえずクッソでかい値いれとく
+                        float ShortestDistance = 1000000.0f;
+                        int NeerIndex = 0;
+
+                        // for回す
+                        for (int i = 0; i < SacrificeArray.Length; i++)
+                        {
+                            float DistanceX = SacrificeArray[i].transform.position.x - tf.transform.position.x;
+                            float DistanceY = SacrificeArray[i].transform.position.y - tf.transform.position.y;
+
+                            float Distance = DistanceX * DistanceX + DistanceY * DistanceY;
+
+                            if (Distance < ShortestDistance)
+                            {
+                                ShortestDistance = Distance;
+                                NeerIndex = i;
+                            }
+
+                            float sign = Mathf.Sign(SacrificeArray[i].transform.position.x - tf.position.x);
+
+                            SelfVel.y = 0.0f;
+                            SelfVel.x = 8 * (1.0f / 65) * sign;
+
+                            if (SacrificeArray[i].transform.position.x - tf.position.x < SelfVel.x)
+                                SelfVel.x = SacrificeArray[i].transform.position.x - tf.position.x;
+                        }
+                    }
 
                     if (MoveFlameCount > 200)
                     {
