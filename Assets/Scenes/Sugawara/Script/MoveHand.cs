@@ -157,7 +157,7 @@ public class MoveHand : MonoBehaviour
             }
             CountTime = FreezeTime;
 
-            CustomTimeLine.instance.StopTimeLine();
+            //CustomTimeLine.instance.StopTimeLine();
 
             //掴んでいるときの画像を変更する
             if (DragAndDrop == true)
