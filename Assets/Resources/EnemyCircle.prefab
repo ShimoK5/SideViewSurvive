@@ -193,4 +193,7 @@ MonoBehaviour:
   stationary: 1
   HighScore: 0
   InitEnmyType: 5
+  FirstSprite: {fileID: 21300000, guid: 6484b64039ae876468ea851770734e51, type: 3}
+  SecondSprite: {fileID: 21300000, guid: 6484b64039ae876468ea851770734e51, type: 3}
+  childObject: {fileID: 4594348580611927414}
   inScreen: 0

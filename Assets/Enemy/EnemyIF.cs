@@ -39,6 +39,7 @@ public class EnemyIF : PawnIF
 
     public bool DeadCntFlag = true;               //死亡時加算するかのフラグ（）
     public bool HighScoreflag = false;            //ハイスコアかどうかの引継ぎ用フラグ
+    public int FlyOneWeyFlame = 0;
 
     //コピー関数
     //全ての変数をコピーする
