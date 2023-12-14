@@ -18,25 +18,35 @@ public class EnemyFormationManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        bool TempAllInScreen = true;
+        //大元はfalse
+        bool TempAllInScreen = false;
 
-        for(int i = 0; i < EnemyFormations.Length; i++ )
+        if(GameStateManager.instance.GameState == GAME_STATE.Game)
         {
-            //エネミーあれば
-            if(EnemyFormations[i])
-            {
-                //映っていれば
-                if(EnemyFormations[i].inScreen)
-                {
 
-                }
-                //映っていなければ
-                else
+            //デフォはtrue
+            TempAllInScreen = true;
+
+            for (int i = 0; i < EnemyFormations.Length; i++)
+            {
+                //エネミーあれば
+                if (EnemyFormations[i])
                 {
-                    TempAllInScreen = false;
+                    //映っていれば
+                    if (EnemyFormations[i].inScreen)
+                    {
+
+                    }
+                    //映っていなければ
+                    else
+                    {
+                        TempAllInScreen = false;
+                    }
                 }
             }
         }
+
+        
 
         //一度でも全員映ってたらずっとtrue
         if(TempAllInScreen)
