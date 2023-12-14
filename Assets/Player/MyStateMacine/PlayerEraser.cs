@@ -7,10 +7,11 @@ public class PlayerEraser : PlayerIF
 {
 
     TrackEntry m_TrackEntry;
-
+    int FCnt = 0;
     public PlayerEraser(PlayerIF oldPlayer)
     {
         CopyPlayer(oldPlayer);
+        FCnt = 0;
 
         //if (Player.instance.GetAnim().Anim.AnimationName != "enbitsu/enbitsutama_idel_shoot")
         //アニメーション
@@ -65,6 +66,8 @@ public class PlayerEraser : PlayerIF
 
     public override void CustumFixed()
     {
+        FCnt++;
+
         //アニメーション
         if (!isGround)
         {
@@ -120,7 +123,7 @@ public class PlayerEraser : PlayerIF
             //ジャンプ処理
             Jump();
             //状態遷移
-            //ChangeNextState();
+            ChangeNextState();
             //浮遊
             AirBorneCheck(true);
             //速度反映
@@ -143,7 +146,7 @@ public class PlayerEraser : PlayerIF
             //向き変更
             ChangeDirection();
             //状態遷移
-            //ChangeNextState();
+            ChangeNextState();
             //浮遊
             AirBorneCheck(true);
             //速度反映
@@ -156,15 +159,29 @@ public class PlayerEraser : PlayerIF
     }
 
     //状態遷移
-    //protected override void ChangeNextState()
-    //{
-    //    if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED && NextPlayerState == PLAYER_STATE.STAND)
-    //    {
-    //        NextPlayerState = PLAYER_STATE.RUN;
-    //    }
-    //    if (!isGround)
-    //    {
-    //        NextPlayerState = PLAYER_STATE.AIR;
-    //    }
-    //}
+    protected override void ChangeNextState()
+    {
+        if(FCnt >= 30)
+        {
+            if (!isGround)
+            {
+                NextPlayerState = PLAYER_STATE.AIR;
+            }
+            else
+            {
+                if (Mathf.Abs(SelfVel.x /*+ OtherVel.x*/) >= STAND_SPEED && NextPlayerState == PLAYER_STATE.STAND)
+                {
+                    NextPlayerState = PLAYER_STATE.RUN;
+                }
+                else
+                {
+                    NextPlayerState = PLAYER_STATE.STAND;
+                }
+            }
+           
+            
+        }
+
+        
+    }
 }
