@@ -10,15 +10,10 @@ public class StrageNoteBox : MonoBehaviour
     [SerializeField] private RhythmManager Rhythm = null;
     [SerializeField] private static int PresetSpriteSize = 15;
     [SerializeField] private Sprite[] PresetSprite = new Sprite[PresetSpriteSize];
-    [SerializeField] private AudioClip[] ActionSE = new AudioClip[PresetSpriteSize];
-    [SerializeField] private AudioSource audioSource = null;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.volume = 0.03f;
 
         if (Rhythm == null)
         {
@@ -82,98 +77,18 @@ public class StrageNoteBox : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Change();
-        }
-
-       
         switch (GameStateManager.instance.GameState)
         {
             case GAME_STATE.Game:
             int count = Rhythm.FCnt / Rhythm.BeatTempo;
-            if (Rhythm.FCnt % Rhythm.BeatTempo == 0 && count == 0)
-            {
-                switch (Rhythm.ActionArray[7])
+                if (Rhythm.FCnt % Rhythm.BeatTempo == 0 && count == 0)
                 {
-                    case RhythmAction.Umbrella:
-                        audioSource.PlayOneShot(ActionSE[0]);
-                        break;
-
-                    case RhythmAction.Recorder:
-                        audioSource.PlayOneShot(ActionSE[1]);
-                        break;
-
-                    case RhythmAction.Eraser:
-                        audioSource.PlayOneShot(ActionSE[2]);
-                        break;
-
-                    case RhythmAction.Sacrifice:
-                        audioSource.PlayOneShot(ActionSE[3]);
-                        break;
-
-                    case RhythmAction.AirCannon:
-                        audioSource.PlayOneShot(ActionSE[4]);
-                        break;
-
-                    case RhythmAction.Bag:
-                        audioSource.PlayOneShot(ActionSE[5]);
-                        break;
-
-                    case RhythmAction.Ruler:
-                        audioSource.PlayOneShot(ActionSE[6]);
-                        break;
-
-                    case RhythmAction.Whistle:
-                        audioSource.PlayOneShot(ActionSE[7]);
-                        break;
-
-                    default:
-                        audioSource.PlayOneShot(ActionSE[8]);
-                        break;
+                    PlayActionSE.instance.Ref_NewSoundManager(Rhythm.ActionArray[7]);
                 }
-            }
-            else if (Rhythm.FCnt % Rhythm.BeatTempo == 0 && count > 0)
-            {
-                switch (Rhythm.ActionArray[(count - 1)])
+                else if (Rhythm.FCnt % Rhythm.BeatTempo == 0 && count > 0)
                 {
-                    case RhythmAction.Umbrella:
-                        audioSource.PlayOneShot(ActionSE[0]);
-                        break;
-
-                    case RhythmAction.Recorder:
-                        audioSource.PlayOneShot(ActionSE[1]);
-                        break;
-
-                    case RhythmAction.Eraser:
-                        audioSource.PlayOneShot(ActionSE[2]);
-                        break;
-
-                    case RhythmAction.Sacrifice:
-                        audioSource.PlayOneShot(ActionSE[3]);
-                        break;
-
-                    case RhythmAction.AirCannon:
-                        audioSource.PlayOneShot(ActionSE[4]);
-                        break;
-
-                    case RhythmAction.Bag:
-                        audioSource.PlayOneShot(ActionSE[5]);
-                        break;
-
-                    case RhythmAction.Ruler:
-                        audioSource.PlayOneShot(ActionSE[6]);
-                        break;
-
-                    case RhythmAction.Whistle:
-                        audioSource.PlayOneShot(ActionSE[7]);
-                        break;
-
-                    default:
-                        audioSource.PlayOneShot(ActionSE[8]);
-                        break;
+                    PlayActionSE.instance.Ref_NewSoundManager(Rhythm.ActionArray[(count - 1)]);                   
                 }
-            }
 
                 break;
 
