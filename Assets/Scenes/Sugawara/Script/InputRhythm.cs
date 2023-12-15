@@ -13,6 +13,7 @@ public class InputRhythm : MonoBehaviour
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう 
     private string SceneName = null;                                                                    //シーンネーム保管庫
     private bool FistGameChange = false;
+    bool TitleCheck = false;
 
     void Awake()
     {
@@ -36,7 +37,7 @@ public class InputRhythm : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        SceneName = SceneManager.GetActiveScene().name;       
+        SceneName = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
@@ -47,7 +48,7 @@ public class InputRhythm : MonoBehaviour
             ResetSceneAction();
             ChangeSceneAction();
             SceneName = SceneManager.GetActiveScene().name;
-            FistGameChange = true;
+            FistGameChange = true;           
         }
 
         if (UpdateRhythmManager == true)
@@ -58,7 +59,12 @@ public class InputRhythm : MonoBehaviour
             }
             if (SceneManager.GetActiveScene().name == "SetScene")
             {
-                ChangeNoteBox();
+                if(TitleCheck == true)
+                {
+                    FistGameChange = false;
+                    TitleCheck = false;
+                }
+                ChangeNoteBox();               
             }
             UpdateRhythmManager = false;
         }
@@ -74,6 +80,15 @@ public class InputRhythm : MonoBehaviour
                     FistGameChange = false;
                 }                             
             }          
+        }
+
+        if (SceneManager.GetActiveScene().name == "UI_title")
+        {
+            if (TitleCheck == false)
+            {
+                ResetMetronome();
+                TitleCheck = true;
+            }
         }
 
         
@@ -129,6 +144,13 @@ public class InputRhythm : MonoBehaviour
         }
     }
 
+    void ResetMetronome()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            Action[i] = RhythmManager.RhythmAction.None;
+        }
+    }
 
     public void ChangeMetronome(int Number,RhythmManager.RhythmAction ArrayAction)
     {
@@ -145,41 +167,49 @@ public class InputRhythm : MonoBehaviour
                 case 0:
                     Metronome = GameObject.Find("frame_item0_1");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
+                    Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
                     break;
 
                 case 1:
                     Metronome = GameObject.Find("frame_item0_2");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
+                    Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
                     break;
 
                 case 2:
                     Metronome = GameObject.Find("frame_item0_3");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
+                    Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
                     break;
 
                 case 3:
                     Metronome = GameObject.Find("frame_item0_4");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
+                    Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
                     break;
 
                 case 4:
                     Metronome = GameObject.Find("frame_item0_5");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
+                    Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
                     break;
 
                 case 5:
                     Metronome = GameObject.Find("frame_item0_6");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
+                    Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
                     break;
 
                 case 6:
                     Metronome = GameObject.Find("frame_item0_7");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
+                    Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
                     break;
 
                 case 7:
                     Metronome = GameObject.Find("frame_item0_8");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
+                    Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
                     break;
 
                 default:
