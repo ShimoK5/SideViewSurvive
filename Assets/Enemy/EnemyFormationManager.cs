@@ -62,7 +62,7 @@ public class EnemyFormationManager : MonoBehaviour
             for (int i = 0; i < EnemyFormations.Length; i++)
 
             {
-                if (Cnt == 90 + i * 10)
+                if (Cnt == 180 + i * 10)
                 {
 
                     //エネミーあれば
