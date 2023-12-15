@@ -182,6 +182,11 @@ public class Enemy : MonoBehaviour
             m_Enemy.CustumFixed();
             IsOnes = true;
         }
+        //Deadエネミーなら特別に更新する
+        else if(m_Enemy.EnemyState == ENEMY_STATE.DEAD)
+        {
+            m_Enemy.CustumFixed();
+        }
     }
 
     void Check_inScreen()
