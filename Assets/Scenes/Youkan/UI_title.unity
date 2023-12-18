@@ -566,6 +566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 601044537}
   - component: {fileID: 601044538}
+  - component: {fileID: 601044539}
   m_Layer: 5
   m_Name: zzz
   m_TagString: Untagged
@@ -614,6 +615,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &601044539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601044536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e426c9ea3afc248b01ee659a2b265e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &663350001
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,7 +974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1035,7 +1048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1074,7 +1087,7 @@ PrefabInstance:
     - target: {fileID: 5107878508607477188, guid: 61223a66a4ddbf242836d5bbdf08410b,
         type: 3}
       propertyPath: selectplayTitle
-      value: "\u30BF\u30A4\u30C8\u30EB\u753B\u9762BGM"
+      value: "\u30BF\u30A4\u30C8\u30EBBGM"
       objectReference: {fileID: 0}
     - target: {fileID: 5107878508607477189, guid: 61223a66a4ddbf242836d5bbdf08410b,
         type: 3}
@@ -1183,7 +1196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2253,8 +2266,6 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -3544296138891358339, guid: 4d619791a40d00243a3e9afdc521459a, type: 2}
     value: {fileID: 1370766117}
-  - key: {fileID: -1496148800089038367, guid: 4d619791a40d00243a3e9afdc521459a, type: 2}
-    value: {fileID: 601044538}
   - key: {fileID: 0}
     value: {fileID: 1676172228}
   - key: {fileID: 0}
