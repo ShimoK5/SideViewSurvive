@@ -87,7 +87,7 @@ public class CameraPos2 : MonoBehaviour
         //MaxX = MaxObj.x - ZurashiX;
 
         MinX = MinObj.x + ZurashiX - 2;
-        MaxX = MaxObj.x - ZurashiX;
+        MaxX = MaxObj.x /*- ZurashiX*/;
 
 
         instance = this;
