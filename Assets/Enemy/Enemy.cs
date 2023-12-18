@@ -38,11 +38,12 @@ public class Enemy : MonoBehaviour
     [Header("エネミーのタイプ")]
     [SerializeField] ENEMY_STATE InitEnmyType;
 
+#if false
     [SerializeField] Sprite FirstSprite;                //１コマ目の画像保管場所
     [SerializeField] Sprite SecondSprite;               //２コマ目の画像保管場所
     SpriteRenderer ThisSpriteRenderer = null;      //オブジェクトのSpriteRenderer保管場所
     [SerializeField] GameObject childObject = null;  //子オブジェクト保管庫
-   
+#endif
 
     //[Header("円運動用の半径")]
     //public float Radius = 0.0f;
@@ -55,8 +56,10 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         //instance = this;
+#if false
         childObject = this.transform.GetChild(0).gameObject; //子オブジェクト取得
         ThisSpriteRenderer = childObject.GetComponent<SpriteRenderer>();　　//ここも変更
+#endif
     }
 
     void OnEnable()
@@ -166,6 +169,7 @@ public class Enemy : MonoBehaviour
 
     void FixedGame()
     {
+#if false
         //15フレーム以上の時に画像処理を行う
         if (RhythmManager.Instance.FCnt % RhythmManager.Instance.BeatTempo >= 15)
         {
@@ -175,6 +179,7 @@ public class Enemy : MonoBehaviour
         {
             ThisSpriteRenderer.sprite = FirstSprite;
         }
+#endif
 
         CheckState();
         if ((stationary != !Operation) || !IsOnes)
