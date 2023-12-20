@@ -9,26 +9,26 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class MoveHand : MonoBehaviour
 {
-    [SerializeField] private Vector3 HandPosition = Vector3.zero;                           //ハンドの初期位置
-    private Vector3 IconShift = new Vector3(-40.0f,0.0f,0.0f);                                               //アイコンの位置ずれ
+    private Vector3 IconShift = new Vector3(-40.0f, 0.0f, 0.0f);                            //アイコンの位置ずれ
     private Vector2 ShiftOffset = new Vector2(-30.0f, 0.0f);                                //当たり判定のずれ
-    private Vector2 MoveR1Position = new Vector2(-750.0f,-850.0f);                          //R1押したときの移動場所
-    private Vector2 MoveL1Position = new Vector2(-1050.0f, -850.0f);                        //L1押したときの移動場所
-    private Vector2 MaxMovePosition = new Vector2(650.0f, 100.0f);
-    private Vector2 MinMovePosition = new Vector2(-600.0f, -900.0f);
-    [SerializeField] private float MoveSpeed = 10.0f;                                        //移動スピード
+    private Vector2 MaxMovePosition = new Vector2(650.0f, 100.0f);                          //移動上限値
+    private Vector2 MinMovePosition = new Vector2(-600.0f, -900.0f);                        //移動下限値
+
+    [SerializeField] private Vector3 HandPosition = Vector3.zero;                           //ハンドの初期位置
+    [SerializeField] private float MoveSpeed = 10.0f;                                       //移動スピード
     [SerializeField] private int FreezeTime = 180;                                          //最初に動かせなくする用
-    [SerializeField] private int CountTime = 0;                                             //セット画面が始まってからのカウント
+    [SerializeField] private int FreezeCountTime = 0;                                       //セット画面が始まってからのカウント
     [SerializeField] private string touch_Name = null;                                      //触れたオブジェクトを判断するよう
-    [SerializeField] private GameObject Touch_Object = null;                                //触ったオブジェクト
+    [SerializeField] private List<GameObject> Touch_Objects = new List<GameObject>();       //触ったオブジェクト達
+    [SerializeField] private GameObject Touch_Object = null;
     [SerializeField] private GameObject Duplication_Object = null;                          //オブジェクトが重なってしまった場合
-    [SerializeField] private GameObject DragAndDrop_Object = null;                           //掴んでいるオブジェクト
+    [SerializeField] private GameObject DragAndDrop_Object = null;                          //掴んでいるオブジェクト
     [SerializeField] private bool TouchJudge = false;                                       //触っているかどうか
     [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
-    [SerializeField] bool FistNoteChange = false;                                            //ノートにぶつかっているか確認用
-    [SerializeField] bool Check = false;                                              //シーンチェンジ用
+    [SerializeField] bool FistNoteChange = false;                                           //ノートにぶつかっているか確認用
+    [SerializeField] bool Check = false;                                                    //シーンチェンジ用
 
-    
+    [SerializeField]bool CollisionCheck = false;
     bool ChangeTouch = false;
 
    
@@ -39,7 +39,7 @@ public class MoveHand : MonoBehaviour
     {
         HandPosition = new Vector3(0.0f, 0.0f, -10.0f);
         FreezeTime = 180;
-        CountTime = 0;
+        FreezeCountTime = 0;
         touch_Name = null;
         RectTransform HandTransform = this.GetComponent<RectTransform>();
         HandTransform.TransformPoint(HandPosition);
@@ -50,6 +50,7 @@ public class MoveHand : MonoBehaviour
         MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Whistle);
         ChangeFlavor("None");
         ChangeHeader("None");
+        CollisionCheck = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -59,11 +60,12 @@ public class MoveHand : MonoBehaviour
             if (TouchJudge == false)
             {
                 TouchJudge = true;
-                Touch_Object = collision.gameObject;
+                Touch_Objects.Add(collision.gameObject);
+                //Touch_Object.GetComponent<ChangeMetronome>().TouchMetronome();
             }
             else
             {
-                Duplication_Object = collision.gameObject;
+                Touch_Objects.Add(collision.gameObject);
             }            
         }       
         else if(collision.gameObject.tag == "Icon")
@@ -86,7 +88,14 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(ChangeTouch == true)
+        if (CollisionCheck == true)
+        {
+            if (collision.gameObject.tag == "Note")
+            {
+                Touch_Objects.Add(collision.gameObject);
+            }
+        }
+            if (ChangeTouch == true)
         {
             if (collision.gameObject.tag == "Note")
             {
@@ -109,15 +118,18 @@ public class MoveHand : MonoBehaviour
             if (Duplication_Object == null)
             {
                 TouchJudge = false;
+                Touch_Object.GetComponent<ChangeMetronome>().DontTouchMetronome();
                 Touch_Object = null;
             }
             else 
             {
                 TouchJudge = true;
+                Touch_Object.GetComponent<ChangeMetronome>().DontTouchMetronome();
                 Touch_Object = Duplication_Object;
                 Duplication_Object = null;
             }
             
+
         }
         else if(collision.gameObject.tag == "PlatForm")
         {
@@ -143,13 +155,63 @@ public class MoveHand : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        CountTime += 1;
-        if (CountTime < FreezeTime)
+        FreezeCountTime += 1;
+        if (FreezeCountTime < FreezeTime)
         {
             return;            
         }
-        else if (CountTime >= FreezeTime)
+        else if (FreezeCountTime >= FreezeTime)
         {
+            if(Touch_Objects.Count >= 2)
+            {
+                GameObject touch = Touch_Objects[0];
+                Vector3 sabun1 = touch.transform.position - this.transform.position;
+                if(sabun1.x < 0)
+                {
+                    sabun1.x *= -1.0f;
+                }
+                Debug.Log(sabun1 + "object_0");
+                touch = Touch_Objects[1];
+                Vector3 sabun2 = touch.transform.position - this.transform.position;
+                if (sabun2.x < 0)
+                {
+                    sabun2.x *= -1.0f;
+                }
+                Debug.Log(sabun2 + "object_1");
+                if(sabun1.x > sabun2.x)
+                {
+                    Touch_Object = Touch_Objects[0];
+                    Duplication_Object = Touch_Objects[1];
+                }
+                else if(sabun1.x < sabun2.x)
+                {
+                    Touch_Object = Touch_Objects[1];
+                    Duplication_Object = Touch_Objects[0];
+                }
+                Debug.Log(this.transform.position + "hand");
+                Touch_Objects.Clear();
+                //Debug.Break();
+
+                Touch_Object.GetComponent<ChangeMetronome>().TouchMetronome();
+                Duplication_Object.GetComponent<ChangeMetronome>().DontTouchMetronome();
+            }
+            else if(Touch_Objects.Count >0)
+            {
+                Touch_Object = Touch_Objects[0];
+                Touch_Objects.Clear();
+                Touch_Object.GetComponent<ChangeMetronome>().TouchMetronome();
+            }
+
+            if (Touch_Object != null)
+            {
+                if (Touch_Object.tag == "Note")
+                {
+                    //Touch_Object.GetComponent<ChangeMetronome>().TouchMetronome();
+                }
+            }
+
+
+
             if (Check == false)
             {
                 FistNoteChange = InputRhythm.instance.Ref_FirstScene();
@@ -161,7 +223,7 @@ public class MoveHand : MonoBehaviour
                 }
                 Check = true;
             }
-            CountTime = FreezeTime;
+            FreezeCountTime = FreezeTime;
 
             //掴んでいるときの画像を変更する
             if (DragAndDrop == true)
@@ -181,43 +243,50 @@ public class MoveHand : MonoBehaviour
                     this.transform.GetChild(1).gameObject.SetActive(false);
                     this.GetComponent<BoxCollider2D>().offset = Vector2.zero;
                 }
-
-                //if(ChangeTarget == true)
-                //{
-                //    Debug.Log("1");
-
-                //}
             }
 
-            if (DragAndDrop == false && SetInputManager.instance.Ref_Button(SetInputManager.BUTTON.MENU_BUTTON))         //掴んでいないでMenuボタンを押したとき
+            //掴んでいないでMenuボタンを押したとき
+            if (DragAndDrop == false && SetInputManager.instance.Ref_Button(SetInputManager.BUTTON.MENU_BUTTON))
             {
                 SceneChangeManager.instance.SceneTransition(NextSceneName.Instance.Ref_NextSceneName());
             }
 
-            if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.L1_BUTTON))       //掴んでいないでL1ボタンを押したとき
+            //掴んでいないでL1ボタンを押したとき
+            if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.L1_BUTTON))
             {
                 InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
+                InputRhythm.instance.ChangeNoteBox();
+                //if (SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.L1_BUTTON))
+                //{
+                   
+                //}
             }
-            else if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.R1_BUTTON))  //掴んでいないでR1ボタンを押したとき
+            //掴んでいないでR1ボタンを押したとき
+            else if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.R1_BUTTON))
             {
                 InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(1));
+                InputRhythm.instance.ChangeNoteBox();
             }
 
-            if (TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.B_BUTTON))          //触れていてBボタンを押したとき
+            //触れていてBボタンを押したとき
+            if (DragAndDrop == false && TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.B_BUTTON))
             {
                 DeleteNote();
             }
 
+            //触れていてAボタンを押した瞬間
             if (TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.A_BUTTON))
-            {//触れていてAボタンを押した瞬間
+            {
                 CatchIcon();
             }
+            //掴んでいる状態で触れたおらず、Aボタンを離したとき
             else if (TouchJudge == false && DragAndDrop == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
-            {//掴んでいる状態で触れたおらず、Aボタンを離したとき
+            {
                 DragIcon();
             }
+            //掴んでいる状態で触れていて、Aボタンを離したとき
             else if (DragAndDrop == true && TouchJudge == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
-            {//掴んでいる状態で触れていて、Aボタンを離したとき
+            {
                 DropIcon();
             }
 
@@ -226,9 +295,11 @@ public class MoveHand : MonoBehaviour
 
             if (Horizon == 0.0f && Vertical == 0.0f)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
             {
+                CollisionCheck = false;
             }
             else //  テンキーや3Dスティックの入力（GetAxis）がゼロではない時の動作
             {
+                CollisionCheck = true;
                 MoveChange(Horizon, Vertical);
                 RectTransform HandTransform = this.GetComponent<RectTransform>();
                 HandTransform.localPosition = HandPosition;
@@ -263,6 +334,7 @@ public class MoveHand : MonoBehaviour
 
     }
 
+    //アイコンを掴んだ時の行動
     void CatchIcon()
     {
         if (touch_Name != null)
@@ -271,7 +343,7 @@ public class MoveHand : MonoBehaviour
             {
                 CreateCloneIcon();
                 DragAndDrop = true;
-                TouchJudge = false;
+                TouchJudge = true;
                 //ChangeTarget = true;
             }
             else
@@ -281,12 +353,14 @@ public class MoveHand : MonoBehaviour
         }       
     }
 
+    //アイコンを掴んでいるときの行動
     void DragIcon()
     {
         DragAndDrop = false;       
         Destroy(DragAndDrop_Object);
     }
 
+    //アイコン掴んでいるときに離したときの行動
     void DropIcon()
     {
         if (Touch_Object.tag == "Note")
@@ -308,6 +382,7 @@ public class MoveHand : MonoBehaviour
         
     }
 
+    //メトロノームの中身変更
     void DeleteNote()
     {
         if (Touch_Object.tag == "Note")
@@ -316,6 +391,7 @@ public class MoveHand : MonoBehaviour
         }
     }
 
+    //掴んでるときのアイコン作成
     void CreateCloneIcon()
     {
         Vector3 IconPosition = HandPosition + IconShift;
@@ -371,9 +447,7 @@ public class MoveHand : MonoBehaviour
         DragAndDrop_Object = CloneIconBox;
     }
 
-
-
-
+    //説明映像変更
     void ChangeMovie(string Name)
     {
         GameObject MovieObject = GameObject.Find("Movie");
@@ -420,6 +494,7 @@ public class MoveHand : MonoBehaviour
         }
     }
 
+    //説明文変更
     void ChangeFlavor(string Name)
     {
         GameObject Flavor = GameObject.Find("Flavor");
@@ -466,6 +541,7 @@ public class MoveHand : MonoBehaviour
         }
     }
 
+    //説明の文字部分変更
     void ChangeHeader(string Name)
     {
         GameObject Header = GameObject.Find("Header");

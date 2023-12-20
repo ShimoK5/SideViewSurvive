@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Data.Util.KeywordDependentCollection;
 
 public class Change_NoteBox : MonoBehaviour
 {
