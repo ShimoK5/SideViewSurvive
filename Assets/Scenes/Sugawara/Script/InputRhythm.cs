@@ -11,9 +11,10 @@ public class InputRhythm : MonoBehaviour
     [SerializeField] private bool Changer = false;                                                      //シーン変更の際に使用する変数
     public bool UpdateRhythmManager = false;                                                            //変更があった際に使用する変数
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう 
-    private string SceneName = null;                                                                    //シーンネーム保管庫
+    private string NowSceneName = null;                                                                    //シーンネーム保管庫
     private bool FistGameChange = false;
     bool TitleCheck = false;
+    [SerializeField]string[] SceneNames = new string[2];
 
     void Awake()
     {
@@ -37,23 +38,25 @@ public class InputRhythm : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        SceneName = SceneManager.GetActiveScene().name;
+        NowSceneName = SceneManager.GetActiveScene().name;
+        SceneNames[0] = "Game";
+        SceneNames[1] = "Game 1";
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(SceneManager.GetActiveScene().name != SceneName)
+        if(SceneManager.GetActiveScene().name != NowSceneName)
         {
             ResetSceneAction();
             ChangeSceneAction();
-            SceneName = SceneManager.GetActiveScene().name;
+            NowSceneName = SceneManager.GetActiveScene().name;
             FistGameChange = true;           
         }
 
         if (UpdateRhythmManager == true)
         {
-            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "SetScene" || SceneManager.GetActiveScene().name == "Game")
+            if (SceneManager.GetActiveScene().name == "SetScene" || SceneManager.GetActiveScene().name == SceneNames[0] || SceneManager.GetActiveScene().name == SceneNames[1])
             {
                 ChangeRhythmManager();
             }
@@ -64,12 +67,13 @@ public class InputRhythm : MonoBehaviour
                     FistGameChange = false;
                     TitleCheck = false;
                 }
-                ChangeNoteBox();               
+                ChangeNoteBox();
+               
             }
             UpdateRhythmManager = false;
         }
 
-        if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game")
+        if (SceneManager.GetActiveScene().name == SceneNames[0] || SceneManager.GetActiveScene().name == SceneNames[1])
         {
             if (GameStateManager.instance.GameState == GAME_STATE.StartFade)
             {
@@ -141,6 +145,14 @@ public class InputRhythm : MonoBehaviour
                 default:
                     break;
             }
+        }
+    }
+
+    public void SceneNameReference()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            SceneNames[i] = NextSceneName.Instance.Ref_SceneNames(i);
         }
     }
 

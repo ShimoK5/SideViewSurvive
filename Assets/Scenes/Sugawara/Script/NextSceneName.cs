@@ -26,6 +26,11 @@ public class NextSceneName : MonoBehaviour
         Instance = this;
     }
 
+    public string Ref_SceneNames(int Number)
+    {
+        return SceneName[Number];
+    }
+
     public void Change_SceneNumber(int SceneNumber)
     {
         Scene = SceneNumber;
