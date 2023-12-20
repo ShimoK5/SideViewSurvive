@@ -11,8 +11,8 @@ public class NextSceneName : MonoBehaviour
     public static NextSceneName Instance = null;
     void Awake()
     {
-        SceneName[0] = "ShimokawaraScene 1";
-        SceneName[1] = "Game";
+        SceneName[0] = "Game 1";
+        SceneName[1] = "Game 1 Shimokawara";
 
         if (Scene > -1 && Scene < 2)
         {
