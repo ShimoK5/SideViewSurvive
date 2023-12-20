@@ -17,8 +17,7 @@ public class InputName : MonoBehaviour
     [SerializeField]
     private Text userName = default; //inputFieldName component
 
-    public int s;
-
+    
    void Start()
     {
         //get buttons object
@@ -29,7 +28,7 @@ public class InputName : MonoBehaviour
     void Update()
     {
         //順位ごとに入力欄の位置調整
-        switch (s)//Result.RankCount)
+        switch (Result.RankCount)
         {
             case 0:
                 RectTransform_get.anchoredPosition = new Vector3(-130, 124, 0);
@@ -90,6 +89,9 @@ public class InputName : MonoBehaviour
                 userName.fontSize = 15;
                 break;
         }
+
+        if (InputManager_U.instanse.GetKeyTrigger(Key.Start))
+            OnClickName();
     }
 
     //プレイヤーネーム送信
@@ -140,6 +142,7 @@ public class InputName : MonoBehaviour
 
     private void DelaySceneManager()
     {
+        Debug.Log("ランキングに移動");
         SceneChangeManager.instance.SceneTransition("DrawRanking");
         //SceneManager.LoadScene("DrawRanking");
     }

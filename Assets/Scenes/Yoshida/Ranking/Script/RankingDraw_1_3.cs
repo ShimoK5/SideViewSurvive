@@ -23,15 +23,6 @@ public class RankingDraw_1_3 : MonoBehaviour
         GetLeaderboard();
     }
 
-    //ボタン処理
-    public void SceneChange()
-    {
-        Button btn = GetComponent<Button>();
-        btn.interactable = false;
-
-        SceneChangeManager.instance.SceneTransition("UI_title");
-    }
-
     // ランキング情報の取得
     public void GetLeaderboard()
     {
