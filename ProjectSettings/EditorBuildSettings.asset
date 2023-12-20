@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/yukino/Game.unity
     guid: ae644594cc230e649b65ae2eb975b613
+  - enabled: 1
+    path: Assets/Scenes/Yoshida/Ranking/NameInput.unity
+    guid: 52f9a7ccac25c624c8ccc023e85fa88b
+  - enabled: 1
+    path: Assets/Scenes/Yoshida/Ranking/DrawRanking.unity
+    guid: a81c9b023a1bfec428c496216883b62b
   m_configObjects: {}
