@@ -1,20 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NextSceneName : MonoBehaviour
 {
+    int MaxScene = 2;
     [SerializeField] int Scene;
-    private string[] SceneName = new string[2];
+    [SerializeField]private string[] SceneName = new string[2];
     private string NextScene = null;    
 
     public static NextSceneName Instance = null;
     void Awake()
     {
-        SceneName[0] = "ShimokawaraScene 1";
-        SceneName[1] = "Game";
 
-        if (Scene > -1 && Scene < 2)
+        if (Scene > -1 && Scene < MaxScene)
         {
             NextScene = SceneName[Scene];
         }
@@ -24,6 +24,11 @@ public class NextSceneName : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    public void Change_SceneNumber(int SceneNumber)
+    {
+        Scene = SceneNumber;
     }
 
    public string Ref_NextSceneName()

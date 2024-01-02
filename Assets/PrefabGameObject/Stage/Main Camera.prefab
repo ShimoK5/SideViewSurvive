@@ -131,7 +131,7 @@ MonoBehaviour:
   ViewHeight: 0
   FLAME_MOVE_RANGE_X: 0.02
   CAMERA_FOLLOW_VEL_Y_MULTI: 0.1
-  MAX_SWING_RANGE: 0.2
+  MAX_SWING_RANGE: 0.1
   MAX_SWING_CNT: 10
   StartMovieFlame: 180
   DeadStopMovieFlame: 25

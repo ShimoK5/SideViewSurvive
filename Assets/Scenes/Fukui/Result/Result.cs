@@ -29,10 +29,8 @@ public class Result : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space") /*|| Input.GetButtonDown("Action1")*/) //スペースキー、Aボタン
-        {
-            GetLeaderboard();
-        }
+        if (InputManager_U.instanse.GetKeyTrigger(Key.Start) || InputManager_U.instanse.GetKeyTrigger(Key.B))
+            GetLeaderboard();     
     }
 
     //ユーザーID生成

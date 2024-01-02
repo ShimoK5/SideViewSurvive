@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bd76d3b4f7747459de926c05da1073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeadVectorMulti: 0.8
-  DeadFlame: 7
+  DeadVectorMulti: 0.5
+  DeadFlame: 9
