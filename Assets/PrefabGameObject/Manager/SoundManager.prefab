@@ -266,7 +266,7 @@ MonoBehaviour:
     - m_key: "\u30D7\u30EC\u30A4\u30E4\u30FC\u30B8\u30E3\u30F3\u30D7"
       m_value: {fileID: 8300000, guid: f6c144f717d223047b8fedb1c7e8b970, type: 3}
     - m_key: "\u8E0F\u3093\u5F35\u308A\u97F3"
-      m_value: {fileID: 0}
+      m_value: {fileID: 8300000, guid: e3359126ac16cf04bbf83d32c7fed16b, type: 3}
     - m_key: "\u30B9\u30BF\u30FC\u30C8\u97F3"
       m_value: {fileID: 8300000, guid: 63c1a694a63e8cf41acd7bc3cf9bc208, type: 3}
     - m_key: "\u30B2\u30FC\u30E0\u30AF\u30EA\u30A2\u97F3"
