@@ -30,4 +30,9 @@ public class MovieEndSceneChange : MonoBehaviour
             SceneChangeManager.instance.SceneTransition(NEXT_SCENE_NAME);
         }        
     }
+
+    public void GetSceneName(string name)
+    {
+        NEXT_SCENE_NAME = name;
+    }
 }

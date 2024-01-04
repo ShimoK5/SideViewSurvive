@@ -43,4 +43,9 @@ public class CircleGauge : MonoBehaviour
         }
         image.fillAmount = param;
     }
+
+    public void SetSceneName(string Name)
+    {
+        nextSceneName = Name;
+    }
 }
