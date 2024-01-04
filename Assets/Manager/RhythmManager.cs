@@ -98,7 +98,7 @@ public class RhythmManager : MonoBehaviour
             if (PlayBGMCnt % 1 == 0)
             {
                 NewSoundManager.instance.StopBGM();
-                NewSoundManager.instance.PlayBGM(BGMName[PlayBGMCnt / 1]);
+                NewSoundManager.instance.PlayBGM(BGMName[PlayBGMCnt / 1],false);
             }
             //カウント加算
             PlayBGMCnt++;
