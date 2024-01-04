@@ -6842,8 +6842,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Scene: 1
   SceneName:
-  - Game 1
-  - Game 1 Shimokawara
+  - Game
+  - Game Hard
 --- !u!4 &1112356146
 Transform:
   m_ObjectHideFlags: 0
