@@ -36,7 +36,7 @@ public class PlayActionSE : MonoBehaviour
         }
 
         NewSoundManager.instance.ChangeVolume(1.0f, AS_TYPE.SE);
-        NewSoundManager.instance.ChangeMute(true, AS_TYPE.BGM);
+        //NewSoundManager.instance.ChangeMute(true, AS_TYPE.BGM);
         switch (Action)
         {
             case RhythmManager.RhythmAction.Umbrella:

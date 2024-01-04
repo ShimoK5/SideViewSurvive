@@ -29211,6 +29211,16 @@ PrefabInstance:
       propertyPath: StartPlayBGM
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5107878508607477188, guid: 61223a66a4ddbf242836d5bbdf08410b,
+        type: 3}
+      propertyPath: selectplayTitle
+      value: "\u30B9\u30BF\u30FC\u30C8\u97F3"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5107878508607477188, guid: 61223a66a4ddbf242836d5bbdf08410b,
+        type: 3}
+      propertyPath: isloop
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5107878508607477189, guid: 61223a66a4ddbf242836d5bbdf08410b,
         type: 3}
       propertyPath: m_LocalPosition.x
