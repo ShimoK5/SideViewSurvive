@@ -222,7 +222,6 @@ public class MoveHand : MonoBehaviour
                     InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
                     InputRhythm.instance.ChangeNoteBox();
                     FistNoteChange = true;
-                    InputRhythm.instance.SceneNameReference();
                 }
                 Check = true;
             }

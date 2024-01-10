@@ -34,16 +34,7 @@ public class NextSceneName : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-    public string Ref_SceneNames(int Number)
-    {
-        return SceneName[Number];
-    }
-
-    public void Change_SceneNumber(int SceneNumber)
-=======
     public void Change_SceneNumber(SceneNumber Number)
->>>>>>> ALL_Proto_Prot
     {
         Scene = (int)Number;
         NextScene = SceneName[Scene];

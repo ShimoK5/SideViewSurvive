@@ -14,11 +14,7 @@ public class InputRhythm : MonoBehaviour
     private string NowSceneName = null;                                                                    //シーンネーム保管庫
     private bool FistGameChange = false;
     bool TitleCheck = false;
-<<<<<<< HEAD
-    [SerializeField]string[] SceneNames = new string[2];
-=======
     [SerializeField]string SceneName = null;
->>>>>>> ALL_Proto_Prot
 
     void Awake()
     {
@@ -43,12 +39,7 @@ public class InputRhythm : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         NowSceneName = SceneManager.GetActiveScene().name;
-<<<<<<< HEAD
-        SceneNames[0] = "Game";
-        SceneNames[1] = "Game 1";
-=======
         SceneName = "Game";
->>>>>>> ALL_Proto_Prot
     }
 
     // Update is called once per frame
@@ -64,11 +55,7 @@ public class InputRhythm : MonoBehaviour
 
         if (UpdateRhythmManager == true)
         {
-<<<<<<< HEAD
-            if (SceneManager.GetActiveScene().name == "SetScene" || SceneManager.GetActiveScene().name == SceneNames[0] || SceneManager.GetActiveScene().name == SceneNames[1])
-=======
             if (SceneManager.GetActiveScene().name == "SetScene" || SceneManager.GetActiveScene().name == SceneName )
->>>>>>> ALL_Proto_Prot
             {
                 ChangeRhythmManager();
             }
@@ -85,11 +72,7 @@ public class InputRhythm : MonoBehaviour
             UpdateRhythmManager = false;
         }
 
-<<<<<<< HEAD
-        if (SceneManager.GetActiveScene().name == SceneNames[0] || SceneManager.GetActiveScene().name == SceneNames[1])
-=======
         if (SceneManager.GetActiveScene().name == SceneName)
->>>>>>> ALL_Proto_Prot
         {
             if (GameStateManager.instance.GameState == GAME_STATE.StartFade)
             {
@@ -173,15 +156,6 @@ public class InputRhythm : MonoBehaviour
             }
         }
     }
-
-<<<<<<< HEAD
-    public void SceneNameReference()
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            SceneNames[i] = NextSceneName.Instance.Ref_SceneNames(i);
-        }
-=======
     public void SetSceneName(string Name)
     {
         SceneName = Name;
@@ -190,7 +164,6 @@ public class InputRhythm : MonoBehaviour
     public string GetSceneName()
     {
         return SceneName;
->>>>>>> ALL_Proto_Prot
     }
 
     void ResetMetronome()
