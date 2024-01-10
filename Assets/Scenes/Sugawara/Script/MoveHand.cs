@@ -217,6 +217,8 @@ public class MoveHand : MonoBehaviour
                 FistNoteChange = InputRhythm.instance.Ref_FirstScene();
                 if (FistNoteChange == false)
                 {
+                    NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
+                    InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
                     InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
                     InputRhythm.instance.ChangeNoteBox();
                     FistNoteChange = true;
@@ -249,7 +251,7 @@ public class MoveHand : MonoBehaviour
             //掴んでいないでMenuボタンを押したとき
             if (DragAndDrop == false && SetInputManager.instance.Ref_Button(SetInputManager.BUTTON.MENU_BUTTON))
             {
-                SceneChangeManager.instance.SceneTransition(NextSceneName.Instance.Ref_NextSceneName());
+                SceneChangeManager.instance.SceneTransition("02_Movie");
             }
 
             //掴んでいないでL1ボタンを押したとき
@@ -257,9 +259,11 @@ public class MoveHand : MonoBehaviour
             {
                 InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
                 InputRhythm.instance.ChangeNoteBox();
+                NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
+                InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
                 //if (SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.L1_BUTTON))
                 //{
-                   
+
                 //}
             }
             //掴んでいないでR1ボタンを押したとき
@@ -267,6 +271,8 @@ public class MoveHand : MonoBehaviour
             {
                 InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(1));
                 InputRhythm.instance.ChangeNoteBox();
+                NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_R_Scene);
+                InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
             }
 
             //触れていてBボタンを押したとき

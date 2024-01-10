@@ -20,6 +20,11 @@ public enum ENEMY_STATE
 
 public class Enemy : MonoBehaviour
 {
+    enum ENEMY_INIT_DIRECTION
+    {
+        LEFT,RIGHT
+    }
+
     EnemyIF m_Enemy;
     bool IsOnes = false;
 
@@ -37,6 +42,9 @@ public class Enemy : MonoBehaviour
 
     [Header("エネミーのタイプ")]
     [SerializeField] ENEMY_STATE InitEnmyType;
+
+    [Header("エネミーの最初の向き")]
+    [SerializeField] ENEMY_INIT_DIRECTION InitDirection;
 
 #if false
     [SerializeField] Sprite FirstSprite;                //１コマ目の画像保管場所
@@ -134,7 +142,19 @@ public class Enemy : MonoBehaviour
             //親子関係
             Effect.transform.parent = transform;
         }
-        
+
+        switch (InitDirection)
+        {
+            case ENEMY_INIT_DIRECTION.LEFT:
+                transform.localEulerAngles = new Vector3(0, -90, 0);
+                break;
+
+            case ENEMY_INIT_DIRECTION.RIGHT:
+                transform.localEulerAngles = new Vector3(0, 90, 0);
+                break;
+        }
+
+
     }
 
     // Update is called once per frame
@@ -191,6 +211,19 @@ public class Enemy : MonoBehaviour
         else if(m_Enemy.EnemyState == ENEMY_STATE.DEAD)
         {
             m_Enemy.CustumFixed();
+        }
+
+        //向きを変える 死んでいない場合
+        if(m_Enemy.EnemyState != ENEMY_STATE.DEAD)
+        {
+            if (m_Enemy.SelfVel.x > 0)
+            {
+                transform.localEulerAngles = new Vector3(0, 90, 0);
+            }
+            else if (m_Enemy.SelfVel.x < 0)
+            {
+                transform.localEulerAngles = new Vector3(0, -90, 0);
+            }
         }
     }
 

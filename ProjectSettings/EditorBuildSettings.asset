@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Shimokawara/GameKUso.unity
     guid: f4da57a6fc17b6347937c297a1093eba
   - enabled: 1
-    path: Assets/Scenes/yukino/Game.unity
+    path: Assets/Scenes/yukino/Game 2.unity
     guid: ae644594cc230e649b65ae2eb975b613
   - enabled: 1
     path: Assets/Scenes/yukino/Game 1.unity
@@ -39,6 +39,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Yoshida/Ranking/NameInput.unity
     guid: 52f9a7ccac25c624c8ccc023e85fa88b
   - enabled: 1
-    path: Assets/Scenes/yukino/Game 1 Shimokawara.unity
+    path: Assets/Scenes/yukino/Game.unity
     guid: 03a00a3314402a84fbeaf67313d6d714
   m_configObjects: {}
