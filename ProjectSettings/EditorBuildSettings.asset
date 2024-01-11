@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/yukino/Game.unity
     guid: 03a00a3314402a84fbeaf67313d6d714
+  - enabled: 1
+    path: Assets/Scenes/yukino/Game Hard.unity
+    guid: f412ee51d57f2e4489657498b6742be3
   m_configObjects: {}

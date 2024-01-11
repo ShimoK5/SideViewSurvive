@@ -156,7 +156,6 @@ public class InputRhythm : MonoBehaviour
             }
         }
     }
-
     public void SetSceneName(string Name)
     {
         SceneName = Name;
