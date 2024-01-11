@@ -47,7 +47,7 @@ public class EnemyKillCountManager : MonoBehaviour
         {
             InitOnce = false;
             //初期化
-            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game")
+            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game" || SceneManager.GetActiveScene().name == "Game Hard")
             {
                 //初期化
                 DestroyEnemy = 0;
