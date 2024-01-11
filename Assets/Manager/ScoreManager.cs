@@ -48,7 +48,7 @@ public class ScoreManager : MonoBehaviour
         {
             InitOnce = false;
             //初期化
-            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game")
+            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game" || SceneManager.GetActiveScene().name == "Game Hard")
             {
                 //初期化
                 InitGame();
@@ -56,7 +56,7 @@ public class ScoreManager : MonoBehaviour
         }
 
 
-        if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game")
+        if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game" || SceneManager.GetActiveScene().name == "Game Hard")
         {
             //if (GameStateManager.instance.GameState == GAME_STATE.Game)
             {
