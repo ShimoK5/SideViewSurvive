@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4814067404277532387}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.57, z: -0.06}
+  m_LocalPosition: {x: -0, y: 0.57, z: -0.66}
   m_LocalScale: {x: 0.67638, y: 0.67638, z: 0.13528}
   m_Children: []
   m_Father: {fileID: 8703219925921046998}
@@ -123,7 +123,7 @@ Animator:
   m_GameObject: {fileID: 4814067404277532387}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7f86af1e05303e743a4ced27eb216e22, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0803a6777f2d6564eaa8fb79a17dc04c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -622573461951879792, guid: 75e182a26fd283d40a704bf45ba0312b,
+  m_Sprite: {fileID: -3432554191921720939, guid: 5bc9bb0c332b94643a25b721d0793bd7,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -297,4 +297,5 @@ MonoBehaviour:
   HighScore: 0
   OneWeyFlame: 60
   InitEnmyType: 4
+  InitDirection: 0
   inScreen: 0
