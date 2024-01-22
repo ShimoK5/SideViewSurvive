@@ -258,13 +258,13 @@ MonoBehaviour:
     - m_key: "\u4EEESE"
       m_value: {fileID: 8300000, guid: 42d383662ee4daf469cb262659349dfa, type: 3}
     - m_key: "\u6C7A\u5B9A\u97F3"
-      m_value: {fileID: 8300000, guid: 0628290b4a6220944adf0520c9fb7f24, type: 3}
+      m_value: {fileID: 8300000, guid: 3878497d162e7b541a3700621c9ca5be, type: 3}
     - m_key: "\u9078\u629E\u97F3"
-      m_value: {fileID: 8300000, guid: 1f56fcb6654519e40879a31d17910788, type: 3}
+      m_value: {fileID: 8300000, guid: 27ee42fa43489884bab5b7ba0944b641, type: 3}
     - m_key: "\u30E9\u30A4\u30D5\u6E1B\u5C11\u97F3"
       m_value: {fileID: 8300000, guid: fe7a8b4f452391f48b0ec601d9198239, type: 3}
     - m_key: "\u30D7\u30EC\u30A4\u30E4\u30FC\u30B8\u30E3\u30F3\u30D7"
-      m_value: {fileID: 8300000, guid: f6c144f717d223047b8fedb1c7e8b970, type: 3}
+      m_value: {fileID: 8300000, guid: 1dca6d143df779c44b1c3e5fe58c6b13, type: 3}
     - m_key: "\u8E0F\u3093\u5F35\u308A\u97F3"
       m_value: {fileID: 8300000, guid: e3359126ac16cf04bbf83d32c7fed16b, type: 3}
     - m_key: "\u30B9\u30BF\u30FC\u30C8\u97F3"
@@ -272,15 +272,15 @@ MonoBehaviour:
     - m_key: "\u30B2\u30FC\u30E0\u30AF\u30EA\u30A2\u97F3"
       m_value: {fileID: 8300000, guid: 231fa3f0ae378ac4b9b55d3192a25b5c, type: 3}
     - m_key: "\u30B9\u30BF\u30FC\u30C8\u30DB\u30A4\u30C3\u30B9\u30EB"
-      m_value: {fileID: 8300000, guid: 75648ad051c4d6a478331b44ccd9b2e6, type: 3}
+      m_value: {fileID: 8300000, guid: 7f196a1d103b8c84aa329fa1a0183cfb, type: 3}
     - m_key: "\u30D7\u30EC\u30A4\u30E4\u30FC\u79FB\u52D5\u97F3"
-      m_value: {fileID: 8300000, guid: 6e673e29224c9b246af516bb444446e1, type: 3}
+      m_value: {fileID: 8300000, guid: e5129a067a5a93f47b122eddd36837c1, type: 3}
     - m_key: "\u30A8\u30CD\u30DF\u30FC\u6483\u7834"
-      m_value: {fileID: 8300000, guid: 3541e3f3e2c237c4187b07ac4c4a2599, type: 3}
+      m_value: {fileID: 8300000, guid: 978e075f464ccf84babde747e2d47298, type: 3}
     - m_key: Umbrella
-      m_value: {fileID: 8300000, guid: 47374dfffd12c1049a62b086e01be6e7, type: 3}
+      m_value: {fileID: 8300000, guid: 5d74cbf2d8fa1654797dd69fa2fd431b, type: 3}
     - m_key: Eraser
-      m_value: {fileID: 8300000, guid: 8e9fb665f4fcb2a4f8550e70b6c2c1d2, type: 3}
+      m_value: {fileID: 8300000, guid: dd73088c15f555d4a96242729c79e021, type: 3}
     - m_key: Sacrifice
       m_value: {fileID: 8300000, guid: 9b2c68f711879c64da0a363f9ca122f2, type: 3}
     - m_key: Bag
@@ -291,5 +291,9 @@ MonoBehaviour:
       m_value: {fileID: 8300000, guid: 5011591ffb931ff4989a618a8771bbbf, type: 3}
     - m_key: None
       m_value: {fileID: 0}
+    - m_key: "\u30DD\u30FC\u30BA\u97F3"
+      m_value: {fileID: 8300000, guid: 5ed594b4c96c5684fb0c58603e2f57a1, type: 3}
+    - m_key: "\u9078\u629E\u80A2\u30AD\u30E3\u30F3\u30BB\u30EB"
+      m_value: {fileID: 8300000, guid: edc9900b288c7fe498eb59b6d6081526, type: 3}
   AS_BGM: {fileID: 2847566288453565380}
   AS_SE: {fileID: 2847566288453565383}
