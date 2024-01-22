@@ -330,7 +330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7092031975569260468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 240, y: 18, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7092031976874566774}
@@ -610,7 +610,7 @@ PrefabInstance:
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
@@ -702,7 +702,7 @@ PrefabInstance:
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
@@ -794,7 +794,7 @@ PrefabInstance:
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
@@ -886,7 +886,7 @@ PrefabInstance:
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
@@ -978,7 +978,7 @@ PrefabInstance:
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8932838817256153228, guid: 9472f92d291b800478f2f962319d57ca,
         type: 3}
