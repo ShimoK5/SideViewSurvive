@@ -37,7 +37,7 @@ public class EnemyFallLeft : EnemyIF
                     if(Count > 0)
                         SelfVel.y = MAX_RUN_SPEED * 2;
                     else
-                        Fall();
+                        SelfVel.y -= GLAVITY * 2;
                     break;
                 }
             case FallState.Walk:
