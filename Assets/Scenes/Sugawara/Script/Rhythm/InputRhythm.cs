@@ -15,6 +15,7 @@ public class InputRhythm : MonoBehaviour
 
     void Awake()
     {
+        //シングルトン化
         if (instance == null)
         {
             instance = this;
@@ -40,20 +41,23 @@ public class InputRhythm : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //OneActionをステートから取得
         OneAction = StateInputRhythm.instance.GetOneAction();
 
+        //各シーンに変更した際の一回行動分
         if(OneAction == true)
         {
+            //ここでOneActionを変更しています。
             StateInputRhythm.STATE State = StateInputRhythm.instance.GetState();
             switch (State)
             {
                 case StateInputRhythm.STATE.FirstSet:
-                    ChangeRhythmManager();
+                    SetRhythmManager();
                     ChangeNoteBox();
                     break;
 
                 case StateInputRhythm.STATE.BreakSet:
-                    ChangeRhythmManager();
+                    SetRhythmManager();
                     ChangeNoteBox();
                     break;
 
@@ -75,7 +79,7 @@ public class InputRhythm : MonoBehaviour
                     break;
 
                 case StateInputRhythm.STATE.NowGameSet:
-                    ChangeRhythmManager();
+                    SetRhythmManager();
                     FistGameChange = true;
                     
                     break;
@@ -104,7 +108,7 @@ public class InputRhythm : MonoBehaviour
 
   
 
-    void ChangeRhythmManager()
+    void SetRhythmManager()
     {
         for (int Number = 0; Number < 8; Number++)
         {
@@ -169,9 +173,14 @@ public class InputRhythm : MonoBehaviour
         }
     }
 
-    public void ChangeMetronome(int Number,RhythmManager.RhythmAction ArrayAction)
+    public void SetMetronome(int Number,RhythmManager.RhythmAction ArrayAction)
     {
         Action[Number] = ArrayAction;
+    }
+
+    public RhythmManager.RhythmAction GetMetronome(int Number)
+    {
+        return Action[Number];
     }
 
     public void ChangeNoteBox()

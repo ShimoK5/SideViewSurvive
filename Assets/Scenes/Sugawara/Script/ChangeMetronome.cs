@@ -22,61 +22,61 @@ public class ChangeMetronome : MonoBehaviour
             case ("Umbrella"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Umbrella);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Umbrella);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.Umbrella);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.Umbrella);
                 break;
 
             case ("Recorder"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Recorder);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Recorder);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.Recorder);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.Recorder);
                 break;
 
             case ("Eraser"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Eraser);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Eraser);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.Eraser);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.Eraser);
                 break;
 
             case ("Sacrifice"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Sacrifice);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Sacrifice);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.Sacrifice);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.Sacrifice);
                 break;
 
             case ("AirCannon"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.AirCannon);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.AirCannon);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.AirCannon);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.AirCannon);
                 break;
 
             case ("Bag"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Bag);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Bag);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.Bag);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.Bag);
                 break;
 
             case ("Ruler"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Ruler);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.None);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.None);
                 break;
 
             case ("Whistle"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.Whistle);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.None);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.None);
                 break;
 
             case ("None"):
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.None);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.None);
                 break;
 
             default:
                 this.gameObject.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
                 NowActionSprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
-                InputRhythm.instance.ChangeMetronome(MetronomeNumber, RhythmManager.RhythmAction.None);
+                InputRhythm.instance.SetMetronome(MetronomeNumber, RhythmManager.RhythmAction.None);
                 break;
         }
     }

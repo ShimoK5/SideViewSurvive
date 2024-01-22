@@ -248,6 +248,7 @@ public class MoveHand : MonoBehaviour
                     InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
                     InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(0));
                     InputRhythm.instance.ChangeNoteBox();
+                    ActionLevel.instance.SetLevel();
                     FistNoteChange = true;
                 }
                 Check = true;
@@ -286,7 +287,7 @@ public class MoveHand : MonoBehaviour
                 InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(0));
                 InputRhythm.instance.ChangeNoteBox();
                 NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
-                InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
+                ActionLevel.instance.SetLevel();
                 //if (SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.L1_BUTTON))
                 //{
 
@@ -298,7 +299,7 @@ public class MoveHand : MonoBehaviour
                 InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(1));
                 InputRhythm.instance.ChangeNoteBox();
                 NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_R_Scene);
-                InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
+                ActionLevel.instance.SetLevel();
             }
 
             //触れていてBボタンを押したとき
@@ -401,6 +402,7 @@ public class MoveHand : MonoBehaviour
             if (DragAndDrop == true)
             {
                 Touch_Object.GetComponent<ChangeMetronome>().StorageIcon(DragAndDrop_Object.name);
+                ActionLevel.instance.RemoveLevel();
             }
             else
             {
@@ -421,6 +423,7 @@ public class MoveHand : MonoBehaviour
         if (Touch_Object.tag == "Note")
         {
             Touch_Object.GetComponent<ChangeMetronome>().StorageIcon("None");
+            ActionLevel.instance.AddLevel();
         }
     }
 
