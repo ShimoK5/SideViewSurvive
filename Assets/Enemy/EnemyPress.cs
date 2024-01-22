@@ -29,6 +29,7 @@ public class EnemyPress : EnemyIF
         StartPos = tf.transform.position;
         State = PressState.search;
         PreviousState = OldState = PressState.none;
+       
     }
 
     public override void CustumUpdate()
@@ -68,7 +69,7 @@ public class EnemyPress : EnemyIF
                         SelfVel.y = 0.0f;
                         SelfVel.x = 8 * (1.0f / 65) * sign;
 
-                        if (playerPos.x - tf.position.x < SelfVel.x)
+                        if (Mathf.Abs(playerPos.x - tf.position.x) < SelfVel.x)
                             SelfVel.x = playerPos.x - tf.position.x;
                     }
                     else 
