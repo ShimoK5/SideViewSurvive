@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 public class Result : MonoBehaviour
 {
     private const string TitleId = "3208A";
-    public int ResultScore;
+    private int ResultScore;
     public static int RankCount; 
 
     // Start is called before the first frame update

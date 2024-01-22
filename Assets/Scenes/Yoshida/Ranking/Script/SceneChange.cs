@@ -19,7 +19,7 @@ public class SceneChange : MonoBehaviour
     {
         Button btn = GetComponent<Button>();
         btn.interactable = false;
-        Debug.Log("タイトルに移動");
-        SceneChangeManager.instance.SceneTransition("UI_title");
+       
+        SceneChangeManager.instance.SceneTransition("UI_title", 0.2f, SceneChangeManager.TransitionType.Black);
     }
 }

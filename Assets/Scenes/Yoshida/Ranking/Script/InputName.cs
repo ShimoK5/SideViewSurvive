@@ -121,7 +121,6 @@ public class InputName : MonoBehaviour
     //プレイヤーネーム表示設定
     public void DisplayName(string displayName)
     {
-
         // プレイヤー名の設定
         PlayFabClientAPI.UpdateUserTitleDisplayName(
             new UpdateUserTitleDisplayNameRequest 
@@ -142,8 +141,6 @@ public class InputName : MonoBehaviour
 
     private void DelaySceneManager()
     {
-        Debug.Log("ランキングに移動");
-        SceneChangeManager.instance.SceneTransition("DrawRanking");
-        //SceneManager.LoadScene("DrawRanking");
+        SceneChangeManager.instance.SceneTransition("DrawRanking",0.2f, SceneChangeManager.TransitionType.Black);
     }
 }

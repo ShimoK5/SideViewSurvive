@@ -70,7 +70,7 @@ public class PauseManager : MonoBehaviour
                 if (InputManager_U.instanse.GetKeyTrigger(Key.Start))
                 {
                     //SE
-                    NewSoundManager.instance.PlaySE("決定音");
+                    NewSoundManager.instance.PlaySE("ポーズ音");
                     //ゲームステート変更
                     GameStateManager.instance.GameState = GAME_STATE.Pause;
                     //タイムスケール変更
@@ -87,7 +87,7 @@ public class PauseManager : MonoBehaviour
                     InputManager_U.instanse.GetKeyTrigger(Key.A))
                 {
                     //SE
-                    NewSoundManager.instance.PlaySE("決定音");
+                    NewSoundManager.instance.PlaySE("選択肢キャンセル");
 
                     //GameStateManager.instance.GameState = GAME_STATE.Game;
                     //ポーズステート変更

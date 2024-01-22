@@ -31,7 +31,7 @@ public class EnemyFallRight : EnemyIF
                     if (Count > 0)
                         SelfVel.y = MAX_RUN_SPEED * 2;
                     else
-                        Fall();
+                        SelfVel.y -= GLAVITY * 2;
                     break;
                 }
             case FallState.Walk:
@@ -45,8 +45,10 @@ public class EnemyFallRight : EnemyIF
 
         if (isGround)
         {
-            state = FallState.Walk;
-            SelfVel.x = -MAX_RUN_SPEED;
+            state = FallState.Walk; 
+            Vector3 playerPos = Player.instance.transform.position;
+            float sign = Mathf.Sign(playerPos.x - tf.position.x);
+            SelfVel.x = MAX_RUN_SPEED * sign;
         }
 
         if (Count != 0)
