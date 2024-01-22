@@ -76,8 +76,16 @@ public class MoveHand : MonoBehaviour
                 ChangeFlavor(touch_Name);
                 ChangeHeader(touch_Name);
                 ChangeMovie(touch_Name);
-                collision.GetComponent<Change_Name_Item>().Collision();
-                TouchJudge = true;
+                if (ActionCount.instance.GetCount(touch_Name) >= 3)
+                {
+                    collision.GetComponent<Change_Name_Item>().MaxCount();
+                }
+                else
+                {
+                    collision.GetComponent<Change_Name_Item>().Collision();
+                    TouchJudge = true;
+                }
+               
             }
         }
         else if(collision.gameObject.tag == "PlatForm")
@@ -88,6 +96,20 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Icon" && DragAndDrop == false)
+        {
+            if (ActionCount.instance.GetCount(touch_Name) >= 3)
+            {
+                collision.GetComponent<Change_Name_Item>().MaxCount();
+            }
+            else
+            {
+                collision.GetComponent<Change_Name_Item>().Collision();
+                TouchJudge = true;
+            }
+        }
+
+
         if (CollisionCheck == true)
         {
             if (collision.gameObject.tag == "Note")
@@ -113,7 +135,12 @@ public class MoveHand : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Note")
+        if (collision.gameObject.tag == "Icon")
+        {
+            collision.GetComponent<Change_Name_Item>().Exit();
+        }
+
+        if (collision.gameObject.tag == "Note")
         {           
             if (Duplication_Object == null)
             {
@@ -219,7 +246,7 @@ public class MoveHand : MonoBehaviour
                 {
                     NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
                     InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
-                    InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
+                    InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(0));
                     InputRhythm.instance.ChangeNoteBox();
                     FistNoteChange = true;
                 }
@@ -256,7 +283,7 @@ public class MoveHand : MonoBehaviour
             //掴んでいないでL1ボタンを押したとき
             if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.L1_BUTTON))
             {
-                InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(0));
+                InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(0));
                 InputRhythm.instance.ChangeNoteBox();
                 NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
                 InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
@@ -268,7 +295,7 @@ public class MoveHand : MonoBehaviour
             //掴んでいないでR1ボタンを押したとき
             else if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.R1_BUTTON))
             {
-                InputRhythm.instance.ArrayAction(ActionFolder.instance.Ref_Action(1));
+                InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(1));
                 InputRhythm.instance.ChangeNoteBox();
                 NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_R_Scene);
                 InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());

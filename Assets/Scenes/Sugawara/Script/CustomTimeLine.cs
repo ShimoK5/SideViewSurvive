@@ -8,8 +8,8 @@ public class CustomTimeLine : MonoBehaviour
     public static CustomTimeLine instance = null;
     private PlayableDirector mDirector;
     private bool Stop = false;
-    [SerializeField]private Animator mAnimator;
-    [SerializeField]private GameObject mGameObject;
+    [SerializeField]private Animator[] mAnimators = new Animator[5];
+    [SerializeField]private GameObject[] mGameObjects = new GameObject[2];
     int NowAnimation = 0;
     private int StopAnimation = 360;
 
@@ -35,8 +35,16 @@ public class CustomTimeLine : MonoBehaviour
         {
             NowAnimation = StopAnimation;
             mDirector.Stop();
-            mAnimator.enabled = false;
-            mGameObject.SetActive(false);
+            for(int i = 0; i < 5;i++)
+            {
+                mAnimators[i].enabled = false;
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                mGameObjects[i].SetActive(false);
+            }
+           
         }
     }
 
