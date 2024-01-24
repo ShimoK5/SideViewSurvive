@@ -109,10 +109,30 @@ public class RhythmManager : MonoBehaviour
             }
 
         }
-
+        
 
         //フレームカウント加算
         FCnt++;
+
+        //ここで音楽の帳尻を合わせる
+        if(NewSoundManager.instance)
+        {
+            if (NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_1" ||
+            NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_2" ||
+            NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_3" ||
+            NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_4")
+            {
+                Debug.Log(NewSoundManager.instance.GetBGMTime());
+                Debug.Log(NewSoundManager.instance.GetBGMLength());
+                if (NewSoundManager.instance.GetBGMTime() >= NewSoundManager.instance.GetBGMLength() - (1.0f / 60))
+                {
+                    FCnt = BeatTempo * BeatNum - 1;
+                    Debug.Log("力技調整");
+                }
+
+            }
+        }
+        
 
         //周期の直前にステートリセット
         if (FCnt % BeatTempo == BeatTempo - 1)

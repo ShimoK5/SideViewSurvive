@@ -125,4 +125,17 @@ public class NewSoundManager : MonoBehaviour
             }
         }
     }
+
+    public string GetBGMName()
+    {
+        return AS_BGM.clip.name;
+    }
+    public float GetBGMTime()
+    {
+        return AS_BGM.time;
+    }
+    public float GetBGMLength()
+    {
+        return AS_BGM.clip.length;
+    }
 }
