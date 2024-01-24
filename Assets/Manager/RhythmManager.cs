@@ -107,7 +107,7 @@ public class RhythmManager : MonoBehaviour
                     float OneSicleSecond = (float)(BeatTempo * BeatNum) / 60; //アビリティ一周にかかる時間
 
                     //BGMの速さをゲームに合わせる
-                    float pitch = OneSicleSecond / NewSoundManager.instance.GetBGMLength();
+                    float pitch =  NewSoundManager.instance.GetBGMLength()/ OneSicleSecond;
                     NewSoundManager.instance.SetBGMPitch(pitch);
                 }
             }
@@ -126,7 +126,7 @@ public class RhythmManager : MonoBehaviour
         FCnt++;
 
         //ここで音楽の帳尻を合わせる
-#if true
+#if false
         {
             if (NewSoundManager.instance)
             {
