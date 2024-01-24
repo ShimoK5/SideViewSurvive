@@ -57,6 +57,8 @@ public class NewSoundManager : MonoBehaviour
         AS_BGM.loop = isloop;
 
         AS_BGM.Play();
+        //ƒsƒbƒ`‚ğ1‚É‰Šú‰»
+        AS_BGM.pitch = 1;
     }
 
     public void StopBGM(/*string key*/) 
@@ -138,4 +140,15 @@ public class NewSoundManager : MonoBehaviour
     {
         return AS_BGM.clip.length;
     }
+
+    public void SetBGMPitch(float pitch)
+    {
+        AS_BGM.pitch = pitch;
+    }
+
+    public float GetPitch()
+    {
+        return AS_BGM.pitch;
+    }
+
 }

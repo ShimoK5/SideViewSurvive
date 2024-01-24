@@ -94,11 +94,22 @@ public class RhythmManager : MonoBehaviour
         //週の初めに
         if(FCnt == 0)
         {
-            //2週に一回 
+            //1週に一回 
             if (PlayBGMCnt % 1 == 0)
             {
+                
+
                 NewSoundManager.instance.StopBGM();
                 NewSoundManager.instance.PlayBGM(BGMName[PlayBGMCnt / 1],false);
+
+                //ピッチ調整
+                {
+                    float OnSicleSecond = (float)(BeatTempo * BeatNum) / 60; //アビリティ一周にかかる時間
+
+                    //BGMの速さをゲームに合わせる
+                    float pitch = OnSicleSecond / NewSoundManager.instance.GetBGMLength();
+                    NewSoundManager.instance.SetBGMPitch(pitch);
+                }
             }
             //カウント加算
             PlayBGMCnt++;
@@ -115,23 +126,28 @@ public class RhythmManager : MonoBehaviour
         FCnt++;
 
         //ここで音楽の帳尻を合わせる
-        if(NewSoundManager.instance)
+#if false
         {
-            if (NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_1" ||
-            NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_2" ||
-            NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_3" ||
-            NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_4")
+            if (NewSoundManager.instance)
             {
-                Debug.Log(NewSoundManager.instance.GetBGMTime());
-                Debug.Log(NewSoundManager.instance.GetBGMLength());
-                if (NewSoundManager.instance.GetBGMTime() >= NewSoundManager.instance.GetBGMLength() - (1.0f / 60))
+                if (NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_1" ||
+                NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_2" ||
+                NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_3" ||
+                NewSoundManager.instance.GetBGMName() == "未来創造展sound_23_4")
                 {
-                    FCnt = BeatTempo * BeatNum - 1;
-                    Debug.Log("力技調整");
-                }
+                    //Debug.Log(NewSoundManager.instance.GetBGMTime());
+                    //Debug.Log(NewSoundManager.instance.GetBGMLength());
+                    if (NewSoundManager.instance.GetBGMTime() >= NewSoundManager.instance.GetBGMLength() - (1.0f / 60))
+                    {
+                        FCnt = BeatTempo * BeatNum - 1;
+                        Debug.Log("力技調整");
+                    }
 
+                }
             }
         }
+#endif
+        
         
 
         //周期の直前にステートリセット
