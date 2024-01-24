@@ -104,10 +104,10 @@ public class RhythmManager : MonoBehaviour
 
                 //ピッチ調整
                 {
-                    float OnSicleSecond = (float)(BeatTempo * BeatNum) / 60; //アビリティ一周にかかる時間
+                    float OneSicleSecond = (float)(BeatTempo * BeatNum) / 60; //アビリティ一周にかかる時間
 
                     //BGMの速さをゲームに合わせる
-                    float pitch = OnSicleSecond / NewSoundManager.instance.GetBGMLength();
+                    float pitch = OneSicleSecond / NewSoundManager.instance.GetBGMLength();
                     NewSoundManager.instance.SetBGMPitch(pitch);
                 }
             }
@@ -126,7 +126,7 @@ public class RhythmManager : MonoBehaviour
         FCnt++;
 
         //ここで音楽の帳尻を合わせる
-#if false
+#if true
         {
             if (NewSoundManager.instance)
             {
@@ -137,7 +137,8 @@ public class RhythmManager : MonoBehaviour
                 {
                     //Debug.Log(NewSoundManager.instance.GetBGMTime());
                     //Debug.Log(NewSoundManager.instance.GetBGMLength());
-                    if (NewSoundManager.instance.GetBGMTime() >= NewSoundManager.instance.GetBGMLength() - (1.0f / 60))
+                    if (NewSoundManager.instance.GetBGMTime() * NewSoundManager.instance.GetPitch()
+                        >= NewSoundManager.instance.GetBGMLength() * NewSoundManager.instance.GetPitch() - (1.0f / 60))
                     {
                         FCnt = BeatTempo * BeatNum - 1;
                         Debug.Log("力技調整");
