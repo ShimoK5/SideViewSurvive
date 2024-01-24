@@ -57,6 +57,8 @@ public class NewSoundManager : MonoBehaviour
         AS_BGM.loop = isloop;
 
         AS_BGM.Play();
+        //ÉsÉbÉ`Ç1Ç…èâä˙âª
+        AS_BGM.pitch = 1;
     }
 
     public void StopBGM(/*string key*/) 
@@ -125,4 +127,28 @@ public class NewSoundManager : MonoBehaviour
             }
         }
     }
+
+    public string GetBGMName()
+    {
+        return AS_BGM.clip.name;
+    }
+    public float GetBGMTime()
+    {
+        return AS_BGM.time;
+    }
+    public float GetBGMLength()
+    {
+        return AS_BGM.clip.length;
+    }
+
+    public void SetBGMPitch(float pitch)
+    {
+        AS_BGM.pitch = pitch;
+    }
+
+    public float GetPitch()
+    {
+        return AS_BGM.pitch;
+    }
+
 }
