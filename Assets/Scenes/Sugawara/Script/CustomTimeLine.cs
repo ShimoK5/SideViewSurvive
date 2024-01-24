@@ -11,7 +11,7 @@ public class CustomTimeLine : MonoBehaviour
     [SerializeField]private Animator[] mAnimators = new Animator[5];
     [SerializeField]private GameObject[] mGameObjects = new GameObject[2];
     int NowAnimation = 0;
-    private int StopAnimation = 360;
+    private int StopAnimation = 353;
 
     // Start is called before the first frame update
     void Awake()
@@ -26,11 +26,7 @@ public class CustomTimeLine : MonoBehaviour
     void FixedUpdate()
     {
         NowAnimation += 1;
-
-        if(NowAnimation >= StopAnimation)
-        {
-            Stop = true;
-        }
+        
         if (Stop == true)
         {
             NowAnimation = StopAnimation;
@@ -44,12 +40,18 @@ public class CustomTimeLine : MonoBehaviour
             {
                 mGameObjects[i].SetActive(false);
             }
-           
+        }
+
+        if (NowAnimation >= StopAnimation)
+        {
+            Stop = true;
         }
     }
 
-    //public void StopTimeLine()
-    //{
-    //    Stop = true;
-    //}
+    public bool GetStopTimeLine()
+    {
+        return Stop;
+    }
+
+    
 }

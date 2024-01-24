@@ -402,7 +402,6 @@ public class MoveHand : MonoBehaviour
             if (DragAndDrop == true)
             {
                 Touch_Object.GetComponent<ChangeMetronome>().StorageIcon(DragAndDrop_Object.name);
-                ActionLevel.instance.RemoveLevel();
             }
             else
             {
@@ -423,7 +422,6 @@ public class MoveHand : MonoBehaviour
         if (Touch_Object.tag == "Note")
         {
             Touch_Object.GetComponent<ChangeMetronome>().StorageIcon("None");
-            ActionLevel.instance.AddLevel();
         }
     }
 

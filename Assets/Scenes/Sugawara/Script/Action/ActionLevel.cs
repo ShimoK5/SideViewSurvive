@@ -7,7 +7,7 @@ public class ActionLevel : MonoBehaviour
     public static ActionLevel instance;
     int MaxAction = 8;
     int MaxLevel = 9;
-    int MinLevel = 1;
+    int MinLevel = 0;
     [SerializeField]int Count = 0;
     [SerializeField] GameObject[] LevelObject = new GameObject[9];
     [SerializeField]bool SetLevelActive = false;
@@ -37,6 +37,7 @@ public class ActionLevel : MonoBehaviour
             ResetLevel();
             for (int LevelCount = 0; LevelCount < Count; LevelCount++)
             {
+                Debug.Log(MaxLevel - LevelCount - 1);
                 LevelObject[(MaxLevel - LevelCount - 1)].SetActive(false);
             }
             SetLevelActive = false;
@@ -45,7 +46,7 @@ public class ActionLevel : MonoBehaviour
 
     void ResetLevel()
     {
-        for (int LevelCount = 0; LevelCount < MaxAction ; LevelCount++)
+        for (int LevelCount = 0; LevelCount < MaxLevel ; LevelCount++)
         {
             LevelObject[LevelCount].SetActive(true);
         }
@@ -72,7 +73,7 @@ public class ActionLevel : MonoBehaviour
     public void RemoveLevel()
     {
         Count++;
-        if(Count >= MaxLevel)
+        if(Count > MaxLevel)
         {
             Count = MaxLevel ;
         }

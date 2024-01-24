@@ -175,6 +175,24 @@ public class InputRhythm : MonoBehaviour
 
     public void SetMetronome(int Number,RhythmManager.RhythmAction ArrayAction)
     {
+        //他のアクションが存在し、且つアクションが無い状態に変更するとき
+        if (Action[Number] != RhythmManager.RhythmAction.None)
+        {
+            ActionCount.instance.RemoveCount(Action[Number]);
+            if (ArrayAction == RhythmManager.RhythmAction.None)
+            {
+                ActionLevel.instance.AddLevel();                
+            }
+            else if(ArrayAction != RhythmManager.RhythmAction.None)
+            {
+                ActionCount.instance.AddCount(ArrayAction);
+            }
+        }
+        else if(Action[Number] == RhythmManager.RhythmAction.None && ArrayAction != RhythmManager.RhythmAction.None)
+        {
+            ActionLevel.instance.RemoveLevel();
+            ActionCount.instance.AddCount(ArrayAction);
+        }
         Action[Number] = ArrayAction;
     }
 

@@ -137,7 +137,7 @@ public class ChangeMetronome : MonoBehaviour
         {
             Debug.Log("touch" + MetronomeNumber);
             NowActionSprite = this.GetComponent<Image>().sprite;
-            this.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
+            //this.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
             changesprite = true;
         }
     }

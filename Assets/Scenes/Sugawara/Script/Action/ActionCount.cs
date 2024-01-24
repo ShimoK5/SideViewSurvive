@@ -43,6 +43,18 @@ public class ActionCount : MonoBehaviour
         }
     }
 
+    public void RemoveCount(RhythmManager.RhythmAction ActionNumber)
+    {
+        if (Count[(int)ActionNumber] <= MinCount)
+        {
+            return;
+        }
+        else
+        {
+            Count[(int)ActionNumber] -= 1;
+        }
+    }
+
     public void SetCount(RhythmManager.RhythmAction ActionNumber, int CountNumber)
     {
         if (CountNumber >= MaxCount)

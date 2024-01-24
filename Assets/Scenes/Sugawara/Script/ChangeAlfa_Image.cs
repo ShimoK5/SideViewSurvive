@@ -11,7 +11,7 @@ public class ChangeAlfa_Image : MonoBehaviour
     bool Change = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         TextColor.a = 0.0f;
         this.gameObject.GetComponent<Image>().color = TextColor;
@@ -19,7 +19,7 @@ public class ChangeAlfa_Image : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Change == false)
         {

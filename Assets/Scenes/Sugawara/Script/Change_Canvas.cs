@@ -7,6 +7,8 @@ public class Change_Canvas : MonoBehaviour
     bool ChangeFlag = false;
     GameObject Canvas;
     GameObject MapCanvas;
+    bool ButtonFlag = false;
+   
     // Start is called before the first frame update
     void Awake()
     {
@@ -14,24 +16,36 @@ public class Change_Canvas : MonoBehaviour
         Canvas = GameObject.Find("Canvas");
         MapCanvas = GameObject.Find("MapCanvas");
         MapCanvas.SetActive(false);
+        ButtonFlag = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.X_BUTTON))
+        if (ButtonFlag == false &&CustomTimeLine.instance.GetStopTimeLine() == true)
         {
-            if(ChangeFlag == false)
+            ButtonFlag = true;
+        }
+
+        if (ButtonFlag == true)
+        {
+            if (SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.X_BUTTON))
             {
-                Canvas.SetActive(false);
-                MapCanvas.SetActive(true);
-                ChangeFlag = true;
-            }
-            else
-            {
-                Canvas.SetActive(true);
-                MapCanvas.SetActive(false);
-                ChangeFlag = false;
+
+
+                if (ChangeFlag == false)
+                {
+                    Canvas.SetActive(false);
+                    MapCanvas.SetActive(true);
+                    MapMetronome.instance.SetUI();
+                    ChangeFlag = true;
+                }
+                else
+                {
+                    Canvas.SetActive(true);
+                    MapCanvas.SetActive(false);
+                    ChangeFlag = false;
+                }
             }
         }
     }
