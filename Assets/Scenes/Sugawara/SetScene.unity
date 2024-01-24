@@ -363,7 +363,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: -175.447}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25661097
@@ -856,7 +856,7 @@ GameObject:
   - component: {fileID: 87306952}
   - component: {fileID: 87306951}
   m_Layer: 5
-  m_Name: Level8
+  m_Name: MapLevel8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2986,7 +2986,7 @@ GameObject:
   - component: {fileID: 331538405}
   - component: {fileID: 331538404}
   m_Layer: 5
-  m_Name: Level2
+  m_Name: MapLevel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3134,7 +3134,7 @@ GameObject:
   - component: {fileID: 359577685}
   - component: {fileID: 359577684}
   m_Layer: 5
-  m_Name: Level7
+  m_Name: MapLevel7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3505,7 +3505,7 @@ GameObject:
   - component: {fileID: 455219362}
   - component: {fileID: 455219361}
   m_Layer: 5
-  m_Name: Level6
+  m_Name: MapLevel6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8780,7 +8780,7 @@ GameObject:
   - component: {fileID: 1120176362}
   - component: {fileID: 1120176361}
   m_Layer: 5
-  m_Name: Level1
+  m_Name: MapLevel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10865,6 +10865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387115559}
+  - component: {fileID: 1387115560}
   m_Layer: 5
   m_Name: Map_Metronome
   m_TagString: Untagged
@@ -10896,6 +10897,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0002593994, y: -0.0010070801}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1387115560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387115558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69990fff7350454caab3ee8409ca982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MetronomeObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  LevelObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1399899921
 GameObject:
   m_ObjectHideFlags: 0
@@ -12955,7 +12987,7 @@ GameObject:
   - component: {fileID: 1702945411}
   - component: {fileID: 1702945410}
   m_Layer: 5
-  m_Name: Level5
+  m_Name: MapLevel5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13432,7 +13464,7 @@ GameObject:
   - component: {fileID: 1753716065}
   - component: {fileID: 1753716066}
   m_Layer: 5
-  m_Name: Level
+  m_Name: MapLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14379,7 +14411,7 @@ GameObject:
   - component: {fileID: 1879081875}
   - component: {fileID: 1879081874}
   m_Layer: 5
-  m_Name: Level3
+  m_Name: MapLevel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14559,7 +14591,7 @@ GameObject:
   - component: {fileID: 1919287937}
   - component: {fileID: 1919287936}
   m_Layer: 5
-  m_Name: Level9
+  m_Name: MapLevel9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14720,7 +14752,7 @@ GameObject:
   - component: {fileID: 1961785759}
   - component: {fileID: 1961785758}
   m_Layer: 5
-  m_Name: Level4
+  m_Name: MapLevel4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
