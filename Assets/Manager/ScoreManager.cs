@@ -90,7 +90,7 @@ public class ScoreManager : MonoBehaviour
 
         if(SceneManager.GetActiveScene().name == "Game Hard")
         {
-            Multiply *= 2;
+            Multiply += 3;
         }
 
         //Debug.Log("Multiply = " + Multiply);
