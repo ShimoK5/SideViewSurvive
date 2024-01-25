@@ -34,10 +34,17 @@ public class ActionLevel : MonoBehaviour
     {
         if (SetLevelActive == true)
         {
+            if (LevelObject[0] == null)
+            {
+                for (int LevelNumber = 0; LevelNumber < MaxLevel; LevelNumber++)
+                {
+                    string ObjectName = "Level";
+                    LevelObject[LevelNumber] = GameObject.Find(ObjectName + (LevelNumber + 1));
+                }
+            }
             ResetLevel();
             for (int LevelCount = 0; LevelCount < Count; LevelCount++)
             {
-                Debug.Log(MaxLevel - LevelCount - 1);
                 LevelObject[(MaxLevel - LevelCount - 1)].SetActive(false);
             }
             SetLevelActive = false;
@@ -89,4 +96,5 @@ public class ActionLevel : MonoBehaviour
         }
         SetLevelActive = true;
     }
+    
 }
