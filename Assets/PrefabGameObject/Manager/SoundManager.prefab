@@ -299,7 +299,7 @@ MonoBehaviour:
       m_value: {fileID: 8300000, guid: 5ed594b4c96c5684fb0c58603e2f57a1, type: 3}
     - m_key: "\u9078\u629E\u80A2\u30AD\u30E3\u30F3\u30BB\u30EB"
       m_value: {fileID: 8300000, guid: edc9900b288c7fe498eb59b6d6081526, type: 3}
-    - m_key: Cacth
+    - m_key: Catch
       m_value: {fileID: 8300000, guid: edc9900b288c7fe498eb59b6d6081526, type: 3}
     - m_key: Drop
       m_value: {fileID: 8300000, guid: edc9900b288c7fe498eb59b6d6081526, type: 3}
