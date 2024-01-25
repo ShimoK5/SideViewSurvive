@@ -397,7 +397,7 @@ public class MoveHand : MonoBehaviour
     {
         DragAndDrop = false;       
         Destroy(DragAndDrop_Object);
-        NewSoundManager.instance.PlaySE("Drop");
+        NewSoundManager.instance.PlaySE("Delete");
     }
 
     //アイコン掴んでいるときに離したときの行動
