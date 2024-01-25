@@ -30,7 +30,10 @@ public class Result : MonoBehaviour
     void Update()
     {
         if (InputManager_U.instanse.GetKeyTrigger(Key.Start) || InputManager_U.instanse.GetKeyTrigger(Key.B))
-            GetLeaderboard();     
+        {
+            GetLeaderboard();
+            NewSoundManager.instance.PlaySE("決定音");
+        }
     }
 
     //ユーザーID生成
