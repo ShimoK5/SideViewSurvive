@@ -254,9 +254,9 @@ MonoBehaviour:
     - m_key: "\u30BF\u30A4\u30C8\u30EBBGM"
       m_value: {fileID: 8300000, guid: b49a312a9b5b0be4fa616165623fef84, type: 3}
     - m_key: "\u30BB\u30C3\u30C8BGM"
-      m_value: {fileID: 8300000, guid: b49a312a9b5b0be4fa616165623fef84, type: 3}
+      m_value: {fileID: 8300000, guid: 6de4b8d81502e9f4dada3b4468a8ecc9, type: 3}
     - m_key: "\u30EA\u30B6\u30EB\u30C8BGM"
-      m_value: {fileID: 8300000, guid: b49a312a9b5b0be4fa616165623fef84, type: 3}
+      m_value: {fileID: 8300000, guid: 25c4ddcf97a9be642a0bc66e2ae72903, type: 3}
   AS_SEdic:
     m_list:
     - m_key: "\u4EEESE"
@@ -294,7 +294,7 @@ MonoBehaviour:
     - m_key: Recorder
       m_value: {fileID: 8300000, guid: 5011591ffb931ff4989a618a8771bbbf, type: 3}
     - m_key: None
-      m_value: {fileID: 0}
+      m_value: {fileID: 8300000, guid: 00ea0ba3fdf31f64fbf30b31e04f4cd0, type: 3}
     - m_key: "\u30DD\u30FC\u30BA\u97F3"
       m_value: {fileID: 8300000, guid: 5ed594b4c96c5684fb0c58603e2f57a1, type: 3}
     - m_key: "\u9078\u629E\u80A2\u30AD\u30E3\u30F3\u30BB\u30EB"
