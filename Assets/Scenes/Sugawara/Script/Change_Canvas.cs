@@ -35,9 +35,9 @@ public class Change_Canvas : MonoBehaviour
 
                 if (ChangeFlag == false)
                 {
-                    Canvas.SetActive(false);
                     MapCanvas.SetActive(true);
                     MapMetronome.instance.SetUI();
+                    Canvas.SetActive(false);
                     ChangeFlag = true;
                 }
                 else

@@ -10,6 +10,7 @@ public class MapMetronome : MonoBehaviour
     int MaxLevel = 9;
     [SerializeField] GameObject[] MetronomeObjects = new GameObject[8];
     [SerializeField] GameObject[] LevelObjects = new GameObject[9];
+    [SerializeField] Sprite[] LevelSprite = new Sprite[2];
     bool Changer = false;
 
     //[SerializeField]int Level = 0;
@@ -37,7 +38,7 @@ public class MapMetronome : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Changer == true)
         {
@@ -51,6 +52,7 @@ public class MapMetronome : MonoBehaviour
                 }
             }
             SetMetronome();
+            SetStageLevel();
         }
     }
 
@@ -101,6 +103,25 @@ public class MapMetronome : MonoBehaviour
                 default:
                     break;
             }
+        }
+    }
+
+    void SetStageLevel()
+    {
+        string stage = InputRhythm.instance.GetSceneName();
+        switch(stage)
+        {
+            case "Game":
+                GameObject.Find("Map_frame_metronome").GetComponent<Image>().sprite = LevelSprite[0];
+                break;
+
+            case "Game Hard":
+                GameObject.Find("Map_frame_metronome").GetComponent<Image>().sprite = LevelSprite[1];
+                break;
+
+            default:
+                GameObject.Find("Map_frame_metronome").GetComponent<Image>().sprite = LevelSprite[0];
+                break;
         }
     }
 

@@ -288,6 +288,8 @@ public class MoveHand : MonoBehaviour
                 InputRhythm.instance.ChangeNoteBox();
                 NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
                 ActionLevel.instance.SetLevel();
+                ChangeStageLevel.instance.EasyLevel();
+                InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
                 //if (SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.L1_BUTTON))
                 //{
 
@@ -300,6 +302,8 @@ public class MoveHand : MonoBehaviour
                 InputRhythm.instance.ChangeNoteBox();
                 NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_R_Scene);
                 ActionLevel.instance.SetLevel();
+                ChangeStageLevel.instance.NormalLevel();
+                InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
             }
 
             //触れていてBボタンを押したとき
