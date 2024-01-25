@@ -91,7 +91,10 @@ public class InputName : MonoBehaviour
         }
 
         if (InputManager_U.instanse.GetKeyTrigger(Key.Start))
+        {
+            NewSoundManager.instance.PlaySE("決定音");
             OnClickName();
+        }
     }
 
     //プレイヤーネーム送信

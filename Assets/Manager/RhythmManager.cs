@@ -91,35 +91,39 @@ public class RhythmManager : MonoBehaviour
 
     void FixedGame()
     {
-        //週の初めに
-        if(FCnt == 0)
+        if (SceneManager.GetActiveScene().name != "SetScene")
         {
-            //1週に一回 
-            if (PlayBGMCnt % 1 == 0)
+            //週の初めに
+            if (FCnt == 0)
             {
-                
-
-                NewSoundManager.instance.StopBGM();
-                NewSoundManager.instance.PlayBGM(BGMName[PlayBGMCnt / 1],false);
-
-                //ピッチ調整
+                //1週に一回 
+                if (PlayBGMCnt % 1 == 0)
                 {
-                    float OneSicleSecond = (float)(BeatTempo * BeatNum) / 60; //アビリティ一周にかかる時間
 
-                    //BGMの速さをゲームに合わせる
-                    float pitch =  NewSoundManager.instance.GetBGMLength()/ OneSicleSecond;
-                    NewSoundManager.instance.SetBGMPitch(pitch);
+
+                    NewSoundManager.instance.StopBGM();
+                    NewSoundManager.instance.PlayBGM(BGMName[PlayBGMCnt / 1], false);
+
+                    //ピッチ調整
+                    {
+                        float OneSicleSecond = (float)(BeatTempo * BeatNum) / 60; //アビリティ一周にかかる時間
+
+                        //BGMの速さをゲームに合わせる
+                        float pitch = NewSoundManager.instance.GetBGMLength() / OneSicleSecond;
+                        NewSoundManager.instance.SetBGMPitch(pitch);
+                    }
                 }
-            }
-            //カウント加算
-            PlayBGMCnt++;
-            //あふれ防止
-            if (PlayBGMCnt >= 4 * 1)
-            {
-                PlayBGMCnt = 0;
-            }
+                //カウント加算
+                PlayBGMCnt++;
+                //あふれ防止
+                if (PlayBGMCnt >= 4 * 1)
+                {
+                    PlayBGMCnt = 0;
+                }
 
+            }
         }
+           
         
 
         //フレームカウント加算
