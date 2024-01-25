@@ -11,7 +11,10 @@ public class SceneChange : MonoBehaviour
     void Update()
     {
         if (InputManager_U.instanse.GetKeyTrigger(Key.Start) || InputManager_U.instanse.GetKeyTrigger(Key.B))
+        {
+            NewSoundManager.instance.PlaySE("決定音");
             TitleChange();
+        }
     }
 
     //ボタン処理
