@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Data.Util.KeywordDependentCollection;
 
 public class NextSceneName : MonoBehaviour
 {
