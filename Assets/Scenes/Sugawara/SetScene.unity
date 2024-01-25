@@ -2497,7 +2497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TypeArray:
   - ActionArray: 0000000008000000020000000000000001000000000000000100000002000000
-  - ActionArray: 0000000008000000080000000200000008000000080000000400000002000000
+  - ActionArray: 0000000001000000040000000500000002000000040000000500000002000000
 --- !u!4 &66695441
 Transform:
   m_ObjectHideFlags: 0
@@ -30051,6 +30051,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerFolda
       objectReference: {fileID: 0}
+    - target: {fileID: 5336501846170933996, guid: af4f5bcd325702f42957814bae9f3b29,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6068434024762596919, guid: af4f5bcd325702f42957814bae9f3b29,
         type: 3}
       propertyPath: m_Mesh
@@ -36047,6 +36052,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1098513595}
   - component: {fileID: 1098513594}
+  - component: {fileID: 1098513596}
+  - component: {fileID: 1098513597}
   m_Layer: 0
   m_Name: Set_Input
   m_TagString: Untagged
@@ -36096,6 +36103,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1098513596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098513593}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179421d9a49f843ba03c681ec536ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1098513597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098513593}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc32cea27e4f5c94dad9dcb9937fe81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1101795488
 GameObject:
   m_ObjectHideFlags: 0
