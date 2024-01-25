@@ -253,6 +253,10 @@ MonoBehaviour:
       m_value: {fileID: 8300000, guid: e64e95e2e2a4ccc4f802e90a218ef543, type: 3}
     - m_key: "\u30BF\u30A4\u30C8\u30EBBGM"
       m_value: {fileID: 8300000, guid: b49a312a9b5b0be4fa616165623fef84, type: 3}
+    - m_key: "\u30BB\u30C3\u30C8BGM"
+      m_value: {fileID: 8300000, guid: b49a312a9b5b0be4fa616165623fef84, type: 3}
+    - m_key: "\u30EA\u30B6\u30EB\u30C8BGM"
+      m_value: {fileID: 8300000, guid: b49a312a9b5b0be4fa616165623fef84, type: 3}
   AS_SEdic:
     m_list:
     - m_key: "\u4EEESE"
@@ -294,6 +298,12 @@ MonoBehaviour:
     - m_key: "\u30DD\u30FC\u30BA\u97F3"
       m_value: {fileID: 8300000, guid: 5ed594b4c96c5684fb0c58603e2f57a1, type: 3}
     - m_key: "\u9078\u629E\u80A2\u30AD\u30E3\u30F3\u30BB\u30EB"
+      m_value: {fileID: 8300000, guid: edc9900b288c7fe498eb59b6d6081526, type: 3}
+    - m_key: Cacth
+      m_value: {fileID: 8300000, guid: edc9900b288c7fe498eb59b6d6081526, type: 3}
+    - m_key: Drop
+      m_value: {fileID: 8300000, guid: edc9900b288c7fe498eb59b6d6081526, type: 3}
+    - m_key: Delete
       m_value: {fileID: 8300000, guid: edc9900b288c7fe498eb59b6d6081526, type: 3}
   AS_BGM: {fileID: 2847566288453565380}
   AS_SE: {fileID: 2847566288453565383}
