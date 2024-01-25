@@ -76,21 +76,23 @@ public class MoveHand : MonoBehaviour
                 ChangeFlavor(touch_Name);
                 ChangeHeader(touch_Name);
                 ChangeMovie(touch_Name);
-                if (ActionCount.instance.GetCount(touch_Name) >= 3)
-                {
-                    collision.GetComponent<Change_Name_Item>().MaxCount();
-                }
-                else
-                {
-                    collision.GetComponent<Change_Name_Item>().Collision();
-                    TouchJudge = true;
-                }
+                collision.GetComponent<Change_Name_Item>().Collision();
+               
                
             }
         }
         else if(collision.gameObject.tag == "PlatForm")
         {
             Touch_Object = collision.gameObject;
+            if (ActionCount.instance.GetCount(touch_Name) >= 3)
+            {
+                collision.GetComponent<Change_Name_Item>().MaxCount();
+            }
+            else
+            {
+                TouchJudge = true;
+            }
+            
         }
     }
 
@@ -100,6 +102,7 @@ public class MoveHand : MonoBehaviour
         {
             if (ActionCount.instance.GetCount(touch_Name) >= 3)
             {
+
                 collision.GetComponent<Change_Name_Item>().MaxCount();
             }
             else
@@ -160,6 +163,7 @@ public class MoveHand : MonoBehaviour
         }
         else if(collision.gameObject.tag == "PlatForm")
         {
+            collision.GetComponent<Change_Name_Item>().Exit();
             Touch_Object.GetComponent<Change_Name_Item>().Collision();
             Touch_Object = null;
             TouchJudge = false;
@@ -307,23 +311,23 @@ public class MoveHand : MonoBehaviour
             }
 
             //触れていてBボタンを押したとき
-            if (DragAndDrop == false && TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.B_BUTTON))
+            if (DragAndDrop == false && TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.A_BUTTON))
             {
                 DeleteNote();
             }
 
             //触れていてAボタンを押した瞬間
-            if (TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.A_BUTTON))
+            if (TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.B_BUTTON))
             {
                 CatchIcon();
             }
             //掴んでいる状態で触れたおらず、Aボタンを離したとき
-            else if (TouchJudge == false && DragAndDrop == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
+            else if (TouchJudge == false && DragAndDrop == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.B_BUTTON))
             {
                 DragIcon();
             }
             //掴んでいる状態で触れていて、Aボタンを離したとき
-            else if (DragAndDrop == true && TouchJudge == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.A_BUTTON))
+            else if (DragAndDrop == true && TouchJudge == true && !SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.B_BUTTON))
             {
                 DropIcon();
             }
