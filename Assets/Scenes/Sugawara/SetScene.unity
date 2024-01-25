@@ -12769,7 +12769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionArray: 0800000008000000080000000800000008000000080000000800000008000000
-  BeatTempo: 30
+  BeatTempo: 60
   FCnt: 0
 --- !u!4 &1636154683
 Transform:
