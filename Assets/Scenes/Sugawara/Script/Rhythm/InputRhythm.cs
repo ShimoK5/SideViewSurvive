@@ -194,6 +194,7 @@ public class InputRhythm : MonoBehaviour
             ActionCount.instance.AddCount(ArrayAction);
         }
         Action[Number] = ArrayAction;
+        SetRhythmManager();
     }
 
     public RhythmManager.RhythmAction GetMetronome(int Number)
@@ -270,6 +271,7 @@ public class InputRhythm : MonoBehaviour
             Action[i] = ActionArray.ActionArray[i];
             ActionCount.instance.AddCount(Action[i]);
         }
+        SetRhythmManager();
     }
 
     public bool Ref_FirstScene()
