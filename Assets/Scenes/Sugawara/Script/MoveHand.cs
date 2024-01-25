@@ -378,6 +378,7 @@ public class MoveHand : MonoBehaviour
                 CreateCloneIcon();
                 DragAndDrop = true;
                 TouchJudge = true;
+                NewSoundManager.instance.PlaySE("Catch");
                 //ChangeTarget = true;
             }
             else
@@ -392,6 +393,7 @@ public class MoveHand : MonoBehaviour
     {
         DragAndDrop = false;       
         Destroy(DragAndDrop_Object);
+        NewSoundManager.instance.PlaySE("Drop");
     }
 
     //アイコン掴んでいるときに離したときの行動
@@ -422,6 +424,7 @@ public class MoveHand : MonoBehaviour
         if (Touch_Object.tag == "Note")
         {
             Touch_Object.GetComponent<ChangeMetronome>().StorageIcon("None");
+            NewSoundManager.instance.PlaySE("Delete");
         }
     }
 

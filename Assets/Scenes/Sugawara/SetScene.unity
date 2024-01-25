@@ -10141,6 +10141,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6154549861293731684, guid: 45e0d06925ceb94479dda21f2aa905ff,
+        type: 3}
+      propertyPath: AS_SEdic.m_list.Array.size
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154549861293731684, guid: 45e0d06925ceb94479dda21f2aa905ff,
+        type: 3}
+      propertyPath: AS_SEdic.m_list.Array.data[20].m_key
+      value: Catch
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154549861293731684, guid: 45e0d06925ceb94479dda21f2aa905ff,
+        type: 3}
+      propertyPath: AS_SEdic.m_list.Array.data[20].m_value
+      value: 
+      objectReference: {fileID: 8300000, guid: 27ee42fa43489884bab5b7ba0944b641, type: 3}
+    - target: {fileID: 6154549861293731684, guid: 45e0d06925ceb94479dda21f2aa905ff,
+        type: 3}
+      propertyPath: AS_SEdic.m_list.Array.data[21].m_key
+      value: Drop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154549861293731684, guid: 45e0d06925ceb94479dda21f2aa905ff,
+        type: 3}
+      propertyPath: AS_SEdic.m_list.Array.data[21].m_value
+      value: 
+      objectReference: {fileID: 8300000, guid: f42eca80b1f0e304d8702345cf707c15, type: 3}
+    - target: {fileID: 6154549861293731684, guid: 45e0d06925ceb94479dda21f2aa905ff,
+        type: 3}
+      propertyPath: AS_SEdic.m_list.Array.data[22].m_key
+      value: Delete
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154549861293731684, guid: 45e0d06925ceb94479dda21f2aa905ff,
+        type: 3}
+      propertyPath: AS_SEdic.m_list.Array.data[22].m_value
+      value: 
+      objectReference: {fileID: 8300000, guid: 99c400f06b1fd1b4881951a14b55c01b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45e0d06925ceb94479dda21f2aa905ff, type: 3}
 --- !u!1 &1321852415
