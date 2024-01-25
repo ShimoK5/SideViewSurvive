@@ -404,6 +404,7 @@ public class MoveHand : MonoBehaviour
             if (DragAndDrop == true)
             {
                 Touch_Object.GetComponent<ChangeMetronome>().StorageIcon(DragAndDrop_Object.name);
+                NewSoundManager.instance.PlaySE("Drop");
             }
             else
             {
