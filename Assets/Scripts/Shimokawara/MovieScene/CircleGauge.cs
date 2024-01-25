@@ -25,14 +25,19 @@ public class CircleGauge : MonoBehaviour
     {
         if (InputManager_FU.instanse.GetKey(Key.B))
         {
-            if ((param += speed) >= 1)
+            if(!SceneChangeManager.instance.isFade)
             {
-                SceneChangeManager.instance.SceneTransition(nextSceneName);
-                //SE
-                NewSoundManager.instance.PlaySE("決定音");
-                this.enabled = false;
-                //param = 0;
+                if ((param += speed) >= 1)
+                {
+                    SceneChangeManager.instance.SceneTransition(nextSceneName);
+                    Debug.Log("ボタンシーンチェンジ");
+                    //SE
+                    NewSoundManager.instance.PlaySE("決定音");
+                    this.enabled = false;
+                    //param = 0;
+                }
             }
+           
         }
         else
         {
