@@ -87,6 +87,12 @@ public class ScoreManager : MonoBehaviour
                 Multiply++;
             }
         }
+
+        if(SceneManager.GetActiveScene().name == "Game Hard")
+        {
+            Multiply += 3;
+        }
+
         //Debug.Log("Multiply = " + Multiply);
     }
 #else
