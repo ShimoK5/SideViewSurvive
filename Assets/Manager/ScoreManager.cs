@@ -44,16 +44,20 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (InitOnce)
+        if(GameStateManager.instance.GameState == GAME_STATE.StartCameraMotion)
         {
-            InitOnce = false;
-            //初期化
-            if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game" || SceneManager.GetActiveScene().name == "Game Hard")
+            if (InitOnce)
             {
+                InitOnce = false;
                 //初期化
-                InitGame();
+                if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game" || SceneManager.GetActiveScene().name == "Game Hard")
+                {
+                    //初期化
+                    InitGame();
+                }
             }
         }
+        
 
 
         if (SceneManager.GetActiveScene().name == "ShimokawaraScene 1" || SceneManager.GetActiveScene().name == "Game" || SceneManager.GetActiveScene().name == "Game Hard")
@@ -83,6 +87,7 @@ public class ScoreManager : MonoBehaviour
                 Multiply++;
             }
         }
+        //Debug.Log("Multiply = " + Multiply);
     }
 #else
 
