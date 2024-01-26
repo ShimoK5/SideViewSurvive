@@ -8,6 +8,7 @@ public class Change_Canvas : MonoBehaviour
     GameObject Canvas;
     GameObject MapCanvas;
     bool ButtonFlag = false;
+    [SerializeField] GameObject[] GuideUI = new GameObject[2];
    
     // Start is called before the first frame update
     void Awake()
@@ -16,6 +17,7 @@ public class Change_Canvas : MonoBehaviour
         Canvas = GameObject.Find("Canvas");
         MapCanvas = GameObject.Find("MapCanvas");
         MapCanvas.SetActive(false);
+        GuideUI[1].SetActive(false);
         ButtonFlag = false;
     }
 
@@ -36,14 +38,18 @@ public class Change_Canvas : MonoBehaviour
                 if (ChangeFlag == false)
                 {
                     MapCanvas.SetActive(true);
+                    GuideUI[1].SetActive(true);
                     MapMetronome.instance.SetUI();
-                    Canvas.SetActive(false);
+                    GuideUI[0].SetActive(false); 
+                    Canvas.SetActive(false);                  
                     ChangeFlag = true;
                 }
                 else
                 {
                     Canvas.SetActive(true);
+                    GuideUI[0].SetActive(true);
                     MapCanvas.SetActive(false);
+                    GuideUI[1].SetActive(false);
                     ChangeFlag = false;
                 }
             }
