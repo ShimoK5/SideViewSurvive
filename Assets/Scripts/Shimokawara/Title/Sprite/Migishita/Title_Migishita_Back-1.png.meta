@@ -1,0 +1,1004 @@
+fileFormatVersion: 2
+guid: f85bf1b8b465ce24ab0c187ad9351f00
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1687855621613192547
+    second: Title_Migishita_Back-1_0
+  - first:
+      213: -5337644590902893665
+    second: Title_Migishita_Back-1_1
+  - first:
+      213: 1473133499445750769
+    second: Title_Migishita_Back-1_2
+  - first:
+      213: -6075978124394235902
+    second: Title_Migishita_Back-1_3
+  - first:
+      213: -1330886231843641935
+    second: Title_Migishita_Back-1_4
+  - first:
+      213: -2441374741581082178
+    second: Title_Migishita_Back-1_5
+  - first:
+      213: 7388929852123256968
+    second: Title_Migishita_Back-1_6
+  - first:
+      213: -999214890942444177
+    second: Title_Migishita_Back-1_7
+  - first:
+      213: -1331388897640463839
+    second: Title_Migishita_Back-1_8
+  - first:
+      213: -222282173264060508
+    second: Title_Migishita_Back-1_9
+  - first:
+      213: -2884767250289155512
+    second: Title_Migishita_Back-1_10
+  - first:
+      213: 7574698850680428289
+    second: Title_Migishita_Back-1_11
+  - first:
+      213: -5577431203325783532
+    second: Title_Migishita_Back-1_12
+  - first:
+      213: -3206205882609476069
+    second: Title_Migishita_Back-1_13
+  - first:
+      213: 5588988888955460998
+    second: Title_Migishita_Back-1_14
+  - first:
+      213: -2366806386763471241
+    second: Title_Migishita_Back-1_15
+  - first:
+      213: 2410001696947272289
+    second: Title_Migishita_Back-1_16
+  - first:
+      213: -835431531294302923
+    second: Title_Migishita_Back-1_17
+  - first:
+      213: 8263221206848560595
+    second: Title_Migishita_Back-1_18
+  - first:
+      213: -6772730018126326509
+    second: Title_Migishita_Back-1_19
+  - first:
+      213: 6166724646077736701
+    second: Title_Migishita_Back-1_20
+  - first:
+      213: 3618275555185669615
+    second: Title_Migishita_Back-1_21
+  - first:
+      213: -8723475653651086809
+    second: Title_Migishita_Back-1_22
+  - first:
+      213: -600077159541096509
+    second: Title_Migishita_Back-1_23
+  - first:
+      213: 8921317420261488631
+    second: Title_Migishita_Back-1_24
+  - first:
+      213: -1315808210193484631
+    second: Title_Migishita_Back-1_25
+  - first:
+      213: 8088397407429804133
+    second: Title_Migishita_Back-1_26
+  - first:
+      213: -8893301087872706789
+    second: Title_Migishita_Back-1_27
+  - first:
+      213: 7041345254669375757
+    second: Title_Migishita_Back-1_28
+  - first:
+      213: -1728598897321971232
+    second: Title_Migishita_Back-1_29
+  - first:
+      213: -3001935712981221567
+    second: Title_Migishita_Back-1_0
+  - first:
+      213: 8598553055513662169
+    second: Title_Migishita_Back-1_1
+  - first:
+      213: -8927522616133062743
+    second: Title_Migishita_Back-1_2
+  - first:
+      213: 7575679972037771203
+    second: Title_Migishita_Back-1_3
+  - first:
+      213: -8781279886610636917
+    second: Title_Migishita_Back-1_4
+  - first:
+      213: -9176618914071888317
+    second: Title_Migishita_Back-1_5
+  - first:
+      213: -8275222783681320007
+    second: Title_Migishita_Back-1_6
+  - first:
+      213: -7326337873881159570
+    second: Title_Migishita_Back-1_7
+  - first:
+      213: 8340158658712980717
+    second: Title_Migishita_Back-1_8
+  - first:
+      213: 6535409274730181602
+    second: Title_Migishita_Back-1_9
+  - first:
+      213: -6280973556517762983
+    second: Title_Migishita_Back-1_10
+  - first:
+      213: -8496914138461986366
+    second: Title_Migishita_Back-1_11
+  - first:
+      213: 4240292995470986302
+    second: Title_Migishita_Back-1_12
+  - first:
+      213: 4998422351914367046
+    second: Title_Migishita_Back-1_13
+  - first:
+      213: 3428683597115430088
+    second: Title_Migishita_Back-1_14
+  - first:
+      213: 1969021127845787924
+    second: Title_Migishita_Back-1_15
+  - first:
+      213: -4581741866770951253
+    second: Title_Migishita_Back-1_16
+  - first:
+      213: -270313050274100795
+    second: Title_Migishita_Back-1_17
+  - first:
+      213: 6095119882922668789
+    second: Title_Migishita_Back-1_18
+  - first:
+      213: -2763028579133130503
+    second: Title_Migishita_Back-1_19
+  - first:
+      213: 1766102350785817171
+    second: Title_Migishita_Back-1_20
+  - first:
+      213: 1439613651232779946
+    second: Title_Migishita_Back-1_21
+  - first:
+      213: -8062065702078217085
+    second: Title_Migishita_Back-1_22
+  - first:
+      213: 519737996856863241
+    second: Title_Migishita_Back-1_23
+  - first:
+      213: -829155739059475335
+    second: Title_Migishita_Back-1_24
+  - first:
+      213: 1149370330132111256
+    second: Title_Migishita_Back-1_25
+  - first:
+      213: 2014993007956600687
+    second: Title_Migishita_Back-1_26
+  - first:
+      213: -577580921639741202
+    second: Title_Migishita_Back-1_27
+  - first:
+      213: 8296021524789162211
+    second: Title_Migishita_Back-1_28
+  - first:
+      213: -4106377237308693615
+    second: Title_Migishita_Back-1_29
+  - first:
+      213: 895223762729531177
+    second: Title_Migishita_Back-1_30
+  - first:
+      213: -3313986996783031546
+    second: Title_Migishita_Back-1_31
+  - first:
+      213: 801697911610330771
+    second: Title_Migishita_Back-1_32
+  - first:
+      213: -4924055031277981998
+    second: Title_Migishita_Back-1_33
+  - first:
+      213: 6089292907958123861
+    second: Title_Migishita_Back-1_34
+  - first:
+      213: 6820078865672172016
+    second: Title_Migishita_Back-1_35
+  - first:
+      213: -4240261124677782272
+    second: Title_Migishita_Back-1_36
+  - first:
+      213: -5063950448927038202
+    second: Title_Migishita_Back-1_37
+  - first:
+      213: -5818324337104106611
+    second: Title_Migishita_Back-1_38
+  - first:
+      213: 5707254342886930399
+    second: Title_Migishita_Back-1_39
+  - first:
+      213: -7302165924734866375
+    second: Title_Migishita_Back-1_40
+  - first:
+      213: -245962502071450951
+    second: Title_Migishita_Back-1_41
+  - first:
+      213: -8146570265318214409
+    second: Title_Migishita_Back-1_42
+  - first:
+      213: -4000601591880532805
+    second: Title_Migishita_Back-1_43
+  - first:
+      213: -8408230111597224070
+    second: Title_Migishita_Back-1_44
+  - first:
+      213: 2504032883611107933
+    second: Title_Migishita_Back-1_45
+  - first:
+      213: 7386343201464634747
+    second: Title_Migishita_Back-1_46
+  - first:
+      213: 7535896453717831037
+    second: Title_Migishita_Back-1_47
+  - first:
+      213: -5119515631226770243
+    second: Title_Migishita_Back-1_48
+  - first:
+      213: -1887351085323692044
+    second: Title_Migishita_Back-1_49
+  - first:
+      213: 2584857900390582374
+    second: Title_Migishita_Back-1_50
+  - first:
+      213: 4724394777407813085
+    second: Title_Migishita_Back-1_51
+  - first:
+      213: -6330904526469108844
+    second: Title_Migishita_Back-1_52
+  - first:
+      213: -3214380478391859119
+    second: Title_Migishita_Back-1_53
+  - first:
+      213: -1334381924824362543
+    second: Title_Migishita_Back-1_54
+  - first:
+      213: -2893176964771639828
+    second: Title_Migishita_Back-1_55
+  - first:
+      213: -7206947985743303003
+    second: Title_Migishita_Back-1_56
+  - first:
+      213: -6985562827237090947
+    second: Title_Migishita_Back-1_57
+  - first:
+      213: -606610789473055338
+    second: Title_Migishita_Back-1_58
+  - first:
+      213: 7692928596280375868
+    second: Title_Migishita_Back-1_59
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: -1
+    mipBias: -100
+    wrapU: 2
+    wrapV: 2
+    wrapW: 2
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2800
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14ff13dbf5bf656d0800000000000000
+      internalID: -3001935712981221567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_1
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 2800
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d2dd386272345770800000000000000
+      internalID: 8598553055513662169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_2
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 2800
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9af6f1d0b711b1480800000000000000
+      internalID: -8927522616133062743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_3
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 2800
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cf3a510cc8322960800000000000000
+      internalID: 7575679972037771203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_4
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 2800
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8f5a45e770a22680800000000000000
+      internalID: -8781279886610636917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_5
+      rect:
+        serializedVersion: 2
+        x: 3400
+        y: 2800
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34e3d9ba7b916a080800000000000000
+      internalID: -9176618914071888317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2100
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bba475e8b0882d80800000000000000
+      internalID: -8275222783681320007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_7
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 2100
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e68a2d2358e935a90800000000000000
+      internalID: -7326337873881159570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_8
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 2100
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dec4cfeac123eb370800000000000000
+      internalID: 8340158658712980717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_9
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 2100
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e3f51afb1072ba50800000000000000
+      internalID: 6535409274730181602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_10
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 2100
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 958032014df75d8a0800000000000000
+      internalID: -6280973556517762983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_11
+      rect:
+        serializedVersion: 2
+        x: 3400
+        y: 2100
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c1aaf11c95e41a80800000000000000
+      internalID: -8496914138461986366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1400
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3c00aa630c88da30800000000000000
+      internalID: 4240292995470986302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_13
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 1400
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6487a3375a6fd5540800000000000000
+      internalID: 4998422351914367046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_14
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 1400
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c4164dc091259f20800000000000000
+      internalID: 3428683597115430088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_15
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 1400
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 419bc70984e535b10800000000000000
+      internalID: 1969021127845787924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_16
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 1400
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba3159a1c026a60c0800000000000000
+      internalID: -4581741866770951253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_17
+      rect:
+        serializedVersion: 2
+        x: 3400
+        y: 1400
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c9824486b7af3cf0800000000000000
+      internalID: -270313050274100795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 700
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f2b60d7d37369450800000000000000
+      internalID: 6095119882922668789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_19
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 700
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f8748c7520c7a9d0800000000000000
+      internalID: -2763028579133130503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_20
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 700
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a22971bb4728810800000000000000
+      internalID: 1766102350785817171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_21
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 700
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aae68870df88af310800000000000000
+      internalID: 1439613651232779946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_22
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 700
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38484c765f9cd1090800000000000000
+      internalID: -8062065702078217085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_23
+      rect:
+        serializedVersion: 2
+        x: 3400
+        y: 700
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90a2de654fa763700800000000000000
+      internalID: 519737996856863241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97c22e59f3f3e74f0800000000000000
+      internalID: -829155739059475335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_25
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 0
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89fd5e2c93263ff00800000000000000
+      internalID: 1149370330132111256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_26
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 0
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6726200771b6fb10800000000000000
+      internalID: 2014993007956600687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_27
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 0
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee8de9046350cf7f0800000000000000
+      internalID: -577580921639741202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_28
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 0
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e07d026f93612370800000000000000
+      internalID: 8296021524789162211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_Migishita_Back-1_29
+      rect:
+        serializedVersion: 2
+        x: 3400
+        y: 0
+        width: 680
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1932770c8a73307c0800000000000000
+      internalID: -4106377237308693615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: f6731d5dc1e65cc40a24c51bf27525bb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
