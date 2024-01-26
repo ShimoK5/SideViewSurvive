@@ -27,6 +27,11 @@ public class MoveHand : MonoBehaviour
     [SerializeField] private bool DragAndDrop = false;                                      //アイコン掴んでいるかどうか
     [SerializeField] bool FistNoteChange = false;                                           //ノートにぶつかっているか確認用
     [SerializeField] bool Check = false;                                                    //シーンチェンジ用
+    
+    [SerializeField]int LevelChangeFlame = 0;
+    int MaxLevelChangeFlame = 60;
+    [SerializeField]bool OneAction = false;
+    int ResetTime = 0;
 
     [SerializeField]bool CollisionCheck = false;
     bool ChangeTouch = false;
@@ -51,6 +56,9 @@ public class MoveHand : MonoBehaviour
         ChangeFlavor("None");
         ChangeHeader("None");
         CollisionCheck = false;
+        LevelChangeFlame = 0;
+        OneAction = false;
+        ResetTime = 0;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -287,34 +295,79 @@ public class MoveHand : MonoBehaviour
             }
 
             //掴んでいないでL1ボタンを押したとき
-            if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.L1_BUTTON))
+            if (DragAndDrop == false && SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.L1_BUTTON))
             {
-                InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(0));
-                InputRhythm.instance.ChangeNoteBox();
-                NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
-                ActionLevel.instance.SetLevel();
-                ChangeStageLevel.instance.EasyLevel();
-                InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
+                LevelChangeFlame += 1;
+                if(LevelChangeFlame > MaxLevelChangeFlame)
+                {
+                    if (LevelChangeFlame == MaxLevelChangeFlame + 1)
+                    {
+                        InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(0));
+                        InputRhythm.instance.ChangeNoteBox();
+                        NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
+                        ActionLevel.instance.SetLevel();
+                        ChangeStageLevel.instance.EasyLevel();
+                        InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
+                        OneAction = false;
+                    }
+                    LevelChangeFlame = MaxLevelChangeFlame + 1;
+                }
+                
                 //if (SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.L1_BUTTON))
                 //{
 
                 //}
             }
             //掴んでいないでR1ボタンを押したとき
-            else if (DragAndDrop == false && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.R1_BUTTON))
+            else if (DragAndDrop == false && SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.R1_BUTTON))
             {
-                InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(1));
-                InputRhythm.instance.ChangeNoteBox();
-                NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_R_Scene);
-                ActionLevel.instance.SetLevel();
-                ChangeStageLevel.instance.NormalLevel();
-                InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
+                LevelChangeFlame -= 1;
+                if (LevelChangeFlame <0)
+                {
+                    if (LevelChangeFlame == -1)
+                    {
+                        InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(1));
+                        InputRhythm.instance.ChangeNoteBox();
+                        NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_R_Scene);
+                        ActionLevel.instance.SetLevel();
+                        ChangeStageLevel.instance.NormalLevel();
+                        InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
+                        OneAction = true;
+                    }
+                    LevelChangeFlame = -1;
+                }                
+            }
+            else
+            {
+                if (OneAction == false)
+                {
+                    LevelChangeFlame = MaxLevelChangeFlame + 1;
+                }
+                else
+                {
+                    LevelChangeFlame = -1;
+                }
             }
 
             //触れていてBボタンを押したとき
             if (DragAndDrop == false && TouchJudge == true && SetInputManager.instance.Ref_Trigger_Button(SetInputManager.BUTTON.A_BUTTON))
             {
                 DeleteNote();
+            }
+
+            //触れていてYボタンを押したとき
+            if (DragAndDrop == false && SetInputManager.instance.Ref_LongPush_Button(SetInputManager.BUTTON.Y_BUTTON))
+            {
+                ResetTime += 1;
+                if (ResetTime > 60)
+                {
+                    InputRhythm.instance.ResetMetronome();
+                    InputRhythm.instance.ChangeNoteBox();
+                    ActionLevel.instance.SetLevel();
+                    ActionCount.instance.ResetCount();
+                    NewSoundManager.instance.PlaySE("ライフ減少音");
+                    ResetTime = 0;
+                }
             }
 
             //触れていてAボタンを押した瞬間
