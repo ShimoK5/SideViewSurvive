@@ -11,6 +11,7 @@ public class InputRhythm : MonoBehaviour
     [SerializeField] RhythmManager.RhythmAction[] Action = new RhythmManager.RhythmAction[8];           //インスペクター内でいじれるよう
     [SerializeField] private bool OneAction;                                                            //各シーンの変化毎に一回分のアクションを起こす用の変数
     private bool FistGameChange = false;                                                                //Gameシーンでのノート変化用
+    private bool FirstSet = false;
     [SerializeField]string GameSceneName = null;                                                        //Gameシーンの名前保管用
 
     void Awake()
@@ -30,6 +31,7 @@ public class InputRhythm : MonoBehaviour
         {
             Action[Number] = RhythmManager.RhythmAction.None;
         }
+        FirstSet = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -63,12 +65,17 @@ public class InputRhythm : MonoBehaviour
 
                 case StateInputRhythm.STATE.TitleSet:
                     ResetMetronome();
+                    FirstSet = false;
                     break;
 
                 case StateInputRhythm.STATE.Movie_01Set:
                     break;
 
                 case StateInputRhythm.STATE.Movie_02Set:
+                    if (FirstSet == false)
+                    {
+                        FirstSet = true;
+                    }
                     GameObject MovieChange = GameObject.Find("MovieEndSceneChange");
                     if (MovieChange != null)
                     {
@@ -276,7 +283,7 @@ public class InputRhythm : MonoBehaviour
 
     public bool Ref_FirstScene()
     {
-        return (FistGameChange);
+        return (FirstSet);
     }
 
 }

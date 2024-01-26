@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 public class MapAction : MonoBehaviour
 {
+    [System.Serializable]
+    public class MapClass
+    {
+        public float Max_Position;
+        public float Min_Position;
+        public GameObject Map;
+        //public Image MapImage;
+        public Vector3 MapPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    }
+
     public enum STATE
     {
         Idle = 0,
@@ -13,43 +23,73 @@ public class MapAction : MonoBehaviour
         Left,
     }
 
-    [SerializeField] float Max_Position;
-    [SerializeField] float Min_Position;
-
     public STATE MapState;
-    [SerializeField] Image Map;
+    [SerializeField] MapClass EasyMap;
+    [SerializeField] MapClass HardMap;
     [SerializeField] float MoveSpeed;
     [SerializeField] float SpeedUpper = 1.0f;
     [SerializeField] int MoveCount;
-    [SerializeField] Vector3 MapPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    bool NowMap = false;
+    string stage;
+
     // Start is called before the first frame update
     void Awake()
     {
-        if(Map == null)
+        if(EasyMap == null)
         {
-            Map = GameObject.Find("One_Map").GetComponent<Image>();            
+            //Map = GameObject.Find("One_Map").GetComponent<Image>();
+            EasyMap.Map = GameObject.Find("EasyMap");
+            EasyMap.MapPosition = EasyMap.Map.transform.localPosition;
         }
-        if(MoveSpeed <= 1.0)
+        if(MoveSpeed <= 5.0)
         {
-            MoveSpeed = 1.0f;
+            MoveSpeed = 5.0f;
         }
         SpeedUpper = 1.0f;
         MapState = STATE.Idle;
-        MapPosition = Map.transform.localPosition;
+        NowMap = false;
+        stage = "None";
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       MapMove();           //マップ移動用関数
+        if (stage != InputRhythm.instance.GetSceneName())
+        {
+            stage = InputRhythm.instance.GetSceneName();
+            NowMap = true;
+        }
+        MapMove(stage);           //マップ移動用関数
     }
 
 
-    void MapMove()
+    void MapMove(string StageLevel)
     {
+        if(NowMap == true)
+        {
+            switch (StageLevel)
+            {
+                case "Game":
+                    EasyMap.Map.SetActive(true);
+                    EasyMap.MapPosition = EasyMap.Map.transform.localPosition;
+                    HardMap.Map.SetActive(false);
+                    break;
+
+                case "Game Hard":
+                    EasyMap.Map.SetActive(false);
+                    HardMap.Map.SetActive(true);
+                    HardMap.MapPosition = HardMap.Map.transform.localPosition;
+                    break;
+
+                default:
+                    EasyMap.Map.SetActive(true);
+                    HardMap.Map.SetActive(false);
+                    break;
+            }
+        }
         float Horizon = SetInputManager.instance.Ref_Stick_Horizon(SetInputManager.BUTTON.LEFT_STICK);
         //float Vertical = SetInputManager.instance.Ref_Stick_Vertical(SetInputManager.BUTTON.LEFT_STICK);       
-
+       
         if (Horizon == 0.0f)  //  テンキーや3Dスティックの入力（GetAxis）がゼロの時の動作
         {
             MoveCount = 0;
@@ -78,17 +118,47 @@ public class MapAction : MonoBehaviour
                 MoveCount = 0;
                 SpeedUpper *= 2.0f;
             }
-            MapPosition.x += Horizon * MoveSpeed * SpeedUpper * -1.0f;
-            if(Min_Position >= MapPosition.x)
+            switch(StageLevel)
             {
-                MapPosition.x = Map.transform.localPosition.x;
-            }
-            else if (Max_Position <= MapPosition.x)
-            {
-                MapPosition.x = Map.transform.localPosition.x;
-            }
-            Map.transform.localPosition = MapPosition;
+                case "Game":
+                    EasyMap.MapPosition.x += Horizon * MoveSpeed * SpeedUpper * -1.0f;
+                    if (EasyMap.Min_Position >= EasyMap.MapPosition.x)
+                    {
+                        EasyMap.MapPosition.x = EasyMap.Map.transform.localPosition.x;
+                    }
+                    else if (EasyMap.Max_Position <= EasyMap.MapPosition.x)
+                    {
+                        EasyMap.MapPosition.x = EasyMap.Map.transform.localPosition.x;
+                    }
+                    EasyMap.Map.transform.localPosition = EasyMap.MapPosition;
+                    break;
 
+                case "Game Hard":
+                    HardMap.MapPosition.x += Horizon * MoveSpeed * SpeedUpper * -1.0f;
+                    if (HardMap.Min_Position >= HardMap.MapPosition.x)
+                    {
+                        HardMap.MapPosition.x = HardMap.Map.transform.localPosition.x;
+                    }
+                    else if (HardMap.Max_Position <= HardMap.MapPosition.x)
+                    {
+                        HardMap.MapPosition.x = HardMap.Map.transform.localPosition.x;
+                    }
+                    HardMap.Map.transform.localPosition = HardMap.MapPosition;
+                    break;
+
+                default:
+                    EasyMap.MapPosition.x += Horizon * MoveSpeed * SpeedUpper * -1.0f;
+                    if (EasyMap.Min_Position >= EasyMap.MapPosition.x)
+                    {
+                        EasyMap.MapPosition.x = EasyMap.Map.transform.localPosition.x;
+                    }
+                    else if (EasyMap.Max_Position <= EasyMap.MapPosition.x)
+                    {
+                        EasyMap.MapPosition.x = EasyMap.Map.transform.localPosition.x;
+                    }
+                    EasyMap.Map.transform.localPosition = EasyMap.MapPosition;
+                    break;
+            }
         }
     }
 
