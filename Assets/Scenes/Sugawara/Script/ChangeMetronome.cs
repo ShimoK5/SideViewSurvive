@@ -137,6 +137,7 @@ public class ChangeMetronome : MonoBehaviour
         {
             Debug.Log("touch" + MetronomeNumber);
             NowActionSprite = this.GetComponent<Image>().sprite;
+            this.GetComponent<AnimationNote>().HightLighted();
             //this.GetComponent<Image>().sprite = AssetManager.Instance.ReferenceSpriteBox(AssetManager.ActionName.None);
             changesprite = true;
         }
@@ -146,6 +147,7 @@ public class ChangeMetronome : MonoBehaviour
     {
         if (changesprite == true)
         {
+            this.GetComponent<AnimationNote>().Normal();
             Debug.Log("donttouch" + MetronomeNumber);
             this.GetComponent<Image>().sprite = NowActionSprite;
             changesprite = false;

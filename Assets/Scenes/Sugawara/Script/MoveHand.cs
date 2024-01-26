@@ -250,11 +250,12 @@ public class MoveHand : MonoBehaviour
                 {
                     NextSceneName.instance.Change_SceneNumber(NextSceneName.SceneNumber.Button_L_Scene);
                     InputRhythm.instance.SetSceneName(NextSceneName.instance.Ref_NextSceneName());
-                    InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(0));
-                    InputRhythm.instance.ChangeNoteBox();
-                    ActionLevel.instance.SetLevel();
+                    InputRhythm.instance.ArrayAction(ActionFolder.instance.GetAction(0));                    
                     FistNoteChange = true;
                 }
+                InputRhythm.instance.ChangeNoteBox();
+                ActionLevel.instance.SetLevel();
+                ChangeStageLevel.instance.SetStageLevel();
                 Check = true;
             }
             FreezeCountTime = FreezeTime;
