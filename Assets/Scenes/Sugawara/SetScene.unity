@@ -66245,6 +66245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c913df455c602e4194d5b9fae66ebb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayKey: "\u30BB\u30C3\u30C8BGM"
 --- !u!4 &2119211117
 Transform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayBGM : MonoBehaviour
 {
     bool PlaySound = false;
+    [SerializeField]string PlayKey;
     void Awake()
     {
         PlaySound = false;
@@ -14,7 +15,7 @@ public class PlayBGM : MonoBehaviour
     {
         if (PlaySound == false)
         {
-            NewSoundManager.instance.PlayBGM("セットBGM");
+            NewSoundManager.instance.PlayBGM(PlayKey);
             PlaySound = true;
         }
     }
