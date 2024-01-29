@@ -36,7 +36,11 @@ public class MoveHand : MonoBehaviour
     [SerializeField]bool CollisionCheck = false;
     bool ChangeTouch = false;
 
-   
+    [SerializeField] GameObject MovieObject;
+    [SerializeField] GameObject Flavor;
+    [SerializeField] GameObject Header;
+
+
 
     // Start is called before the first frame update
 
@@ -265,6 +269,16 @@ public class MoveHand : MonoBehaviour
                 ActionLevel.instance.SetLevel();
                 ChangeStageLevel.instance.SetStageLevel();
                 Check = true;
+                if(InputRhythm.instance.GetSceneName() == "Game")
+                {
+                    OneAction = false;
+                    LevelChangeFlame = -1;
+                }
+                else
+                {
+                    OneAction = true;
+                    LevelChangeFlame = MaxLevelChangeFlame + 1;
+                }
             }
             FreezeCountTime = FreezeTime;
 
@@ -550,141 +564,152 @@ public class MoveHand : MonoBehaviour
     //説明映像変更
     void ChangeMovie(string Name)
     {
-        GameObject MovieObject = GameObject.Find("Movie");
-        switch (Name)
+        if (MovieObject.activeSelf != false)
         {
-            case ("Umbrella"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Umbrella);
-                break;
+        
+            switch (Name)
+            {
+                case ("Umbrella"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Umbrella);
+                    break;
 
-            case ("Recorder"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Recorder);
-                break;
+                case ("Recorder"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Recorder);
+                    break;
 
-            case ("Eraser"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Eraser);
-                break;
+                case ("Eraser"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Eraser);
+                    break;
 
-            case ("Sacrifice"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Sacrifice);
-                break;
+                case ("Sacrifice"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Sacrifice);
+                    break;
 
-            case ("AirCannon"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.AirCannon);
-                break;
+                case ("AirCannon"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.AirCannon);
+                    break;
 
-            case ("Bag"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Bag);
-                break;
+                case ("Bag"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Bag);
+                    break;
 
-            case ("Ruler"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Ruler);
-                break;
+                case ("Ruler"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Ruler);
+                    break;
 
-            case ("Whistle"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Whistle);
-                break;
+                case ("Whistle"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.Whistle);
+                    break;
 
-            case ("None"):
-                MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.None);
-                break;
+                case ("None"):
+                    MovieObject.GetComponent<MovieChange>().Change(RhythmManager.RhythmAction.None);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
     }
 
     //説明文変更
     void ChangeFlavor(string Name)
     {
-        GameObject Flavor = GameObject.Find("Flavor");
-        switch (Name)
+        if (Flavor.activeSelf != false)
         {
-            case ("Umbrella"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Umbrella);
-                break;
+            
+        
+            switch (Name)
+            {
+                case ("Umbrella"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Umbrella);
+                    break;
 
-            case ("Recorder"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Recorder);
-                break;
+                case ("Recorder"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Recorder);
+                    break;
 
-            case ("Eraser"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Eraser);
-                break;
+                case ("Eraser"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Eraser);
+                    break;
 
-            case ("Sacrifice"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Sacrifice);
-                break;
+                case ("Sacrifice"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Sacrifice);
+                    break;
 
-            case ("AirCannon"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.AirCannon);
-                break;
+                case ("AirCannon"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.AirCannon);
+                    break;
 
-            case ("Bag"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Bag);
-                break;
+                case ("Bag"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Bag);
+                    break;
 
-            case ("Ruler"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Ruler);
-                break;
+                case ("Ruler"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Ruler);
+                    break;
 
-            case ("Whistle"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Whistle);
-                break;
+                case ("Whistle"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.Whistle);
+                    break;
 
-            case ("None"):
-                Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.None);
-                break;
+                case ("None"):
+                    Flavor.GetComponent<ChangeFlavor>().Change(RhythmManager.RhythmAction.None);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
     }
 
     //説明の文字部分変更
     void ChangeHeader(string Name)
     {
-        GameObject Header = GameObject.Find("Header");
-        switch (Name)
+        if (Header.activeSelf != false)
         {
-            case ("Umbrella"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Umbrella);
-                break;
+            
+        
+            switch (Name)
+            {
+                case ("Umbrella"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Umbrella);
+                    break;
 
-            case ("Recorder"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Recorder);
-                break;
+                case ("Recorder"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Recorder);
+                    break;
 
-            case ("Eraser"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Eraser);
-                break;
+                case ("Eraser"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Eraser);
+                    break;
 
-            case ("Sacrifice"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Sacrifice);
-                break;
+                case ("Sacrifice"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Sacrifice);
+                    break;
 
-            case ("AirCannon"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.AirCannon);
-                break;
+                case ("AirCannon"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.AirCannon);
+                    break;
 
-            case ("Bag"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Bag);
-                break;
+                case ("Bag"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Bag);
+                    break;
 
-            case ("Ruler"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Ruler);
-                break;
+                case ("Ruler"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Ruler);
+                    break;
 
-            case ("Whistle"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Whistle);
-                break;
+                case ("Whistle"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.Whistle);
+                    break;
 
-            case ("None"):
-                Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.None);
-                break;
+                case ("None"):
+                    Header.GetComponent<ChangeHeader>().Change(RhythmManager.RhythmAction.None);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
     }
 }

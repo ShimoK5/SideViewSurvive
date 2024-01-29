@@ -211,6 +211,7 @@ public class InputRhythm : MonoBehaviour
 
     public void ChangeNoteBox()
     {
+        ActionCount.instance.ResetCount();
         for(int Number = 0;Number < 8;Number++)
         {
             GameObject Metronome = null;
@@ -220,48 +221,56 @@ public class InputRhythm : MonoBehaviour
                     Metronome = GameObject.Find("frame_item0_1");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
+                    ActionCount.instance.AddCount(Action[Number]);
                     break;
 
                 case 1:
                     Metronome = GameObject.Find("frame_item0_2");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
+                    ActionCount.instance.AddCount(Action[Number]);
                     break;
 
                 case 2:
                     Metronome = GameObject.Find("frame_item0_3");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
+                    ActionCount.instance.AddCount(Action[Number]);
                     break;
 
                 case 3:
                     Metronome = GameObject.Find("frame_item0_4");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
+                    ActionCount.instance.AddCount(Action[Number]);
                     break;
 
                 case 4:
                     Metronome = GameObject.Find("frame_item0_5");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
+                    ActionCount.instance.AddCount(Action[Number]);
                     break;
 
                 case 5:
                     Metronome = GameObject.Find("frame_item0_6");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
+                    ActionCount.instance.AddCount(Action[Number]);
                     break;
 
                 case 6:
                     Metronome = GameObject.Find("frame_item0_7");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
+                    ActionCount.instance.AddCount(Action[Number]);
                     break;
 
                 case 7:
                     Metronome = GameObject.Find("frame_item0_8");
                     Metronome.GetComponent<ChangeMetronome>().ChangeRestart(Action[Number]);
                     Metronome.GetComponent<ChangeMetronome>().ChangeSprite();
+                    ActionCount.instance.AddCount(Action[Number]);
                     break;
 
                 default:
